@@ -1,10 +1,10 @@
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -24,13 +24,13 @@
   font-family: "Comfortaa", cursive;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -39,7 +39,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -70,13 +70,13 @@
   font-size: 1.5rem;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -85,7 +85,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -116,13 +116,13 @@
   font-weight: 10;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -131,7 +131,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -176,13 +176,13 @@
   font-family: "Comfortaa", cursive;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -191,7 +191,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -233,13 +233,13 @@
   border-radius: 2vw;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -248,7 +248,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -287,13 +287,13 @@
   text-align: center;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -302,7 +302,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -341,6 +341,10 @@
   border-radius: 3vh;
   margin-bottom: 4vh;
 }
+.details .watchlist--clicked {
+  background-color: white;
+  border: 2px solid #bfa276;
+}
 .details .watchlist__img {
   height: 5vh;
   width: 5vh;
@@ -357,14 +361,17 @@
   justify-content: center;
   align-items: center;
 }
+.details .watchlist__button--clicked {
+  color: black;
+}
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -373,7 +380,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -406,13 +413,13 @@
   margin: 1vh;
 }
 
-.header__top .login .line {
-  border: 3px solid #bfa276;
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
 }
 
-.login .input {
+.edit .form .input, .register .input, .login .input {
   border-radius: 3vh;
   border: 3px solid #bfa276;
   margin: 2vh;
@@ -421,7 +428,7 @@
   text-align: center;
 }
 
-.login .submit {
+.edit .form .submit, .register .submit, .login .submit {
   border-radius: 5vh;
   background-color: #bfa276;
   color: white;
@@ -430,6 +437,102 @@
   font-size: 1.5rem;
   text-align: center;
   font-family: "Comfortaa", cursive;
+}
+
+.register {
+  margin: 5vh 0;
+}
+.register .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.register .incentive {
+  font-family: "Comfortaa", cursive;
+  margin-top: 0;
+  margin: 3vh 4vh;
+  text-align: center;
+  line-height: 5vh;
+}
+
+.edit .line, .header__top .login .line {
+  border: 2px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.edit .form .input, .login .input, .register .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.edit .form .submit, .login .submit, .register .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+.edit__title {
+  color: #414141;
+  font-family: "Comfortaa", cursive;
+  margin: 5vh;
+  text-align: center;
+  font-weight: 1;
+  font-size: 2rem;
+}
+.edit .line {
+  width: 60vw;
+  align-self: center;
+  display: flex;
+}
+.edit .edit-category {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: 5vh;
+  margin-top: 0;
+}
+.edit .edit-category .category {
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  margin: 1vh;
+  color: #bfa276;
+}
+.edit .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.edit .form .submit {
+  font-size: 1rem;
+}
+.edit .button {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 8vh;
+  margin-top: 3vh;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #bfa276;
+  padding: 0 2vh;
+  text-align: center;
 }
 
 ul {
