@@ -4,10 +4,50 @@
   margin: 1vw 0;
 }
 
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
 .header__top .login .line {
   border: 3px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
+}
+
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
 }
 
 .header .search {
@@ -36,6 +76,26 @@
   margin: 1vw 0;
 }
 
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
 .header__top {
   display: flex;
   justify-content: space-between;
@@ -60,6 +120,26 @@
   border: 3px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
+}
+
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
 }
 
 .footer {
@@ -102,6 +182,26 @@
   margin: 1vw 0;
 }
 
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
 .results {
   margin: 5vw;
 }
@@ -139,6 +239,26 @@
   margin: 1vw 0;
 }
 
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
 .results {
   display: flex;
   flex-direction: column;
@@ -146,19 +266,170 @@
   justify-content: center;
 }
 .results__title {
-  z-index: 5;
   color: #414141;
   font-family: "Comfortaa", cursive;
   margin: 5vh;
 }
-.results__item {
-  height: 10vh;
+.results .item {
+  min-height: 10vh;
+  max-height: 100%;
   width: 100%;
   border-radius: 2vw;
-  position: relative;
+  background-color: #bfa276;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Comfortaa", cursive;
 }
-.results__title {
-  position: absolute;
+.results .item-title {
+  color: white;
+  padding: 2vh;
+  text-align: center;
+}
+
+.header__top .login .line {
+  border: 3px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.details__image {
+  height: 30vh;
+  align-self: center;
+  margin: 5vh;
+  margin-top: 0;
+}
+.details__category {
+  font-family: "Comfortaa", cursive;
+  color: #bfa276;
+  margin: 5vh;
+}
+.details__info-text {
+  font-family: "Comfortaa", cursive;
+  margin: 5vh;
+  text-align: justify;
+  line-height: 3vh;
+}
+.details .watchlist {
+  align-self: center;
+  background-color: #bfa276;
+  border-radius: 3vh;
+  margin-bottom: 4vh;
+}
+.details .watchlist__img {
+  height: 5vh;
+  width: 5vh;
+  color: white;
+}
+.details .watchlist__text {
+  padding: 3vw;
+  font-family: "Comfortaa", cursive;
+  font-size: 1rem;
+  color: white;
+}
+.details .watchlist__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__top .login .line {
+  border: 3px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.login {
+  margin-top: 5vh;
+}
+.login .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login .not-registered {
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  margin: 1vh 5vh 5vh 5vh;
+}
+.login .not-registered__link {
+  color: #bfa276;
+  margin: 1vh;
+}
+.login .not-registered__text {
+  margin: 1vh;
+}
+
+.header__top .login .line {
+  border: 3px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
 }
 
 ul {

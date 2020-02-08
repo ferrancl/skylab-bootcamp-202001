@@ -3,7 +3,7 @@
 
 .results
     display: flex
-    //flex-direction: column
+    flex-direction: column
     align-items: center
     justify-content: center
 
@@ -18,14 +18,25 @@
         font-family: $font-main
         margin: 5vh
 
-    &__item
-        height: 10vh
+    .item
+        min-height: 10vh
+        max-height: 100%
         width: 100%
         border-radius: $border-radius
+        background-color: $main-color
+        display: flex
+        align-items: center
+        justify-content: center
+        font-family: $font-main
+        
         //position: relative
     
-    &__item-title
-        //position: absolute
+        &-title
+            color: white
+            padding: 2vh
+            text-align: center
+
+            //position: absolute
         
 
     // &__opacity
