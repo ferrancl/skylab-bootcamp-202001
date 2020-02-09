@@ -1,4 +1,4 @@
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -24,7 +24,7 @@
   font-family: "Comfortaa", cursive;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -70,7 +70,7 @@
   font-size: 1.5rem;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -116,7 +116,7 @@
   font-weight: 10;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -171,12 +171,13 @@
 .app__logo {
   height: 30vw;
   width: 30vw;
+  margin: 5vh;
 }
 .app__title {
   font-family: "Comfortaa", cursive;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -233,7 +234,7 @@
   border-radius: 2vw;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -287,7 +288,7 @@
   text-align: center;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -365,7 +366,7 @@
   color: black;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -413,7 +414,7 @@
   margin: 1vh;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -456,7 +457,7 @@
   line-height: 5vh;
 }
 
-.edit .line, .header__top .login .line {
+.user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
   margin: 1vw 0;
@@ -531,8 +532,72 @@
   font-size: 1.5rem;
   text-align: center;
   color: #bfa276;
-  padding: 0 2vh;
+  padding: 1vh 2vh;
   text-align: center;
+}
+
+.user-nav .user .line, .header__top .login .line, .edit .line {
+  border: 2px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input, .register .input, .edit .form .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit, .register .submit, .edit .form .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.user-nav {
+  margin-right: 7vw;
+  margin-left: 45vw;
+  position: absolute;
+}
+.user-nav__list {
+  display: flex;
+  flex-direction: column;
+  background-color: gainsboro;
+  width: 45vw;
+  border-radius: 0 0 5vh 5vh;
+  position: relative;
+  top: 0;
+}
+.user-nav .user {
+  justify-self: right;
+  align-self: self-end;
+  text-align: center;
+}
+.user-nav .user .line {
+  justify-self: right;
+  margin: 0;
+}
+.user-nav .option {
+  display: none;
+}
+.user-nav .option--show {
+  text-align: center;
+  position: relative;
+  display: block;
+  font-family: "Comfortaa", cursive;
+  margin: 5vh 0;
+}
+
+body {
+  position: absolute;
 }
 
 ul {

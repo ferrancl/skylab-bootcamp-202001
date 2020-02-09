@@ -22,14 +22,39 @@
         </div> -->
 
 
+<!-- HEADER -->
+
+
         <main class="main">
             <header class="header">
                 <div class="header__top">
                     <img class="logo" src="images/totoro.svg">
-                    <button class="login">
+
+
+<!-- HEADER'S LOGIN BUTTON -->
+
+                    
+                    <!-- <button class="login">
                         <span class="login__text">LOGIN</span>
                         <div class="line"></div>
-                    </button>
+                    </button> -->
+
+
+<!-- HEADER'S USER NAV -->
+
+                    <div class="user-nav" id="nav" onclick="myFunction()">
+                        <div class="user">
+                            <span class="login__text">SOFIA</span>
+                            <div class="line"></div>
+                        </div>
+                        <div class="user-nav__list">
+                            <a class="option">WATCHLIST</a>
+                            <a class="option">EDIT PROFILE</a>
+                            <a class="option">LOGOUT</a>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="search">
                     <img class="search__icon" src="images/search-solid.svg">
@@ -165,7 +190,7 @@
 <!-- EDIT PROFILE -->
 
 
-            <!-- <section class="edit">
+            <section class="edit">
                 <h2 class="edit__title">Edit profile</h2>
                 <div class="edit__username">
                     <div class="edit-category">
@@ -217,7 +242,7 @@
         
                 <button class="button">Delete Profile</button>
                 
-            </section> -->
+            </section>
 
             <footer class="footer">
                 <div class="footer__container">
@@ -227,4 +252,15 @@
         </main>
     </div>  
 </body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("nav").childNodes[3]
+        var y = new Array
+
+        for (var i =1; i<x.childNodes.length; i++) {
+            if (x.childNodes[i].nodeName !== "#text") y.push(x.childNodes[i])
+        }
+        y.forEach(item => item.classList.toggle("option--show"))
+    }
+</script>
 </html>
