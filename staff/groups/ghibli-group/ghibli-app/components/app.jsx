@@ -1,8 +1,7 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, film: undefined, loggedIn: false, toggleMenu: false, message: undefined}
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, message: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -133,22 +132,20 @@ class App extends Component {
         }
     }
 
-    handleSearchCategories = (category) => {
+
+    handleSearchFilms = () => {
         try {
-            
             const { token } = sessionStorage
 
-            //const query = location.queryString
+            const query = location.queryString
 
-            searchCategory(category,token, (error, results) => {
+            searchFilms(token, query, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
-                //location.queryString = { q: query }
-            
-                console.log(results)
+                location.queryString = { q: query }
 
-                this.setState({view: 'category_results', results})
+                this.setState({films})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -185,19 +182,17 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout, handleUpdate, handleDeleteUser,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchCategories, 
+        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
         handleDetail} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchCategories} warning={error} />}
-
+            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} />}
             
-            {view === "home" && <Landing goToResults={handleSearchCategories}/>}
+            {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
 
@@ -205,7 +200,7 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'category_results' && results && <Results results={results} />}
+            {view === 'search' && films && <Results results={films} />}
 
             {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
