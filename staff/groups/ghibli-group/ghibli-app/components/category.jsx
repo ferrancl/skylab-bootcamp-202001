@@ -1,6 +1,6 @@
-function Category({category, onCategoryClick}){
+function Category({category, goToResults}){
     return <li className="results__container" name={category}>
-    <div className="category  ${category} onClick={ event => {
+    <div className={`category  ${category}`} onClick={ event => {
         event.preventDefault()
        
         console.log('click')
