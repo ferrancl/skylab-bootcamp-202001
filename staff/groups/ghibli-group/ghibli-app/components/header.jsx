@@ -1,9 +1,9 @@
-function Header ({goToResults, goHome, loggedIn, goToLogin, toggleMenu, showNav}) {
+function Header ({goToResults, goHome, loggedIn, goToLogin, toggleMenu, showNav, goToWatchlist, goToEditProfile, goToLogout}) {
     return <header className="header">
         <div className="header__top">
             <img className="logo" src="images/totoro.svg" onClick={goHome}/>
 
-            {!loggedIn ? <LoginButton goToLogin={goToLogin}/> : <UserButton showNav={showNav} toggleMenu={toggleMenu}/>}
+            {!loggedIn ? <LoginButton goToLogin={goToLogin}/> : <UserButton showNav={showNav} toggleMenu={toggleMenu} watchlist={goToWatchlist} editProfile={goToEditProfile} logOut={goToLogout}/>}
 
         </div>
             <div className="search">
