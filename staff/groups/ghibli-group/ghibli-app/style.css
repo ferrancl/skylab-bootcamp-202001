@@ -575,6 +575,7 @@
   border-radius: 0 0 5vh 5vh;
   position: relative;
   top: 0;
+  z-index: 10;
 }
 .user-nav .user {
   justify-self: right;
@@ -586,14 +587,14 @@
   margin: 0;
 }
 .user-nav .option {
-  display: none;
-}
-.user-nav .option--show {
   text-align: center;
   position: relative;
-  display: block;
   font-family: "Comfortaa", cursive;
   margin: 5vh 0;
+  z-index: 10;
+}
+.user-nav .option--show {
+  display: none;
 }
 
 body {

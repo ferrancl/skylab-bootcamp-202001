@@ -1,7 +1,7 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: true, toggleMenu: false}
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -18,8 +18,19 @@ class App extends Component {
         this.setState({view: 'home'})
     }
 
-    handleToggleMenu = () => {
-        this.setState({toggleMenu: true ? false : true})
+    handleToggleMenu = (toggleMenu) => {
+        if (toggleMenu === true){
+            this.setState({toggleMenu: false})
+            toggleMenu = false
+        }
+        else {
+            this.setState({toggleMenu: true})
+            toggleMenu = true
+        }
+    }
+
+    handleGoToEditProfile = () => {
+        this.setState({view: "editProfile", toggleMenu: false})
     }
 
     handleLogin = (username, password) => {
@@ -30,14 +41,14 @@ class App extends Component {
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
-                            
+
                             return this.setState({error: error.message})
     
                         }else{
                             
                             sessionStorage.token = token
     
-                            this.setState({ view: 'landing', user })
+                            this.setState({ view: 'home', user })
                         }
                     })
                 }
@@ -116,14 +127,14 @@ class App extends Component {
     render() {
 
         const {props: {title, query}, state: {view, error, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
-        handleResults, handleToggleMenu, 
+        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
         handleDetail} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} />}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} />}
             
             {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
@@ -134,6 +145,8 @@ class App extends Component {
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
             {view === 'search' && films && <Results results={films} />}
+
+            {view === 'editProfile' && <EditProfile/>}
 
             {/* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
 
