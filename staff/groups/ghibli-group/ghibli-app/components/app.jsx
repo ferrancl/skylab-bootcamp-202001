@@ -81,7 +81,7 @@ class App extends Component {
 
     handleSearchCategories = (category) => {
         try {
-            
+            debugger
             const { token } = sessionStorage
 
             //const query = location.queryString
@@ -144,7 +144,7 @@ class App extends Component {
             {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchCategories} warning={error} />}
 
             
-            {view === "home" && <Landing goToResults={handleSearchCategories}/>}
+            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories}/>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
 

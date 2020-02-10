@@ -1,15 +1,12 @@
-function Category({category, onCategoryClick}){
+function Category({category, goToResults}){
     return <li className="results__container" name={category}>
-    <div className="category  ${category} onClick={ event => {
+    <div className={`category  ${category}`} onClick={ event => {
         event.preventDefault()
-       
-        console.log('click')
-        goToResults('films')
-
+        goToResults(`${category}`)
     }
     }>
-        <h2 className="category__title">Films</h2>
-        <img className="category__img" src="images/movies.jpg"/>
+        <h2 className="category__title">{`${category}`}</h2>
+        <img className="category__img" src={`images/${category}.jpg`}/>
         <div className="category__opacity"></div>
     </div>
 </li>
