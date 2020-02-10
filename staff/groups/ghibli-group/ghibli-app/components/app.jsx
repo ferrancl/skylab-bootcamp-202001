@@ -2,7 +2,7 @@ const {Component, Fragment} = React
 
 class App extends Component {
 
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, film: undefined, loggedIn: false, toggleMenu: false}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, loggedIn: false, toggleMenu: false}
 
 
     // componentWillMount() {
@@ -81,12 +81,11 @@ class App extends Component {
 
     handleSearchCategories = (category) => {
         try {
-            debugger
             const { token } = sessionStorage
 
             //const query = location.queryString
 
-            searchCategory(category,token, (error, results) => {
+            searchCategory(category, token, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
@@ -94,7 +93,7 @@ class App extends Component {
             
                 console.log(results)
 
-                this.setState({view: 'category_results', results})
+                this.setState({view: 'category_results', results, category})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -152,7 +151,7 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'category_results' && results && <Results results={results} />}
+            {view === 'category_results' && results && <Results results={results} category={category}/>}
 
             {view === 'editProfile' && <EditProfile/>}
 
