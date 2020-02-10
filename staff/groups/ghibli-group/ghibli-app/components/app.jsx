@@ -2,9 +2,11 @@ const {Component, Fragment} = React
 
 class App extends Component {
 
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined}
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
 
-
+    capitalizeFirstLetter = (string) => {
+        
+    }
     // componentWillMount() {
     //     const {token} = sessionStorage
 
@@ -161,7 +163,13 @@ class App extends Component {
     }
 
     handleResults = (query) => {
-        searchAll(query)
+        
+
+
+        searchAll(query, (results) => {
+            console.log(results)
+            this.setState({results})
+        })
     }
 
     // handleDetail = id => {
