@@ -1,7 +1,7 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: true, toggleMenu: false}
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -19,7 +19,7 @@ class App extends Component {
     }
 
     handleToggleMenu = () => {
-        this.setState({toggleMenu: true ? false : true})
+        this.setState({ toggleMenu: false ? true : false })
     }
 
     handleLogin = (username, password) => {
@@ -34,10 +34,9 @@ class App extends Component {
                             return this.setState({error: error.message})
     
                         }else{
-                            
-                            sessionStorage.token = token
-    
-                            this.setState({ view: 'landing', user })
+                            sessionStorage.token = token 
+                            user.username = user.username.toUpperCase()
+                            this.setState({ view: 'landing', user: user.username, loggedIn: true })
                         }
                     })
                 }
@@ -115,7 +114,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, user, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, 
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
         handleDetail} = this
@@ -123,7 +122,7 @@ class App extends Component {
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} />}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} user={user}/>}
             
             {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
