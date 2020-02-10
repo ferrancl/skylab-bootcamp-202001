@@ -1,6 +1,6 @@
-function Item({ item: { id, title, release_date, isFav}, onClick}) {
+function Item({ item: { id, title, year, isFav}, onClick}) {
     return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{title} ({release_date})</h3>
+            <h3 className="item-title">{title} ({year})</h3>
         </li>
     
     
