@@ -55,7 +55,7 @@ class App extends Component {
                         }else{
                             sessionStorage.token = token 
                             user.username = user.username.toUpperCase()
-                            this.setState({ view: 'landing', user: user.username, loggedIn: true })
+                            this.setState({ view: 'home', user: user.username, loggedIn: true })
                         }
                     })
                 }
@@ -160,6 +160,10 @@ class App extends Component {
         }
     }
 
+    handleResults = (query) => {
+        searchAll(query)
+    }
+
     // handleDetail = id => {
     //     try {
     //         retrieveFilms(id, (error, films) => {
@@ -174,9 +178,7 @@ class App extends Component {
     // handleLogout = () => {
     //     sessionStorage.clear()
 
-    //     // TODO clear querystring in url
-
-    //     this.setState({ view: 'login', user: undefined })
+    //     this.setState({ view: 'home', user: undefined })
     // }
 
 
@@ -188,13 +190,15 @@ class App extends Component {
 
         const {props: {title, query}, state: {view, error, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout, handleUpdate, handleDeleteUser,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
+        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch,
         handleDetail} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} user={user}/>}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
+            //onSubmit={handleSearchFilms} 
+            warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} user={user}/>}
             
             {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
