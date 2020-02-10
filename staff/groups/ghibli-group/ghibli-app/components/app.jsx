@@ -1,7 +1,7 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false}
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, message: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -38,6 +38,11 @@ class App extends Component {
             authenticateUser(username, password, (error, token)=>{
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
+
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
@@ -45,10 +50,9 @@ class App extends Component {
                             return this.setState({error: error.message})
     
                         }else{
-                            
-                            sessionStorage.token = token
-    
-                            this.setState({ view: 'home', user })
+                            sessionStorage.token = token 
+                            user.username = user.username.toUpperCase()
+                            this.setState({ view: 'landing', user: user.username, loggedIn: true })
                         }
                     })
                 }
@@ -66,6 +70,10 @@ class App extends Component {
             registerUser(name, email, username, password, error => {
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
                 }else{
                     this.setState({view: 'login'})
                 }
@@ -76,6 +84,54 @@ class App extends Component {
     }
     
     handleGoToLogin = () => {this.setState({ view: 'login' })}
+
+    handleGoToUpdate = () => {this.setState({ view: 'update' })}
+
+    handleUpdate = (data) => {
+
+        const { token } = sessionStorage
+
+        try{
+            updateUser(token, data, error => {
+                if(error){
+                    this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
+                }else{
+                    this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
+                }
+            })
+        
+        }catch(error){
+            this.setState(error)
+        }
+
+    }
+
+    handleDeleteUser = (password) => {
+
+        const { token } = sessionStorage
+
+        try{
+            deleteUser(password, token, error => {
+                if(error){
+                    this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
+                }else{
+                    this.setState({view: 'login'})
+                }
+            })
+        
+        }catch(error){
+            this.setState(error)
+        }
+    }
+
 
     handleSearchFilms = () => {
         try {
@@ -126,8 +182,8 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
-        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout,
+        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
         handleDetail} = this
 
@@ -146,7 +202,7 @@ class App extends Component {
 
             {view === 'search' && films && <Results results={films} />}
 
-            {view === 'editProfile' && <EditProfile/>}
+            {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
             {/* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
 
