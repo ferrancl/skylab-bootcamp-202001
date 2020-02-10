@@ -524,6 +524,20 @@
 .edit .form .submit {
   font-size: 1rem;
 }
+.edit .form .message {
+  font-family: "Comfortaa", cursive;
+  margin-bottom: 3vh;
+}
+.edit .form .delete {
+  border-radius: 5vh;
+  background-color: gainsboro;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
 .edit .button {
   border-radius: 3vh;
   border: 3px solid #bfa276;
