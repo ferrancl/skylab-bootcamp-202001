@@ -524,6 +524,20 @@
 .edit .form .submit {
   font-size: 1rem;
 }
+.edit .form .message {
+  font-family: "Comfortaa", cursive;
+  margin-bottom: 3vh;
+}
+.edit .form .delete {
+  border-radius: 5vh;
+  background-color: gainsboro;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
 .edit .button {
   border-radius: 3vh;
   border: 3px solid #bfa276;
@@ -575,6 +589,7 @@
   border-radius: 0 0 5vh 5vh;
   position: relative;
   top: 0;
+  z-index: 10;
 }
 .user-nav .user {
   justify-self: right;
@@ -586,14 +601,14 @@
   margin: 0;
 }
 .user-nav .option {
-  display: none;
-}
-.user-nav .option--show {
   text-align: center;
   position: relative;
-  display: block;
   font-family: "Comfortaa", cursive;
   margin: 5vh 0;
+  z-index: 10;
+}
+.user-nav .option--show {
+  display: none;
 }
 
 body {

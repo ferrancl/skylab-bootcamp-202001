@@ -1,4 +1,4 @@
-function searchFilms(token, callback) {
+function searchCategory(category, token, callback) {
     if (typeof token !== 'string') throw new TypeError(`token ${token} is not a string`)
 
     const [header, payload, signature] = token.split('.')
@@ -8,7 +8,7 @@ function searchFilms(token, callback) {
 
     if (!sub) throw new Error('no user id in token')
 
-    if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+    //if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
     call(`https://skylabcoders.herokuapp.com/api/v2/users/${sub}`, {
@@ -25,15 +25,16 @@ function searchFilms(token, callback) {
 
         const { favs = [] } = user
 
-        call(`https://ghibliapi.herokuapp.com/films/`, undefined, (error, response) => {
+        call(`https://ghibliapi.herokuapp.com/${category}`, undefined, (error, response) => {
+            
             if (error) return callback(error)
 
             if (response.status === 200) {
-                const films = JSON.parse(response.content)
+                const results = JSON.parse(response.content)
 
-                films.forEach(film => film.isFav = favs.includes(film.id))
+                results.forEach(result => result.isFav = favs.includes(result.id))
 
-                callback(undefined, films)
+                callback(undefined, results)
             }
         })
     })
