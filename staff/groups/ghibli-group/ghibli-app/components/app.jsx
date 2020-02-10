@@ -2,10 +2,10 @@ const {Component, Fragment} = React
 
 class App extends Component {
 
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
 
     capitalizeFirstLetter = (string) => {
-        
+
     }
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -19,7 +19,7 @@ class App extends Component {
 
 
     handleGoToHome = () => {
-        this.setState({view: 'home'})
+        this.setState({view: 'home', toggleMenu: false})
     }
 
     handleToggleMenu = (toggleMenu) => {
@@ -163,8 +163,6 @@ class App extends Component {
     }
 
     handleResults = (query) => {
-        
-
 
         searchAll(query, (results) => {
             console.log(results)
@@ -183,11 +181,11 @@ class App extends Component {
     //     }
     // }
 
-    // handleLogout = () => {
-    //     sessionStorage.clear()
+    handleLogout = () => {
+        sessionStorage.clear()
 
-    //     this.setState({ view: 'home', user: undefined })
-    // }
+        this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
+    }
 
 
 
@@ -197,7 +195,7 @@ class App extends Component {
 
 
         const {props: {title, query}, state: {view, error, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
-        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout, handleUpdate, handleDeleteUser,
+        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch,
         handleDetail} = this
 
@@ -206,7 +204,7 @@ class App extends Component {
 
             {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
             //onSubmit={handleSearchFilms} 
-            warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} user={user}/>}
+            warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
             
             {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
@@ -216,7 +214,7 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'search' && films && <Results results={films} />}
+            {view === 'results' && films && <Results results={results} />}
 
             {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
