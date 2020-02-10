@@ -1,7 +1,9 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, message: undefined}
+
+    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined}
+
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -31,6 +33,7 @@ class App extends Component {
 
     handleGoToEditProfile = () => {
         this.setState({view: "editProfile", toggleMenu: false})
+
     }
 
     handleLogin = (username, password) => {
@@ -182,7 +185,8 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+
+        const {props: {title, query}, state: {view, error, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
         handleDetail} = this
@@ -190,7 +194,7 @@ class App extends Component {
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} />}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} goToLogout={handleGoToLogout} user={user}/>}
             
             {view === "home" && <Landing goToResults={handleSearchFilms}/>}
 
