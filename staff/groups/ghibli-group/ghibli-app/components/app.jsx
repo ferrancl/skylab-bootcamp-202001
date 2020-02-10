@@ -131,7 +131,7 @@ class App extends Component {
     render() {
 
 
-        const {props: {title, query}, state: {view, error, results, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query, category}, state: {view, error, results, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout,
         handleLogin, handleRegister, handleGoToRegister, handleSearchCategories, 
         handleDetail} = this
