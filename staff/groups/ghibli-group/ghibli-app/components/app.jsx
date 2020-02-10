@@ -1,7 +1,7 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-    state= {view: 'start', error: undefined, token: undefined, films: undefined, film: undefined, loggedIn: true, toggleMenu: false}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, film: undefined, loggedIn: false, toggleMenu: false}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -37,7 +37,7 @@ class App extends Component {
                             
                             sessionStorage.token = token
     
-                            this.setState({ view: 'landing', user })
+                            this.setState({ view: 'home', user })
                         }
                     })
                 }
@@ -66,19 +66,22 @@ class App extends Component {
     
     handleGoToLogin = () => {this.setState({ view: 'login' })}
 
-    handleSearchFilms = () => {
+    handleSearchCategories = (category) => {
         try {
+            
             const { token } = sessionStorage
 
-            const query = location.queryString
+            //const query = location.queryString
 
-            searchFilms(token, query, (error, results) => {
+            searchCategory(category,token, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
-                location.queryString = { q: query }
+                //location.queryString = { q: query }
+            
+                console.log(results)
 
-                this.setState({films})
+                this.setState({view: 'category_results', results})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -115,17 +118,17 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, 
-        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, 
+        handleLogin, handleRegister, handleGoToRegister, handleSearchCategories, 
         handleDetail} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchFilms} warning={error} />}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchCategories} warning={error} />}
             
-            {view === "home" && <Landing goToResults={handleSearchFilms}/>}
+            {view === "home" && <Landing goToResults={handleSearchCategories}/>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
 
@@ -133,7 +136,7 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'search' && films && <Results results={films} />}
+            {view === 'category_results' && results && <Results results={results} />}
 
             {/* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
 
