@@ -14,9 +14,9 @@ function createFav (token, id, callback) {
 
         user = JSON.parse(response.content)
 
-        user.favs.includes(id) ? user.favs.splice(favs.indexOf(id), 1) : user.favs.push(id)
+        user.favs.includes(id) ? user.favs.splice(user.favs.indexOf(id), 1) : user.favs.push(id)
 
-        var favs = user.favs        
+        var favs = user.favs
 
         if (response.status === 200) {
 
