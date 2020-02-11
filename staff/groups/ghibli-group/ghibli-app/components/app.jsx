@@ -90,8 +90,6 @@ class App extends Component {
                     return this.setState({error: error.message})
 
                 //location.queryString = { q: query }
-            
-                console.log(results)
 
                 this.setState({view: 'category_results', results, category})
 
@@ -131,7 +129,7 @@ class App extends Component {
     render() {
 
 
-        const {props: {title, query, category}, state: {view, error, results, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout,
         handleLogin, handleRegister, handleGoToRegister, handleSearchCategories, 
         handleDetail} = this
@@ -151,7 +149,19 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'category_results' && results && <Results results={results} category={category}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results}/>}
+
+            {view === 'category_results' && category==='people' && <People results={results}/>}
+
+            {view === 'category_results' && category==='locations' && <Locations results={results}/>}
+
+            {view === 'category_results' && category==='species' && <Species results={results}/>}
+
+            {view === 'category_results' && category==='vehicles' && <Vehicles results={results}/>}
+
+
+
+            {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
             {view === 'editProfile' && <EditProfile/>}
 
