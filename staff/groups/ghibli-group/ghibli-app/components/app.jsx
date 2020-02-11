@@ -40,6 +40,10 @@ class App extends Component {
             authenticateUser(username, password, (error, token)=>{
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
@@ -69,6 +73,10 @@ class App extends Component {
             registerUser(name, email, username, password, error => {
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
                 }else{
                     this.setState({view: 'login'})
                 }
