@@ -60,7 +60,7 @@ class App extends Component {
 
                             sessionStorage.token = token 
                             user.username = user.username.toUpperCase()
-                            this.setState({ view: 'home', user: user.username, loggedIn: true })
+                            this.setState({ view: 'home', user: user, loggedIn: true })
 
                         }
                     })
@@ -127,40 +127,30 @@ class App extends Component {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsFilms)
-            console.log(error)
             this.setState({view: 'search-results', resultsFilms})   
         })
         searchPeople(_query, (error, resultsPeople) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsPeople)
-            console.log(error)
             this.setState({resultsPeople})   
         })
         searchLocations(_query, (error, resultsLocations) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsLocations)
-            console.log(error)
             this.setState({resultsLocations})   
         })
         searchSpecies(_query, (error, resultsSpecies) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsSpecies)
-            console.log(error)
             this.setState({resultsSpecies})   
         })
         searchVehicles(_query, (error, resultsVehicles) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsVehicles)
-            console.log(error)
             this.setState({resultsVehicles})   
         })
         // this.setState({results: undefined, category: undefined})
@@ -192,6 +182,21 @@ class App extends Component {
             this.setState(error)
         }
 
+    }
+
+    handleFav = (id, user) => {
+
+        const { token } = sessionStorage
+
+        try {
+            createFav(token, id, (userInfo) => {
+                //if(error) this.setState({error})
+                this.setState({user: userInfo})
+            })
+
+        } catch (error) {
+
+        }
     }
 
     handleDeleteUser = (password) => {
@@ -241,7 +246,7 @@ class App extends Component {
 
         const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
+        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,
         handleDetail} = this
 
         return <main className="main">
@@ -269,7 +274,7 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category} fav={handleFav} user={user}/>}
 
             {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} category={category}/>}
 

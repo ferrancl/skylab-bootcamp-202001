@@ -20,8 +20,8 @@ function retrieveUser(token, callback) {
 
         if (_error) return callback(new Error(_error))
 
-        const { name, email, username } = data
+        const { name, email, username, favs } = data
 
-        callback(undefined, { name, email, username })
+        callback(undefined, { name, email, username, favs })
     })
 }
