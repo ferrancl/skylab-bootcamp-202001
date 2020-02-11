@@ -82,11 +82,11 @@ class App extends Component {
 
     handleSearchCategories = (category) => {
         try {
-            const { token } = sessionStorage
+            // const { token } = sessionStorage
 
             //const query = location.queryString
 
-            searchCategory(category,token, (error, results) => {
+            searchCategory(category, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
@@ -118,6 +118,7 @@ class App extends Component {
             this.setState({results})
         })
     }
+
 
     handleGoToUpdate = () => {this.setState({ view: 'update' })}
 
@@ -210,18 +211,17 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-
             {view === 'results' && films && <Results results={results} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category}/>}
 
-            {view === 'category_results' && category==='people' && <People results={results}/>}
+            {view === 'category_results' && category==='people' && <People results={results} category={category}/>}
 
-            {view === 'category_results' && category==='locations' && <Locations results={results}/>}
+            {view === 'category_results' && category==='locations' && <Locations results={results} category={category}/>}
 
-            {view === 'category_results' && category==='species' && <Species results={results}/>}
+            {view === 'category_results' && category==='species' && <Species results={results} category={category}/>}
 
-            {view === 'category_results' && category==='vehicles' && <Vehicles results={results}/>}
+            {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category}/>}
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
