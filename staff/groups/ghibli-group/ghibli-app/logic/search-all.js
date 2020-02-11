@@ -73,7 +73,9 @@ function searchAll(query, callback) {
 
                                             vehicles.forEach(vehicle => vehicle.name.includes(query) ? results.push(vehicle.name) : '')
 
-                                            callback(undefined, results)
+                                            if (results.length === 0) throw new Error ('No results')
+
+                                            callback(error, results)
                                         }
                                     })            
                                 }

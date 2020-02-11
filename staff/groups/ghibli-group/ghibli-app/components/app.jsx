@@ -164,8 +164,13 @@ class App extends Component {
 
     handleResults = (query) => {
 
-        searchAll(query, (results) => {
+        searchAll(query, (error, results) => {
+
+            if(error)
+                this.setState({error: error.message})
+
             console.log(results)
+            console.log(error)
             this.setState({results})
         })
     }
