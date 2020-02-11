@@ -1,8 +1,8 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, loggedIn: false, toggleMenu: false}
+  
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
 
 
     // componentWillMount() {
@@ -17,7 +17,7 @@ class App extends Component {
 
 
     handleGoToHome = () => {
-        this.setState({view: 'home'})
+        this.setState({view: 'home', toggleMenu: false})
     }
 
     handleToggleMenu = (toggleMenu) => {
@@ -47,10 +47,11 @@ class App extends Component {
                             return this.setState({error: error.message})
     
                         }else{
-                            
-                            sessionStorage.token = token
-    
-                            this.setState({ view: 'home', user })
+
+                            sessionStorage.token = token 
+                            user.username = user.username.toUpperCase()
+                            this.setState({ view: 'home', user: user.username, loggedIn: true })
+
                         }
                     })
                 }
@@ -81,11 +82,11 @@ class App extends Component {
 
     handleSearchCategories = (category) => {
         try {
-            const { token } = sessionStorage
+            // const { token } = sessionStorage
 
             //const query = location.queryString
 
-            searchCategory(category,token, (error, results) => {
+            searchCategory(category, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
@@ -103,6 +104,21 @@ class App extends Component {
         }
     }
 
+    handleResults = (query) => {
+
+        const _query = toProperCase(query)
+
+        searchAll(_query, (error, results) => {
+
+            if(error)
+                this.setState({error: error.message})
+
+            console.log(results)
+            console.log(error)
+            this.setState({results})
+        })
+    }
+
     // handleDetail = id => {
     //     try {
     //         retrieveFilms(id, (error, films) => {
@@ -114,13 +130,11 @@ class App extends Component {
     //     }
     // }
 
-    // handleLogout = () => {
-    //     sessionStorage.clear()
+    handleLogout = () => {
+        sessionStorage.clear()
 
-    //     // TODO clear querystring in url
-
-    //     this.setState({ view: 'login', user: undefined })
-    // }
+        this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
+    }
 
 
 
@@ -129,17 +143,17 @@ class App extends Component {
     render() {
 
 
-        const {props: {title, query}, state: {view, error, results, category, loggedIn, toggleMenu}, handleGoToHome, handleGoToLogin, 
-        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleGoToLogout,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchCategories, 
+        const {props: {title, query}, state: {view, error, results, category, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
+        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-
-            {view !== "start" && <Header goToLogin={handleGoToLogin} goToSearch={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} onSubmit={handleSearchCategories} warning={error} />}
-
+            {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
+            //onSubmit={handleSearchFilms} 
+            warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
             
             {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories}/>}
 
@@ -149,17 +163,18 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'category_results' && category === 'films' && <Films results={results}/>}
 
-            {view === 'category_results' && category==='people' && <People results={results}/>}
+            {view === 'results' && films && <Results results={results} />}
 
-            {view === 'category_results' && category==='locations' && <Locations results={results}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category}/>}
 
-            {view === 'category_results' && category==='species' && <Species results={results}/>}
+            {view === 'category_results' && category==='people' && <People results={results} category={category}/>}
 
-            {view === 'category_results' && category==='vehicles' && <Vehicles results={results}/>}
+            {view === 'category_results' && category==='locations' && <Locations results={results} category={category}/>}
 
+            {view === 'category_results' && category==='species' && <Species results={results} category={category}/>}
 
+            {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category}/>}
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
