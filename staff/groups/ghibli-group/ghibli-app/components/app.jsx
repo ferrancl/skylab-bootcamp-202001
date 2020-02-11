@@ -223,7 +223,7 @@ class App extends Component {
                     return this.__handleError__(error)
                 }else{
                     console.log(result)
-                    this.setState({view: "details", result})
+                    this.setState({view: "details", category, result})
                 }
             })    
         } catch(error) {
@@ -279,15 +279,15 @@ class App extends Component {
 
             {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
 
-            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'}/>}
+            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'}/>}
+            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'}/>}
+            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'}/>}
+            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'}/>}
+            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
 
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
