@@ -4,7 +4,7 @@ function searchLocations (query, callback) {
 
     let locations = new Array
 
-    call(`https://ghibliapi.herokuapp.com/people`, undefined, (error, response) => {
+    call(`https://ghibliapi.herokuapp.com/locations`, undefined, (error, response) => {
         
         if (error) return callback(error)
 
@@ -13,7 +13,6 @@ function searchLocations (query, callback) {
             const _locations = JSON.parse(response.content)
 
             //results.forEach(result => result.isFav = favs.includes(result.id))
-            console.log(results)
 
             _locations.forEach(location => location.name.includes(query) ? locations.push(location) : '')
             

@@ -13,7 +13,7 @@ function searchPeople (query, callback) {
             const _people = JSON.parse(response.content)
 
             //results.forEach(result => result.isFav = favs.includes(result.id))
-            console.log(results)
+            // console.log(people)
 
             _people.forEach(person => person.name.includes(query) ? people.push(person) : '')
 

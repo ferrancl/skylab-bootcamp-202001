@@ -4,7 +4,7 @@ function searchSpecies (query, callback) {
 
     let species = new Array
 
-    call(`https://ghibliapi.herokuapp.com/people`, undefined, (error, response) => {
+    call(`https://ghibliapi.herokuapp.com/species`, undefined, (error, response) => {
         
         if (error) return callback(error)
 
@@ -13,8 +13,6 @@ function searchSpecies (query, callback) {
             const _species = JSON.parse(response.content)
 
             //results.forEach(result => result.isFav = favs.includes(result.id))
-            console.log(species)
-
             _species.forEach(specie => specie.name.includes(query) ? species.push(specie) : '')
 
             callback(error, species)

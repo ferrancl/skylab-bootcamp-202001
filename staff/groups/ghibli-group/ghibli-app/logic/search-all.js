@@ -4,8 +4,6 @@ function searchAll(query, callback) {
 
     let results = new Array
 
-    let results = new Object
-
     call(`https://ghibliapi.herokuapp.com/films`, undefined, (error, response) => {
             
         if (error) return callback(error)

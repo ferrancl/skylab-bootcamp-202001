@@ -1,4 +1,4 @@
-function SearchFilms (query, callback) {
+function searchFilms (query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
@@ -16,7 +16,7 @@ function SearchFilms (query, callback) {
 
             _films.forEach(film => film.title.includes(query) ? films.push(film) : '')
 
-            console.log(results)
+            // console.log(films)
 
             callback(error, films)
         }
