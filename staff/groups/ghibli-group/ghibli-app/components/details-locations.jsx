@@ -1,4 +1,4 @@
-function DetailsLocations({result, loggedIn}) {
+function DetailsLocations({result}) {
 
     return <div className="details__info">
         <div className="details__info-container">
