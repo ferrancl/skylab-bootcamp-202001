@@ -1,7 +1,9 @@
-function Item({ item: { id, title, year, isFav}, onClick}) {
-    return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{title} ({year})</h3>
-        </li>
+function Item({ item: {id, title, release_date}, category, onClick}) {
+        return <li className="results--item item" onClick={() => onClick(id)}>
+        <h3 className="item-title">{title} ({release_date})</h3>
+    </li>
+    }
+    
     
     
     // <li className="results--item item" onClick={() => onClick(id)}>

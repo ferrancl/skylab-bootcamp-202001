@@ -1,12 +1,10 @@
 const {Component, Fragment} = React
 
 class App extends Component {
+  
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
 
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, film: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
 
-    capitalizeFirstLetter = (string) => {
-
-    }
     // componentWillMount() {
     //     const {token} = sessionStorage
 
@@ -35,7 +33,6 @@ class App extends Component {
 
     handleGoToEditProfile = () => {
         this.setState({view: "editProfile", toggleMenu: false})
-
     }
 
     handleLogin = (username, password) => {
@@ -43,11 +40,6 @@ class App extends Component {
             authenticateUser(username, password, (error, token)=>{
                 if(error){
                     this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
-
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
@@ -55,9 +47,11 @@ class App extends Component {
                             return this.setState({error: error.message})
     
                         }else{
+
                             sessionStorage.token = token 
                             user.username = user.username.toUpperCase()
                             this.setState({ view: 'home', user: user.username, loggedIn: true })
+
                         }
                     })
                 }
@@ -75,10 +69,6 @@ class App extends Component {
             registerUser(name, email, username, password, error => {
                 if(error){
                     this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
                 }else{
                     this.setState({view: 'login'})
                 }
@@ -90,67 +80,19 @@ class App extends Component {
     
     handleGoToLogin = () => {this.setState({ view: 'login' })}
 
-    handleGoToUpdate = () => {this.setState({ view: 'update' })}
-
-    handleUpdate = (data) => {
-
-        const { token } = sessionStorage
-
-        try{
-            updateUser(token, data, error => {
-                if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
-                }else{
-                    this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
-                }
-            })
-        
-        }catch(error){
-            this.setState(error)
-        }
-
-    }
-
-    handleDeleteUser = (password) => {
-
-        const { token } = sessionStorage
-
-        try{
-            deleteUser(password, token, error => {
-                if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
-                }else{
-                    this.setState({view: 'login'})
-                }
-            })
-        
-        }catch(error){
-            this.setState(error)
-        }
-    }
-
-
-    handleSearchFilms = () => {
+    handleSearchCategories = (category) => {
         try {
             const { token } = sessionStorage
 
-            const query = location.queryString
+            //const query = location.queryString
 
-            searchFilms(token, query, (error, results) => {
+            searchCategory(category,token, (error, results) => {
                 if (error)
                     return this.setState({error: error.message})
 
-                location.queryString = { q: query }
+                //location.queryString = { q: query }
 
-                this.setState({films})
+                this.setState({view: 'category_results', results, category})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -201,9 +143,9 @@ class App extends Component {
     render() {
 
 
-        const {props: {title, query}, state: {view, error, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch,
+        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
 
         return <main className="main">
@@ -213,7 +155,7 @@ class App extends Component {
             //onSubmit={handleSearchFilms} 
             warning={error} goToWatchList={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
             
-            {view === "home" && <Landing goToResults={handleSearchFilms}/>}
+            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories}/>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
 
@@ -221,9 +163,22 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
+
             {view === 'results' && films && <Results results={results} />}
 
-            {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results}/>}
+
+            {view === 'category_results' && category==='people' && <People results={results}/>}
+
+            {view === 'category_results' && category==='locations' && <Locations results={results}/>}
+
+            {view === 'category_results' && category==='species' && <Species results={results}/>}
+
+            {view === 'category_results' && category==='vehicles' && <Vehicles results={results}/>}
+
+            {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
+
+            {view === 'editProfile' && <EditProfile/>}
 
             {/* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
 
