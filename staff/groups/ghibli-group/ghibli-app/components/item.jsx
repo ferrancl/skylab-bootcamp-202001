@@ -1,30 +1,7 @@
-function Item({ item: {props}, category, onClick}) {
-    switch (category){
-        case 'films':
-            return <li className="results--item item" onClick={() => onClick(props.id)}>
-            <h3 className="item-title">{props.title} ({props.release_date})</h3>
-        </li>
-
-        case 'people':
-            return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{name}</h3>
-        </li>
-
-        case 'locations':
-            return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{title} ({release_date})</h3>
-        </li>
-
-        case 'species':
-            return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{title} ({release_date})</h3>
-        </li>
-
-        case 'vehicles':
-            return <li className="results--item item" onClick={() => onClick(id)}>
-            <h3 className="item-title">{title} ({release_date})</h3>
-        </li>
-
+function Item({ item: {id, title, release_date}, category, onClick}) {
+        return <li className="results--item item" onClick={() => onClick(id)}>
+        <h3 className="item-title">{title} ({release_date})</h3>
+    </li>
     }
     
     
