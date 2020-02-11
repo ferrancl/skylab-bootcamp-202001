@@ -2,7 +2,7 @@ const {Component, Fragment} = React
 
 class App extends Component {
   
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, results: undefined}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined}
 
 
     // componentWillMount() {
@@ -15,6 +15,13 @@ class App extends Component {
     //     }
     // }
 
+    __handleError__(error) {
+        this.setState({ error: error.message + ' ' })
+
+        setTimeout(() => {
+            this.setState({ error: undefined })
+        }, 3000)
+    }
 
     handleGoToHome = () => {
         this.setState({view: 'home', toggleMenu: false})
@@ -85,6 +92,7 @@ class App extends Component {
             // const { token } = sessionStorage
 
             //const query = location.queryString
+            this.setState({category})
 
             searchCategory(category, (error, results) => {
                 if (error)
@@ -167,16 +175,20 @@ class App extends Component {
         }
     }
 
-    // handleDetail = id => {
-    //     try {
-    //         retrieveFilms(id, (error, films) => {
-    //             if (error)
-    //                 return this.__handleError__(error)
-    //             })
-    //     } catch (error) {
-    //         this.__handleError__(error)
-    //     }
-    // }
+    handleDetail = (id, category) => {
+        try {
+            retrieveDetails(id, category, (error, result) => {
+                if (error){
+                    return this.__handleError__(error)
+                }else{
+                    console.log(result)
+                    this.setState({view: "details", result})
+                }
+            })    
+        } catch(error) {
+            this.__handleError__(error)
+        }
+    }
 
     handleLogout = () => {
         sessionStorage.clear()
@@ -184,14 +196,10 @@ class App extends Component {
         this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
     }
 
-
-
-
-
     render() {
 
 
-        const {props: {title, query}, state: {view, error, results, category, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
@@ -211,17 +219,25 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-            {view === 'results' && films && <Results results={results} />}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category}/>}
+            {view === 'category_results' && category==='people' && <People results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'category_results' && category==='people' && <People results={results} category={category}/>}
+            {view === 'category_results' && category==='locations' && <Locations results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'category_results' && category==='locations' && <Locations results={results} category={category}/>}
+            {view === 'category_results' && category==='species' && <Species results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'category_results' && category==='species' && <Species results={results} category={category}/>}
+            {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category}/>}
+
+            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} category={category}/>}
+
+            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} category={category}/>}
+
+            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} category={category}/>}
+
+            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
