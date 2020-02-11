@@ -119,6 +119,54 @@ class App extends Component {
         })
     }
 
+
+    handleGoToUpdate = () => {this.setState({ view: 'update' })}
+
+    handleUpdate = (data) => {
+
+        const { token } = sessionStorage
+
+        try{
+            updateUser(token, data, error => {
+                if(error){
+                    this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
+                }else{
+                    this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
+                }
+            })
+        
+        }catch(error){
+            this.setState(error)
+        }
+
+    }
+
+    handleDeleteUser = (password) => {
+
+        const { token } = sessionStorage
+
+        try{
+            deleteUser(password, token, error => {
+                if(error){
+                    this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
+                }else{
+                    this.setState({view: 'login'})
+                }
+            })
+        
+        }catch(error){
+            this.setState(error)
+        }
+    }
+
     // handleDetail = id => {
     //     try {
     //         retrieveFilms(id, (error, films) => {
@@ -163,7 +211,6 @@ class App extends Component {
 
             {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
 
-
             {view === 'results' && films && <Results results={results} />}
 
             {view === 'category_results' && category === 'films' && <Films results={results} category={category}/>}
@@ -178,9 +225,9 @@ class App extends Component {
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
-            {view === 'editProfile' && <EditProfile/>}
+            {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>
 
-            {/* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
+            /* {user && <Fragment><h2>{user.name} <button onClick={handleLogout}>Logout</button></h2></Fragment>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
 
