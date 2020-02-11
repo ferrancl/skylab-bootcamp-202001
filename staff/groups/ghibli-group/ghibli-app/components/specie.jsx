@@ -1,5 +1,5 @@
-function Specie({ item: {id, name, classification}, onClick}) {
-    return <li className="results--item item" onClick={() => onClick(id)}>
+function Specie({ item: {id, name, classification}, category, onClick}) {
+    return <li className="results--item item" onClick={() => onClick(id, category)}>
     <h3 className="item-title">{name} ({classification})</h3>
 </li>
 }

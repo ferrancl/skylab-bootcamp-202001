@@ -16,5 +16,3 @@ function Item({ item: {id, title, release_date}, category, onClick}) {
     //     <img src={thumbnail} />
     // </li>
 
-
-}
