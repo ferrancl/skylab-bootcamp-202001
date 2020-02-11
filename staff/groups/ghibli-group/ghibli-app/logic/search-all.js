@@ -14,7 +14,7 @@ function searchAll(query, callback) {
             //results.forEach(result => result.isFav = favs.includes(result.id))
             // films.forEach(film => console.log('films: ' + film.title))
 
-            films.forEach(film => film.title.includes(query) ? results.push(film.title) : '')
+            films.forEach(film => film.title.includes(query) ? results.push(film) : '')
 
             console.log(results)
 
@@ -29,7 +29,7 @@ function searchAll(query, callback) {
                     //results.forEach(result => result.isFav = favs.includes(result.id))
                     console.log(results)
     
-                    people.forEach(person => person.name.includes(query) ? results.push(person.name) : '')
+                    people.forEach(person => person.name.includes(query) ? results.push(person) : '')
 
                     call(`https://ghibliapi.herokuapp.com/species`, undefined, (error, response) => {
         
@@ -43,7 +43,7 @@ function searchAll(query, callback) {
                             console.log(results)
 
                             
-                            species.forEach(specie => specie.name.includes(query) ? results.push(specie.name) : '')
+                            species.forEach(specie => specie.name.includes(query) ? results.push(specie) : '')
 
                             call(`https://ghibliapi.herokuapp.com/locations`, undefined, (error, response) => {
         
@@ -57,7 +57,7 @@ function searchAll(query, callback) {
                                     console.log(results)
 
                     
-                                    locations.forEach(location => location.name.includes(query) ? results.push(location.name) : '')
+                                    locations.forEach(location => location.name.includes(query) ? results.push(location) : '')
 
                                     call(`https://ghibliapi.herokuapp.com/vehicles`, undefined, (error, response) => {
         
@@ -71,7 +71,7 @@ function searchAll(query, callback) {
                                             
                                             console.log(results)
 
-                                            vehicles.forEach(vehicle => vehicle.name.includes(query) ? results.push(vehicle.name) : '')
+                                            vehicles.forEach(vehicle => vehicle.name.includes(query) ? results.push(vehicle) : '')
 
                                             if (results.length === 0) throw new Error ('No results')
 

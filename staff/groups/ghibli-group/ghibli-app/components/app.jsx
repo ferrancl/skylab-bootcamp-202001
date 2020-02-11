@@ -164,7 +164,9 @@ class App extends Component {
 
     handleResults = (query) => {
 
-        searchAll(query, (error, results) => {
+        const _query = toProperCase(query)
+
+        searchAll(_query, (error, results) => {
 
             if(error)
                 this.setState({error: error.message})
