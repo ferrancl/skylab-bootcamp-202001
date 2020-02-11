@@ -2,8 +2,7 @@ const {Component, Fragment} = React
 
 class App extends Component {
   
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined}
-
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -47,6 +46,10 @@ class App extends Component {
             authenticateUser(username, password, (error, token)=>{
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
@@ -76,6 +79,10 @@ class App extends Component {
             registerUser(name, email, username, password, error => {
                 if(error){
                     this.setState({error: error.message})
+
+                    setTimeout(()=>{
+                        this.setState({ error: undefined })
+                    },3000)
                 }else{
                     this.setState({view: 'login'})
                 }
@@ -116,15 +123,49 @@ class App extends Component {
 
         const _query = toProperCase(query)
 
-        searchAll(_query, (error, results) => {
-
+        searchFilms(_query, (error, resultsFilms) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(results)
+            console.log(resultsFilms)
             console.log(error)
-            this.setState({results})
+            this.setState({view: 'search-results', resultsFilms})   
         })
+        searchPeople(_query, (error, resultsPeople) => {
+            if(error)
+                this.setState({error: error.message})
+
+            console.log(resultsPeople)
+            console.log(error)
+            this.setState({resultsPeople})   
+        })
+        searchLocations(_query, (error, resultsLocations) => {
+            if(error)
+                this.setState({error: error.message})
+
+            console.log(resultsLocations)
+            console.log(error)
+            this.setState({resultsLocations})   
+        })
+        searchSpecies(_query, (error, resultsSpecies) => {
+            if(error)
+                this.setState({error: error.message})
+
+            console.log(resultsSpecies)
+            console.log(error)
+            this.setState({resultsSpecies})   
+        })
+        searchVehicles(_query, (error, resultsVehicles) => {
+            if(error)
+                this.setState({error: error.message})
+
+            console.log(resultsVehicles)
+            console.log(error)
+            this.setState({resultsVehicles})   
+        })
+        // this.setState({results: undefined, category: undefined})
+            
+        // this.setState({results: undefined, category: undefined})
     }
 
 
@@ -198,8 +239,7 @@ class App extends Component {
 
     render() {
 
-
-        const {props: {title, query}, state: {view, error, results, category, result, user, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
@@ -238,6 +278,17 @@ class App extends Component {
             {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} category={category}/>}
 
             {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
+
+            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'}/>}
+
+            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'}/>}
+
+            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'}/>}
+
+            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'}/>}
+
+            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'}/>}
+
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}
 
