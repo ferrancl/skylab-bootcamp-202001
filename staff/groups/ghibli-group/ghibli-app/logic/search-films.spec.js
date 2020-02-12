@@ -1,8 +1,20 @@
 describe('search-films', ()=>{
-    it('should response with films url',(done)=>{
-
-        searchFilms('https://ghibliapi.herokuapp.com/films', (error, films)=>{
     
+    it('should succed on search query', (done) => {
+
+        let querys = ['Castle in the Sky',
+                    'Grave of the Fireflies',
+                    'My Neighbor Totoro',
+                    'Kikis Delivery Service',
+                    'Only Yesterday',
+                    'Porco Rosso',
+                    'Pom Poko',
+                    'Whisper of the Heart'    
+                    ]
+        let query = querys.random()
+
+        searchFilms(query, undefined, undefined, (error, films) => {
+
             expect(error).toBeUndefined()
             expect(films).toBeDefined()
 
@@ -10,34 +22,34 @@ describe('search-films', ()=>{
         })
     })
 
-    it('should fail on non string query', ()=>{
-
-        expect(()=>{
-            searchFilms(true, ()=>{})
+    it('should fail on non query string', () => {
         
+        expect(() => {
+            searchFilms(true, undefined, undefined, ()=>{})
         }).toThrowError(TypeError, 'query true is not a string')
-
-        expect(()=>{
-            searchFilms(1, ()=>{})
         
-        }).toThrowError(TypeError, 'query 1 is not a string')
+        expect(() => {
+            searchFilms(3, undefined, undefined, ()=>{})
+        }).toThrowError(TypeError, 'query 3 is not a string')
+
+        expect(() => {
+            searchFilms(undefined, undefined, undefined, ()=>{})
+        }).toThrowError(TypeError, 'query undefined is not a string')
     })
 
-    it('should fail on non callback function', ()=>{
-
-        expect(()=>{
-            searchFilms('string', true)
+    it('should fail on non function callback', () => {
         
-        }).toThrowError(TypeError, 'true is not a function')
-
-        expect(()=>{
-            searchFilms('string', 1)
+        expect(() => {
+            searchFilms('query', undefined, undefined, 'not-function')
+        }).toThrowError(TypeError, 'not-function is not a function')
         
-        }).toThrowError(TypeError, '1 is not a function')
+        expect(() => {
+            searchFilms('query', undefined, undefined, undefined)
+        }).toThrowError(TypeError, 'undefined is not a function')
 
-        expect(()=>{
-            searchFilms('string', 'string')
-        
-        }).toThrowError(TypeError, 'string is not a function')
+        expect(() => {
+            searchFilms('query', undefined, undefined, 2)
+        }).toThrowError(TypeError, '2 is not a function')
     })
+    
 })

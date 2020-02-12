@@ -1,15 +1,14 @@
-describe('search-people', ()=>{
+describe('search-vehicles', ()=>{
     
     it('should succed on search query', (done) => {
 
-        let querys = ['Ashitaka', 'San', 'Eboshi', 'Jigo', 'Kohroku', 'Gonza',
-                    'Hii-sama', 'Yakul', 'Shishigami', 'Moro']
+        let querys = ['Air Destroyer Goliath','Red Wing','Sosukes Boat']
         let query = querys.random()
 
-        searchPeople(query, (error, people) => {
+        searchVehicles(query, (error, vehicles) => {
 
             expect(error).toBeUndefined()
-            expect(people).toBeDefined()
+            expect(vehicles).toBeDefined()
 
             done()
         })
@@ -18,30 +17,30 @@ describe('search-people', ()=>{
     it('should fail on non query string', () => {
         
         expect(() => {
-            searchPeople(true, ()=>{})
+            searchVehicles(true, ()=>{})
         }).toThrowError(TypeError, 'query true is not a string')
         
         expect(() => {
-            searchPeople(3, ()=>{})
+            searchVehicles(3, ()=>{})
         }).toThrowError(TypeError, 'query 3 is not a string')
 
         expect(() => {
-            searchPeople(undefined, ()=>{})
+            searchVehicles(undefined, ()=>{})
         }).toThrowError(TypeError, 'query undefined is not a string')
     })
 
     it('should fail on non function callback', () => {
         
         expect(() => {
-            searchPeople('query', 'not-function')
+            searchVehicles('query', 'not-function')
         }).toThrowError(TypeError, 'not-function is not a function')
         
         expect(() => {
-            searchPeople('query', undefined)
+            searchVehicles('query', undefined)
         }).toThrowError(TypeError, 'undefined is not a function')
 
         expect(() => {
-            searchPeople('query', 2)
+            searchVehicles('query', 2)
         }).toThrowError(TypeError, '2 is not a function')
     })
     
