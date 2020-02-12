@@ -2,17 +2,42 @@ const {Component, Fragment} = React
 
 class App extends Component {
   
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, favs: undefined}
+    state= {view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, favs: undefined}
 
-    // componentWillMount() {
-    //     const {token} = sessionStorage
+    componentDidMount() {
+        const { token } = sessionStorage
 
-    //     if(token) {
-    //         try{
+        if (token)
+            try {
+                retrieveUser(token, (error, user) => {
+                    if (error) {
+                        //return this.__handleError__(error)
+                        this.handleLogout()
+                    }
 
-    //         }
-    //     }
-    // }
+                    if (user !== undefined) this.setState({ view: 'home', user, loggedIn: true })
+                })
+
+            } catch (error) {
+                // this.setState({ error: error.message + ' ' + IT })
+
+                // setTimeout(() => {
+                //     this.setState({ error: undefined })
+                // }, 3000)
+                sessionStorage.clear()
+
+                this.setState({ view: 'start' })
+            }
+        else {
+            this.setState({view: 'start'})
+
+            setTimeout(() => {
+                this.handleGoToHome()
+            }, 1500)
+    }
+}
+
+
 
     __handleError__(error) {
         this.setState({ error: error.message + ' ' })
