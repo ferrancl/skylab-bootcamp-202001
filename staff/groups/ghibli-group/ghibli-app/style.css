@@ -281,6 +281,7 @@
   align-items: center;
   justify-content: center;
   font-family: "Comfortaa", cursive;
+  margin: 2vh 0;
 }
 .results .item-title {
   color: white;
@@ -340,11 +341,15 @@
   align-self: center;
   background-color: #bfa276;
   border-radius: 3vh;
-  margin-bottom: 4vh;
+  margin: 4vh;
 }
 .details .watchlist--clicked {
   background-color: white;
   border: 2px solid #bfa276;
+  color: #bfa276;
+  border-radius: 3vh;
+  margin: 4vh;
+  align-self: center;
 }
 .details .watchlist__img {
   height: 5vh;
@@ -355,7 +360,7 @@
   padding: 3vw;
   font-family: "Comfortaa", cursive;
   font-size: 1rem;
-  color: white;
+  color: black;
 }
 .details .watchlist__button {
   display: flex;

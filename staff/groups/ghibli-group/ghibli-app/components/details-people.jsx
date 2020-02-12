@@ -1,6 +1,7 @@
 function DetailsPeople({result}) {
 
-    return <div className="details__info">
+    return <section className="details">
+    <div className="details__info">
         <div className="details__info-container">
             <p className="details__info-title details__category">NAME</p>
             <p className="details__info-text">{result.name}</p>
@@ -23,6 +24,7 @@ function DetailsPeople({result}) {
         </div>
         <img className="details__image" src="images/dust.png"></img>
     </div>
+    </section>
 
     
 }
