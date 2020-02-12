@@ -1,4 +1,4 @@
-fdescribe('call', ()=>{
+describe('call', ()=>{
     it('should succeed on valid url', done => {
 
         call('https://www.lavanguardia.com/', undefined, (error, response) => {
