@@ -12,7 +12,7 @@ function registerUser(name, email, username, password, callback) {
     call(`https://skylabcoders.herokuapp.com/api/v2/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, username, password })
+        body: JSON.stringify({ name, email, username, password, datapp: 'ghibli', favs: [] })
     }, (error, response) => {
         if (error) return callback(error)
 
