@@ -1,33 +1,32 @@
-function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}) {
-    return <div className="details__info">
+function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    return <div className="details__info">
         <div className="details__info-container">
-            <p className="details__info-title details__category">TITLE</p>
+            <h2 className="details__info-title details__category">TITLE</h2>
             <p className="details__info-text">{result.title}</p>
         </div>
         <div className="details__info-container">
-            <p className="details__info-description details__category">DESCRIPTION</p>
+            <h2 className="details__info-description details__category">DESCRIPTION</h2>
             <p className="details__info-text">{result.description}</p>
         </div>
         <div className="details__info-container">
-            <p className="details__info-director details__category">DIRECTOR</p>
+            <h2 className="details__info-director details__category">DIRECTOR</h2>
             <p className="details__info-text">{result.director}</p>
         </div>
         <div className="details__info-container">
-            <p className="details__info-producer details__category">PRODUCER</p>
+            <h2 className="details__info-producer details__category">PRODUCER</h2>
             <p className="details__info-text">{result.producer}</p>
         </div>
         <div className="details__info-container">
-            <p className="details__info-release details__category">RELEASE</p>
+            <h2 className="details__info-release details__category">RELEASE</h2>
             <p className="details__info-text">{result.release_date}</p>
         </div>
         <div className="details__info-container">
-            <p className="details__info-score details__category">SCORE</p>
+            <h2 className="details__info-score details__category">SCORE</h2>
             <p className="details__info-text">{result.rt_score}</p>
         </div>
-        {linkedCharacters[0]!== undefined && <div className="details__info-container">{ <InfoDetail key={name.id} category={'CHARACTERS'} linkedItems={linkedCharacters}/>}</div>}
-        {linkedLocations[0]!== undefined && <div className="details__info-container">{ <InfoDetail key={name.id} category={'LOCATIONS'} linkedItems={linkedLocations}/>}</div>}
-        {linkedSpecies[0]!== undefined && <div className="details__info-container">{ <InfoDetail key={name.id} category={'SPECIES'} linkedItems={linkedSpecies}/>}</div>}
-        {linkedVehicles[0]!== undefined && <div className="details__info-container">{ <InfoDetail key={name.id} category={'VEHICLES'} linkedItems={linkedVehicles}/>}</div>}
+        {linkedCharacters!== undefined && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
+        {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
+        {linkedSpecies!== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
+        {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <div className="watchlist">
             <button className="watchlist__button">
                 <img className="watchlist__img" src="images/plus.svg"/>

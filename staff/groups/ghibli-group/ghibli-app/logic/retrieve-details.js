@@ -9,6 +9,7 @@ function retrieveDetails(id, category, callback) {
     // if (typeof category !== 'string') throw new TypeError(`${id} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
+    debugger
     call(`https://ghibliapi.herokuapp.com/${category}/${id}`, undefined, (error, response) => {
         if (error) return callback(error)
         if (response.status === 200) {
@@ -21,66 +22,71 @@ function retrieveDetails(id, category, callback) {
             for (i=0; i<categories.length; i++){
                 switch (categories[i]){
                     case 'films':
-                        if (result.films !== 'https://ghibliapi.herokuapp.com/films/'){
-                            (result.categories[i]).map(film=> call(film ,undefined, (error, response) => {
+                        if (result.films.map){
+                            result.films.map(film=> call(film ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
                                 if (response.status === 200) {
-                                    films.push(JSON.parse(response.content).title)
+                                    films.push(JSON.parse(response.content))
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                            break
                         }
+                        break
+                        
                     case 'people':
-                        if (result.people !== 'https://ghibliapi.herokuapp.com/people/'){
-                            (result.people).map(character=> call(character ,undefined, (error, response) => {
+                        if (result.people.map){
+                            result.people.map(character=> call(character ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
                                 if (response.status === 200) {
-                                    characters.push(JSON.parse(response.content).name)
-                                    callback(undefined, result, characters)
+                                    characters.push(JSON.parse(response.content))
+                                    callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                            break
                         }
+                        break
+                        
                     case 'locations':
-                        if (result.locations !== 'https://ghibliapi.herokuapp.com/locations/'){
-                            (result.locations).map(location=> call(location ,undefined, (error, response) => {
+                        if (result.locations){
+                            result.locations.map(location=> call(location ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
                                 if (response.status === 200){
-                                    locations.push(JSON.parse(response.content).name)
+                                    locations.push(JSON.parse(response.content))
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                            break
-                        }    
+                        }                            
+                        break
+
                     case 'species':
-                        if (result.species !== 'https://ghibliapi.herokuapp.com/species/'){
-                            (result.species).map(specie=> call(specie ,undefined, (error, response) => {
+                        if (result.species.map){
+                            result.species.map(specie=> call(specie ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
                                 if (response.status === 200) {
-                                    species.push(JSON.parse(response.content).name)
+                                    species.push(JSON.parse(response.content))
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                            break
                         }
+                        break
+
                     case 'vehicles':
-                        if (result.vehicles !== 'https://ghibliapi.herokuapp.com/vehicles/'){
-                            (result.vehicles).map(vehicle=> call(vehicle ,undefined, (error, response) => {
+                        if (result.vehicles.map){
+                            result.vehicles.map(vehicle=> call(vehicle ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
                                 if (response.status === 200) {
-                                    vehicles.push(JSON.parse(response.content).name)
+                                    vehicles.push(JSON.parse(response.content))
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                            break
                         }
-                    }
+                        break
+                }
+                    
             }
             callback(undefined, result, films, characters, locations, species, vehicles)
         }

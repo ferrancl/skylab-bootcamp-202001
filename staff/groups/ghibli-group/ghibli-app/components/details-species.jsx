@@ -1,5 +1,4 @@
-function DetailsSpecies({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}) {
-
+function DetailsSpecies({result, loggedIn, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles}) {
     return <div className="details__info">
         <div className="details__info-container">
             <p className="details__info-title details__category">NAME</p>
@@ -17,6 +16,10 @@ function DetailsSpecies({result, loggedIn, linkedCharacters, linkedLocations, li
             <p className="details__info-producer details__category">HAIR COLORS</p>
             <p className="details__info-text">{result.hair_colors}</p>
         </div>
+        {linkedFilms!== undefined && <div className="details__info-container">{ <Films key={name.id} category={'films'} results={linkedFilms} onClick={onClick}/>}</div>}
+        {linkedCharacters!== undefined && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
+        {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
+        {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <img className="details__image" src="images/dust.png"></img>
     </div>
     
