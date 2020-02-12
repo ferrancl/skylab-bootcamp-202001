@@ -27,11 +27,14 @@ function DetailsFilms({result, loggedIn, user, fav}) {
                 <p className="details__info-text">{result.rt_score}</p>
             </div>
 
-            <div onClick={() => fav(result.id, user)} className={user.favs.includes(result.id) ? "watchlist--clicked" : "watchlist"}>
+            <div onClick={() => user ? fav(result.id, user) : ''} className={!user ? "watchlist" : user.favs.includes(result.id) ? "watchlist--clicked" : "watchlist"}>
                 <button className="watchlist__button">
                     <img className="watchlist__img" src="images/plus.svg"/>
-                    {loggedIn ? <span className="watchlist__text">ADD TO WATCHLIST</span>
-                    : <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
+                    {loggedIn && !user.favs.includes(result.id) && <span className="watchlist__text">ADD TO WATCHLIST</span>}
+
+                    {loggedIn && user.favs.includes(result.id) && <span className="watchlist__text">REMOVE FROM WATCHLIST</span>}
+
+                    {!loggedIn && <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
                 </button>
             </div>
             <img className="details__image" src="images/dust.png"></img>
