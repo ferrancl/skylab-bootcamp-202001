@@ -1,4 +1,4 @@
-function DetailsSpecies({result}) {
+function DetailsSpecies({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}) {
 
     return <div className="details__info">
         <div className="details__info-container">

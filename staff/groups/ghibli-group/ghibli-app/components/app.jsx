@@ -2,7 +2,7 @@ const {Component, Fragment} = React
 
 class App extends Component {
   
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, characterFilm: undefined}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -208,12 +208,12 @@ class App extends Component {
 
     handleDetail = (id, category) => {
         try {
-            retrieveDetails(id, category, (error, result, characterFilm) => {
+            retrieveDetails(id, category, (error, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles) => {
                 if (error){
                     return this.__handleError__(error)
                 }else{
-                    debugger
-                    this.setState({view: "details", category, result, characterFilm})
+                    console.log(linkedCharacters)
+                    this.setState({view: "details", category, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles})
                 }
             })    
         } catch(error) {
@@ -229,7 +229,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, characterFilm}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
@@ -257,15 +257,15 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} characterFilm={characterFilm}/>}
+            {view === 'details' && category === 'films' && linkedCharacters && linkedLocations && linkedSpecies && linkedVehicles && <DetailsFilms result={result} loggedIn={loggedIn} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn}/>}
+            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn}/>}
+            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn}/>}
+            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn}/>}
+            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedLocations={linkedLocations}/>}
 
             {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 
