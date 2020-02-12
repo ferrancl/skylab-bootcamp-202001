@@ -2,7 +2,7 @@ const {Component, Fragment} = React
 
 class App extends Component {
   
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined}
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, characterFilm: undefined}
 
     // componentWillMount() {
     //     const {token} = sessionStorage
@@ -127,40 +127,30 @@ class App extends Component {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsFilms)
-            console.log(error)
             this.setState({view: 'search-results', resultsFilms})   
         })
         searchPeople(_query, (error, resultsPeople) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsPeople)
-            console.log(error)
             this.setState({resultsPeople})   
         })
         searchLocations(_query, (error, resultsLocations) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsLocations)
-            console.log(error)
             this.setState({resultsLocations})   
         })
         searchSpecies(_query, (error, resultsSpecies) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsSpecies)
-            console.log(error)
             this.setState({resultsSpecies})   
         })
         searchVehicles(_query, (error, resultsVehicles) => {
             if(error)
                 this.setState({error: error.message})
 
-            console.log(resultsVehicles)
-            console.log(error)
             this.setState({resultsVehicles})   
         })
         // this.setState({results: undefined, category: undefined})
@@ -218,12 +208,12 @@ class App extends Component {
 
     handleDetail = (id, category) => {
         try {
-            retrieveDetails(id, category, (error, result) => {
+            retrieveDetails(id, category, (error, result, characterFilm) => {
                 if (error){
                     return this.__handleError__(error)
                 }else{
-                    console.log(result)
-                    this.setState({view: "details", category, result})
+                    debugger
+                    this.setState({view: "details", category, result, characterFilm})
                 }
             })    
         } catch(error) {
@@ -239,7 +229,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, characterFilm}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
@@ -257,8 +247,6 @@ class App extends Component {
 
             {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} />}
 
-            {/* {view === 'search' && <Search onSubmit={handleSearchFilms}  warning={error} />} */}
-
             {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail}/>}
 
             {view === 'category_results' && category==='people' && <People results={results} category={category} onClick={handleDetail}/>}
@@ -269,15 +257,15 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} characterFilm={characterFilm}/>}
 
-            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn}/>}
 
-            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn}/>}
 
-            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn}/>}
 
-            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn}/>}
 
             {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 

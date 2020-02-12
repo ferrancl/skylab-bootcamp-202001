@@ -1,4 +1,4 @@
-function DetailsFilms({result, loggedIn}) {
+function DetailsFilms({result, loggedIn, characterFilm}) {
 
     return <div className="details__info">
         <div className="details__info-container">
@@ -24,6 +24,10 @@ function DetailsFilms({result, loggedIn}) {
         <div className="details__info-container">
             <p className="details__info-score details__category">SCORE</p>
             <p className="details__info-text">{result.rt_score}</p>
+        </div>
+        <div className="details__info-container">
+            <p className="details__info-score details__category">CHARACTERS</p>
+            <p className="details__info-text">{characterFilm}</p>
         </div>
         <div className="watchlist">
             <button className="watchlist__button">
