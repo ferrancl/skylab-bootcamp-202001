@@ -1,7 +1,7 @@
 describe('search-films', ()=>{
-    it('should response with films content on query',(done)=>{
+    it('should response with films url',(done)=>{
 
-        searchFilms('totoro', (error, films)=>{
+        searchFilms('https://ghibliapi.herokuapp.com/films', (error, films)=>{
     
             expect(error).toBeUndefined()
             expect(films).toBeDefined()
