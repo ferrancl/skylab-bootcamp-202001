@@ -356,7 +356,7 @@ class App extends Component {
 
             {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} gotToLogin={handleGoToLogin}/>}
 
             {view === 'category_results' && category==='people' && <People results={results} category={category} onClick={handleDetail}/>}
 
@@ -376,7 +376,7 @@ class App extends Component {
 
             {view === 'details' && category === 'vehicles'  && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies}/>}
 
-            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} gotToLogin={handleGoToLogin}/>}
 
             {view === 'search-results'  && resultsPeople && resultsPeople.length>0  && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
 
@@ -388,7 +388,7 @@ class App extends Component {
 
             {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
-            {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs}/>}
+            {view === 'watchlist' && <Watchlist user={user} favs={favs} onClick={handleDetail} user={user} loggedIn={loggedIn} fav={handleFav}/>}
 
             {/* { {view === 'category_results' && results && <Results results={results} category={category}/>} }
 
