@@ -117,7 +117,6 @@ class App extends Component {
                             return this.setState({error: error.message})
     
                         }else{
-
                             sessionStorage.token = token 
                             this.setState({ view: 'home', user: user, loggedIn: true })
 
