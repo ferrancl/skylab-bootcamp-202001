@@ -616,6 +616,46 @@
   display: none;
 }
 
+.header__top .login .line, .edit .line, .user-nav .user .line {
+  border: 2px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input, .register .input, .edit .form .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit, .register .submit, .edit .form .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.message {
+  height: 40vh;
+  width: 70vw;
+  background: rgba(128, 128, 128, 0.9);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  border-radius: 5vh;
+  color: black;
+  font-family: "Comfortaa", cursive;
+}
+
 body {
   position: absolute;
   width: 100vw;

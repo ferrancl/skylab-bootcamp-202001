@@ -1,6 +1,10 @@
 function EditProfile({onSubmit, onSubmitDelete, error, message}) {
     return(
         <section className="edit">
+            
+            {error && <div className="message">{error}</div>}
+            {message && <div className="message">{message}</div>}
+
             <h2 className="edit__title">Edit profile</h2>
             <div className="edit-category">
                 <div className="line"></div>
@@ -17,9 +21,9 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                 <input className="input" name="username" placeholder="New Username"/>
                 <button className="submit" type="submit">SAVE</button>
 
-                {error && <span className="message">{error}</span>}
+                {/* {error && <span className="message">{error}</span>} */}
 
-                {message && <span className="message">{message}</span>}
+                {/* {message && <span className="message">{message}</span>} */}
 
             </form>
             <div className="edit__password">
@@ -40,9 +44,9 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                     <input className="input" type="password" name="password"  placeholder="New password"/>
                     <button className="submit" type="submit">SAVE</button>
 
-                    {error && <span className="message">{error}</span>}
+                    {/* {error && <span className="message">{error}</span>} */}
 
-                    {message && <span className="message">{message}</span>}
+                    {/* {message && <span className="message">{message}</span>} */}
 
                 </form>
             </div>
@@ -62,9 +66,9 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                     <input className="input" name="name" placeholder="New Name"/>                    
                     <button className="submit" type="submit">SAVE</button>
 
-                    {error && <span className="message">{error}</span>}
+                    {/* {error && <span className="message">{error}</span>} */}
 
-                    {message && <span className="message">{message}</span>}
+                    {/* {message && <span className="message">{message}</span>} */}
 
                 </form>
             </div>
@@ -84,9 +88,9 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                     <input className="input" name="email" placeholder="New E-mail"/>                    
                     <button className="submit" type="submit">SAVE</button>
 
-                    {error && <span className="message">{error}</span>}
+                    {/* {error && <span className="message">{error}</span>} */}
 
-                    {message && <span className="message">{message}</span>}
+                    {/* {message && <span className="message">{message}</span>} */}
 
                 </form>
             </div>
@@ -106,9 +110,9 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                  }}>
                     <input className="input" type="password" name="password"  placeholder="Password"/>
 
-                    {error && <span className="message">{error}</span>}
+                    {/* {error && <span className="message">{error}</span>} */}
 
-                    {message && <span className="message">{message}</span>}
+                    {/* {message && <span className="message">{message}</span>} */}
 
                     <button className="delete" type="submit">DELETE</button>
 

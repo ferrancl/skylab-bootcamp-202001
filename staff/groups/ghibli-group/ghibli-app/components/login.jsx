@@ -1,4 +1,6 @@
-function Login({onSubmit, handleGoToRegister, error}) {
+function Login({onSubmit, handleGoToRegister
+    // , error
+}) {
     
         return <section className="login">
             <form className="form" onSubmit={event => {
@@ -8,11 +10,11 @@ function Login({onSubmit, handleGoToRegister, error}) {
 
                 onSubmit(username, password)
             }}>
-                <input className="input" type="text" name="username" placeholder ="username" required/>
-                <input className="input" type="password" name="password" placeholder="password" required/>
+                <input className="input" type="text" name="username" placeholder ="username"/>
+                <input className="input" type="password" name="password" placeholder="password"/>
                 <button className="submit" type="submit">LOGIN</button>
 
-                {error && <span className="">{error}</span>}
+                {/* {error && <span className="">{error}</span>} */}
 
             </form>
             <section className="not-registered">

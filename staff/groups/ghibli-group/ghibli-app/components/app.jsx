@@ -15,7 +15,7 @@ class App extends Component {
     // }
 
     __handleError__(error) {
-        this.setState({ error: error.message + ' ' })
+        this.setState({view: 'error', error: error.message + ' ' })
 
         setTimeout(() => {
             this.setState({ error: undefined })
@@ -45,15 +45,10 @@ class App extends Component {
         try{
             authenticateUser(username, password, (error, token)=>{
                 if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
+                    this.__handleError__(error)
                 } else {
                     retrieveUser(token, (error, user) => {
                         if(error){
-
                             return this.setState({error: error.message})
     
                         }else{
@@ -78,11 +73,7 @@ class App extends Component {
         try{
             registerUser(name, email, username, password, error => {
                 if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
+                    this.__handleError__(error)
                 }else{
                     this.setState({view: 'login'})
                 }
@@ -92,14 +83,14 @@ class App extends Component {
         }
     }
     
-    handleGoToLogin = () => {this.setState({ view: 'login' })}
+    handleGoToLogin = () => {this.setState({ view: 'login', toggleMenu: false })}
 
     handleSearchCategories = (category) => {
         try {
             // const { token } = sessionStorage
 
             //const query = location.queryString
-            this.setState({category})
+            this.setState({category, toggleMenu: false})
 
             searchCategory(category, (error, results) => {
                 if (error)
@@ -107,7 +98,7 @@ class App extends Component {
 
                 //location.queryString = { q: query }
 
-                this.setState({view: 'category_results', results, category})
+                this.setState({view: 'category_results', results, category, toggleMenu: false})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -127,31 +118,31 @@ class App extends Component {
             if(error)
                 this.setState({error: error.message})
 
-            this.setState({view: 'search-results', resultsFilms})   
+            this.setState({view: 'search-results', resultsFilms, toggleMenu: false})   
         })
         searchPeople(_query, (error, resultsPeople) => {
             if(error)
                 this.setState({error: error.message})
 
-            this.setState({resultsPeople})   
+            this.setState({resultsPeople, toggleMenu: false})   
         })
         searchLocations(_query, (error, resultsLocations) => {
             if(error)
                 this.setState({error: error.message})
 
-            this.setState({resultsLocations})   
+            this.setState({resultsLocations, toggleMenu: false})   
         })
         searchSpecies(_query, (error, resultsSpecies) => {
             if(error)
                 this.setState({error: error.message})
 
-            this.setState({resultsSpecies})   
+            this.setState({resultsSpecies, toggleMenu: false})   
         })
         searchVehicles(_query, (error, resultsVehicles) => {
             if(error)
                 this.setState({error: error.message})
 
-            this.setState({resultsVehicles})   
+            this.setState({resultsVehicles, toggleMenu: false})   
         })
 
         // this.setState({results: undefined, category: undefined})
@@ -160,7 +151,7 @@ class App extends Component {
     }
 
 
-    handleGoToUpdate = () => {this.setState({ view: 'update' })}
+    handleGoToUpdate = () => {this.setState({ view: 'update', toggleMenu: false })}
 
     handleUpdate = (data) => {
 
@@ -169,11 +160,7 @@ class App extends Component {
         try{
             updateUser(token, data, error => {
                 if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
+                    this.__handleError__(error)
                 }else{
                     this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
                 }
@@ -207,11 +194,7 @@ class App extends Component {
         user.favs.map(film => 
             searchFilms(undefined, token, film, (error, films) => {
                 if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
+                    this.__handleError__(error)
                 }else{
                     this.setState({view: 'watchlist', toggleMenu: false, favs: films})
                 }
@@ -226,13 +209,9 @@ class App extends Component {
         try{
             deleteUser(password, token, error => {
                 if(error){
-                    this.setState({error: error.message})
-
-                    setTimeout(()=>{
-                        this.setState({ error: undefined })
-                    },3000)
+                    this.__handleError__(error)
                 }else{
-                    this.setState({view: 'login'})
+                    this.setState({view: 'login', toggleMenu: false})
                 }
             })
         
@@ -247,8 +226,7 @@ class App extends Component {
                 if (error){
                     return this.__handleError__(error)
                 }else{
-                    console.log(result)
-                    this.setState({view: "details", category, result})
+                    this.setState({view: "details", category, result, toggleMenu: false})
                 }
             })    
         } catch(error) {
@@ -315,6 +293,8 @@ class App extends Component {
             {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
             {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs}/>}
+
+            {view === 'error' && error || message && <Error error={error} message={message}/>}
 
             {/* { {view === 'category_results' && results && <Results results={results} category={category}/>} }
 
