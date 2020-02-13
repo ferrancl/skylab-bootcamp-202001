@@ -20,7 +20,12 @@ function deleteUser(password, token, callback) {
         body: JSON.stringify({ password })
    
     }, (error,response) => {
-        if (error) return callback(error)
+        if (error) return callback(new ReferenceError(error))
+
+        const { error: _error} = JSON.parse(response.content)
+
+        if (_error) return callback(new ReferenceError(_error))
+        //if (error) return callback(error)
         if (response.status === 204) callback()
     })
 }

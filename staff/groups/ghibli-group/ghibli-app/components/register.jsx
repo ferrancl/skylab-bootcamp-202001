@@ -1,4 +1,4 @@
-function Register({onSubmit, error}) {
+function Register({onSubmit, error, message, errorClick }) {
 
     return <section className="register">
         <form className="form" onSubmit={event => {
@@ -12,13 +12,15 @@ function Register({onSubmit, error}) {
             onSubmit(name, email, username, password)
         
         }}>
-            <input className="input" type="text" name="name" placeholder="name" required/>
-            <input className="input" type="text" name="email" placeholder="email" required/>
-            <input className="input" type="text" name="username" placeholder="username" required/>
-            <input className="input" type="password" name="password" placeholder="password" required/>
+            <input className="input" type="text" name="name" placeholder="name"/>
+            <input className="input" type="text" name="email" placeholder="email"/>
+            <input className="input" type="text" name="username" placeholder="username"/>
+            <input className="input" type="password" name="password" placeholder="password"/>
             <button className="submit" type="submit">REGISTER</button>
+            
+            {error && <Error error={error} message = {message} onClick={errorClick}/>}
 
-            {error && <span>{error}</span>}
+            {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
             <p className="incentive">Register to add your favourite movies to your watchlist!</p>
         </form>

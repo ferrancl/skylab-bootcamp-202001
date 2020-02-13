@@ -1,0 +1,28 @@
+@import config
+@import utils
+
+.message
+    height: 100vh
+    width: 100vw
+    background: transparentize(white, 0.3)
+    z-index: 20
+    display: flex
+    justify-content: center
+    align-items: center
+    position: fixed
+    top: 0
+    left: 0
+    color: black
+    font-family: $font-main
+
+    .container
+        .text__container
+            height: 40vh
+            width: 60vw
+            display: flex
+            justify-content: center
+            align-items: center
+            text-align: center
+            background: transparentize(lightgrey, 0.7)
+            border-radius: 5vh
+            margin: 5vh

@@ -50,21 +50,26 @@
   font-family: "Comfortaa", cursive;
 }
 
+.header .submit {
+  padding: 0;
+}
 .header .search {
-  margin: 2vh 5vh;
+  margin: 2vh 5vh 2vh 1vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .header .search__icon {
-  height: 8vw;
-  width: 8vw;
+  height: 5vh;
+  width: 5vh;
   color: #8a8a8a;
   padding-right: 2vw;
+  padding: 0;
 }
 .header .search__input {
   margin: 1vw 0;
   width: 67vw;
+  max-width: 60vw;
   height: 5vh;
   border-bottom: 3px solid grey;
   font-size: 1.5rem;
@@ -322,6 +327,15 @@
   color: black;
 }
 
+.no-results {
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  display: flex;
+  margin: 13.5vh;
+  justify-content: center;
+  font-size: 2rem;
+}
+
 .user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
@@ -355,9 +369,10 @@
 }
 .details__image {
   height: 30vh;
-  align-self: center;
-  margin: 5vh;
+  margin: auto;
   margin-top: 0;
+  display: flex;
+  padding-bottom: 5vh;
 }
 .details__category {
   font-family: "Comfortaa", cursive;
@@ -368,21 +383,24 @@
   font-family: "Comfortaa", cursive;
   margin: 5vh;
   text-align: justify;
-  line-height: 3vh;
+  line-height: 5vh;
 }
 .details .watchlist {
   align-self: center;
   background-color: #bfa276;
   border-radius: 3vh;
   margin: 4vh;
+  display: flex;
+  justify-content: space-evenly;
 }
 .details .watchlist--clicked {
   background-color: white;
-  border: 2px solid #bfa276;
+  border: 3px solid #bfa276;
   color: #bfa276;
   border-radius: 3vh;
   margin: 4vh;
-  align-self: center;
+  display: flex;
+  justify-content: space-evenly;
 }
 .details .watchlist__img {
   height: 5vh;
@@ -618,6 +636,7 @@
   margin-right: 7vw;
   margin-left: 45vw;
   position: absolute;
+  right: 1vw;
 }
 .user-nav__list {
   display: flex;
@@ -628,6 +647,7 @@
   position: relative;
   top: 0;
   z-index: 10;
+  transform: translateY(-1vh);
 }
 .user-nav .user {
   justify-self: right;
@@ -647,6 +667,58 @@
 }
 .user-nav .option--show {
   display: none;
+}
+
+.header__top .login .line, .edit .line, .user-nav .user .line {
+  border: 2px solid #bfa276;
+  border-radius: 1vw;
+  margin: 1vw 0;
+}
+
+.login .input, .register .input, .edit .form .input {
+  border-radius: 3vh;
+  border: 3px solid #bfa276;
+  margin: 2vh;
+  height: 6vh;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.login .submit, .register .submit, .edit .form .submit {
+  border-radius: 5vh;
+  background-color: #bfa276;
+  color: white;
+  padding: 2vh;
+  margin: 4vh;
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+}
+
+.message {
+  height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: black;
+  font-family: "Comfortaa", cursive;
+}
+.message .container .text__container {
+  height: 40vh;
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(211, 211, 211, 0.3);
+  border-radius: 5vh;
+  margin: 5vh;
 }
 
 body {

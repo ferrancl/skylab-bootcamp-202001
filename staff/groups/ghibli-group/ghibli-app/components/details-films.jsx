@@ -1,5 +1,6 @@
-function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin, goBack, category, query}) {    
-    return <section className="details">
+function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin, goBack, category, query, image}) {    
+    
+  return <section className="details">
       <div className="details__info">
         <div className="details__info-container">
             <h2 className="details__info-title details__category">TITLE</h2>
@@ -31,7 +32,15 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
         {linkedVehicles !== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <div onClick={() => user ? fav(result.id, user) : ''} className={!user ? "watchlist" : user.favs.includes(result.id) ? "watchlist--clicked" : "watchlist"}>
             <button className="watchlist__button">
-                <img className="watchlist__img" src="images/plus.svg"/>
+
+                {loggedIn && !user.favs.includes(result.id) && <img className="watchlist__img" src="images/plus.svg"/>}
+
+                {loggedIn && user.favs.includes(result.id) && <img className="watchlist__img" src="images/minus.svg"/>}
+
+                {!loggedIn && <img className="watchlist__img" src="images/plus.svg"/>}
+
+                {/* <img className="watchlist__img" src="images/plus.svg"/> */}
+
                 {loggedIn && !user.favs.includes(result.id) && <span className="watchlist__text">ADD TO WATCHLIST</span>}
 
                 {loggedIn && user.favs.includes(result.id) && <span className="watchlist__text">REMOVE FROM WATCHLIST</span>}
@@ -39,11 +48,14 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
                 {!loggedIn && <span className="watchlist__text" onClick={goToLogin}>LOGIN TO ADD TO WATCHLIST</span>}
             </button>
         </div>
+
+        <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
+
         <a href="" className="" onClick={event => {
             event.preventDefault()
             goBack(category, query)
         }} >Go Back</a>
-        <img className="details__image" src="images/dust.png"></img>
+
       </div>
     </section>
 

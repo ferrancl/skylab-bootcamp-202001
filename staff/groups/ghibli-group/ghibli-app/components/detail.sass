@@ -9,9 +9,10 @@
 
     &__image
         height: 30vh
-        align-self: center
-        margin: 5vh
+        margin: auto
         margin-top: 0
+        display: flex
+        padding-bottom: 5vh
 
     &__category
         font-family: $font-main
@@ -23,21 +24,24 @@
             font-family: $font-main
             margin: 5vh
             text-align: justify
-            line-height: 3vh
+            line-height: 5vh
 
     .watchlist
         align-self: center
         background-color: $main-color
         border-radius: 3vh
         margin: 4vh
+        display: flex
+        justify-content: space-evenly
 
         &--clicked
             background-color: white
-            border: 2px solid $main-color
+            border: $border-width solid $main-color
             color: $main-color
             border-radius: 3vh
             margin: 4vh
-            align-self: center
+            display: flex
+            justify-content: space-evenly
 
         &__img
             height: 5vh
