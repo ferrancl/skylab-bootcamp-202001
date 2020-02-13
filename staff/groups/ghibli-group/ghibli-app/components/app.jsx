@@ -1,6 +1,40 @@
 const {Component, Fragment} = React
 
 class App extends Component {
+
+ 
+    state= {view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
+   
+        
+    componentWillMount() {
+        const { token } = sessionStorage
+
+        if (token)
+            try {
+                retrieveUser(token, (error, user) => {
+                    if (error) {
+                        this.__handleError__(error)
+                        this.handleLogout()
+                    }
+
+                    if (user !== undefined) this.setState({ view: 'home', user, loggedIn: true })
+                })
+
+            } catch (error) {
+                this.__handleError__(error)
+              
+                sessionStorage.clear()
+
+                this.setState({ view: 'start' })
+            }
+        else {
+            this.setState({view: 'start'})
+
+            setTimeout(() => {
+                this.handleGoToHome()
+            }, 1500)
+    }
+}
  
     state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
    
