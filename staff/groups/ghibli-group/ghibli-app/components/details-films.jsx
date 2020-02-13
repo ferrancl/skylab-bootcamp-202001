@@ -1,4 +1,4 @@
-function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    
+function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, image}) {    
     return <section className="details">
       <div className="details__info">
         <div className="details__info-container">
@@ -39,7 +39,7 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
                 {!loggedIn && <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
             </button>
         </div>
-        <img className="details__image" src="images/dust.png"></img>
+        <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
       </div>
     </section>
 

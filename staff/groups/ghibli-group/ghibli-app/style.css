@@ -289,6 +289,15 @@
   text-align: center;
 }
 
+.no-results {
+  text-align: center;
+  font-family: "Comfortaa", cursive;
+  display: flex;
+  margin: 13.5vh;
+  justify-content: center;
+  font-size: 2rem;
+}
+
 .user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
   border-radius: 1vw;
@@ -322,9 +331,10 @@
 }
 .details__image {
   height: 30vh;
-  align-self: center;
-  margin: 5vh;
+  margin: auto;
   margin-top: 0;
+  display: flex;
+  padding-bottom: 5vh;
 }
 .details__category {
   font-family: "Comfortaa", cursive;

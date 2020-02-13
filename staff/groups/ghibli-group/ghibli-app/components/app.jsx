@@ -263,7 +263,6 @@ class App extends Component {
                 if (error) {
                     return this.__handleError__(error)
                 } else {
-                    debugger
                     this.setState({ view: "details", category, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, toggleMenu: false })
                 }
             })
@@ -282,9 +281,13 @@ class App extends Component {
         this.setState({ error: undefined, message: undefined })
     }
 
+    randomImage = ['images/dust.png', 'images/mask.png', 'images/fire.png', 'images/duck.png', 'images/animal.png']
+    
+    // Math.floor(Math.random()) * 4 
+
     render() {
 
-        const { props: { title, query }, state: { view, error, results, category, result,user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles }, handleGoToHome, handleGoToLogin, handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser, handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav, handleLeaveError, handleDetail } = this
+        const { props: { title, query }, state: { view, error, results, category, result,user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles }, handleGoToHome, handleGoToLogin, handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser, handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav, handleLeaveError, handleDetail, randomImage } = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome} />}
@@ -293,31 +296,31 @@ class App extends Component {
                 //onSubmit={handleSearchFilms} 
             warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user} />}
 
-            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories} />}
+            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories} error={error} message={message} onClick={handleLeaveError}/>}
 
             {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} errorClick={handleLeaveError} />}
 
             {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} errorClick={handleLeaveError} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} />}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} error={error}/>}
 
-            {view === 'category_results' && category === 'people' && <People results={results} category={category} onClick={handleDetail} />}
+            {view === 'category_results' && category === 'people' && <People results={results} category={category} onClick={handleDetail} error={error}/>}
 
-            {view === 'category_results' && category === 'locations' && <Locations results={results} category={category} onClick={handleDetail} />}
+            {view === 'category_results' && category === 'locations' && <Locations results={results} category={category} onClick={handleDetail} error={error}/>}
 
-            {view === 'category_results' && category === 'species' && <Species results={results} category={category} onClick={handleDetail} />}
+            {view === 'category_results' && category === 'species' && <Species results={results} category={category} onClick={handleDetail} error={error}/>}
 
-            {view === 'category_results' && category === 'vehicles' && <Vehicles results={results} category={category} onClick={handleDetail} />}
+            {view === 'category_results' && category === 'vehicles' && <Vehicles results={results} category={category} onClick={handleDetail} error={error}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} image={randomImage}/>}
 
-            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
+            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} image={randomImage}/>}
 
-            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
+            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} image={randomImage}/>}
 
-            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} />}
+            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} image={randomImage}/>}
 
-            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} />}
+            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} image={randomImage}/>}
 
             {view === 'search-results' && resultsFilms && resultsFilms.length > 0 && <Films results={resultsFilms} category={'films'} onClick={handleDetail} />}
 
@@ -333,7 +336,7 @@ class App extends Component {
 
             {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs} />}
 
-            {/* {error || message && <Error error={error} message={message} onClick={errorClick} />} */}
+            {view === 'search-results' && resultsVehicles && resultsVehicles.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsLocations && resultsLocations.length === 0 && resultsPeople && resultsPeople.length === 0 && resultsFilms && resultsFilms.length === 0 && <NoResults/>}
 
             {/* { {view === 'category_results' && results && <Results results={results} category={category}/>} }
 
