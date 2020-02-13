@@ -3,39 +3,77 @@ const {Component, Fragment} = React
 class App extends Component {
 
  
-    state= {view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
-   
+    state= {view: undefined, error: undefined,query: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
         
     componentWillMount() {
-        const { token } = sessionStorage
+        
+        const { token } = sessionStorage       
 
-        if (token)
-            try {
-                retrieveUser(token, (error, user) => {
-                    if (error) {
-                        this.__handleError__(error)
-                        this.handleLogout()
-                    }
+        if(address.search.query){
+            const {query} = address.search
 
-                    if (user !== undefined) this.setState({ view: 'home', user, loggedIn: true })
-                })
-
-            } catch (error) {
-                this.__handleError__(error)
-              
-                sessionStorage.clear()
-
-                this.setState({ view: 'start' })
-            }
-        else {
-            this.setState({view: 'start'})
-
-            setTimeout(() => {
-                this.handleGoToHome()
-            }, 1500)
-    }
-}
+            if (token && query){
+                try {
+                    retrieveUser(token, (error, user) => {
+                        if (error) {
+                            this.__handleError__(error)
+                            this.handleLogout()
+                        }
     
+                        if (user !== undefined) this.setState({ user, loggedIn: true })
+                        this.handleResults(query)
+                    })
+                    
+                
+                } catch (error) {
+                    this.__handleError__(error)
+                  
+                    sessionStorage.clear()
+    
+                    this.setState({ view: 'start' })
+                }
+            }else if(query){
+                this.handleResults(query)
+            }
+            
+        
+        }else if(address.hash && address.hash.startsWith(`${this.state.category}/`)){
+            const [,id] = address.hash.split('/')
+
+            this.handleDetail(id, this.state.category)
+        }else{
+            if (token){
+                try {
+                    retrieveUser(token, (error, user) => {
+                        if (error) {
+                            this.__handleError__(error)
+                            this.handleLogout()
+                        }
+    
+                        if (user !== undefined) this.setState({ view: 'home', user, loggedIn: true })
+                    })
+                    
+                
+                } catch (error) {
+                    this.__handleError__(error)
+                  
+                    sessionStorage.clear()
+    
+                    this.setState({ view: 'start' })
+                }
+            }
+            else {
+                this.setState({view: 'start'})
+
+                setTimeout(() => {
+                    this.handleGoToHome()
+                }, 1500)
+            }
+
+        }
+        
+}
+ 
     __handleError__(error) {
         this.setState({ error: error.message + ' ' })
 
@@ -143,6 +181,10 @@ class App extends Component {
     handleResults = (query) => {
 
         const _query = toProperCase(query)
+
+        this.setState({query})
+
+        address.search = {query}
 
         searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
             if(error)
@@ -281,7 +323,6 @@ class App extends Component {
                 if (error){
                     return this.__handleError__(error)
                 }else{
-                    debugger
                     this.setState({view: "details", category, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles})
                 }
             })    
@@ -298,7 +339,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
+        const {props: {title}, state: {view, query, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,
         handleDetail} = this
@@ -306,7 +347,7 @@ class App extends Component {
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
+            {view !== "start" && <Header query={query} goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
             //onSubmit={handleSearchFilms} 
             warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
             
