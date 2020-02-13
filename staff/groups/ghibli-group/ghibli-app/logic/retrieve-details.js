@@ -1,6 +1,6 @@
-function retrieveDetails(id, category, callback) {
+function retrieveDetails(id,category,callback) {
     if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
-    // if (typeof category !== 'string') throw new TypeError(`${id} is not a string`)
+    if (typeof category !== 'string') throw new TypeError(`${category} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
     call(`https://ghibliapi.herokuapp.com/${category}/${id}`, undefined, (error, response) => {
