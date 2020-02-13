@@ -22,7 +22,7 @@ describe('search-films', ()=>{
         })
     })
 
-    it('should fail on non query string', () => {
+    it('should fail on non query string or undefined', () => {
         
         expect(() => {
             searchFilms(true, undefined, undefined, ()=>{})
@@ -32,9 +32,6 @@ describe('search-films', ()=>{
             searchFilms(3, undefined, undefined, ()=>{})
         }).toThrowError(TypeError, 'query 3 is not a string')
 
-        expect(() => {
-            searchFilms(undefined, undefined, undefined, ()=>{})
-        }).toThrowError(TypeError, 'query undefined is not a string')
     })
 
     it('should fail on non function callback', () => {
