@@ -282,8 +282,6 @@ class App extends Component {
     }
 
     randomImage = ['images/dust.png', 'images/mask.png', 'images/fire.png', 'images/duck.png', 'images/animal.png']
-    
-    // Math.floor(Math.random()) * 4 
 
     render() {
 

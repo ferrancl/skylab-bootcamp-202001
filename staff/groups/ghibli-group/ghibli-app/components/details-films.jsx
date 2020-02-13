@@ -31,7 +31,15 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
         {linkedVehicles !== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <div onClick={() => user ? fav(result.id, user) : ''} className={!user ? "watchlist" : user.favs.includes(result.id) ? "watchlist--clicked" : "watchlist"}>
             <button className="watchlist__button">
-                <img className="watchlist__img" src="images/plus.svg"/>
+
+                {loggedIn && !user.favs.includes(result.id) && <img className="watchlist__img" src="images/plus.svg"/>}
+
+                {loggedIn && user.favs.includes(result.id) && <img className="watchlist__img" src="images/minus.svg"/>}
+
+                {!loggedIn && <img className="watchlist__img" src="images/plus.svg"/>}
+
+                {/* <img className="watchlist__img" src="images/plus.svg"/> */}
+
                 {loggedIn && !user.favs.includes(result.id) && <span className="watchlist__text">ADD TO WATCHLIST</span>}
 
                 {loggedIn && user.favs.includes(result.id) && <span className="watchlist__text">REMOVE FROM WATCHLIST</span>}

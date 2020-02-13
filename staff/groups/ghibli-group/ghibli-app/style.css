@@ -50,21 +50,26 @@
   font-family: "Comfortaa", cursive;
 }
 
+.header .submit {
+  padding: 0;
+}
 .header .search {
-  margin: 2vh 5vh;
+  margin: 2vh 5vh 2vh 1vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .header .search__icon {
-  height: 8vw;
-  width: 8vw;
+  height: 5vh;
+  width: 5vh;
   color: #8a8a8a;
   padding-right: 2vw;
+  padding: 0;
 }
 .header .search__input {
   margin: 1vw 0;
   width: 67vw;
+  max-width: 60vw;
   height: 5vh;
   border-bottom: 3px solid grey;
   font-size: 1.5rem;
@@ -345,21 +350,24 @@
   font-family: "Comfortaa", cursive;
   margin: 5vh;
   text-align: justify;
-  line-height: 3vh;
+  line-height: 5vh;
 }
 .details .watchlist {
   align-self: center;
   background-color: #bfa276;
   border-radius: 3vh;
   margin: 4vh;
+  display: flex;
+  justify-content: space-evenly;
 }
 .details .watchlist--clicked {
   background-color: white;
-  border: 2px solid #bfa276;
+  border: 3px solid #bfa276;
   color: #bfa276;
   border-radius: 3vh;
   margin: 4vh;
-  align-self: center;
+  display: flex;
+  justify-content: space-evenly;
 }
 .details .watchlist__img {
   height: 5vh;
