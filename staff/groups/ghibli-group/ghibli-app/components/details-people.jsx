@@ -1,4 +1,5 @@
-function DetailsPeople({result, linkedFilms, linkedLocations, linkedSpecies, linkedVehicles, onClick, image}) {
+function DetailsPeople({result, linkedFilms, linkedLocations, linkedSpecies, linkedVehicles, onClick, goBack, category, query, image}) {
+
     return <section className="details">
     <div className="details__info">
         <div className="details__info-container">
@@ -25,7 +26,14 @@ function DetailsPeople({result, linkedFilms, linkedLocations, linkedSpecies, lin
         {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
         {linkedSpecies!== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
         {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
+
         <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
+
+        <a href="" className="" onClick={event => {
+            event.preventDefault()
+            goBack(category, query)
+        }} >Go Back</a>
+
     </div>
     </section>    
 }

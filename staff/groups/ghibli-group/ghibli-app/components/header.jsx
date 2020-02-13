@@ -1,4 +1,4 @@
-function Header ({search, goHome, loggedIn, goToLogin, toggleMenu, showNav, goToWatchlist, goToEditProfile, logout, user}) {
+function Header ({search, goHome, loggedIn, goToLogin, toggleMenu, showNav, goToWatchlist, goToEditProfile, logout, user, query}) {
 
     return <header className="header">
         <div className="header__top">
@@ -18,7 +18,7 @@ function Header ({search, goHome, loggedIn, goToLogin, toggleMenu, showNav, goTo
                     <button type="submit">
                         <img className="search__icon" src="images/search-solid.svg"/>
                     </button>
-                    <input className="search__input" name="query" type="text"/>
+                    <input className="search__input" defaultValue={query} name="query" type="text"/>
                 </form>
             </div>
     </header>

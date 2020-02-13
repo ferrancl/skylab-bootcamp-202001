@@ -1,5 +1,6 @@
-function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, image}) {    
-    return <section className="details">
+function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin, goBack, category, query, image}) {    
+    
+  return <section className="details">
       <div className="details__info">
         <div className="details__info-container">
             <h2 className="details__info-title details__category">TITLE</h2>
@@ -44,10 +45,17 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
 
                 {loggedIn && user.favs.includes(result.id) && <span className="watchlist__text">REMOVE FROM WATCHLIST</span>}
 
-                {!loggedIn && <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
+                {!loggedIn && <span className="watchlist__text" onClick={goToLogin}>LOGIN TO ADD TO WATCHLIST</span>}
             </button>
         </div>
+
         <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
+
+        <a href="" className="" onClick={event => {
+            event.preventDefault()
+            goBack(category, query)
+        }} >Go Back</a>
+
       </div>
     </section>
 
