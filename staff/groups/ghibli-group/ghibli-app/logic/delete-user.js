@@ -1,6 +1,18 @@
 function deleteUser(password, token, callback) {
-    if (typeof password !== 'string') throw new TypeError('password ' + password + ' is not a string');
-    if (typeof callback !== 'function') throw new TypeError('callback ' + callback + ' is not a function');
+    /* if (typeof password !== 'string') throw new TypeError('password ' + password + ' is not a string');
+    if(typeof token !== 'string') throw new TypeError('token' + token + ' is not a string')
+    if (typeof callback !== 'function') throw new TypeError('callback ' + callback + ' is not a function'); */
+    if (typeof token !== 'string') throw new TypeError(`token ${token} is not a string`)
+    if (typeof callback !== 'function') throw new TypeError(`callback ${callback} is not a function`)
+    if(typeof password !== 'string') throw new TypeError(`password ${password} is not a string`)
+
+    const [header, payload, signature] = token.split('.')
+    if (!header || !payload || !signature) throw new Error('invalid token')
+
+    const { sub } = JSON.parse(atob(payload))
+
+    if (!sub) throw new Error('no user id in token')
+
 
     call(`https://skylabcoders.herokuapp.com/api/v2/users/`, {
         method: 'DELETE',
