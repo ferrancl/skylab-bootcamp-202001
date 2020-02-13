@@ -5,11 +5,11 @@ function retrieveDetails(id, category, callback) {
     let locations = undefined
     let species = undefined
     let vehicles = undefined
+    
     if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
-    // if (typeof category !== 'string') throw new TypeError(`${id} is not a string`)
+    if (typeof category !== 'string') throw new TypeError(`${category} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    debugger
     call(`https://ghibliapi.herokuapp.com/${category}/${id}`, undefined, (error, response) => {
         if (error) return callback(error)
         if (response.status === 200) {

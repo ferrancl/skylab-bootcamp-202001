@@ -1,5 +1,6 @@
-function DetailsSpecies({result, loggedIn, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles}) {
-    return <div className="details__info">
+function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles}) {
+    return <section className="details">
+      <div className="details__info">
         <div className="details__info-container">
             <p className="details__info-title details__category">NAME</p>
             <p className="details__info-text">{result.name}</p>
@@ -21,6 +22,6 @@ function DetailsSpecies({result, loggedIn, onClick, linkedFilms, linkedCharacter
         {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
         {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <img className="details__image" src="images/dust.png"></img>
-    </div>
-    
+      </div>
+    </section>
 }

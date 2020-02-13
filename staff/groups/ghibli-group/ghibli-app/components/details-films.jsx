@@ -1,6 +1,6 @@
-function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    
-    debugger
-    return <div className="details__info">
+function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    
+    return <section className="details">
+      <div className="details__info">
         <div className="details__info-container">
             <h2 className="details__info-title details__category">TITLE</h2>
             <p className="details__info-text">{result.title}</p>
@@ -29,15 +29,19 @@ function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, link
         {linkedLocations !== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
         {linkedSpecies !== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
         {linkedVehicles !== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
-        <div className="watchlist">
+        <div onClick={() => user ? fav(result.id, user) : ''} className={!user ? "watchlist" : user.favs.includes(result.id) ? "watchlist--clicked" : "watchlist"}>
             <button className="watchlist__button">
                 <img className="watchlist__img" src="images/plus.svg"/>
-                {loggedIn ? <span className="watchlist__text">ADD TO WATCHLIST</span>
-                : <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
+                {loggedIn && !user.favs.includes(result.id) && <span className="watchlist__text">ADD TO WATCHLIST</span>}
+
+                {loggedIn && user.favs.includes(result.id) && <span className="watchlist__text">REMOVE FROM WATCHLIST</span>}
+
+                {!loggedIn && <span className="watchlist__text">LOGIN TO ADD TO WATCHLIST</span>}
             </button>
         </div>
         <img className="details__image" src="images/dust.png"></img>
-    </div>
+      </div>
+    </section>
 
     
 }
