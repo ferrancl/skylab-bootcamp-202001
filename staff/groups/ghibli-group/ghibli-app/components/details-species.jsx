@@ -1,4 +1,4 @@
-function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles, category, goBack}) {
+function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles, category, goBack, query}) {
     return <section className="details">
       <div className="details__info">
         <div className="details__info-container">
@@ -23,7 +23,7 @@ function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedL
         {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <a href="" className="" onClick={event => {
             event.preventDefault()
-            goBack(category)
+            goBack(category, query)
         }} >Go Back</a>
         <img className="details__image" src="images/dust.png"></img>
       </div>

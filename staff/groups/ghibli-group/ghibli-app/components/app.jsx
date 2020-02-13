@@ -165,7 +165,7 @@ class App extends Component {
 
                 //location.queryString = { q: query }
 
-                this.setState({view: 'category_results', results, category})
+                this.setState({view: 'category_results', results, category, query: undefined})
 
                 if (!results.length)
                     setTimeout(() => {
@@ -336,31 +336,63 @@ class App extends Component {
         this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
     }
 
-    handleGoBack = (category) => {
+    handleGoBack = (category, query) => {
+        if (query === undefined){
+            try {
+                // const { token } = sessionStorage
+                //this.setState({category})
 
-        try {
-            // const { token } = sessionStorage
+                searchCategory(category, (error, results) => {
+                    if (error)
+                        return this.setState({error: error.message})
 
-            //const query = location.queryString
-            this.setState({category})
+                    //location.queryString = { q: query }
 
-            searchCategory(category, (error, results) => {
-                if (error)
-                    return this.setState({error: error.message})
+                    this.setState({view: 'category_results', results})
 
-                //location.queryString = { q: query }
+                    if (!results.length)
+                        setTimeout(() => {
+                            this.setState({ error: undefined })
+                        }, 3000)
+                })
+            } catch (error) {
+                this.setState({error: error})
+            }
+        }else{
+            const _query = toProperCase(query)
 
-                this.setState({view: 'category_results', results, category})
-
-                if (!results.length)
-                    setTimeout(() => {
-                        this.setState({ error: undefined })
-                    }, 3000)
-            })
-        } catch (error) {
-            this.setState({error: error})
-        }
+            this.setState({query})
+            searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
+                if(error)
+                    this.setState({error: error.message})
     
+                this.setState({view: 'search-results', resultsFilms})   
+            })
+            searchPeople(_query, (error, resultsPeople) => {
+                if(error)
+                    this.setState({error: error.message})
+    
+                this.setState({view: 'search-results',resultsPeople})   
+            })
+            searchLocations(_query, (error, resultsLocations) => {
+                if(error)
+                    this.setState({error: error.message})
+    
+                this.setState({view: 'search-results', resultsLocations})   
+            })
+            searchSpecies(_query, (error, resultsSpecies) => {
+                if(error)
+                    this.setState({error: error.message})
+    
+                this.setState({resultsSpecies})   
+            })
+            searchVehicles(_query, (error, resultsVehicles) => {
+                if(error)
+                    this.setState({error: error.message})
+    
+                this.setState({view: 'search-results', resultsVehicles})   
+            })
+        } 
     }
     
 
@@ -394,15 +426,15 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms category={category} result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms query={query} category={category} result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'people'  && <DetailsPeople category={category}result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
+            {view === 'details' && category === 'people'  && <DetailsPeople query={query} category={category}result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'locations'  && <DetailsLocations category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
+            {view === 'details' && category === 'locations'  && <DetailsLocations query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'species'  && <DetailsSpecies category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
+            {view === 'details' && category === 'species'  && <DetailsSpecies query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'vehicles'  && <DetailsVehicles category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goBack={handleGoBack}/>}
+            {view === 'details' && category === 'vehicles'  && <DetailsVehicles query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goBack={handleGoBack}/>}
 
             {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 
