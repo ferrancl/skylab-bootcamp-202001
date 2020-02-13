@@ -1,17 +1,19 @@
 const {Component, Fragment} = React
 
 class App extends Component {
-  
-    state= {view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, favs: undefined}
 
-    componentDidMount() {
+ 
+    state= {view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
+   
+        
+    componentWillMount() {
         const { token } = sessionStorage
 
         if (token)
             try {
                 retrieveUser(token, (error, user) => {
                     if (error) {
-                        //return this.__handleError__(error)
+                        this.__handleError__(error)
                         this.handleLogout()
                     }
 
@@ -19,11 +21,8 @@ class App extends Component {
                 })
 
             } catch (error) {
-                // this.setState({ error: error.message + ' ' + IT })
-
-                // setTimeout(() => {
-                //     this.setState({ error: undefined })
-                // }, 3000)
+                this.__handleError__(error)
+              
                 sessionStorage.clear()
 
                 this.setState({ view: 'start' })
@@ -36,9 +35,9 @@ class App extends Component {
             }, 1500)
     }
 }
-
-
-
+ 
+    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
+   
     __handleError__(error) {
         this.setState({ error: error.message + ' ' })
 
@@ -268,12 +267,12 @@ class App extends Component {
 
     handleDetail = (id, category) => {
         try {
-            retrieveDetails(id, category, (error, result) => {
+            retrieveDetails(id, category, (error, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles) => {
                 if (error){
                     return this.__handleError__(error)
                 }else{
-                    console.log(result)
-                    this.setState({view: "details", category, result})
+                    debugger
+                    this.setState({view: "details", category, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles})
                 }
             })    
         } catch(error) {
@@ -289,7 +288,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, favs}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,
         handleDetail} = this
@@ -317,25 +316,25 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category} fav={handleFav} user={user}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'people'  && <DetailsPeople result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'locations'  && <DetailsLocations result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'species'  && <DetailsSpecies result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles}/>}
 
-            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'vehicles'  && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies}/>}
 
-            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsPeople && resultsPeople.length>0  && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsLocations && resultsLocations.length>0  && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsSpecies && resultsSpecies.length>0   && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsVehicles && resultsVehicles.length>0  && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
 
             {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
 
