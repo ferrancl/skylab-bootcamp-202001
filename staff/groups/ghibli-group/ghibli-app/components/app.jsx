@@ -132,58 +132,66 @@ class App extends Component {
         }
     }
 
-    handleResults = (query) => {
+    handleResults = (_query) => {
 
-        const _query = toProperCase(query)
+        this.setState({error: undefined})
 
+        let query = _query.split(' ')
+
+        query = query.map(word => word.charAt(0).toUpperCase() + word.substring(1))
+        //const _query = toProperCase(query)
         let results = new Array
 
-        searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
-            if (error)
-                this.__handleError__(error)
+        for (let i = 0; i<query.length; i++) {
 
-            if (resultsFilms) results.push(resultsFilms)
-
-            this.setState({ view: 'search-results', resultsFilms, toggleMenu: false })
-        })
-        searchPeople(_query, (error, resultsPeople) => {
-            if (error)
-                this.__handleError__(error)
-
-            if (resultsPeople) results.push(resultsPeople)
-
-            this.setState({ resultsPeople, toggleMenu: false })
-        })
-        searchLocations(_query, (error, resultsLocations) => {
-            if (error)
-                this.__handleError__(error)
-            
-            if (resultsLocations) results.push(resultsLocations)
-
-            this.setState({ resultsLocations, toggleMenu: false })
-        })
-        searchSpecies(_query, (error, resultsSpecies) => {
-            if (error)
-                this.__handleError__(error)
-
-            if(resultsSpecies) results.push(resultsSpecies)
-
-            this.setState({ resultsSpecies, toggleMenu: false })
-        })
-        searchVehicles(_query, (error, resultsVehicles) => {
-            if (error)
-                this.__handleError__(error)
-            
-            if(resultsVehicles) results.push(resultsVehicles)
-
-            this.setState({ resultsVehicles, toggleMenu: false })
-        })
+            searchFilms(query[i], undefined, undefined, (error, resultsFilms) => {
+                if (error)
+                    this.__handleError__(error)
+    
+                if (resultsFilms) results.push(resultsFilms)
+    
+                this.setState({ view: 'search-results', resultsFilms, toggleMenu: false })
+            })
+            searchPeople(query[i], (error, resultsPeople) => {
+                if (error)
+                    this.__handleError__(error)
+    
+                if (resultsPeople) results.push(resultsPeople)
+    
+                this.setState({ resultsPeople, toggleMenu: false })
+            })
+            searchLocations(query[i], (error, resultsLocations) => {
+                if (error)
+                    this.__handleError__(error)
+                
+                if (resultsLocations) results.push(resultsLocations)
+    
+                this.setState({ resultsLocations, toggleMenu: false })
+            })
+            searchSpecies(query[i], (error, resultsSpecies) => {
+                if (error)
+                    this.__handleError__(error)
+    
+                if(resultsSpecies) results.push(resultsSpecies)
+    
+                this.setState({ resultsSpecies, toggleMenu: false })
+            })
+            searchVehicles(query[i], (error, resultsVehicles) => {
+                if (error)
+                    this.__handleError__(error)
+                
+                if(resultsVehicles) results.push(resultsVehicles)
+    
+                this.setState({ resultsVehicles, toggleMenu: false })
+            })
+    
+        }
 
         try{
             if(!results.length) throw new ReferenceError ('No results')
         }
         catch(error) {
-            this.__handleError__(error)
+            this.setState({ view: 'search-results', error: error.message})
         }
     }
 
@@ -191,6 +199,8 @@ class App extends Component {
     handleGoToUpdate = () => { this.setState({ view: 'update', toggleMenu: false }) }
 
     handleUpdate = (data) => {
+
+        this.setState({error: undefined})
 
         const { token } = sessionStorage
 
@@ -226,6 +236,8 @@ class App extends Component {
 
     handleGoToWatchlist = (user) => {
 
+        this.setState({error: undefined})
+
         const { token } = sessionStorage
 
         user.favs.map(film =>
@@ -253,11 +265,14 @@ class App extends Component {
             })
 
         } catch (error) {
-            this.setState(error)
+            this.__handleError__(error)
         }
     }
 
     handleDetail = (id, category) => {
+
+        this.setState({error: undefined})
+
         try {
             retrieveDetails(id, category, (error, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles) => {
                 if (error) {
@@ -334,7 +349,12 @@ class App extends Component {
 
             {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs} />}
 
-            {view === 'search-results' && resultsVehicles && resultsVehicles.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsLocations && resultsLocations.length === 0 && resultsPeople && resultsPeople.length === 0 && resultsFilms && resultsFilms.length === 0 && <NoResults/>}
+            {
+            view === 'search-results' && 
+            error &&
+            resultsVehicles && resultsVehicles.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsLocations && resultsLocations.length === 0 && resultsPeople && resultsPeople.length === 0 && resultsFilms && resultsFilms.length === 0 && 
+            
+            <NoResults/>}
 
             {/* { {view === 'category_results' && results && <Results results={results} category={category}/>} }
 

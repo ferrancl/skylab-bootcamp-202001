@@ -603,6 +603,7 @@
   margin-right: 7vw;
   margin-left: 45vw;
   position: absolute;
+  right: 1vw;
 }
 .user-nav__list {
   display: flex;
@@ -613,6 +614,7 @@
   position: relative;
   top: 0;
   z-index: 10;
+  transform: translateY(-1vh);
 }
 .user-nav .user {
   justify-self: right;

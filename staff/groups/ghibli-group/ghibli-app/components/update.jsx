@@ -1,4 +1,4 @@
-function EditProfile({onSubmit, onSubmitDelete, error, message}) {
+function EditProfile({onSubmit, onSubmitDelete, error, message, errorClick}) {
     return(
         <section className="edit">
 
@@ -18,7 +18,8 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                 <input className="input" name="username" placeholder="New Username"/>
                 <button className="submit" type="submit">SAVE</button>
 
-                {error || message && <Error error={error} message = {message} onClick={errorClick}/>}
+                {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
             </form>
             <div className="edit__password">
@@ -39,10 +40,8 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                     <input className="input" type="password" name="password"  placeholder="New password"/>
                     <button className="submit" type="submit">SAVE</button>
 
-                    {/* {error && <span className="message">{error}</span>} */}
-
-                    {/* {message && <span className="message">{message}</span>} */}
-
+                    {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                    {message && <Error error={error} message = {message} onClick={errorClick}/>}
                 </form>
             </div>
             <div className="edit__name">
@@ -61,9 +60,8 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                     <input className="input" name="name" placeholder="New Name"/>                    
                     <button className="submit" type="submit">SAVE</button>
 
-                    {/* {error && <span className="message">{error}</span>} */}
-
-                    {/* {message && <span className="message">{message}</span>} */}
+                    {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                    {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
                 </form>
             </div>
@@ -82,11 +80,10 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                 }}>
                     <input className="input" name="email" placeholder="New E-mail"/>                    
                     <button className="submit" type="submit">SAVE</button>
-
-                    {/* {error && <span className="message">{error}</span>} */}
-
-                    {/* {message && <span className="message">{message}</span>} */}
-
+                    
+                {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                {message && <Error error={error} message = {message} onClick={errorClick}/>}
+                
                 </form>
             </div>
 
@@ -105,9 +102,8 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                  }}>
                     <input className="input" type="password" name="password"  placeholder="Password"/>
 
-                    {/* {error && <span className="message">{error}</span>} */}
-
-                    {/* {message && <span className="message">{message}</span>} */}
+                    {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                    {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
                     <button className="delete" type="submit">DELETE</button>
 
