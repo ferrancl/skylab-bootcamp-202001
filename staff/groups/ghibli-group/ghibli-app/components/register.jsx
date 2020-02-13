@@ -1,6 +1,4 @@
-function Register({onSubmit
-    // , error
-}) {
+function Register({onSubmit, error, message, errorClick }) {
 
     return <section className="register">
         <form className="form" onSubmit={event => {
@@ -19,8 +17,10 @@ function Register({onSubmit
             <input className="input" type="text" name="username" placeholder="username"/>
             <input className="input" type="password" name="password" placeholder="password"/>
             <button className="submit" type="submit">REGISTER</button>
+            
+            {error && <Error error={error} message = {message} onClick={errorClick}/>}
 
-            {/* {error && <span>{error}</span>} */}
+            {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
             <p className="incentive">Register to add your favourite movies to your watchlist!</p>
         </form>

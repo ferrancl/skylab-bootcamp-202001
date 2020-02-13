@@ -2,7 +2,7 @@ function searchVehicles (query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    let vehicles = new Array
+    let vehicles = []
 
     call(`https://ghibliapi.herokuapp.com/vehicles`, undefined, (error, response) => {
         

@@ -1,21 +1,43 @@
-const {Component, Fragment} = React
+const { Component, Fragment } = React
 
 class App extends Component {
-  
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, films: undefined, result: undefined, people: undefined, loggedIn: false, toggleMenu: false, user: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, favs: undefined}
 
-    // componentWillMount() {
-    //     const {token} = sessionStorage
 
-    //     if(token) {
-    //         try{
+    state = { view: undefined, error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined }
 
-    //         }
-    //     }
-    // }
+
+    componentWillMount() {
+        const { token } = sessionStorage
+
+        if (token)
+            try {
+                retrieveUser(token, (error, user) => {
+                    if (error) {
+                        this.__handleError__(error)
+                        this.handleLogout()
+                    }
+
+                    if (user !== undefined) this.setState({ view: 'home', user, loggedIn: true })
+                })
+
+            } catch (error) {
+                this.__handleError__(error)
+
+                sessionStorage.clear()
+
+                this.setState({ view: 'start' })
+            }
+        else {
+            this.setState({ view: 'start' })
+
+            setTimeout(() => {
+                this.handleGoToHome()
+            }, 1500)
+        }
+    }
 
     __handleError__(error) {
-        this.setState({view: 'error', error: error.message + ' ' })
+        this.setState({ error: error.message })
 
         setTimeout(() => {
             this.setState({ error: undefined })
@@ -23,82 +45,82 @@ class App extends Component {
     }
 
     handleGoToHome = () => {
-        this.setState({view: 'home', toggleMenu: false})
+        this.setState({ view: 'home', toggleMenu: false })
     }
 
     handleToggleMenu = (toggleMenu) => {
-        if (toggleMenu === true){
-            this.setState({toggleMenu: false})
+        if (toggleMenu === true) {
+            this.setState({ toggleMenu: false })
             toggleMenu = false
         }
         else {
-            this.setState({toggleMenu: true})
+            this.setState({ toggleMenu: true })
             toggleMenu = true
         }
     }
 
     handleGoToEditProfile = () => {
-        this.setState({view: "editProfile", toggleMenu: false})
+        this.setState({ view: "editProfile", toggleMenu: false })
     }
 
     handleLogin = (username, password) => {
-        try{
-            authenticateUser(username, password, (error, token)=>{
-                if(error){
+        try {
+            authenticateUser(username, password, (error, token) => {
+                if (error) {
                     this.__handleError__(error)
+
                 } else {
                     retrieveUser(token, (error, user) => {
-                        if(error){
-                            return this.setState({error: error.message})
-    
-                        }else{
-
-                            sessionStorage.token = token 
+                        if (error) {
+                            return this.__handleError__(error)    
+                        }
+                        else {
+                            sessionStorage.token = token
                             user.username = user.username.toUpperCase()
                             this.setState({ view: 'home', user: user, loggedIn: true })
-
                         }
                     })
                 }
             })
-    
-        }catch(error){
-            this.setState({error: error})
+
+        } catch (error) {
+            this.__handleError__(error)
+
         }
     }
-    
-    handleGoToRegister = () => {this.setState({ view: 'register' })}
-    
+
+    handleGoToRegister = () => { this.setState({ view: 'register' }) }
+
     handleRegister = (name, email, username, password) => {
-        try{
+        try {
             registerUser(name, email, username, password, error => {
-                if(error){
+                if (error) {
                     this.__handleError__(error)
-                }else{
-                    this.setState({view: 'login'})
+                } else {
+                    this.setState({ view: 'login' })
                 }
             })
-        }catch(error){
-            this.setState(error)
+        } catch (error) {
+            this.__handleError__(error)
         }
     }
-    
-    handleGoToLogin = () => {this.setState({ view: 'login', toggleMenu: false })}
+
+    handleGoToLogin = () => { this.setState({ view: 'login', toggleMenu: false }) }
 
     handleSearchCategories = (category) => {
         try {
             // const { token } = sessionStorage
 
             //const query = location.queryString
-            this.setState({category, toggleMenu: false})
+            this.setState({ category, toggleMenu: false })
 
             searchCategory(category, (error, results) => {
                 if (error)
-                    return this.setState({error: error.message})
+                    return this.setState({ error: error.message })
 
                 //location.queryString = { q: query }
 
-                this.setState({view: 'category_results', results, category, toggleMenu: false})
+                this.setState({ view: 'category_results', results, category, toggleMenu: false })
 
                 if (!results.length)
                     setTimeout(() => {
@@ -106,7 +128,7 @@ class App extends Component {
                     }, 3000)
             })
         } catch (error) {
-            this.setState({error: error})
+            this.setState({ error: error })
         }
     }
 
@@ -114,60 +136,75 @@ class App extends Component {
 
         const _query = toProperCase(query)
 
-        searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
-            if(error)
-                this.setState({error: error.message})
+        let results = new Array
 
-            this.setState({view: 'search-results', resultsFilms, toggleMenu: false})   
+        searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
+            if (error)
+                this.__handleError__(error)
+
+            if (resultsFilms) results.push(resultsFilms)
+
+            this.setState({ view: 'search-results', resultsFilms, toggleMenu: false })
         })
         searchPeople(_query, (error, resultsPeople) => {
-            if(error)
-                this.setState({error: error.message})
+            if (error)
+                this.__handleError__(error)
 
-            this.setState({resultsPeople, toggleMenu: false})   
+            if (resultsPeople) results.push(resultsPeople)
+
+            this.setState({ resultsPeople, toggleMenu: false })
         })
         searchLocations(_query, (error, resultsLocations) => {
-            if(error)
-                this.setState({error: error.message})
+            if (error)
+                this.__handleError__(error)
+            
+            if (resultsLocations) results.push(resultsLocations)
 
-            this.setState({resultsLocations, toggleMenu: false})   
+            this.setState({ resultsLocations, toggleMenu: false })
         })
         searchSpecies(_query, (error, resultsSpecies) => {
-            if(error)
-                this.setState({error: error.message})
+            if (error)
+                this.__handleError__(error)
 
-            this.setState({resultsSpecies, toggleMenu: false})   
+            if(resultsSpecies) results.push(resultsSpecies)
+
+            this.setState({ resultsSpecies, toggleMenu: false })
         })
         searchVehicles(_query, (error, resultsVehicles) => {
-            if(error)
-                this.setState({error: error.message})
+            if (error)
+                this.__handleError__(error)
+            
+            if(resultsVehicles) results.push(resultsVehicles)
 
-            this.setState({resultsVehicles, toggleMenu: false})   
+            this.setState({ resultsVehicles, toggleMenu: false })
         })
 
-        // this.setState({results: undefined, category: undefined})
-            
-        // this.setState({results: undefined, category: undefined})
+        try{
+            if(!results.length) throw new ReferenceError ('No results')
+        }
+        catch(error) {
+            this.__handleError__(error)
+        }
     }
 
 
-    handleGoToUpdate = () => {this.setState({ view: 'update', toggleMenu: false })}
+    handleGoToUpdate = () => { this.setState({ view: 'update', toggleMenu: false }) }
 
     handleUpdate = (data) => {
 
         const { token } = sessionStorage
 
-        try{
+        try {
             updateUser(token, data, error => {
-                if(error){
+                if (error) {
                     this.__handleError__(error)
-                }else{
-                    this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
+                } else {
+                    this.setState({ message: `Updated ${Object.keys(data)[0]} successfully` })
                 }
             })
-        
-        }catch(error){
-            this.setState(error)
+
+        } catch (error) {
+            this.__handleError__(error)
         }
 
     }
@@ -179,7 +216,7 @@ class App extends Component {
         try {
             createFav(token, id, (userInfo) => {
                 //if(error) this.setState({error})
-                this.setState({user: userInfo})
+                this.setState({ user: userInfo })
             })
 
         } catch (error) {
@@ -188,15 +225,15 @@ class App extends Component {
     }
 
     handleGoToWatchlist = (user) => {
-        
+
         const { token } = sessionStorage
 
-        user.favs.map(film => 
+        user.favs.map(film =>
             searchFilms(undefined, token, film, (error, films) => {
-                if(error){
+                if (error) {
                     this.__handleError__(error)
-                }else{
-                    this.setState({view: 'watchlist', toggleMenu: false, favs: films})
+                } else {
+                    this.setState({ view: 'watchlist', toggleMenu: false, favs: films })
                 }
             })
         )
@@ -206,30 +243,31 @@ class App extends Component {
 
         const { token } = sessionStorage
 
-        try{
+        try {
             deleteUser(password, token, error => {
-                if(error){
+                if (error) {
                     this.__handleError__(error)
-                }else{
-                    this.setState({view: 'login', toggleMenu: false})
+                } else {
+                    this.setState({ view: 'login', toggleMenu: false })
                 }
             })
-        
-        }catch(error){
+
+        } catch (error) {
             this.setState(error)
         }
     }
 
     handleDetail = (id, category) => {
         try {
-            retrieveDetails(id, category, (error, result) => {
-                if (error){
+            retrieveDetails(id, category, (error, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles) => {
+                if (error) {
                     return this.__handleError__(error)
-                }else{
-                    this.setState({view: "details", category, result, toggleMenu: false})
+                } else {
+                    debugger
+                    this.setState({ view: "details", category, result, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, toggleMenu: false })
                 }
-            })    
-        } catch(error) {
+            })
+        } catch (error) {
             this.__handleError__(error)
         }
     }
@@ -240,61 +278,62 @@ class App extends Component {
         this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
     }
 
+    handleLeaveError = () => {
+        this.setState({ error: undefined, message: undefined })
+    }
+
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, favs}, handleGoToHome, handleGoToLogin, 
-        handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
-        handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,
-        handleDetail} = this
+        const { props: { title, query }, state: { view, error, results, category, result,user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles }, handleGoToHome, handleGoToLogin, handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser, handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav, handleLeaveError, handleDetail } = this
 
         return <main className="main">
-            {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
+            {view === "start" && <Init title={title} goToLanding={handleGoToHome} />}
 
-            {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
-            //onSubmit={handleSearchFilms} 
-            warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
-            
-            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories}/>}
+            {view !== "start" && <Header goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn}
+                //onSubmit={handleSearchFilms} 
+            warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user} />}
 
-            {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} />}
+            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories} />}
 
-            {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} />}
+            {view === "login" && <Login onSubmit={handleLogin} handleGoToRegister={handleGoToRegister} error={error} errorClick={handleLeaveError} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail}/>}
+            {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} errorClick={handleLeaveError} />}
 
-            {view === 'category_results' && category==='people' && <People results={results} category={category} onClick={handleDetail}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} />}
 
-            {view === 'category_results' && category==='locations' && <Locations results={results} category={category} onClick={handleDetail}/>}
+            {view === 'category_results' && category === 'people' && <People results={results} category={category} onClick={handleDetail} />}
 
-            {view === 'category_results' && category==='species' && <Species results={results} category={category} onClick={handleDetail}/>}
+            {view === 'category_results' && category === 'locations' && <Locations results={results} category={category} onClick={handleDetail} />}
 
-            {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
+            {view === 'category_results' && category === 'species' && <Species results={results} category={category} onClick={handleDetail} />}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} loggedIn={loggedIn} category={category} fav={handleFav} user={user}/>}
+            {view === 'category_results' && category === 'vehicles' && <Vehicles results={results} category={category} onClick={handleDetail} />}
 
-            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
 
-            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'people' && <DetailsPeople result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
 
-            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'locations' && <DetailsLocations result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} />}
 
-            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} category={category}/>}
+            {view === 'details' && category === 'species' && <DetailsSpecies result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} />}
 
-            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
+            {view === 'details' && category === 'vehicles' && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} />}
 
-            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
+            {view === 'search-results' && resultsFilms && resultsFilms.length > 0 && <Films results={resultsFilms} category={'films'} onClick={handleDetail} />}
 
-            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
+            {view === 'search-results' && resultsPeople && resultsPeople.length > 0 && <People results={resultsPeople} category={'people'} onClick={handleDetail} />}
 
-            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
+            {view === 'search-results' && resultsLocations && resultsLocations.length > 0 && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail} />}
 
-            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
+            {view === 'search-results' && resultsSpecies && resultsSpecies.length > 0 && <Species results={resultsSpecies} category={'species'} onClick={handleDetail} />}
 
-            {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message}/>}
+            {view === 'search-results' && resultsVehicles && resultsVehicles.length > 0 && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail} />}
 
-            {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs}/>}
+            {view === "editProfile" && <EditProfile onSubmit={handleUpdate} onSubmitDelete={handleDeleteUser} handleGoToLogin={handleGoToLogin} error={error} message={message} errorClick={handleLeaveError} />}
 
-            {view === 'error' && error || message && <Error error={error} message={message}/>}
+            {view === 'watchlist' && <Watchlist user={user} onClick={handleDetail} favs={favs} />}
+
+            {/* {error || message && <Error error={error} message={message} onClick={errorClick} />} */}
 
             {/* { {view === 'category_results' && results && <Results results={results} category={category}/>} }
 
@@ -310,7 +349,7 @@ class App extends Component {
 
             {view === 'search' && film && <Detail film={film}/>} */}
 
-            {view !== "start" && <Footer/>}
+            {view !== "start" && <Footer />}
 
         </main>
     }

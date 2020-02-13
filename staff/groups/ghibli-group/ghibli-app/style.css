@@ -643,17 +643,29 @@
 }
 
 .message {
-  height: 40vh;
-  width: 70vw;
-  background: rgba(128, 128, 128, 0.9);
+  height: 100vh;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.7);
   z-index: 20;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  border-radius: 5vh;
+  top: 0;
+  left: 0;
   color: black;
   font-family: "Comfortaa", cursive;
+}
+.message .container .text__container {
+  height: 40vh;
+  width: 60vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(211, 211, 211, 0.3);
+  border-radius: 5vh;
+  margin: 5vh;
 }
 
 body {

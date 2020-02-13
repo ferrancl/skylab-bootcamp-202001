@@ -1,9 +1,6 @@
 function EditProfile({onSubmit, onSubmitDelete, error, message}) {
     return(
         <section className="edit">
-            
-            {error && <div className="message">{error}</div>}
-            {message && <div className="message">{message}</div>}
 
             <h2 className="edit__title">Edit profile</h2>
             <div className="edit-category">
@@ -21,9 +18,7 @@ function EditProfile({onSubmit, onSubmitDelete, error, message}) {
                 <input className="input" name="username" placeholder="New Username"/>
                 <button className="submit" type="submit">SAVE</button>
 
-                {/* {error && <span className="message">{error}</span>} */}
-
-                {/* {message && <span className="message">{message}</span>} */}
+                {error || message && <Error error={error} message = {message} onClick={errorClick}/>}
 
             </form>
             <div className="edit__password">

@@ -1,6 +1,4 @@
-function Login({onSubmit, handleGoToRegister
-    // , error
-}) {
+function Login({onSubmit, handleGoToRegister, error, message, errorClick}) {
     
         return <section className="login">
             <form className="form" onSubmit={event => {
@@ -14,7 +12,8 @@ function Login({onSubmit, handleGoToRegister
                 <input className="input" type="password" name="password" placeholder="password"/>
                 <button className="submit" type="submit">LOGIN</button>
 
-                {/* {error && <span className="">{error}</span>} */}
+                {error && <Error error={error} message = {message} onClick={errorClick}/>}
+                {message && <Error error={error} message = {message} onClick={errorClick}/>}
 
             </form>
             <section className="not-registered">
