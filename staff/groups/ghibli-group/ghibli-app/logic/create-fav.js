@@ -15,6 +15,8 @@ function createFav (token, id, callback) {
 
         user = JSON.parse(response.content)
 
+        if(user.error) return callback(new Error (user.error))
+
         user.favs.includes(id) ? user.favs.splice(user.favs.indexOf(id), 1) : user.favs.push(id)
 
         var favs = user.favs
@@ -28,6 +30,8 @@ function createFav (token, id, callback) {
             }, (error, response) => {
     
                 if (error) return callback(error)
+
+                if(response.error) return callback(response.error)
     
                 //if (_error) return callback(new Error(_error))
 

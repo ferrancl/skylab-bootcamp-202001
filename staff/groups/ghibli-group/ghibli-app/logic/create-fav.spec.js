@@ -1,4 +1,4 @@
-describe ('createFav', ()  => {
+fdescribe ('createFav', ()  => {
 
     let name, email, username, password, favs, token, id
 
@@ -13,15 +13,17 @@ describe ('createFav', ()  => {
         datapp =  "datapp-ghibli"
         favs = []
 
-        favs.push(ids[Math.floor(Math.random()) * 13]) * Math.floor(Math.random()) * 13
+        favs.push(ids[(Math.floor(Math.random()) * 12) + 1]) * Math.floor(Math.random()) * 13
 
-        id = Math.floor(Math.random() * 13).toString()
+        id = ((Math.floor(Math.random()) * 12) + 1).toString()
 
     })
 
-    beforeEach(done => 
+    describe('happy path', () => {
 
-        call(`https://skylabcoders.herokuapp.com/api/v2/users`, {
+        beforeEach(done => {
+
+            call(`https://skylabcoders.herokuapp.com/api/v2/users`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, username, password, favs })
@@ -33,56 +35,146 @@ describe ('createFav', ()  => {
     
                 if (error) return done(new Error(error))
             }
-    
-            call(`https://skylabcoders.herokuapp.com/api/v2/users/auth`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            }, (error, response) => {
-                if (error) return done(error)
+                call(`https://skylabcoders.herokuapp.com/api/v2/users/auth`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                }, (error, response) => {
+                    if (error) return done(error)
 
-                token = JSON.parse(response.content).token
+                    token = JSON.parse(response.content).token
+
+                    done()
+                })
+            })
+        })
+        
+
+        it('should add the id of the item to user favs on click', done => {
+            createFav(token, id, (response) => {
+
+                expect(response).not.toBeInstanceOf(Error)
+                expect(response).toBeInstanceOf(Object)
+
+                expect(response.favs.includes(id)).toBe(true)
+
+                done()
+            })
+    
+        })
+    
+        describe('when item is already faved', () => {
+
+            beforeEach(done => {
+
+                const favs = [id]
+
+                call(`https://skylabcoders.herokuapp.com/api/v2/users/`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ favs })
+                }, (error, response) => {
+                    if (error) return done(error)
+
+                    if (response.content) {
+                        const { error } = JSON.parse(response.content)
+
+                        if (error) return done(new Error(error))
+                    }
+
+                    done()
+                })
+            })
+    
+            it('should remove the id of the item on click if the item is already on favs list', done => {
+               createFav(token, id, response => {
+        
+                    expect(response).not.toBeInstanceOf(Error)
+                    expect(response).toBeInstanceOf(Object)
+                    
+                    expect(response.favs.includes(id)).toBe(false)
+        
+                    done()
+                })
+            })
+
+        })
+
+        it('should fail on invalid token', done => {
+            createFav(`${token}-wrong`, id, error => {
+                expect(error).toBeInstanceOf(Error)
+                expect(error.toString()).toBe('Error: invalid token')
 
                 done()
             })
         })
-    )
 
-    fit('should add the id of the item to user favs on click', done => {
-            createFav(token, id, (response) => {})
-        }).toBeDefined()
-
-        expect(() => {
-            createFav(token, id, (response) => {})
-        }).toBeInstanceOf()
-    })
-
-    it('should remove the id of the item on click if the item is already on favs list', () => {
-
-    })
-
-    afterEach(done => {
-        call(`https://skylabcoders.herokuapp.com/api/v2/users`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ password })
-        }, (error, response) => {
-            if (error) return done(error)
-
-            if (response.content) {
-                const { error } = JSON.parse(response.content)
-
-                if (error) return done(new Error(error))
-            }
-
-            done()
+        afterEach(done => {
+            call(`https://skylabcoders.herokuapp.com/api/v2/users`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ password })
+            }, (error, response) => {
+                if (error) return done(error)
+    
+                if (response.content) {
+                    const { error } = JSON.parse(response.content)
+    
+                    if (error) return done(new Error(error))
+                }
+    
+                done()
+            })
         })
     })
 
-    it('should not work on ')
+    it('should fail on non-string token', () => {
+        token = 1
+        expect(() =>
+            createFav(token, id, () => { })
+        ).toThrowError(TypeError, `token ${token} is not a string`)
+
+        token = true
+        expect(() =>
+            createFav(token, id, () => { })
+        ).toThrowError(TypeError, `token ${token} is not a string`)
+
+        token = undefined
+        expect(() =>
+            createFav(token, id, () => { })
+        ).toThrowError(TypeError, `token ${token} is not a string`)
+    })
+
+    //it('should fail on invalid token format', () => {
+      //  expect(() =>
+        //    createFav('abc', id, () => { })
+        //).toThrowError(Error, 'invalid token')
+    //})
+
+    it('should fail on non-function callback', () => {
+        token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTNiZDhmZDE3YjgwOTFiYWFjMTIxMzgiLCJpYXQiOjE1ODA5ODA3NjEsImV4cCI6MTU4MDk4NDM2MX0.t8g49qXznSCYiK040NvOWHPXWqnj9riJ_6MD2vwIv3M'
+
+        callback = 1
+        expect(() =>
+            createFav(token, id, callback)
+        ).toThrowError(TypeError, `callback ${callback} is not a function`)
+
+        callback = true
+        expect(() =>
+            createFav(token, id, callback)
+        ).toThrowError(TypeError, `callback ${callback} is not a function`)
+
+        callback = undefined
+        expect(() =>
+            createFav(token, id, callback)
+        ).toThrowError(TypeError, `callback ${callback} is not a function`)
+    })
 
 })
 
