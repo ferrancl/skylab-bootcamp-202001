@@ -1,10 +1,10 @@
 function retrieveDetails(id, category, callback) {
     let categories = ['films', 'people', 'locations', 'species', 'vehicles']
-    let films = []
-    let characters =[]
-    let locations = []
-    let species = []
-    let vehicles = []
+    let films = undefined
+    let characters = undefined
+    let locations = undefined
+    let species = undefined
+    let vehicles = undefined
     if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
     // if (typeof category !== 'string') throw new TypeError(`${id} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
@@ -22,7 +22,8 @@ function retrieveDetails(id, category, callback) {
             for (i=0; i<categories.length; i++){
                 switch (categories[i]){
                     case 'films':
-                        if (result.films.map){
+                        if (result.films instanceof Array && result.films != "https://ghibliapi.herokuapp.com/films/") {
+                            films = []
                             result.films.map(film=> call(film ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
@@ -31,11 +32,14 @@ function retrieveDetails(id, category, callback) {
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
+                        
                         }
                         break
                         
+                        
                     case 'people':
-                        if (result.people.map){
+                        if (result.people instanceof Array && result.people != "https://ghibliapi.herokuapp.com/people/") {
+                            characters = []
                             result.people.map(character=> call(character ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
@@ -44,11 +48,13 @@ function retrieveDetails(id, category, callback) {
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
+                            
                         }
                         break
                         
                     case 'locations':
-                        if (result.locations){
+                        if (result.locations instanceof Array && result.locations != "https://ghibliapi.herokuapp.com/locations/"){
+                            locations = []
                             result.locations.map(location=> call(location ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
@@ -57,11 +63,12 @@ function retrieveDetails(id, category, callback) {
                                     callback(undefined, result, films, characters, locations, species, vehicles)
                                 }
                             }))
-                        }                            
+                        }                           
                         break
 
                     case 'species':
-                        if (result.species.map){
+                        if (result.species instanceof Array && result.species != "https://ghibliapi.herokuapp.com/species/"){
+                            species = []
                             result.species.map(specie=> call(specie ,undefined, (error, response) => {
                                 if (error) return callback(error)
             
@@ -74,7 +81,8 @@ function retrieveDetails(id, category, callback) {
                         break
 
                     case 'vehicles':
-                        if (result.vehicles.map){
+                        if (result.vehicles instanceof Array && result.vehicles != "https://ghibliapi.herokuapp.com/vehicles/"){
+                            vehicles= []
                             result.vehicles.map(vehicle=> call(vehicle ,undefined, (error, response) => {
                                 if (error) return callback(error)
             

@@ -124,6 +124,7 @@ class App extends Component {
         const _query = toProperCase(query)
 
         searchFilms(_query, (error, resultsFilms) => {
+            debugger
             if(error)
                 this.setState({error: error.message})
 
@@ -229,7 +230,7 @@ class App extends Component {
 
     render() {
 
-        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, films, people, loggedIn, toggleMenu, message, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
+        const {props: {title, query}, state: {view, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, 
         handleDetail} = this
@@ -267,15 +268,15 @@ class App extends Component {
 
             {view === 'details' && category === 'vehicles'  && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies}/>}
 
-            {view === 'search-results'  && resultsFilms && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsPeople && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsPeople && resultsPeople.length>0  && <People results={resultsPeople} category={'people'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsLocations && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsLocations && resultsLocations.length>0  && <Locations results={resultsLocations} category={'locations'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsSpecies && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsSpecies && resultsSpecies.length>0   && <Species results={resultsSpecies} category={'species'} onClick={handleDetail}/>}
 
-            {view === 'search-results'  && resultsVehicles && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
+            {view === 'search-results'  && resultsVehicles && resultsVehicles.length>0  && <Vehicles results={resultsVehicles} category={'vehicles'} onClick={handleDetail}/>}
 
 
             {/* {view === 'category_results' && results && <Results results={results} category={category}/>} */}

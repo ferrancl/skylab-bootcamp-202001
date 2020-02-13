@@ -1,4 +1,6 @@
-function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    return <div className="details__info">
+function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick}) {    
+    debugger
+    return <div className="details__info">
         <div className="details__info-container">
             <h2 className="details__info-title details__category">TITLE</h2>
             <p className="details__info-text">{result.title}</p>
@@ -23,10 +25,10 @@ function DetailsFilms({result, loggedIn, linkedCharacters, linkedLocations, link
             <h2 className="details__info-score details__category">SCORE</h2>
             <p className="details__info-text">{result.rt_score}</p>
         </div>
-        {linkedCharacters!== undefined && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
-        {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
-        {linkedSpecies!== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
-        {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
+        {linkedCharacters !== undefined  && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
+        {linkedLocations !== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
+        {linkedSpecies !== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
+        {linkedVehicles !== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}
         <div className="watchlist">
             <button className="watchlist__button">
                 <img className="watchlist__img" src="images/plus.svg"/>

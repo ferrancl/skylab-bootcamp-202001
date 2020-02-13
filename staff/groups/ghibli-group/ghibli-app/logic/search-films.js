@@ -2,8 +2,7 @@ function searchFilms (query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    let films = new Array
-
+    let films = []
     call(`https://ghibliapi.herokuapp.com/films`, undefined, (error, response) => {
             
         if (error) return callback(error)
