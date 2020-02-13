@@ -336,12 +336,40 @@ class App extends Component {
         this.setState({ view: 'home', user: undefined, toggleMenu: false, loggedIn: false })
     }
 
+    handleGoBack = (category) => {
+
+        try {
+            // const { token } = sessionStorage
+
+            //const query = location.queryString
+            this.setState({category})
+
+            searchCategory(category, (error, results) => {
+                if (error)
+                    return this.setState({error: error.message})
+
+                //location.queryString = { q: query }
+
+                this.setState({view: 'category_results', results, category})
+
+                if (!results.length)
+                    setTimeout(() => {
+                        this.setState({ error: undefined })
+                    }, 3000)
+            })
+        } catch (error) {
+            this.setState({error: error})
+        }
+    
+    }
+    
+
     render() {
 
-        const {props: {title}, state: {view, query, error, results, category, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
+        const {props: {title}, state: {view, error, results, category, query, result, user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles}, handleGoToHome, handleGoToLogin, 
         handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser,
         handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,
-        handleDetail} = this
+        handleDetail, handleGoBack} = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome}/>}
@@ -366,15 +394,15 @@ class App extends Component {
 
             {view === 'category_results' && category==='vehicles' && <Vehicles results={results} category={category} onClick={handleDetail}/>}
 
-            {view === 'details' && category === 'films' && <DetailsFilms result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin}/>}
+            {view === 'details' && category === 'films' && <DetailsFilms category={category} result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'people'  && <DetailsPeople result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
+            {view === 'details' && category === 'people'  && <DetailsPeople category={category}result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'locations'  && <DetailsLocations result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles}/>}
+            {view === 'details' && category === 'locations'  && <DetailsLocations category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'species'  && <DetailsSpecies result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles}/>}
+            {view === 'details' && category === 'species'  && <DetailsSpecies category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} goBack={handleGoBack}/>}
 
-            {view === 'details' && category === 'vehicles'  && <DetailsVehicles result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies}/>}
+            {view === 'details' && category === 'vehicles'  && <DetailsVehicles category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goBack={handleGoBack}/>}
 
             {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail}/>}
 

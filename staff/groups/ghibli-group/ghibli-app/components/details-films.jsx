@@ -1,4 +1,4 @@
-function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin}) {    
+function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin, goBack, category}) {    
     return <section className="details">
       <div className="details__info">
         <div className="details__info-container">
@@ -39,6 +39,10 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
                 {!loggedIn && <span className="watchlist__text" onClick={goToLogin}>LOGIN TO ADD TO WATCHLIST</span>}
             </button>
         </div>
+        <a href="" className="" onClick={event => {
+            event.preventDefault()
+            goBack(category)
+        }} >Go Back</a>
         <img className="details__image" src="images/dust.png"></img>
       </div>
     </section>
