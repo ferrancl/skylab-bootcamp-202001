@@ -35,9 +35,7 @@ class App extends Component {
             }, 1500)
     }
 }
- 
-    state= {view: 'start', error: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined,linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined}
-   
+    
     __handleError__(error) {
         this.setState({ error: error.message + ' ' })
 
