@@ -81,7 +81,6 @@ class App extends Component {
                         }else{
 
                             sessionStorage.token = token 
-                            user.username = user.username.toUpperCase()
                             this.setState({ view: 'home', user: user, loggedIn: true })
 
                         }
@@ -198,8 +197,21 @@ class App extends Component {
                     },3000)
                 }else{
                     this.setState({message: `Updated ${Object.keys(data)[0]} successfully`})
+                    retrieveUser(token , (error, user) =>{
+                        if(error){
+                            this.setState({error: error.message})
+        
+                            setTimeout(()=>{
+                                this.setState({ error: undefined })
+                            },3000)
+                        }else{
+                            this.setState({user})
+                        }
+                    })
                 }
+                
             })
+            
         
         }catch(error){
             this.setState(error)
