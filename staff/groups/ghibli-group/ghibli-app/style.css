@@ -288,6 +288,39 @@
   padding: 2vh;
   text-align: center;
 }
+.results .item .watchlist {
+  align-self: center;
+  background-color: #bfa276;
+  border-radius: 3vh;
+  margin: 4vh;
+}
+.results .item .watchlist--clicked {
+  background-color: white;
+  border: 2px solid #bfa276;
+  color: #bfa276;
+  border-radius: 3vh;
+  margin: 4vh;
+  align-self: center;
+}
+.results .item .watchlist__img {
+  height: 5vh;
+  width: 5vh;
+  color: white;
+}
+.results .item .watchlist__text {
+  padding: 3vw;
+  font-family: "Comfortaa", cursive;
+  font-size: 1rem;
+  color: black;
+}
+.results .item .watchlist__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.results .item .watchlist__button--clicked {
+  color: black;
+}
 
 .user-nav .user .line, .edit .line, .header__top .login .line {
   border: 2px solid #bfa276;
