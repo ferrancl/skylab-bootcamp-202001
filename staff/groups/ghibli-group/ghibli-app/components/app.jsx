@@ -356,7 +356,7 @@ class App extends Component {
 
             {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn}/>}
 
             {view === 'category_results' && category==='people' && <People results={results} category={category} onClick={handleDetail}/>}
 
