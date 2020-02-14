@@ -72,7 +72,6 @@
         &__text
             padding: 3vw
             font-family: $font-main
-            font-size: 1rem
             color: black
 
         &__button 
@@ -83,20 +82,31 @@
             &--clicked
                 color: black
 
+.goback
+    font-family: $font-main
+    color: $main-color
+    margin-bottom: 5vh
+    display: flex
+    justify-content: center
+    font-size: 1rem
+    margin: 10vh
+    margin-top: 4vh
+
 
 @media only screen and (min-width: 992px) 
     .details
         margin: 0 10vw 10vh 10vw
         display: flex
-        flex-direction: row
+        flex-direction: column
         position: relative
         
         .poster-container
             display: flex
             align-self: flex-start
             width: 500vw
-            height: 60vh
             justify-content: center
+            //height: 50vh
+            //left: 200px
 
             .poster
                 max-width: 30vw
@@ -115,11 +125,43 @@
         .goback
             font-size: 1.5rem
             position: fixed
-            transform: translateX(55vw)
+            transform: translateX(60vw)
             font-family: $font-main
             color: $main-color
             margin: 5vh
             top: 10vh
+
+        .watchlist
+            flex-flow: row wrap
+
+            &--clicked
+                background-color: white
+                border: $border-width solid $main-color
+                color: $main-color
+                border-radius: 3vh
+                margin: 4vh
+                display: flex
+                justify-content: space-evenly
+
+            &__img
+                height: 5vh
+                width: 5vh
+                color: white
+
+            &__text
+                padding: 3vw
+                font-family: $font-main
+                font-size: 1rem
+                color: black
+                max-height: 1vh
+
+            &__button 
+                display: flex
+                justify-content: center
+                align-items: center
+
+                &--clicked
+                    color: black
 
 
             

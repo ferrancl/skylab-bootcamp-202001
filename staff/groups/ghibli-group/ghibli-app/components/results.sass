@@ -6,6 +6,8 @@
     flex-direction: column
     align-items: center
     justify-content: center
+    width: 85vw
+    overflow: scroll
 
     // &__img
     //     width: 100%
@@ -18,24 +20,30 @@
         font-family: $font-main
         margin: 5vh
 
+    .no-watchlist
+        font-size: 1rem
+        font-family: $font-main
+        text-align: center
+        line-height: 5vh
+        margin: 4vh 2vh 5vh 2vh
+
     .item
         min-height: 10vh
         max-height: 100%
-        width: 100%
+        width: 80vw
         border-radius: $border-radius
         background-color: $main-color
         display: flex
         align-items: center
-        justify-content: space-between
+        justify-content: center
         font-family: $font-main
         margin: 2vh 0
-        padding: 3vh 0
         
         //position: relative
     
         &-title
             color: white
-            padding: 0 5vh 
+            padding: 2vh
             line-height: 5vh
             text-align: center
 
@@ -69,7 +77,6 @@
 
             &__text
                 font-family: $font-main
-                font-size: 4rem
                 align-self: center
                 color: $main-color
 
@@ -77,6 +84,8 @@
                 display: flex
                 justify-content: center
                 align-items: center
+                width: 5vh
+                height: 5vh
 
                 &--clicked
                     color: black
@@ -114,18 +123,23 @@
             align-self: flex-start
 
         .results__title
+            // color: #414141
+            // font-family: $font-main
+            // margin: 25vh 0
+            // position: fixed
+            // //transform: translateX(120px)
+            // font-size: 3rem
             color: #414141
             font-family: $font-main
             margin: 25vh 0
-            position: fixed
-            //transform: translateX(120px)
             font-size: 3rem
+            transform: translateY(-90px)
 
         &__container
             flex-wrap: wrap
 
         .item
-            min-height: 10vh
+            height: 10vh
             width: 30vw
             border-radius: $border-radius
             background-color: $main-color
@@ -133,4 +147,5 @@
             align-items: center
             justify-content: center
             font-family: $font-main
-            margin: 2vh 0
+            margin: 2vh
+            padding: 3vh 0

@@ -29,7 +29,7 @@ function DetailsPeople({result, linkedFilms, linkedLocations, linkedSpecies, lin
 
         <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
 
-        <a href="" className="" onClick={event => {
+        <a href="" className="goback" onClick={event => {
             event.preventDefault()
             goBack(category, query)
         }} >Go Back</a>

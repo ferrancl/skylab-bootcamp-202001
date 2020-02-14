@@ -99,6 +99,9 @@ class App extends Component {
     }
 
     handleLogin = (username, password) => {
+        
+        this.setState({error: undefined})
+
         try {
             authenticateUser(username, password, (error, token) => {
                 if (error) {
@@ -129,6 +132,9 @@ class App extends Component {
     handleGoToRegister = () => { this.setState({ view: 'register' }) }
 
     handleRegister = (name, email, username, password) => {
+
+        this.setState({error: undefined})
+
         try {
             registerUser(name, email, username, password, error => {
                 if (error) {
@@ -303,15 +309,19 @@ class App extends Component {
 
         const { token } = sessionStorage
 
-        user.favs.map(film =>
-            searchFilms(undefined, token, film, (error, films) => {
-                if (error) {
-                    this.__handleError__(error)
-                } else {
-                    this.setState({ view: 'watchlist', toggleMenu: false, favs: films })
-                }
-            })
-        )
+        if(user.favs.length !== 0)
+            user.favs.map(film =>
+                searchFilms(undefined, token, film, (error, films) => {
+                    if (error) {
+                        this.__handleError__(error)
+                    } else {
+                        this.setState({ view: 'watchlist', toggleMenu: false, favs: films })
+                    }
+                })
+            )
+        else {
+            this.setState({ view: 'watchlist', toggleMenu: false, favs: undefined })
+        }
     }
 
     handleDeleteUser = (password) => {
@@ -440,7 +450,7 @@ class App extends Component {
 
             {view === "register" && <Register onSubmit={handleRegister} handleGoToLogin={handleGoToLogin} error={error} errorClick={handleLeaveError} />}
 
-            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} gotToLogin={handleGoToLogin} error={error}/>}
+            {view === 'category_results' && category === 'films' && <Films results={results} category={category} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} goToLogin={handleGoToLogin} error={error}/>}
 
             {view === 'category_results' && category === 'people' && <People results={results} category={category} onClick={handleDetail} error={error}/>}
 
