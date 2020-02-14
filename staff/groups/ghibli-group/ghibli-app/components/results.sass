@@ -26,15 +26,17 @@
         background-color: $main-color
         display: flex
         align-items: center
-        justify-content: center
+        justify-content: space-between
         font-family: $font-main
         margin: 2vh 0
+        padding: 3vh 0
         
         //position: relative
     
         &-title
             color: white
-            padding: 2vh
+            padding: 0 5vh 
+            line-height: 5vh
             text-align: center
 
             //position: absolute
@@ -47,22 +49,29 @@
 
             &--clicked
                 background-color: white
-                border: 2px solid $main-color
-                color: $main-color
-                border-radius: 3vh
+                border: 50% solid $main-color
+                color: transparentize(white, 0)
+                border-radius: 50%
+                font-family: $font-main
+                width: 5vh
+                height: 5vh
+                align-items: center
+                justify-content: center
+                //border-radius: 3vh
                 margin: 4vh
                 align-self: center
+                display: flex
+
 
             &__img
                 height: 5vh
                 width: 5vh
-                color: white
 
             &__text
-                padding: 3vw
                 font-family: $font-main
-                font-size: 1rem
-                color: black
+                font-size: 4rem
+                align-self: center
+                color: $main-color
 
             &__button 
                 display: flex
@@ -90,3 +99,38 @@
     margin: 13.5vh
     justify-content: center
     font-size: 2rem
+
+@media only screen and (min-width: 992px) 
+    .results
+        position: sticky
+        display: flex
+        flex-direction: row
+        position: relative
+
+        &__title-container
+            width: 20vw
+            height: 30vh
+            display: flex
+            align-self: flex-start
+
+        .results__title
+            color: #414141
+            font-family: $font-main
+            margin: 25vh 0
+            position: fixed
+            //transform: translateX(120px)
+            font-size: 3rem
+
+        &__container
+            flex-wrap: wrap
+
+        .item
+            min-height: 10vh
+            width: 30vw
+            border-radius: $border-radius
+            background-color: $main-color
+            display: flex
+            align-items: center
+            justify-content: center
+            font-family: $font-main
+            margin: 2vh 0

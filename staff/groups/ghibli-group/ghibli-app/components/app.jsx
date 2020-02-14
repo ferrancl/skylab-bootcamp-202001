@@ -2,7 +2,7 @@ const { Component, Fragment } = React
 
 class App extends Component {
 
-    state = { view: undefined, error: undefined, query: undefined, token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined }
+    state = { view: undefined, error: undefined, query: '', token: undefined, results: undefined, category: undefined, result: undefined, loggedIn: false, toggleMenu: false, user: undefined, favs: undefined, message: undefined, resultsFilms: undefined, resultsPeople: undefined, resultsLocations: undefined, resultsSpecies: undefined, resultsVehicles: undefined, linkedFilms: undefined, linkedCharacters: undefined, linkedLocations: undefined, linkedSpecies: undefined, linkedVehicles: undefined }
 
     componentWillMount() {
         
@@ -175,9 +175,9 @@ class App extends Component {
 
         // No sé acerca de este query, se es query o _query
         
-        this.setState({query})
+        this.setState({query: _query})
 
-        address.search = {query}
+        address.search = {_query}
 
         //searchFilms(_query, undefined, undefined, (error, resultsFilms) => {
             //if(error)
@@ -187,7 +187,7 @@ class App extends Component {
 
         query = query.map(word => word.charAt(0).toUpperCase() + word.substring(1))
         //const _query = toProperCase(query)
-        let results = new Array
+        const results = []
 
         for (let i = 0; i<query.length; i++) {
 
@@ -205,7 +205,7 @@ class App extends Component {
     
                 if (resultsPeople) results.push(resultsPeople)
     
-                this.setState({ resultsPeople, toggleMenu: false })
+                this.setState({ view: 'search-results', resultsPeople, toggleMenu: false })
             })
             searchLocations(query[i], (error, resultsLocations) => {
                 if (error)
@@ -213,7 +213,7 @@ class App extends Component {
                 
                 if (resultsLocations) results.push(resultsLocations)
     
-                this.setState({ resultsLocations, toggleMenu: false })
+                this.setState({ view: 'search-results', resultsLocations, toggleMenu: false })
             })
             searchSpecies(query[i], (error, resultsSpecies) => {
                 if (error)
@@ -221,7 +221,7 @@ class App extends Component {
     
                 if(resultsSpecies) results.push(resultsSpecies)
     
-                this.setState({ resultsSpecies, toggleMenu: false })
+                this.setState({ view: 'search-results', resultsSpecies, toggleMenu: false })
             })
             searchVehicles(query[i], (error, resultsVehicles) => {
                 if (error)
@@ -229,7 +229,7 @@ class App extends Component {
                 
                 if(resultsVehicles) results.push(resultsVehicles)
     
-                this.setState({ resultsVehicles, toggleMenu: false })
+                this.setState({ view: 'search-results', resultsVehicles, toggleMenu: false })
             })
     
         }
@@ -425,27 +425,14 @@ class App extends Component {
 
     render() {
       
-         const { props: { title }, state: { view, error, results, category, query, result,user, 
-                                                 resultsFilms, resultsPeople, resultsLocations, 
-                                                 resultsSpecies, resultsVehicles, loggedIn, toggleMenu, 
-                                                 message, linkedFilms, favs, linkedCharacters, linkedLocations, 
-                                                 linkedSpecies, linkedVehicles }, handleGoToHome, handleGoToLogin, 
-               handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, 
-               handleUpdate, handleDeleteUser, handleLogin, handleRegister, handleGoToRegister, 
-               handleSearchFilms, handleSearch, handleSearchCategories, handleFav, handleLeaveError, 
-               handleDetail, randomImage, handleGoBack } = this
+         const { props: { title }, state: { view, error, results, category, query, result,user, resultsFilms, resultsPeople, resultsLocations, resultsSpecies, resultsVehicles, loggedIn, toggleMenu, message, linkedFilms, favs, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles }, handleGoToHome, handleGoToLogin, handleResults, handleToggleMenu, handleGoToWatchlist, handleGoToEditProfile, handleLogout, handleUpdate, handleDeleteUser, handleLogin, handleRegister, handleGoToRegister, handleSearchFilms, handleSearch, handleSearchCategories, handleFav,handleLeaveError, handleDetail, randomImage, handleGoBack } = this
 
         return <main className="main">
             {view === "start" && <Init title={title} goToLanding={handleGoToHome} />}
 
-            {view !== "start" && <Header query={query} goToLogin={handleGoToLogin} search={handleResults} 
-                                   goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} 
-                                   loggedIn={loggedIn} 
+            {view !== "start" && <Header query={query} goToLogin={handleGoToLogin} search={handleResults} goHome={handleGoToHome} showNav={handleToggleMenu} toggleMenu={toggleMenu} loggedIn={loggedIn} 
             //onSubmit={handleSearchFilms} 
-            warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} 
-                                   logout={handleLogout} user={user}/>}
-            
-            {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories}/>}
+            warning={error} goToWatchlist={handleGoToWatchlist} goToEditProfile={handleGoToEditProfile} logout={handleLogout} user={user}/>}
 
             {view === "home" && <Landing categories={['films', 'people', 'locations', 'species', 'vehicles']} goToResults={handleSearchCategories} error={error} message={message} onClick={handleLeaveError}/>}
 
