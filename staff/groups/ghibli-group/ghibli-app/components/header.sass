@@ -25,3 +25,42 @@
                 font-weight: 10
 
 
+@media only screen and (min-width: 992px) 
+    #root
+        .main
+            border: none
+            margin: 0
+
+            .header
+                position: sticky
+                top: 0
+                bottom: 0
+                margin: 0 5vh
+                z-index: 500
+                background-color: white
+
+                &__top
+                    display: flex
+                    justify-content: space-between
+                    align-items: center
+
+                .submit
+                    padding: 0
+
+                .search
+                    position: absolute
+                    top: 0
+                    left: 40vw
+                    right: 40vw
+
+                    form
+                        display: flex
+                        flex-direction: row
+
+                    &__icon
+                        height: 3vh
+                        width: 3vh
+                        margin-right: 3vw
+
+                    &__input
+                        max-width: 30vw

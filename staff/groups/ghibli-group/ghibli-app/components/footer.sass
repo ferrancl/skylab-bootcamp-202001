@@ -6,6 +6,10 @@
     height: 40vh
     background-color: $main-color
     position: relative
+    //position: fixed
+    bottom: 0
+    right: 0
+    left: 0
 
     &__container
         top: 80%
@@ -18,3 +22,21 @@
         top: 80%
         right: 5%
         left: 5%
+
+@media only screen and (min-width: 992px) 
+    .main
+        position: relative
+        margin: 0
+
+        .footer
+            height: 10vh
+            margin: 0
+            position: fixed
+            bottom: 0
+            right: 0
+            left: 0
+            z-index: 500
+
+            &__element
+                transform: translateY(-20px)
+

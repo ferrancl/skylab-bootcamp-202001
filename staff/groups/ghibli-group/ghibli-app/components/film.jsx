@@ -9,7 +9,7 @@ function Film({ item, category, loggedIn, user, onClick, goToLogin, fav}) {
 
                 {loggedIn && user.favs.includes(item.id) && <span className="watchlist__text">-</span>}
             </button>
-            {!loggedIn && <span className="watchlist__text" onClick={goToLogin}>-</span>}
+            {!loggedIn && <span className="watchlist__text"><img className="watchlist__img" src="images/plus.svg" onClick={() => goToLogin()}/></span>}
         </div>
 </li>
 }
