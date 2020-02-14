@@ -1,3 +1,10 @@
+/**
+ * retrieve category details by id
+ * @param {String} id - item id
+ * @param {String} category - possible category
+ * @param {Function} callback - function that response with the content
+ */
+
 function retrieveDetails(id, category, callback) {
     let categories = ['films', 'people', 'locations', 'species', 'vehicles']
     let films = undefined

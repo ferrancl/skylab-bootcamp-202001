@@ -1,3 +1,11 @@
+/**
+ * Include the id of the films to the favs list
+ * @param {String} token the token to indetificate the user 
+ * @param {String} id the id of the films
+ * @param {Function} callback function that modify the user
+ */
+
+
 function createFav (token, id, callback) {
     if (typeof token !== 'string') throw new TypeError (`token ${token} is not a string`)
     if (typeof callback !== 'function') throw new TypeError (`callback ${callback} is not a function`)

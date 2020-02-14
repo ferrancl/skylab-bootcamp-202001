@@ -1,3 +1,4 @@
+
 function searchAll(query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)

@@ -1,3 +1,10 @@
+/**
+ * update user in users API
+ * @param {String} token - to identificate the user
+ * @param {Object} data - object that contain the user data
+ * @param {Funtion} callback - executes after the function 
+ */
+
 function updateUser(token, data, callback) {
     if (typeof token !== 'string') throw new TypeError(`token ${token} is not a string`)
 

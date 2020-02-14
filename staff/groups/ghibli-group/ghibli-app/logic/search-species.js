@@ -1,3 +1,9 @@
+/**
+ * Search in species endpoint
+ * @param {String} query - query to search on species category
+ * @param {Funtion} callback - response with content or error
+ */
+
 function searchSpecies (query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
