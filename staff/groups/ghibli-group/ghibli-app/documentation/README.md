@@ -1,4 +1,4 @@
-# [Deploy linkghi](http://ghibli-guide.surge.sh/)
+# [Deploy link](http://ghibli-guide.surge.sh/)
 
 # Introduction
 
