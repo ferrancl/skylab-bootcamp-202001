@@ -470,7 +470,7 @@ class App extends Component {
 
             {view === 'details' && category === 'vehicles'  && <DetailsVehicles query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
-            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} gotToLogin={handleGoToLogin}/>}
+            {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} goToLogin={handleGoToLogin}/>}
 
             {view === 'search-results' && resultsPeople && resultsPeople.length > 0 && <People results={resultsPeople} category={'people'} onClick={handleDetail} />}
 
