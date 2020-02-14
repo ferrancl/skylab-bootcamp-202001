@@ -1,3 +1,9 @@
+/**
+ * Retrieve the data from the user
+ * @param {String} token - to identificate the user
+ * @param {Function} callback - response with user data
+ */
+
 function retrieveUser(token, callback) {
     if (typeof token !== 'string') throw new TypeError(`token ${token} is not a string`)
 

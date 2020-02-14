@@ -1,3 +1,12 @@
+/**
+ * search on films category and retrieve results
+ * check if the user is logged in and if have favs
+ * @param {String} query - to search in films category
+ * @param {String} token - to identificate the user
+ * @param {String} id - id of the film
+ * @param {Function} callback - response with the content of results or error
+ */
+
 function searchFilms (query, token, id, callback) {
     if (typeof query !== 'string' && typeof query !== 'undefined') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)

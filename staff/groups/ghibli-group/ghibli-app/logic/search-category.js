@@ -1,3 +1,9 @@
+/**
+ * search in API by Category
+ * @param {String} category - category to search
+ * @param {Function} callback - response with results content
+ */
+
 function searchCategory(category, callback) {
    
     if(typeof category !== 'string') throw new TypeError(`${category} is not a string`)

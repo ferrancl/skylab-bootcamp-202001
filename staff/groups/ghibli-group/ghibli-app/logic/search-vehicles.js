@@ -1,3 +1,9 @@
+/**
+ * Search in vehicles endpoint
+ * @param {String} query - query to search on vehicles category
+ * @param {Funtion} callback - response with content or error
+ */
+
 function searchVehicles (query, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)

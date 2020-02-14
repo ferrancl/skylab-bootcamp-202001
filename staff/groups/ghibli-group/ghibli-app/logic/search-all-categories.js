@@ -1,3 +1,10 @@
+/**
+ * Search by category
+ * @param {String} query - query to search in category 
+ * @param {String} category - category that search
+ * @param {Function} callback - response with search content or error
+ */
+
 function searchAllCategories (query, category, callback) {
     if (typeof query !== 'string') throw new TypeError(`query ${query} is not a string`)
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)

@@ -1,3 +1,10 @@
+/**
+ * Delete User from Users API
+ * @param {String} password - user password
+ * @param {String} token - user token
+ * @param {Function} callback - function that response status or error
+ */
+
 function deleteUser(password, token, callback) {
     /* if (typeof password !== 'string') throw new TypeError('password ' + password + ' is not a string');
     if(typeof token !== 'string') throw new TypeError('token' + token + ' is not a string')
