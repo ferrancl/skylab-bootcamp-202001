@@ -1,4 +1,4 @@
-function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles, category, goBack, query, image}) {
+function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedLocations, linkedVehicles, category, goBack, query, image, goToLogin}) {
 
     return <section className="details">
       <div className="details__info">
@@ -18,7 +18,7 @@ function DetailsSpecies({result, onClick, linkedFilms, linkedCharacters, linkedL
             <p className="details__info-producer details__category">HAIR COLORS</p>
             <p className="details__info-text">{result.hair_colors}</p>
         </div>
-        {linkedFilms!== undefined && <div className="details__info-container">{ <Films key={name.id} category={'films'} results={linkedFilms} onClick={onClick}/>}</div>}
+        {linkedFilms!== undefined && <div className="details__info-container">{ <Films key={name.id} category={'films'} results={linkedFilms} onClick={onClick} goToLogin={goToLogin}/>}</div>}
         {linkedCharacters!== undefined && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
         {linkedLocations!== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
         {linkedVehicles!== undefined && <div className="details__info-container">{ <Vehicles key={name.id} category={'vehicles'} results={linkedVehicles} onClick={onClick}/>}</div>}

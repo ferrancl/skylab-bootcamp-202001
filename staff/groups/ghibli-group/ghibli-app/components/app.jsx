@@ -462,13 +462,13 @@ class App extends Component {
         
             {view === 'details' && category === 'films' && <DetailsFilms query={query} category={category} result={result} fav={handleFav} user={user} loggedIn={loggedIn} onClick={handleDetail} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
-            {view === 'details' && category === 'people'  && <DetailsPeople query={query} category={category}result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack} image={randomImage}/>}
+            {view === 'details' && category === 'people'  && <DetailsPeople query={query} category={category}result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
-            {view === 'details' && category === 'locations'  && <DetailsLocations query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goBack={handleGoBack} image={randomImage}/>}
+            {view === 'details' && category === 'locations'  && <DetailsLocations query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedSpecies={linkedSpecies} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
-            {view === 'details' && category === 'species'  && <DetailsSpecies query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} goBack={handleGoBack} image={randomImage}/>}
+            {view === 'details' && category === 'species'  && <DetailsSpecies query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters} linkedLocations={linkedLocations} linkedVehicles={linkedVehicles} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
-            {view === 'details' && category === 'vehicles'  && <DetailsVehicles query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goBack={handleGoBack} image={randomImage}/>}
+            {view === 'details' && category === 'vehicles'  && <DetailsVehicles query={query} category={category} result={result} loggedIn={loggedIn} onClick={handleDetail} linkedFilms={linkedFilms} linkedCharacters={linkedCharacters}  linkedLocations={linkedLocations} linkedSpecies={linkedSpecies} goToLogin={handleGoToLogin} goBack={handleGoBack} image={randomImage}/>}
 
             {view === 'search-results'  && resultsFilms && resultsFilms.length>0  && <Films results={resultsFilms} category={'films'} onClick={handleDetail} user={user} fav={handleFav} loggedIn={loggedIn} gotToLogin={handleGoToLogin}/>}
 
@@ -484,7 +484,7 @@ class App extends Component {
 
             {
             view === 'search-results' && 
-            error &&
+            // error &&
             resultsVehicles && resultsVehicles.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsSpecies && resultsSpecies.length === 0 && resultsLocations && resultsLocations.length === 0 && resultsPeople && resultsPeople.length === 0 && resultsFilms && resultsFilms.length === 0 && 
             <NoResults/>}
           
