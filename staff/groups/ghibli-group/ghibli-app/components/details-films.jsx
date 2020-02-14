@@ -1,7 +1,13 @@
 function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLocations, linkedSpecies, linkedVehicles, onClick, goToLogin, goBack, category, query, image}) {    
     
   return <section className="details">
-    <img className="details__poster" src={`images/${result.title.split(' ').join('')}.jpg`}></img>
+    <div className="poster-container">
+            <a href="" className="goback" onClick={event => {
+                event.preventDefault()
+                goBack(category, query)
+            }} >GO BACK</a>
+        <img className="poster" src={`images/${result.title.split(' ').join('')}.jpg`}></img>
+    </div>
     <div className="details__container">
         <div className="details__info">
             <div className="details__info-container">
@@ -28,6 +34,7 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
                 <h2 className="details__info-score details__category">SCORE</h2>
                 <p className="details__info-text">{result.rt_score}</p>
             </div>
+            <h3 className="details__category featured">FEATURED:</h3>
             {linkedCharacters !== undefined  && <div className="details__info-container">{ <People key={name.id} category={'people'} results={linkedCharacters} onClick={onClick}/>}</div>}
             {linkedLocations !== undefined && <div className="details__info-container">{ <Locations key={name.id} category={'locations'} results={linkedLocations} onClick={onClick}/>}</div>}
             {linkedSpecies !== undefined && <div className="details__info-container">{ <Species key={name.id} category={'species'} results={linkedSpecies} onClick={onClick}/>}</div>}
@@ -51,12 +58,7 @@ function DetailsFilms({result, loggedIn, user, fav, linkedCharacters, linkedLoca
                 </button>
             </div>
 
-            <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img>
-
-            <a href="" className="" onClick={event => {
-                event.preventDefault()
-                goBack(category, query)
-            }} >Go Back</a>
+            {/* <img className="details__image" src={image[Math.floor(Math.random() * 4)]}></img> */}
 
         </div>
     </div>

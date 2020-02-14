@@ -7,6 +7,27 @@
     //align-items: center
     justify-content: center
 
+    .poster-container
+        display: flex
+        justify-content: center
+        flex-direction: column
+        font-family: $font-main
+        color: $main-color
+        margin: 5vh
+        text-align: center
+
+        .goback
+            font-family: $font-main
+            color: $main-color
+            margin-bottom: 5vh
+
+    .poster
+        width: 80vw
+        object-fit: cover
+        //margin: 5vh auto
+        border-radius: 10px
+        align-self: center
+
     &__image
         height: 30vh
         margin: auto
@@ -65,7 +86,43 @@
 
 @media only screen and (min-width: 992px) 
     .details
-        margin: 5vh 10vw
+        margin: 0 10vw 10vh 10vw
+        display: flex
+        flex-direction: row
+        position: relative
+        
+        .poster-container
+            display: flex
+            align-self: flex-start
+            width: 500vw
+            height: 60vh
+            justify-content: center
+
+            .poster
+                max-width: 30vw
+                max-height: 65vh
+                object-fit: cover
+                margin: 5vh auto
+                position: fixed
+                border-radius: 10px
+
+        //&__container
+        &__info
+            .featured
+                text-align: center
+                margin-top: 10vh
+
+        .goback
+            font-size: 1.5rem
+            position: fixed
+            transform: translateX(55vw)
+            font-family: $font-main
+            color: $main-color
+            margin: 5vh
+            top: 10vh
+
+
+            
 
 
 // CAMBIAR LA CLASSE DE WATCHLIST Y DE BUTTON A .WATCHLIST--CLICKED Y 

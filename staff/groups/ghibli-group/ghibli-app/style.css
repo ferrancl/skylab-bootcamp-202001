@@ -521,6 +521,26 @@
   flex-direction: column;
   justify-content: center;
 }
+.details .poster-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Comfortaa", cursive;
+  color: #bfa276;
+  margin: 5vh;
+  text-align: center;
+}
+.details .poster-container .goback {
+  font-family: "Comfortaa", cursive;
+  color: #bfa276;
+  margin-bottom: 5vh;
+}
+.details .poster {
+  width: 80vw;
+  object-fit: cover;
+  border-radius: 10px;
+  align-self: center;
+}
 .details__image {
   height: 30vh;
   margin: auto;
@@ -578,7 +598,38 @@
 
 @media only screen and (min-width: 992px) {
   .details {
-    margin: 5vh 10vw;
+    margin: 0 10vw 10vh 10vw;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  .details .poster-container {
+    display: flex;
+    align-self: flex-start;
+    width: 500vw;
+    height: 60vh;
+    justify-content: center;
+  }
+  .details .poster-container .poster {
+    max-width: 30vw;
+    max-height: 65vh;
+    object-fit: cover;
+    margin: 5vh auto;
+    position: fixed;
+    border-radius: 10px;
+  }
+  .details__info .featured {
+    text-align: center;
+    margin-top: 10vh;
+  }
+  .details .goback {
+    font-size: 1.5rem;
+    position: fixed;
+    transform: translateX(55vw);
+    font-family: "Comfortaa", cursive;
+    color: #bfa276;
+    margin: 5vh;
+    top: 10vh;
   }
 }
 .user-nav .user .line, .edit .line, .header__top .login .line {
