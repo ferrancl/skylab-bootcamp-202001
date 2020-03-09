@@ -1,6 +1,6 @@
-const { validate } = require('tennis-utils')
-const { models: { User } } = require('tennis-data')
-const { NotFoundError, NotAllowedError } = require('tennis-errors')
+const { validate } = require('../../tennis-utils')
+const { models: { User } } = require('../../tennis-data')
+const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 
 module.exports = id => {
     validate.string(id, 'id')
@@ -11,9 +11,11 @@ module.exports = id => {
 
             if (user.deactivated) throw new NotAllowedError(`user with id ${id} is deactivated`)
 
-            user.retrieved = new Date
+            return user
 
-            return user.save()
+            // user.retrieved = new Date
+
+            // return user.save()
         })
-        .then(({ name, surname, email }) => ({ name, surname, email }))
+        .then(({ name, surname, memberNumber, email }) => ({ name, surname, memberNumber, email }))
 }

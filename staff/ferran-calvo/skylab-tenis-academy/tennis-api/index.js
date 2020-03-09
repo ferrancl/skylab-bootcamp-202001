@@ -17,14 +17,16 @@ const bodyParser = require('body-parser')
 const {
     registerUser,
     authenticateUser,
-    // retrieveUser,
-    // publishEvent,
+    retrieveUser,
+    publishBook,
     // retrieveLastEvents,
     // retrievePublishedEvents,
     // subscribeEvent
 } = require('./routes/handlers')
 
 const jsonBodyParser = bodyParser.json()
+
+const { jwtVerifierMidWare } = require('./mid-wares')
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -55,6 +57,10 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.post('/users', jsonBodyParser, registerUser)
 
         app.post('/users/auth', jsonBodyParser, authenticateUser)
+
+        app.get('/users', jwtVerifierMidWare, retrieveUser)
+
+        // app.get('/users', jwtVerifierMidWare, publishBook)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 
