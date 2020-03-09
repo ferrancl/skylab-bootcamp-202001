@@ -1,5 +1,5 @@
 {
-  "name": "tennis-data",
+  "name": "tennis-errors",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "mongoose": "^5.9.3"
-  }
+  "license": "ISC"
 }
