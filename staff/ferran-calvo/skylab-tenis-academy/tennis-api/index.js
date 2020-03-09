@@ -54,6 +54,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.post('/users', jsonBodyParser, registerUser)
 
+        app.post('/users/auth', jsonBodyParser, authenticateUser)
+
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 
         process.on('SIGINT', () => {

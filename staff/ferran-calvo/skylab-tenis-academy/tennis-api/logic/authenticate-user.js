@@ -19,7 +19,7 @@ module.exports = (memberNumber, password) => {
     validate.string(memberNumber, 'memberNumber')
     validate.string(password, 'password')
 
-    return User.findOne({ memberNumber })
+    return User.findOne({memberNumber})
         .then(user => {
             if (!user) throw new NotAllowedError(`wrong credentials`)
 
