@@ -1,20 +1,34 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User, Booking, Court } } = require('../../tennis-data')
-const { NotFoundError } = require('../../tennis-errors')
+const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 
 module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(idUser1, 'idUser1')
     validate.string(user2, 'user2')
-    // validate.string(user3, 'user3')
-    // validate.string(user4, 'user4')
-    validate.string(number, 'number')
-    // validate.type(date, 'date', Date)
+    if (user3) validate.string(user3, 'user3')
+    if (user4) validate.string(user4, 'user4')
 
+    validate.string(number, 'number')
+
+    //Checks if the booking is out of the available schedule
+    date = new Date(date)
+    validate.type(date, 'date', Date)
+    const now = new Date(Date.now())
+    if ((date.getHours())< 8 || (date.getHours())>22){
+        throw new NotAllowedError ('Bookings only allowed between 8 and 22 hours')
+    }
+
+    //Bookings only allowed for the next 48 hours
+    let limitTime = new Date(now)
+    limitTime.setDate(limitTime.getDate()+2)
+    if (date > limitTime){
+        throw new NotAllowedError ('Bookings only allowed for the next 48 hours')  
+    } 
+        
     let booking
     let user2_
-    console.log(idUser1)
+    let court_
 
-    debugger
     return User.findOne({memberNumber: user2})
         .then(user2 => {
             if (!user2) throw new NotFoundError(`user with member number ${user2} not found`)
@@ -22,10 +36,16 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             return Court.findOne({number})
         })
         .then((court) => {
-            booking = new Booking({ user1: idUser1, user2: user2_.id, court: court.id, date, status: "PRE"})
+            court_ = court
+            return Booking.findOne({court: court_.id, date})
+        })
+        .then((bookExists) => {
+            if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
+            booking = new Booking({ user1: idUser1, user2: user2_.id, court: court_.id, date, status: "PRE"})
             user2_.bookings.push(booking.id)
             user2_.save()
             return User.findById(idUser1)
+            
         })
         .then(user => {
             user.bookings.push(booking.id)
