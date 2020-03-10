@@ -18,7 +18,7 @@ const {
     registerUser,
     authenticateUser,
     retrieveUser,
-    publishBook,
+    book,
     // retrieveLastEvents,
     // retrievePublishedEvents,
     // subscribeEvent
@@ -60,7 +60,9 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users', jwtVerifierMidWare, retrieveUser)
 
-        // app.get('/users', jwtVerifierMidWare, publishBook)
+        app.post('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], book)
+
+        // app.post('/users', jwtVerifierMidWare, book)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

@@ -1,11 +1,11 @@
-const { publishEvent } = require('../../logic')
+const { book } = require('../../logic')
 const { ContentError } = require('tennis-errors')
 
 module.exports = (req, res) => {
-    const { params: { id }, body: { title, description, location, date } } = req
+    const { payload: { sub: idUser1 }, body: { user2, user3, user4, number, date } } = req
 
     try {
-        publishEvent(id, title, description, location, new Date(date))
+        book(idUser1, user2, user3, user4, number, date)
             .then(() => res.status(201).end())
             .catch(error => {
                 let status = 400
