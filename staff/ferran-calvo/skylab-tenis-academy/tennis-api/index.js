@@ -17,10 +17,11 @@ const bodyParser = require('body-parser')
 const {
     registerUser,
     authenticateUser,
+    rememberPassword,
     retrieveUser,
     book,
     modifyBook,
-    // retrievePublishedEvents,
+    cancelBook
     // subscribeEvent
 } = require('./routes/handlers')
 
@@ -60,9 +61,13 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users', jwtVerifierMidWare, retrieveUser)
 
+        app.post('/users/remember', [jwtVerifierMidWare, jsonBodyParser], rememberPassword)
+
         app.post('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], book)
 
         app.patch('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], modifyBook)
+
+        app.delete('/users/bookings/:id', jwtVerifierMidWare, cancelBook)
 
 
         // app.post('/users', jwtVerifierMidWare, book)

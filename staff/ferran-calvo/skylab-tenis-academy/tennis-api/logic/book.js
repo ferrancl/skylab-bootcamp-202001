@@ -16,38 +16,48 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     date = new Date(date)
     validate.type(date, 'date', Date)
     const now = new Date(Date.now())
-    if ((date.getHours())< 8 || (date.getHours())>22){
-        throw new NotAllowedError ('Bookings only allowed between 8 and 22 hours')
+    if ((date.getHours()) < 8 || (date.getHours()) > 22) {
+        throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')
     }
 
     //Bookings only allowed for the next 48 hours
     let limitTime = new Date(now)
-    limitTime.setDate(limitTime.getDate()+2)
-    if (date > limitTime){
-        throw new NotAllowedError ('Bookings only allowed for the next 48 hours')  
-    } 
-        
+    limitTime.setDate(limitTime.getDate() + 2)
+    if (date > limitTime) {
+        throw new NotAllowedError('Bookings only allowed for the next 48 hours')
+    }
+
     let booking
     let user2_
     let court_
 
-
-    return User.findOne({memberNumber: user2})
+    return User.findOne({ memberNumber: user2 })
         .then(user2 => {
             if (!user2) throw new NotFoundError(`user with member number ${user2} not found`)
-            user2_ = user2
-            return Court.findOne({number})
+            user2_ = user2.id
+            return Court.findOne({ number })
         })
         .then(court => {
             court_ = court
-            return Booking.findOne({court: court_.id, date})
+            return Booking.findOne({ court: court_.id, date })
         })
-        .then((bookExists) => {
+        .then(async bookExists => {
             if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
-            booking = new Booking({ user1: idUser1, user2: user2_.id, court: court_.id, date, day: dateWithoutHour, status: "PRE"})
-            user2_.bookings.push(booking.id)
-            user2_.save()
-            return User.findById(idUser1)       
+            await User.findById(idUser1).populate({path: 'bookings', match: {day: dateWithoutHour}}).exec(async (err, bookings) => {
+                console.log(bookings)
+                return await bookings
+            })
+        })
+        .then(book => {
+            debugger
+            console.log(book)
+            if (book) {
+                throw new NotAllowedError (`This user has already booked a court for ${dateWithoutHour}`)
+            }
+            booking = new Booking({ user1: idUser1, user2: user2_, court: court_.id, date, day: dateWithoutHour, status: "PRE" })
+            // user2_.bookings.push(booking.id)
+            // user2_.save()
+            return User.findById(idUser1)
         })
         .then(user => {
             user.bookings.push(booking.id)
@@ -78,3 +88,17 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         // // .then(calls => Promise.all(calls))
         // .then((b) => {
         //     console.log(b)
+
+              // .then(b => {
+        //     debugger
+        //     console.log(b)
+        //     return user1.bookings.forEach(async oldBook => {
+        //         // console.log('hola')
+        //         // console.log(await Booking.findOne({ _id: oldBook, day: dateWithoutHour }))
+        //         if ( await Booking.findOne({ _id: oldBook, day: dateWithoutHour }) != null){
+        //             return true
+        //         }       
+        //     })
+        // })
+
+        // .then(calls => Promise.all(calls))
