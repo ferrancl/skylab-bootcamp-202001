@@ -11,6 +11,8 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(number, 'number')
 
     //Checks if the booking is out of the available schedule
+    const dateWithoutHour = date.split('T')[0]
+
     date = new Date(date)
     validate.type(date, 'date', Date)
     const now = new Date(Date.now())
@@ -29,23 +31,23 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     let user2_
     let court_
 
+
     return User.findOne({memberNumber: user2})
         .then(user2 => {
             if (!user2) throw new NotFoundError(`user with member number ${user2} not found`)
             user2_ = user2
             return Court.findOne({number})
         })
-        .then((court) => {
+        .then(court => {
             court_ = court
             return Booking.findOne({court: court_.id, date})
         })
         .then((bookExists) => {
             if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
-            booking = new Booking({ user1: idUser1, user2: user2_.id, court: court_.id, date, status: "PRE"})
+            booking = new Booking({ user1: idUser1, user2: user2_.id, court: court_.id, date, day: dateWithoutHour, status: "PRE"})
             user2_.bookings.push(booking.id)
             user2_.save()
-            return User.findById(idUser1)
-            
+            return User.findById(idUser1)       
         })
         .then(user => {
             user.bookings.push(booking.id)
@@ -53,3 +55,26 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(() => { })
 }
+
+// module.exports = (userId, eventId) => {
+//     validate.string(userId, 'user ID')
+//     validate.string(eventId, 'event ID')
+
+//     return User.find({ subscribedEvents: eventId })
+//         .then(usersArray => usersArray.forEach(user => User.findByIdAndUpdate(user.id, { $pull: { subscribedEvents: eventId } })))
+//         .then(calls => Promise.all(calls))
+//         .then(() => User.findByIdAndUpdate(userId, { $pull: { publishedEvents: eventId } }))
+//         .then(() => Event.findByIdAndRemove(eventId))
+//         .then(() => { })
+
+        //     return User.findById(idUser1).bookings
+        //     populate('bookings').execPopulate()
+        //     // User.findById(idUser1).populate('bookings', 'day')
+
+        //     // return User.findById(idUser1)
+        // })
+        // // .then(user => {
+        // // })
+        // // .then(calls => Promise.all(calls))
+        // .then((b) => {
+        //     console.log(b)
