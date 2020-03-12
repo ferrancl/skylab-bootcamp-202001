@@ -2,10 +2,11 @@ const { modifyBook } = require('../../logic')
 const { NotFoundError } = require('tennis-errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: userId }, body:{date}, params: {id: bookingId} } = req
+    const { payload: { sub: userId }, body:{number, date}, params: {id: bookingId} } = req
 
     try {
-        modifyBook(userId, date, bookingId)
+        debugger
+        modifyBook(userId, number, date, bookingId)
             .then((hour) =>
                 res.status(200).json({ message: `You've successfully updated your book to ${hour}` })
             )
