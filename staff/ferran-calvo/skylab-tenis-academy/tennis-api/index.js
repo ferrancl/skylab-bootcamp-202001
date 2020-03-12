@@ -61,7 +61,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users', jwtVerifierMidWare, retrieveUser)
 
-        app.post('/users/remember', [jwtVerifierMidWare, jsonBodyParser], rememberPassword)
+        app.post('/users/remember', jsonBodyParser, rememberPassword)
 
         app.post('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], book)
 

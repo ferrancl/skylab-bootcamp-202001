@@ -22,9 +22,10 @@ module.exports = (memberNumber, password) => {
     return User.findOne({memberNumber})
         .then(user => {
             if (!user) throw new NotAllowedError(`wrong credentials`)
-
             return bcrypt.compare(password, user.password)
+
                 .then(validPassword => {
+                    console.log(validPassword)
                     if (!validPassword) throw new NotAllowedError(`wrong credentials`)
 
                     user.authenticated = new Date
