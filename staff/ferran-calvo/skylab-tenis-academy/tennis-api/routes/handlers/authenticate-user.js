@@ -4,10 +4,10 @@ const { env: { JWT_SECRET, JWT_EXP } } = process
 const { NotAllowedError, ContentError } = require('tennis-errors')
 
 module.exports = (req, res) => {
-    const { body: { memberNumber, password } } = req
+    const { body: { userMember, password } } = req
 
     try {
-        authenticateUser(memberNumber, password)
+        authenticateUser(userMember, password)
             .then(id => {
                 const token = jwt.sign({ sub: id }, JWT_SECRET, { expiresIn: JWT_EXP })
 

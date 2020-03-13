@@ -60,12 +60,9 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(bookExists => {
             if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
-            User.findById(idUser1).populate({path: 'bookings', match: {day: dateWithoutHour}}).exec((err, bookings) => {
-                return bookings
-            })
+            return Booking.findOne({users: idUser1, day: dateWithoutHour})
         })
         .then(book => {
-            debugger
             if (book) {
                 throw new NotAllowedError (`This user has already booked a court for ${dateWithoutHour}`)
             }
@@ -110,40 +107,3 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(() => {})
 }
-
-// module.exports = (userId, eventId) => {
-//     validate.string(userId, 'user ID')
-//     validate.string(eventId, 'event ID')
-
-//     return User.find({ subscribedEvents: eventId })
-//         .then(usersArray => usersArray.forEach(user => User.findByIdAndUpdate(user.id, { $pull: { subscribedEvents: eventId } })))
-//         .then(calls => Promise.all(calls))
-//         .then(() => User.findByIdAndUpdate(userId, { $pull: { publishedEvents: eventId } }))
-//         .then(() => Event.findByIdAndRemove(eventId))
-//         .then(() => { })
-
-        //     return User.findById(idUser1).bookings
-        //     populate('bookings').execPopulate()
-        //     // User.findById(idUser1).populate('bookings', 'day')
-
-        //     // return User.findById(idUser1)
-        // })
-        // // .then(user => {
-        // // })
-        // // .then(calls => Promise.all(calls))
-        // .then((b) => {
-        //     console.log(b)
-
-              // .then(b => {
-        //     debugger
-        //     console.log(b)
-        //     return user1.bookings.forEach(async oldBook => {
-        //         // console.log('hola')
-        //         // console.log(await Booking.findOne({ _id: oldBook, day: dateWithoutHour }))
-        //         if ( await Booking.findOne({ _id: oldBook, day: dateWithoutHour }) != null){
-        //             return true
-        //         }       
-        //     })
-        // })
-
-        // .then(calls => Promise.all(calls))

@@ -10,6 +10,5 @@ module.exports = id => {
             if (!book) throw new NotFoundError(`No books of this user`)
             
             return book
-        })
-        
+        })  
 }
