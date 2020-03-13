@@ -1,5 +1,5 @@
 const { validate } = require('../../tennis-utils')
-const { models: { User, Booking} } = require('../../tennis-data')
+const { models: { User } } = require('../../tennis-data')
 const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 const bcrypt = require('bcryptjs')
 
@@ -39,7 +39,6 @@ module.exports = (userId, body) => {
             }
         })
         .then((correct) => {
-            debugger
             if (correct && oldPassword){
                 return bcrypt.hash(password, 10)
                 
@@ -56,7 +55,6 @@ module.exports = (userId, body) => {
             else{
                 return User.findByIdAndUpdate(userId , { $set: {email: email_}})
             }
-
         })
         .then(() => {})
 }
