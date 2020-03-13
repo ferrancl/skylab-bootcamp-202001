@@ -1,6 +1,7 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User, Booking, Court } } = require('../../tennis-data')
 const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const nodemailer = require('nodemailer')
 
 module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(idUser1, 'idUser1')
@@ -27,6 +28,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         throw new NotAllowedError('Bookings only allowed for the next 48 hours')
     }
 
+    let usersArray = []
     let booking
     let user4_
     let user3_
@@ -58,14 +60,12 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(bookExists => {
             if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
-            User.findById(idUser1).populate({path: 'bookings', match: {day: dateWithoutHour}}).exec(async (err, bookings) => {
-                console.log(bookings)
+            User.findById(idUser1).populate({path: 'bookings', match: {day: dateWithoutHour}}).exec((err, bookings) => {
                 return bookings
             })
         })
         .then(book => {
             debugger
-            // console.log(book)
             if (book) {
                 throw new NotAllowedError (`This user has already booked a court for ${dateWithoutHour}`)
             }
@@ -73,20 +73,42 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
                 booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_.id, date, day: dateWithoutHour, status: "PRE" })
                 user3_.bookings.push(booking.id)
                 user4_.bookings.push(booking.id)
+                usersArray.push(user1_, user2_, user3_, user4_)
                 Promise.all([user3_.save(), user4_.save()])
             }
             else{
+                usersArray.push(user1_, user2_)
                 booking = new Booking({ users:[idUser1, user2_.id], court: court_.id, date, day: dateWithoutHour, status: "PRE" })      
             }
             user1_.bookings.push(booking.id)
             user2_.bookings.push(booking.id)
             return Promise.all([user1_.save(), user2_.save(), booking.save()])
         })
-        // .then(user => {
-        //     user.bookings.push(booking.id)
-        //     return Promise.all([user.save(), booking.save()])
-        // })
-        .then(() => { })
+        .then(() => {
+            transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'skylab.tennis.academy@gmail.com',
+                    pass: 'Skylab1234'
+                }
+            })
+            usersArray.forEach(user =>{
+                mailOptions = {
+                    from: 'skylab.tennis.academy@gmail.com',
+                    to: `${user.email}`,
+                    subject: 'Tennis court booked succesfully',
+                    text: `You have booked court number ${number} for ${date}. You can modify your reserve in your profile`
+                }
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                })
+            })
+        })
+        .then(() => {})
 }
 
 // module.exports = (userId, eventId) => {

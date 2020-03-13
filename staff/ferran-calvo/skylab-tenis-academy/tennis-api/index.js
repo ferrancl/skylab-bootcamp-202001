@@ -19,9 +19,12 @@ const {
     authenticateUser,
     rememberPassword,
     retrieveUser,
+    updateUser,
     book,
     modifyBook,
-    cancelBook
+    cancelBook,
+    retrieveUserBooks,
+    retrieveUpcomingBooks
     // subscribeEvent
 } = require('./routes/handlers')
 
@@ -61,11 +64,17 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users', jwtVerifierMidWare, retrieveUser)
 
+        app.patch('/users', [jwtVerifierMidWare, jsonBodyParser], updateUser)
+
         app.post('/users/remember', jsonBodyParser, rememberPassword)
 
         app.post('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], book)
 
         app.patch('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], modifyBook)
+
+        app.get('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], retrieveUserBooks)
+
+        app.get('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], retrieveUpcomingBooks)
 
         app.delete('/users/bookings/:id', jwtVerifierMidWare, cancelBook)
 

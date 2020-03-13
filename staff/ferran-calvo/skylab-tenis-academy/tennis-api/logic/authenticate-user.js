@@ -25,7 +25,6 @@ module.exports = (memberNumber, password) => {
             return bcrypt.compare(password, user.password)
 
                 .then(validPassword => {
-                    console.log(validPassword)
                     if (!validPassword) throw new NotAllowedError(`wrong credentials`)
 
                     user.authenticated = new Date
