@@ -19,7 +19,7 @@ module.exports = (name, surname, email, password) => {
             password = nPassword
             return User.estimatedDocumentCount()
         })
-        .then((memberNumber) => {
+        .then(memberNumber => {
             memberNumber += 1
             user = new User({ name, surname, memberNumber , email, password, created: new Date})
             return user.save()

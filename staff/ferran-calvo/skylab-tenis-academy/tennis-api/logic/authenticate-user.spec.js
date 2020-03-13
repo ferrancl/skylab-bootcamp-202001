@@ -13,13 +13,14 @@ describe('authenticateUser', () => {
             .then(() => User.deleteMany())
     )
 
-    let name, surname, email, password
+    let name, surname, email, password, memberNumber
 
     beforeEach(() => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
         password = `password-${random()}`
+        memberNumber = `memberNumber - ${Math.floor(random())}`
     })
 
     describe('when user already exists', () => {
@@ -28,7 +29,7 @@ describe('authenticateUser', () => {
         beforeEach(() =>
             bcrypt.hash(password, 10)
                 .then(password =>
-                    User.create({ name, surname, email, password })
+                    User.create({ name, surname, memberNumber, email, password })
                 )
                 .then(user => _id = user.id)
         )
