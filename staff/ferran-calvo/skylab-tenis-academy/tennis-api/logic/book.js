@@ -66,6 +66,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             if (book) {
                 throw new NotAllowedError (`This user has already booked a court for ${dateWithoutHour}`)
             }
+            debugger
             if (user3 && user4){
                 booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_.id, date, day: dateWithoutHour, status: "PRE" })
                 user3_.bookings.push(booking.id)
