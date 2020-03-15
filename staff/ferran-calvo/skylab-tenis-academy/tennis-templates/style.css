@@ -93,7 +93,7 @@ main {
   width: 35%;
   text-align: center;
 }
-.form .form_cancel {
+.form .form_goback {
   margin: auto;
   margin-top: 2%;
   margin-bottom: 10%;
@@ -112,6 +112,21 @@ main {
   display: flex;
   flex-direction: row;
   font-size: 15px;
+}
+.form .form_cancel {
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 10%;
+  border: 2px solid;
+  background-color: #ff2020;
+  border-radius: 50%;
+  height: 50px;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 700;
+  font-family: Franklin Gothic Medium;
+  width: 35%;
+  text-align: center;
 }
 
 .registerG {
