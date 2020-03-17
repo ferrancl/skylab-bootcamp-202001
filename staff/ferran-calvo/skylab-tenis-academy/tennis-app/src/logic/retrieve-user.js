@@ -1,4 +1,4 @@
-import { NotAllowedError } from 'events-errors'
+import { NotAllowedError } from 'tennis-errors'
 import context from './context'
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
@@ -7,7 +7,7 @@ const API_URL = process.env.REACT_APP_API_URL
 
 export default (function () {
     return (async () => {
-        const response = await fetch(`${API_URL}/users`, {
+        const response = await fetch(`http://localhost:8080/users/users`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`

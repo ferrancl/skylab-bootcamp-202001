@@ -4,7 +4,8 @@ import Page from './Page'
 import Register from './Register'
 import Login from './Login'
 import Home from './Home'
-import { registerUser, login, isLoggedIn } from '../logic'
+import Remember from './Remember'
+import { registerUser, login, isLoggedIn, rememberPassword } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
@@ -43,6 +44,16 @@ export default withRouter(function ({ history }) {
     }
   }
 
+  async function handleRemember(email) {
+    try {
+      await rememberPassword(email)
+
+      history.push('/login')
+    } catch ({ message }) {
+      setState({ error: message })
+    }
+  }
+
   function handleGoToLogin() {
     history.push('/login')
   }
@@ -51,25 +62,55 @@ export default withRouter(function ({ history }) {
     history.push('/register')
   }
 
+  function handleGoToRememberPassword() {
+    history.push('/remember-password')
+  }
+  function handleGoToSearch(){
+    history.push('./search')
+  }
+
+  function handleGoToUpdate(){
+    history.push('./update')
+  }
+
+  function handleGoToMyBookings(){
+    history.push('/.my-bookings')
+  }
+
+  
   function handleMountLogin() {
     setState({ page: 'login' })
   }
-
+  
   function handleMountRegister() {
     setState({ page: 'register' })
+  }
+
+  function handleMountUpdate() {
+    setState({ page: 'update' })
+  }
+
+  function handleMountMyBookings(){
+    setState({ page: 'my-bookings' })
+  }
+
+  function handleMountRemember(){
+    setState({ page: 'remember-password' })
   }
 
   const { page, error } = state
 
   return <div className="app">
     <Page name={page}>
+      <Route path="/" render={props => <h1>{props.match.params.id}</h1>} />
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Redirect to="/login" />} />
       {/* <Route path="/" render={() => <h1>Hello, All</h1>} /> */}
       {/* <Route path="/login" render={() => <h1>Hello, Login</h1>} /> */}
       <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onMount={handleMountLogin} />} />
-      <Route path="/home" render={() => isLoggedIn() ? <Home /> : <Redirect to="/login" />} />
+      <Route path="/login" render={() => <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword} onMount={handleMountLogin} />} />
+      <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBookings={handleGoToMyBookings}/> : <Redirect to="/login" />} />
+      <Route path="/remember-password" render={() => <Remember onSubmit={handleRemember} onGoToLogin={handleGoToLogin} error={error} onMount={handleMountRemember} />} />
     </Page>
   </div>
 })
