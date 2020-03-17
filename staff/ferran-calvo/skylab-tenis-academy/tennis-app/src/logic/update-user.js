@@ -1,17 +1,28 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
+import { validate } from 'tennis-utils'
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function () {
+export default (function (email, oldPassword, password) {
+    if (email){
+        validate.string(email, 'email')
+        validate.email(email)
+    }
+    if (oldPassword){
+        validate.string(oldPassword, 'oldPassword')
+        validate.string(password, 'password')
+    }
     return (async () => {
-        const response = await fetch(`http://localhost:8080/users`, {
+        const response = await fetch(`http://localhost:8080/users/update`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`
-            }
+            },
+            body: JSON.stringify({ email, oldPassword, password })
         })
 
         const { status } = response

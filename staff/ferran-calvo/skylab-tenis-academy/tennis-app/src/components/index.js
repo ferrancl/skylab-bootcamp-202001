@@ -5,6 +5,7 @@ import Login from './Login'
 import Home from './Home'
 import Header from './Header'
 import Remember from './Remember'
+import Update from './Update'
 
 export {
     App,
@@ -13,5 +14,6 @@ export {
     Login,
     Home,
     Header,
-    Remember
+    Remember,
+    Update
 }

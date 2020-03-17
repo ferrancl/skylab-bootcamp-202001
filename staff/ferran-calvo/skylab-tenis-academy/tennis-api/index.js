@@ -64,7 +64,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users', jwtVerifierMidWare, retrieveUser)
 
-        app.patch('/users', [jwtVerifierMidWare, jsonBodyParser], updateUser)
+        app.post('/users/update', [jwtVerifierMidWare, jsonBodyParser], updateUser)
 
         app.post('/users/remember', jsonBodyParser, rememberPassword)
 

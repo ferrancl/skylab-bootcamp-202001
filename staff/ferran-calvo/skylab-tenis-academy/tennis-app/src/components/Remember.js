@@ -35,7 +35,7 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
         <form className="form" onSubmit={handleSubmit}>
             <label for="email" className="form_label">EMAIL ADDRESS</label>
             <input type="text" className="form_input" id="email" name="email" placeholder="Email"/>
-            <button type="submit" className="form_button" onSubmit={handleSubmit}>SEND</button>
+            <button type="submit" className="form_button">SEND</button>
             {error && <Feedback message={error} level="warn" />}
         </form>
         <a href="" onClick={handleGoToLogin} className="remember_a">LOGIN</a>
