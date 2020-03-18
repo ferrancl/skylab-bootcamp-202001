@@ -9,6 +9,7 @@ import Update from './Update'
 import { registerUser, login, isLoggedIn, rememberPassword, updateUser } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
+import MyBooks from './MyBooks'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context)
@@ -86,7 +87,7 @@ export default withRouter(function ({ history }) {
   }
 
   function handleGoToMyBookings(){
-    history.push('/.my-bookings')
+    history.push('/my-books')
   }
 
   
@@ -102,8 +103,8 @@ export default withRouter(function ({ history }) {
     setState({ page: 'update-user' })
   }
 
-  function handleMountMyBookings(){
-    setState({ page: 'my-bookings' })
+  function handleMountMyBooks(){
+    setState({ page: 'my-books' })
   }
 
   function handleMountRemember(){
@@ -124,6 +125,7 @@ export default withRouter(function ({ history }) {
       <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBookings={handleGoToMyBookings}/> : <Redirect to="/login" />} />
       <Route path="/remember-password" render={() => <Remember onSubmit={handleRemember} onGoToLogin={handleGoToLogin} error={error} onMount={handleMountRemember} />} />
       <Route path="/update-user" render={() => <Update onSubmit={handleUpdateUser} onGoToSearch={handleGoToSearch} onGoToMyBookings={handleGoToMyBookings} error={error} onMount={handleMountUpdate} />} />
+      <Route path="/my-books" render={() => <MyBooks onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountMyBooks} />} />
 
     </Page>
   </div>

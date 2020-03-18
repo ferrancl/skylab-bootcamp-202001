@@ -5,6 +5,7 @@ import isLoggedIn from './is-logged-in'
 import logout from './logout'
 import rememberPassword from './remember-password'
 import updateUser from './update-user'
+import retrieveUserBooks from './retrieve-user-books'
 
 export {
     registerUser,
@@ -13,5 +14,6 @@ export {
     isLoggedIn,
     logout,
     rememberPassword,
-    updateUser
+    updateUser,
+    retrieveUserBooks
 }
