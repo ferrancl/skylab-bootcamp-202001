@@ -7,7 +7,7 @@ import './Header.sass'
 import './Form.sass'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit, onGoToMyBookings, onGoToSearch, error, onMount }) {
+export default function ({ onSubmit, onGoToMyBooks, onGoToSearch, error, onMount }) {
     useEffect(() => {
         onMount()
     }, [])
@@ -31,10 +31,10 @@ export default function ({ onSubmit, onGoToMyBookings, onGoToSearch, error, onMo
     }
 
 
-    function handleGoToMyBookings(event) {
+    function handleGoToMyBooks(event) {
         event.preventDefault()
 
-        onGoToMyBookings()
+        onGoToMyBooks()
     }
 
 
@@ -49,7 +49,7 @@ export default function ({ onSubmit, onGoToMyBookings, onGoToSearch, error, onMo
             <button type="submit" className="form_button">UPDATE</button>
             {error && <Feedback message={error} level="warn" />}
         </form>
-        <a href="" onClick={handleGoToMyBookings} className="login">MY BOOKINGS</a>
+        <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKINGS</a>
         <a href="" onClick={handleGoToSearch} className="login">SEARCH</a>   
     </>
 }

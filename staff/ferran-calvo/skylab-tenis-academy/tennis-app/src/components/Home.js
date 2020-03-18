@@ -8,7 +8,7 @@ import { retrieveUser, isLoggedIn, logout} from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 
-export default withRouter(function ({ history, onGoToUpdate, onGoToMyBookings, onGoToSearch }) {
+export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGoToSearch }) {
     const [, setState] = useContext(Context)
     const [name, setName] = useState()
 
@@ -42,10 +42,10 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBookings, o
         onGoToUpdate()
     }
 
-    function handleGoToMyBookings(event) {
+    function handleGoToMyBooks(event) {
         event.preventDefault()
 
-        onGoToMyBookings()
+        onGoToMyBooks()
     }
 
     function handleGoToSearch(event) {
@@ -61,7 +61,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBookings, o
         <h1>Hello, {name}!</h1>
         <button onClick={handleLogout}>Logout</button>
         <a href="" onClick={handleGoToUpdate} className="login">UPDATE USER</a>
-        <a href="" onClick={handleGoToMyBookings} className="login">MY BOOKINGS</a>
+        <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKINGS</a>
         <a href="" onClick={handleGoToSearch} className="login">SEARCH</a>   
     </>
 })

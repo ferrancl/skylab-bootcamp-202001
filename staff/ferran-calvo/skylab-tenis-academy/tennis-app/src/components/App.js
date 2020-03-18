@@ -7,6 +7,7 @@ import Home from './Home'
 import Remember from './Remember'
 import Update from './Update'
 import MyBooks from './MyBooks'
+import Search from './Search'
 import { registerUser, login, isLoggedIn, rememberPassword, updateUser, cancelBook } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
@@ -96,7 +97,7 @@ export default withRouter(function ({ history }) {
     history.push('./update-user')
   }
 
-  function handleGoToMyBookings(){
+  function handleGoToMyBooks(){
     history.push('/my-books')
   }
 
@@ -121,6 +122,10 @@ export default withRouter(function ({ history }) {
     setState({ page: 'remember-password' })
   }
 
+  function handleMountSearch(){
+    setState({ page: 'search' })
+  }
+
   const { page, error } = state
 
   return <div className="app">
@@ -132,11 +137,11 @@ export default withRouter(function ({ history }) {
       <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword} onMount={handleMountLogin} />} />
-      <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBookings={handleGoToMyBookings}/> : <Redirect to="/login" />} />
+      <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks}/> : <Redirect to="/login" />} />
       <Route path="/remember-password" render={() => <Remember onSubmit={handleRemember} onGoToLogin={handleGoToLogin} error={error} onMount={handleMountRemember} />} />
-      <Route path="/update-user" render={() => <Update onSubmit={handleUpdateUser} onGoToSearch={handleGoToSearch} onGoToMyBookings={handleGoToMyBookings} error={error} onMount={handleMountUpdate} />} />
+      <Route path="/update-user" render={() => <Update onSubmit={handleUpdateUser} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks} error={error} onMount={handleMountUpdate} />} />
       <Route path="/my-books" render={() => <MyBooks onSubmit={handleCancelBook} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountMyBooks} />} />
-
+      <Route path="/search" render={() => <Search onGoToMyBooks={handleGoToMyBooks} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountSearch} />} />
     </Page>
   </div>
 })
