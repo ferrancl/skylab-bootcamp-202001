@@ -68,7 +68,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             }
             debugger
             if (user3 && user4){
-                booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_.id, date, day: dateWithoutHour, status: "PRE" })
+                booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_, date, day: dateWithoutHour, status: "PRE" })
                 user3_.bookings.push(booking.id)
                 user4_.bookings.push(booking.id)
                 usersArray.push(user1_, user2_, user3_, user4_)
@@ -76,7 +76,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             }
             else{
                 usersArray.push(user1_, user2_)
-                booking = new Booking({ users:[idUser1, user2_.id], court: court_.id, date, day: dateWithoutHour, status: "PRE" })      
+                booking = new Booking({ users:[idUser1, user2_.id], court: court_, date, day: dateWithoutHour, status: "PRE" })      
             }
             user1_.bookings.push(booking.id)
             user2_.bookings.push(booking.id)

@@ -55,7 +55,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToSearch, error
         <Header/>
         <button onClick={handleLogout}>Logout</button>
         <ul className="results">
-        {myBooks.map(book => <li>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court}</li>)}
+        {myBooks.map(book => <li>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court.number}</li>)}
         </ul>
 
         {/* <h1>Hello, {name}!</h1> */}
