@@ -6,6 +6,7 @@ import logout from './logout'
 import rememberPassword from './remember-password'
 import updateUser from './update-user'
 import retrieveUserBooks from './retrieve-user-books'
+import cancelBook from './cancel-book'
 
 export {
     registerUser,
@@ -15,5 +16,6 @@ export {
     logout,
     rememberPassword,
     updateUser,
-    retrieveUserBooks
+    retrieveUserBooks,
+    cancelBook
 }

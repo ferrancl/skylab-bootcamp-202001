@@ -1,20 +1,18 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
+import { validate } from 'tennis-utils'
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function () {
+export default (function (id) {
+    validate.string(id, 'id')
+
     return (async () => {
-        const [header, payload, signature] = this.token.split('.')
-        if (!header || !payload || !signature) throw new Error('invalid token')
-
-        const { sub } = JSON.parse(atob(payload))
-
-        console.log(sub)
-        if (!sub) throw new Error('no user id in token')
-        const response = await fetch(`http://localhost:8080/users/bookings/${sub}`, {
+        debugger
+        const response = await fetch(`http://localhost:8080/users/bookings/${id}`, {
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`
@@ -23,11 +21,7 @@ export default (function () {
 
         const { status } = response
 
-        if (status === 200) {
-            const books = await response.json()
-
-            return books
-        }
+        if (status === 200) return 
 
         if (status >= 400 && status < 500) {
             const { error } = await response.json()

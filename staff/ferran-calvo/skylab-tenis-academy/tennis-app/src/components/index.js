@@ -6,6 +6,7 @@ import Home from './Home'
 import Header from './Header'
 import Remember from './Remember'
 import Update from './Update'
+import MyBooks from './MyBooks'
 
 export {
     App,
@@ -15,5 +16,6 @@ export {
     Home,
     Header,
     Remember,
-    Update
+    Update,
+    MyBooks
 }
