@@ -1,10 +1,10 @@
-const { retrieveUpcomingBooks } = require('../../logic')
+const { retrieveDayBooks } = require('../../logic')
 const {  ContentError } = require('tennis-errors')
 
 module.exports = (req, res) => {
-
+    const { body: {day} } = req
     try {
-        retrieveUpcomingBooks()
+        retrieveDayBooks(day)
             .then(books =>
                 res.status(200).json(books)
             )

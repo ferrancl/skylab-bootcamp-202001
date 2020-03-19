@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import './App.sass'
 import Page from './Page'
 import Register from './Register'
@@ -8,12 +8,16 @@ import Remember from './Remember'
 import Update from './Update'
 import MyBooks from './MyBooks'
 import Search from './Search'
-import { registerUser, login, isLoggedIn, rememberPassword, updateUser, cancelBook } from '../logic'
+import { registerUser, login, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context)
+  const [results, setResults] = useState([])
+  const [array, setArray] = useState([])
+  const [book, setBook] = useState({})
+
 
   useEffect(() => {
     if (isLoggedIn()) {
@@ -75,6 +79,27 @@ export default withRouter(function ({ history }) {
     } catch ({ message }) {
       setState({ error: message })
     }
+  }
+
+  async function handleDayBooks(day) {
+    try {
+      let array=[]
+      const results = await retrieveDayBooks(day)
+      debugger
+      results.map(result => array.push(`${result.court.number}${(result.date.split('T')[1].split(':')[0])}`))
+      setArray(array)
+      setResults(results)
+
+
+    } catch ({ message }) {
+      setState({ error: message })
+    }
+  }
+
+  async function handleGoToBook(date, court ){
+    let book = {date, court}
+    setBook({book})
+    
   }
 
 
@@ -141,7 +166,8 @@ export default withRouter(function ({ history }) {
       <Route path="/remember-password" render={() => <Remember onSubmit={handleRemember} onGoToLogin={handleGoToLogin} error={error} onMount={handleMountRemember} />} />
       <Route path="/update-user" render={() => <Update onSubmit={handleUpdateUser} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks} error={error} onMount={handleMountUpdate} />} />
       <Route path="/my-books" render={() => <MyBooks onSubmit={handleCancelBook} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountMyBooks} />} />
-      <Route path="/search" render={() => <Search onGoToMyBooks={handleGoToMyBooks} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountSearch} />} />
+      <Route path="/search" render={() => <Search onSubmit={handleDayBooks} onGoToMyBooks={handleGoToMyBooks} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountSearch} results={results} array={array} />} />
+      <Route path="/search" render={() => <Book onSubmit={handleBook} book={book} error={error} />} />
     </Page>
   </div>
 })

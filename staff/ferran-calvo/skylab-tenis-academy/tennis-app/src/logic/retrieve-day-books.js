@@ -5,19 +5,16 @@ import context from './context'
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function () {
+export default (function (day) {
     return (async () => {
-        const [header, payload, signature] = this.token.split('.')
-        if (!header || !payload || !signature) throw new Error('invalid token')
-
-        const { sub } = JSON.parse(atob(payload))
-
-        if (!sub) throw new Error('no user id in token')
-        const response = await fetch(`http://localhost:8080/users/bookings/${sub}`, {
+        debugger
+        const response = await fetch(`http://localhost:8080/users/booking-day`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`
-            }
+            },
+            body: JSON.stringify({day})
         })
 
         const { status } = response

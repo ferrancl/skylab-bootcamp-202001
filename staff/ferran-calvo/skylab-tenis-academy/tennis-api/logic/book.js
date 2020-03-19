@@ -12,10 +12,11 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(number, 'number')
 
     //Checks if the booking is out of the available schedule
-    const dateWithoutHour = date.split('T')[0]
-
+    // const dateWithoutHour = date.split('T')[0]
     date = new Date(date)
     validate.type(date, 'date', Date)
+    const dateWithoutHour = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear()
+
     const now = new Date(Date.now())
     if ((date.getHours()) < 8 || (date.getHours()) > 22) {
         throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')

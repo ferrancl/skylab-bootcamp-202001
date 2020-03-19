@@ -24,7 +24,7 @@ const {
     modifyBook,
     cancelBook,
     retrieveUserBooks,
-    retrieveUpcomingBooks
+    retrieveDayBooks
     // subscribeEvent
 } = require('./routes/handlers')
 
@@ -74,7 +74,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.get('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], retrieveUserBooks)
 
-        app.get('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], retrieveUpcomingBooks)
+        app.post('/users/booking-day', [jwtVerifierMidWare, jsonBodyParser], retrieveDayBooks)
 
         app.delete('/users/bookings/:id', jwtVerifierMidWare, cancelBook)
 
