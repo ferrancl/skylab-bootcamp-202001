@@ -15,7 +15,8 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     // const dateWithoutHour = date.split('T')[0]
     date = new Date(date)
     validate.type(date, 'date', Date)
-    const dateWithoutHour = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear()
+    const dateWithoutHour = date.toLocaleDateString()
+    // const dateWithoutHour = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear()
 
     const now = new Date(Date.now())
     if ((date.getHours()) < 8 || (date.getHours()) > 22) {
@@ -62,6 +63,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         .then(bookExists => {
             if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
             return Booking.findOne({users: idUser1, day: dateWithoutHour})
+            //return Booking.findOne({users: idUser1, day: dateWithoutHour})
         })
         .then(book => {
             if (book) {

@@ -6,12 +6,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-tennis": "^7.1.2",
-    "tennis-errors": "file:../tennis-errors",
-    "tennis-utils": "file:../tennis-utils",
+    "dotenv": "^8.2.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "tennis-errors": "file:../tennis-errors",
+    "tennis-utils": "file:../tennis-utils"
   },
   "scripts": {
     "start": "react-scripts start",

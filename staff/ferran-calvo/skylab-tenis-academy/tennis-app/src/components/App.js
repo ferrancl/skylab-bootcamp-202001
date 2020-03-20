@@ -34,7 +34,8 @@ export default withRouter(function ({ history }) {
     try {
       await registerUser(name, surname, email, password)
 
-      setState({ page: 'login' })
+      history.push('/login')
+      // setState({ page: 'login' })
     } catch ({ message }) {
       setState({ error: message })
     }
@@ -80,9 +81,10 @@ export default withRouter(function ({ history }) {
     }
   }
 
-  async function handleBook(user2, user3, user4, court, date){
+  async function handleBook(user2, user3, user4, number, date){
     try {
-      await book(user2, user3, user4, court, date)
+      debugger
+      await book(user2, user3, user4, number, date)
 
       history.push('/my-books')
     } catch ({ message }) {
@@ -95,7 +97,7 @@ export default withRouter(function ({ history }) {
       let array=[]
       const results = await retrieveDayBooks(day)
       debugger
-      results.map(result => array.push(`${result.court.number}${(result.date.split('T')[1].split(':')[0])}`))
+      results.map(result => array.push(`${result.court.number}-${(result.date.split('T')[1].split(':')[0])}`))
       setArray(array)
       setResults(results)
 

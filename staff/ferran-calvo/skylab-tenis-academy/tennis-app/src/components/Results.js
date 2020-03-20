@@ -29,173 +29,173 @@ export default function ({results, array}) {
                 <tbody>
                 <tr>
                     <td className="tg-x1g8">Court 1</td>
-                    <td value="1-08" name="id" className={array.includes('108')? 'red': 'green'}></td>
-                    <td className={array.includes('109')? 'red': 'green'}></td>
-                    <td className={array.includes('110')? 'red': 'green'}></td>
-                    <td className={array.includes('111')? 'red': 'green'}></td>
-                    <td className={array.includes('112')? 'red': 'green'}></td>
-                    <td className={array.includes('113')? 'red': 'green'}></td>
-                    <td className={array.includes('114')? 'red': 'green'}></td>                
-                    <td className={array.includes('115')? 'red': 'green'}></td>                
-                    <td className={array.includes('116')? 'red': 'green'}></td>               
-                    <td className={array.includes('117')? 'red': 'green'}></td>
-                    <td className={array.includes('118')? 'red': 'green'}></td>
-                    <td className={array.includes('119')? 'red': 'green'}></td>
-                    <td className={array.includes('120')? 'red': 'green'}></td>
-                    <td className={array.includes('121')? 'red': 'green'}></td>
+                    <td value="1-08" name="id" className={array.includes('1-08')? 'red': 'green'}></td>
+                    <td className={array.includes('1-09')? 'red': 'green'}></td>
+                    <td className={array.includes('1-10')? 'red': 'green'}></td>
+                    <td className={array.includes('1-11')? 'red': 'green'}></td>
+                    <td className={array.includes('1-12')? 'red': 'green'}></td>
+                    <td className={array.includes('1-13')? 'red': 'green'}></td>
+                    <td className={array.includes('1-14')? 'red': 'green'}></td>                
+                    <td className={array.includes('1-15')? 'red': 'green'}></td>                
+                    <td className={array.includes('1-16')? 'red': 'green'}></td>               
+                    <td className={array.includes('1-17')? 'red': 'green'}></td>
+                    <td className={array.includes('1-18')? 'red': 'green'}></td>
+                    <td className={array.includes('1-19')? 'red': 'green'}></td>
+                    <td className={array.includes('1-20')? 'red': 'green'}></td>
+                    <td className={array.includes('1-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td className="tg-x1g8">Court 2</td>
-                    <td id="21" className={array.includes('208')? 'red': 'green'}></td>
-                    <td id="22" className={array.includes('209')? 'red': 'green'}></td>
-                    <td id="23" className={array.includes('210')? 'red': 'green'}></td>
-                    <td id="24" className={array.includes('211')? 'red': 'green'}></td>
-                    <td id="25" className={array.includes('212')? 'red': 'green'}></td>
-                    <td id="26" className={array.includes('213')? 'red': 'green'}></td>
-                    <td id="27" className={array.includes('214')? 'red': 'green'}></td>
-                    <td id="28" className={array.includes('215')? 'red': 'green'}></td>
-                    <td id="29" className={array.includes('216')? 'red': 'green'}></td>
-                    <td id="210" className={array.includes('217')? 'red': 'green'}></td>
-                    <td id="211" className={array.includes('218')? 'red': 'green'}></td>
-                    <td id="212" className={array.includes('219')? 'red': 'green'}></td>
-                    <td id="213" className={array.includes('220')? 'red': 'green'}></td>
-                    <td id="214" className={array.includes('221')? 'red': 'green'}></td>
+                    <td id="21" className={array.includes('2-08')? 'red': 'green'}></td>
+                    <td id="22" className={array.includes('2-09')? 'red': 'green'}></td>
+                    <td id="23" className={array.includes('2-10')? 'red': 'green'}></td>
+                    <td id="24" className={array.includes('2-11')? 'red': 'green'}></td>
+                    <td id="25" className={array.includes('2-12')? 'red': 'green'}></td>
+                    <td id="26" className={array.includes('2-13')? 'red': 'green'}></td>
+                    <td id="27" className={array.includes('2-14')? 'red': 'green'}></td>
+                    <td id="28" className={array.includes('2-15')? 'red': 'green'}></td>
+                    <td id="29" className={array.includes('2-16')? 'red': 'green'}></td>
+                    <td id="210" className={array.includes('2-17')? 'red': 'green'}></td>
+                    <td id="211" className={array.includes('2-18')? 'red': 'green'}></td>
+                    <td id="212" className={array.includes('2-19')? 'red': 'green'}></td>
+                    <td id="213" className={array.includes('2-20')? 'red': 'green'}></td>
+                    <td id="214" className={array.includes('2-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td className="tg-x1g8">Court 3</td>
-                    <td id="31" className={array.includes('308')? 'red': 'green'}></td>
-                    <td id="32" className={array.includes('309')? 'red': 'green'}></td>
-                    <td id="33" className={array.includes('310')? 'red': 'green'}></td>
-                    <td id="34" className={array.includes('311')? 'red': 'green'}></td>
-                    <td id="35" className={array.includes('312')? 'red': 'green'}></td>
-                    <td id="36" className={array.includes('313')? 'red': 'green'}></td>
-                    <td id="37" className={array.includes('314')? 'red': 'green'}></td>
-                    <td id="38" className={array.includes('315')? 'red': 'green'}></td>
-                    <td id="39" className={array.includes('316')? 'red': 'green'}></td>
-                    <td id="310" className={array.includes('317')? 'red': 'green'}></td>
-                    <td id="311"className={array.includes('318')? 'red': 'green'}></td>
-                    <td id="312" className={array.includes('319')? 'red': 'green'}></td>
-                    <td id="313" className={array.includes('320')? 'red': 'green'}></td>
-                    <td id="314" className={array.includes('321')? 'red': 'green'}></td>
+                    <td id="31" className={array.includes('3-08')? 'red': 'green'}></td>
+                    <td id="32" className={array.includes('3-09')? 'red': 'green'}></td>
+                    <td id="33" className={array.includes('3-10')? 'red': 'green'}></td>
+                    <td id="34" className={array.includes('3-11')? 'red': 'green'}></td>
+                    <td id="35" className={array.includes('3-12')? 'red': 'green'}></td>
+                    <td id="36" className={array.includes('3-13')? 'red': 'green'}></td>
+                    <td id="37" className={array.includes('3-14')? 'red': 'green'}></td>
+                    <td id="38" className={array.includes('3-15')? 'red': 'green'}></td>
+                    <td id="39" className={array.includes('3-16')? 'red': 'green'}></td>
+                    <td id="310" className={array.includes('3-17')? 'red': 'green'}></td>
+                    <td id="311"className={array.includes('3-18')? 'red': 'green'}></td>
+                    <td id="312" className={array.includes('3-19')? 'red': 'green'}></td>
+                    <td id="313" className={array.includes('3-20')? 'red': 'green'}></td>
+                    <td id="314" className={array.includes('3-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 4</td>
-                    <td className={array.includes('408')? 'red': 'green'}></td>
-                    <td className={array.includes('409')? 'red': 'green'}></td>
-                    <td className={array.includes('410')? 'red': 'green'}></td>
-                    <td className={array.includes('411')? 'red': 'green'}></td>
-                    <td className={array.includes('412')? 'red': 'green'}></td>
-                    <td className={array.includes('413')? 'red': 'green'}></td>
-                    <td className={array.includes('414')? 'red': 'green'}></td>
-                    <td className={array.includes('415')? 'red': 'green'}></td>
-                    <td className={array.includes('416')? 'red': 'green'}></td>
-                    <td className={array.includes('417')? 'red': 'green'}></td>
-                    <td className={array.includes('418')? 'red': 'green'}></td>
-                    <td className={array.includes('419')? 'red': 'green'}></td>
-                    <td className={array.includes('420')? 'red': 'green'}></td>
-                    <td className={array.includes('421')? 'red': 'green'}></td>
+                    <td className={array.includes('4-08')? 'red': 'green'}></td>
+                    <td className={array.includes('4-09')? 'red': 'green'}></td>
+                    <td className={array.includes('4-10')? 'red': 'green'}></td>
+                    <td className={array.includes('4-11')? 'red': 'green'}></td>
+                    <td className={array.includes('4-12')? 'red': 'green'}></td>
+                    <td className={array.includes('4-13')? 'red': 'green'}></td>
+                    <td className={array.includes('4-14')? 'red': 'green'}></td>
+                    <td className={array.includes('4-15')? 'red': 'green'}></td>
+                    <td className={array.includes('4-16')? 'red': 'green'}></td>
+                    <td className={array.includes('4-17')? 'red': 'green'}></td>
+                    <td className={array.includes('4-18')? 'red': 'green'}></td>
+                    <td className={array.includes('4-19')? 'red': 'green'}></td>
+                    <td className={array.includes('4-20')? 'red': 'green'}></td>
+                    <td className={array.includes('4-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 5</td>
-                    <td className={array.includes('508')? 'red': 'green'}></td>
-                    <td className={array.includes('509')? 'red': 'green'}></td>
-                    <td className={array.includes('510')? 'red': 'green'}></td>
-                    <td className={array.includes('511')? 'red': 'green'}></td>
-                    <td className={array.includes('512')? 'red': 'green'}></td>
-                    <td className={array.includes('513')? 'red': 'green'}></td>
-                    <td className={array.includes('514')? 'red': 'green'}></td>
-                    <td className={array.includes('515')? 'red': 'green'}></td>
-                    <td className={array.includes('516')? 'red': 'green'}></td>
-                    <td className={array.includes('517')? 'red': 'green'}></td>
-                    <td className={array.includes('518')? 'red': 'green'}></td>
-                    <td className={array.includes('519')? 'red': 'green'}></td>
-                    <td className={array.includes('520')? 'red': 'green'}></td>
-                    <td className={array.includes('521')? 'red': 'green'}></td>
+                    <td className={array.includes('5-08')? 'red': 'green'}></td>
+                    <td className={array.includes('5-09')? 'red': 'green'}></td>
+                    <td className={array.includes('5-10')? 'red': 'green'}></td>
+                    <td className={array.includes('5-11')? 'red': 'green'}></td>
+                    <td className={array.includes('5-12')? 'red': 'green'}></td>
+                    <td className={array.includes('5-13')? 'red': 'green'}></td>
+                    <td className={array.includes('5-14')? 'red': 'green'}></td>
+                    <td className={array.includes('5-15')? 'red': 'green'}></td>
+                    <td className={array.includes('5-16')? 'red': 'green'}></td>
+                    <td className={array.includes('5-17')? 'red': 'green'}></td>
+                    <td className={array.includes('5-18')? 'red': 'green'}></td>
+                    <td className={array.includes('5-19')? 'red': 'green'}></td>
+                    <td className={array.includes('5-20')? 'red': 'green'}></td>
+                    <td className={array.includes('5-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 6</td>
-                    <td className={array.includes('608')? 'red': 'green'}></td>
-                    <td className={array.includes('609')? 'red': 'green'}></td>
-                    <td className={array.includes('610')? 'red': 'green'}></td>
-                    <td className={array.includes('611')? 'red': 'green'}></td>
-                    <td className={array.includes('612')? 'red': 'green'}></td>
-                    <td className={array.includes('613')? 'red': 'green'}></td>
-                    <td className={array.includes('614')? 'red': 'green'}></td>
-                    <td className={array.includes('615')? 'red': 'green'}></td>
-                    <td className={array.includes('616')? 'red': 'green'}></td>
-                    <td className={array.includes('617')? 'red': 'green'}></td>
-                    <td className={array.includes('618')? 'red': 'green'}></td>
-                    <td className={array.includes('619')? 'red': 'green'}></td>
-                    <td className={array.includes('620')? 'red': 'green'}></td>
-                    <td className={array.includes('621')? 'red': 'green'}></td>
+                    <td className={array.includes('6-08')? 'red': 'green'}></td>
+                    <td className={array.includes('6-09')? 'red': 'green'}></td>
+                    <td className={array.includes('6-10')? 'red': 'green'}></td>
+                    <td className={array.includes('6-11')? 'red': 'green'}></td>
+                    <td className={array.includes('6-12')? 'red': 'green'}></td>
+                    <td className={array.includes('6-13')? 'red': 'green'}></td>
+                    <td className={array.includes('6-14')? 'red': 'green'}></td>
+                    <td className={array.includes('6-15')? 'red': 'green'}></td>
+                    <td className={array.includes('6-16')? 'red': 'green'}></td>
+                    <td className={array.includes('6-17')? 'red': 'green'}></td>
+                    <td className={array.includes('6-18')? 'red': 'green'}></td>
+                    <td className={array.includes('6-19')? 'red': 'green'}></td>
+                    <td className={array.includes('6-20')? 'red': 'green'}></td>
+                    <td className={array.includes('6-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 7</td>
-                    <td className={array.includes('708')? 'red': 'green'}></td>
-                    <td className={array.includes('709')? 'red': 'green'}></td>
-                    <td className={array.includes('710')? 'red': 'green'}></td>
-                    <td className={array.includes('711')? 'red': 'green'}></td>
-                    <td className={array.includes('712')? 'red': 'green'}></td>
-                    <td className={array.includes('713')? 'red': 'green'}></td>
-                    <td className={array.includes('714')? 'red': 'green'}></td>
-                    <td className={array.includes('715')? 'red': 'green'}></td>
-                    <td className={array.includes('716')? 'red': 'green'}></td>
-                    <td className={array.includes('717')? 'red': 'green'}></td>
-                    <td className={array.includes('718')? 'red': 'green'}></td>
-                    <td className={array.includes('719')? 'red': 'green'}></td>
-                    <td className={array.includes('720')? 'red': 'green'}></td>
-                    <td className={array.includes('721')? 'red': 'green'}></td>
+                    <td className={array.includes('7-08')? 'red': 'green'}></td>
+                    <td className={array.includes('7-09')? 'red': 'green'}></td>
+                    <td className={array.includes('7-10')? 'red': 'green'}></td>
+                    <td className={array.includes('7-11')? 'red': 'green'}></td>
+                    <td className={array.includes('7-12')? 'red': 'green'}></td>
+                    <td className={array.includes('7-13')? 'red': 'green'}></td>
+                    <td className={array.includes('7-14')? 'red': 'green'}></td>
+                    <td className={array.includes('7-15')? 'red': 'green'}></td>
+                    <td className={array.includes('7-16')? 'red': 'green'}></td>
+                    <td className={array.includes('7-17')? 'red': 'green'}></td>
+                    <td className={array.includes('7-18')? 'red': 'green'}></td>
+                    <td className={array.includes('7-19')? 'red': 'green'}></td>
+                    <td className={array.includes('7-20')? 'red': 'green'}></td>
+                    <td className={array.includes('7-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 8</td>
-                    <td className={array.includes('808')? 'red': 'green'}></td>
-                    <td className={array.includes('809')? 'red': 'green'}></td>
-                    <td className={array.includes('810')? 'red': 'green'}></td>
-                    <td className={array.includes('811')? 'red': 'green'}></td>
-                    <td className={array.includes('812')? 'red': 'green'}></td>
-                    <td className={array.includes('813')? 'red': 'green'}></td>
-                    <td className={array.includes('814')? 'red': 'green'}></td>
-                    <td className={array.includes('815')? 'red': 'green'}></td>
-                    <td className={array.includes('816')? 'red': 'green'}></td>
-                    <td className={array.includes('817')? 'red': 'green'}></td>
-                    <td className={array.includes('818')? 'red': 'green'}></td>
-                    <td className={array.includes('819')? 'red': 'green'}></td>
-                    <td className={array.includes('820')? 'red': 'green'}></td>
-                    <td className={array.includes('821')? 'red': 'green'}></td>
+                    <td className={array.includes('8-08')? 'red': 'green'}></td>
+                    <td className={array.includes('8-09')? 'red': 'green'}></td>
+                    <td className={array.includes('8-10')? 'red': 'green'}></td>
+                    <td className={array.includes('8-11')? 'red': 'green'}></td>
+                    <td className={array.includes('8-12')? 'red': 'green'}></td>
+                    <td className={array.includes('8-13')? 'red': 'green'}></td>
+                    <td className={array.includes('8-14')? 'red': 'green'}></td>
+                    <td className={array.includes('8-15')? 'red': 'green'}></td>
+                    <td className={array.includes('8-16')? 'red': 'green'}></td>
+                    <td className={array.includes('8-17')? 'red': 'green'}></td>
+                    <td className={array.includes('8-18')? 'red': 'green'}></td>
+                    <td className={array.includes('8-19')? 'red': 'green'}></td>
+                    <td className={array.includes('8-20')? 'red': 'green'}></td>
+                    <td className={array.includes('8-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td>Court 9</td>
-                    <td className={array.includes('908')? 'red': 'green'}></td>
-                    <td className={array.includes('909')? 'red': 'green'}></td>
-                    <td className={array.includes('910')? 'red': 'green'}></td>
-                    <td className={array.includes('911')? 'red': 'green'}></td>
-                    <td className={array.includes('912')? 'red': 'green'}></td>
-                    <td className={array.includes('913')? 'red': 'green'}></td>
-                    <td className={array.includes('914')? 'red': 'green'}></td>
-                    <td className={array.includes('915')? 'red': 'green'}></td>
-                    <td className={array.includes('916')? 'red': 'green'}></td>
-                    <td className={array.includes('917')? 'red': 'green'}></td>
-                    <td className={array.includes('918')? 'red': 'green'}></td>
-                    <td className={array.includes('919')? 'red': 'green'}></td>
-                    <td className={array.includes('920')? 'red': 'green'}></td>
-                    <td className={array.includes('921')? 'red': 'green'}></td>
+                    <td className={array.includes('9-08')? 'red': 'green'}></td>
+                    <td className={array.includes('9-09')? 'red': 'green'}></td>
+                    <td className={array.includes('9-10')? 'red': 'green'}></td>
+                    <td className={array.includes('9-11')? 'red': 'green'}></td>
+                    <td className={array.includes('9-12')? 'red': 'green'}></td>
+                    <td className={array.includes('9-13')? 'red': 'green'}></td>
+                    <td className={array.includes('9-14')? 'red': 'green'}></td>
+                    <td className={array.includes('9-15')? 'red': 'green'}></td>
+                    <td className={array.includes('9-16')? 'red': 'green'}></td>
+                    <td className={array.includes('9-17')? 'red': 'green'}></td>
+                    <td className={array.includes('9-18')? 'red': 'green'}></td>
+                    <td className={array.includes('9-19')? 'red': 'green'}></td>
+                    <td className={array.includes('9-20')? 'red': 'green'}></td>
+                    <td className={array.includes('9-21')? 'red': 'green'}></td>
                 </tr>
                 <tr>
                     <td >Court 10</td>
-                    <td className={array.includes('1008')? 'red': 'green'}></td>
-                    <td className={array.includes('1009')? 'red': 'green'}></td>
-                    <td className={array.includes('1010')? 'red': 'green'}></td>
-                    <td className={array.includes('1011')? 'red': 'green'}></td>
-                    <td className={array.includes('1012')? 'red': 'green'}></td>
-                    <td className={array.includes('1013')? 'red': 'green'}></td>
-                    <td className={array.includes('1014')? 'red': 'green'}></td>
-                    <td className={array.includes('1015')? 'red': 'green'}></td>
-                    <td className={array.includes('1016')? 'red': 'green'}></td>
-                    <td className={array.includes('1017')? 'red': 'green'}></td>
-                    <td className={array.includes('1018')? 'red': 'green'}></td>
-                    <td className={array.includes('1019')? 'red': 'green'}></td>
-                    <td className={array.includes('1020')? 'red': 'green'}></td>
-                    <td className={array.includes('1021')? 'red': 'green'}></td>
+                    <td className={array.includes('10-08')? 'red': 'green'}></td>
+                    <td className={array.includes('10-09')? 'red': 'green'}></td>
+                    <td className={array.includes('10-10')? 'red': 'green'}></td>
+                    <td className={array.includes('10-11')? 'red': 'green'}></td>
+                    <td className={array.includes('10-12')? 'red': 'green'}></td>
+                    <td className={array.includes('10-13')? 'red': 'green'}></td>
+                    <td className={array.includes('10-14')? 'red': 'green'}></td>
+                    <td className={array.includes('10-15')? 'red': 'green'}></td>
+                    <td className={array.includes('10-16')? 'red': 'green'}></td>
+                    <td className={array.includes('10-17')? 'red': 'green'}></td>
+                    <td className={array.includes('10-18')? 'red': 'green'}></td>
+                    <td className={array.includes('10-19')? 'red': 'green'}></td>
+                    <td className={array.includes('10-20')? 'red': 'green'}></td>
+                    <td className={array.includes('10-21')? 'red': 'green'}></td>
                 </tr>    
             </tbody>
         </table>

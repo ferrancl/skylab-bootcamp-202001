@@ -1,6 +1,6 @@
 import { validate } from 'tennis-utils'
 const { NotAllowedError } = require('tennis-errors')
-
+require('dotenv').config()
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -13,7 +13,7 @@ export default function (name, surname, email, password) {
     validate.string(password, 'password')
 
     return (async () => {
-        const response = await fetch(` http://localhost:8080/users`, {
+        const response = await fetch(`${API_URL}/users`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, surname, email, password })

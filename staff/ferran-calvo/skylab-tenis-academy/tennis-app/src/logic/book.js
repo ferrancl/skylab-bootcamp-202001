@@ -6,8 +6,16 @@ import { validate } from 'tennis-utils'
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function (id) {
-    validate.string(id, 'id')
+export default (function (user2, user3, user4, number, date ) {
+    validate.string(user2, 'user2')
+    if (user3){
+        validate.string(user3, 'user3')
+    }
+    if(user4){
+        validate.string(user4, 'user4')
+    }
+    validate.string(number,  'number')
+    validate.string(date, 'date')
 
     return (async () => {
         debugger
@@ -16,12 +24,13 @@ export default (function (id) {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`
-            }
+            },
+            body: JSON.stringify({ user2, user3, user4, number, date })
         })
 
         const { status } = response
 
-        if (status === 200) return 
+        if (status === 201) return 
 
         if (status >= 400 && status < 500) {
             const { error } = await response.json()
