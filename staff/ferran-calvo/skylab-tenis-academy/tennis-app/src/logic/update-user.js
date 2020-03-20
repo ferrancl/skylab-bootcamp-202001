@@ -1,6 +1,7 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
 import { validate } from 'tennis-utils'
+require('dotenv').config()
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
@@ -16,7 +17,7 @@ export default (function (email, oldPassword, password) {
         validate.string(password, 'password')
     }
     return (async () => {
-        const response = await fetch(`http://localhost:8080/users/update`, {
+        const response = await fetch(`${API_URL}/users/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

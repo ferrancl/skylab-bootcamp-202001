@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './Header.sass'
 import './Results.sass'
 
-export default function ({results, array}) {
+export default function ({results, array, error}) {
     debugger
     if (results){
         return <>

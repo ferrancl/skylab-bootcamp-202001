@@ -1,6 +1,7 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
 import { validate } from 'tennis-utils'
+require('dotenv').config()
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
@@ -19,7 +20,7 @@ export default (function (user2, user3, user4, number, date ) {
 
     return (async () => {
         debugger
-        const response = await fetch(`http://localhost:8080/users/bookings/`, {
+        const response = await fetch(`${API_URL}/users/bookings/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

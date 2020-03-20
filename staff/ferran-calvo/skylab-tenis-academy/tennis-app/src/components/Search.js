@@ -16,12 +16,12 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
     const [searchDay, setSearchDay] = useState()
     // const [day2, setDay2] = useState([])
     // const [day3, setDay3] = useState([])
-
+    
     useEffect(() => {
         let day1= new Date(Date.now())
         let day2 = new Date(day1)
-        day2.setDate(day1.getDate() + 1)
         let day3 = new Date(day1)
+        day2.setDate(day1.getDate() + 1)
         day3.setDate(day1.getDate() + 2)
         day1= day1.getMonth()+1+"/"+day1.getDate()+"/"+day1.getFullYear()
         day2= day2.getMonth()+1+"/"+day2.getDate()+"/"+day2.getFullYear()
@@ -70,6 +70,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         <Header/>
         <button onClick={handleLogout}>Logout</button>
 
+        <Results results={results} array={array}/>
         <form id="day" onSubmit={handleSubmit}>
             <label for="day">day</label>
             <select name="day" id="day" form="day">
@@ -77,8 +78,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
             </select>
             <button type="submit" name="submit" value="submit">SEARCH</button>
         </form>      
-        <Results results={results} array={array}/>
-        <Book onSubmit={handleBook} searchDay={searchDay} />
+        <Book onSubmit={handleBook} searchDay={searchDay} error={error} />
         <a href="" onClick={handleGoToUpdate} className="login">UPDATE USER</a>
         <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKS</a>   
     </>
