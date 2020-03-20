@@ -8,6 +8,7 @@ import updateUser from './update-user'
 import retrieveUserBooks from './retrieve-user-books'
 import cancelBook from './cancel-book'
 import retrieveDayBooks from './retrieve-day-books'
+import book from './book'
 
 export {
     registerUser,
@@ -19,5 +20,6 @@ export {
     updateUser,
     retrieveUserBooks,
     cancelBook,
-    retrieveDayBooks
+    retrieveDayBooks,
+    book
 }

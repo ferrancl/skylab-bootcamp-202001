@@ -7,11 +7,13 @@ import './Form.sass'
 import { retrieveDayBooks, isLoggedIn, logout} from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
+import Book from './Book'
 
 
-export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, error, onMount, results, array, history }) {
+export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, error, onMount, results, array, history, handleBook }) {
     const [, setState] = useContext(Context)
     const [day, setDay] = useState([])
+    const [searchDay, setSearchDay] = useState()
     // const [day2, setDay2] = useState([])
     // const [day3, setDay3] = useState([])
 
@@ -52,6 +54,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
             day: { value: day },
         } } = event
 
+        setSearchDay(day)
         onSubmit(day)
     }
 
@@ -95,6 +98,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         {/* <h1>Hello, {name}!</h1> */}
 
         <Results results={results} array={array}/>
+        <Book onSubmit={handleBook} searchDay={searchDay} />
         <a href="" onClick={handleGoToUpdate} className="login">UPDATE USER</a>
         <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKS</a>   
     </>
