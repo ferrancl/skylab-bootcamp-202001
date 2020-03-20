@@ -95,7 +95,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
                     from: 'skylab.tennis.academy@gmail.com',
                     to: `${user.email}`,
                     subject: 'Tennis court booked succesfully',
-                    text: `You have booked court ${number} for ${date.toDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.`
+                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.`
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {

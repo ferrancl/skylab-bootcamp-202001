@@ -65,7 +65,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToSearch, error
     return <>
         <Header/>
         <button onClick={handleLogout}>Logout</button>
-        {myBooks.map(book => <form className="form" onSubmit={handleSubmit}><label>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court.number}</label><input name = "book" id="book" value={book._id}/><button type="submit">CANCEL</button></form>)}
+        {myBooks.map(book => <form className="form" onSubmit={handleSubmit}><label>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court.number}</label><input type="hidden" name = "book" id="book" value={book._id}/><button type="submit">CANCEL</button></form>)}
 
         {/* <ul className="results">
         {myBooks.map(book => <li>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court.number}<button type="submit">CANCEL</button></li>)}
