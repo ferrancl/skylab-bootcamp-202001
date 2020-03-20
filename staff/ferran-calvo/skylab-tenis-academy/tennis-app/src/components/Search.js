@@ -29,6 +29,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         setDay([day1, day2, day3])
         // setDay2(day2)
         // setDay3(day3)
+        onSubmit(day1)
         onMount()
     }, [])
 
