@@ -7,10 +7,6 @@ import './Form.sass'
 import Feedback from './Feedback'
 
 export default function ({onSubmit, searchDay, error }) {
-    // useEffect(() => {
-    //     onMount()
-    // }, [])
-
     function handleSubmit(event) {
         event.preventDefault()
         let date
@@ -23,16 +19,11 @@ export default function ({onSubmit, searchDay, error }) {
             user4: { value: user4 }
         } } = event
 
-        if(searchDay === undefined){
-            let currentDay = new Date(Date.now())
-            currentDay = currentDay.getMonth()+1+"/"+currentDay.getDate()+"/"+currentDay.getFullYear()
-            date =  `${currentDay} ${hour}`
-        } else{
-            date =  `${searchDay} ${hour}`
-        }
+        date =  `${searchDay} ${hour}`
         onSubmit(user2, user3, user4, court, date)
     }
 
+    const courts = [1,2,3,4,5,6,7,8,9,10]
 
     return <>
             <form id="book" onSubmit={handleSubmit}>
@@ -55,16 +46,7 @@ export default function ({onSubmit, searchDay, error }) {
                     </select>
                     <label for="court">court</label>
                     <select name="court" id="court" form="book">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
+                    {courts.map(court => <option value={court}>{court}</option>)}
                     </select>
                     <label for="user2" className="form_label">MEMBER NUMBER PLAYER 2</label>
                     <input type="text" className="form_input" id="user2" name="user2" placeholder="Member Number Player 2"/>
@@ -75,7 +57,6 @@ export default function ({onSubmit, searchDay, error }) {
                     <button type="submit" name="submit" value="submit">BOOK</button>
             </form>
             {error && <Feedback message={error} level="warn" />}
-
         </>     
 
 }
