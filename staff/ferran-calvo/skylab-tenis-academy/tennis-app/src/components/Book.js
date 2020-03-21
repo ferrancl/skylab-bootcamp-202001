@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 // import Navbar from './Navbar'
 import './Login.sass'
@@ -7,6 +7,14 @@ import './Form.sass'
 import Feedback from './Feedback'
 
 export default function ({onSubmit, searchDay, error }) {
+    const [players, setPlayers] = useState("2")
+
+    function handleChange(event){
+        event.preventDefault()
+
+        setPlayers(event.target.value)
+    }
+
     function handleSubmit(event) {
         event.preventDefault()
         let date
@@ -48,12 +56,17 @@ export default function ({onSubmit, searchDay, error }) {
                     <select name="court" id="court" form="book">
                     {courts.map(court => <option value={court}>{court}</option>)}
                     </select>
+                    <label for="players">players</label>
+                    <select name="players" id="players" form="book" onChange={handleChange}>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                    </select>
                     <label for="user2" className="form_label">MEMBER NUMBER PLAYER 2</label>
                     <input type="text" className="form_input" id="user2" name="user2" placeholder="Member Number Player 2"/>
-                    <label for="user3" className="form_label">MEMBER NUMBER PLAYER 3 (optional)</label>
-                    <input type="text" className="form_input" id="user3" name="user3" placeholder="Member Number Player 3"/>
-                    <label for="user4" className="form_label">MEMBER NUMBER PLAYER 4 (optional)</label>
-                    <input type="text" className="form_input" id="user4" name="user4" placeholder="Member Number Player 4"/>
+                    <label for="user3" className={players === "2"? 'hidden':'form_label'}>MEMBER NUMBER PLAYER 3</label>
+                    <input type="text" className={players === "2"? 'hidden':'form_input'} id="user3" name="user3" placeholder="Member Number Player 3"/>
+                    <label for="user4" className={players === "2"? 'hidden':'form_label'}>MEMBER NUMBER PLAYER 4</label>
+                    <input type="text" className={players === "2"? 'hidden':'form_input'} id="user4" name="user4" placeholder="Member Number Player 4"/>
                     <button type="submit" name="submit" value="submit">BOOK</button>
             </form>
             {error && <Feedback message={error} level="warn" />}
