@@ -4,13 +4,13 @@ import Results from './Results'
 import './Header.sass'
 import './Login.sass'
 import './Form.sass'
-import { retrieveDayBooks, isLoggedIn, logout} from '../logic'
+import {logout} from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 import Book from './Book'
 
 
-export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, error, onMount, results, array, history, handleBook }) {
+export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, error, onMount, results, bookedCourts, history, handleBook }) {
     const [, setState] = useContext(Context)
     const [day, setDay] = useState([])
     const [searchDay, setSearchDay] = useState()
@@ -67,7 +67,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         <Header/>
         <button onClick={handleLogout}>Logout</button>
         <h2>{searchDay}</h2>
-        <Results results={results} array={array}/>
+        <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
         <label for="day">day</label>
         <select name="day" id="day" form="day" onChange={handleSubmit}>
         {day.map(date => <option id="day" value={date}>{date}</option>)}
