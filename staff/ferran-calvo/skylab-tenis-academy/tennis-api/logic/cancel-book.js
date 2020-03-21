@@ -43,7 +43,7 @@ module.exports = (userId, bookingId) => {
                     from: 'skylab.tennis.academy@gmail.com',
                     to: `${user.email}`,
                     subject: 'Book cancelled',
-                    text: `Your book for ${date_.toLocaleDateString()} at ${date_.getHours()}h of court ${court_} has been cancelled. `
+                    text: `Your book for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. `
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
