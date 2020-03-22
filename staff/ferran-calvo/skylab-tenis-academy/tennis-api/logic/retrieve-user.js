@@ -17,6 +17,5 @@ module.exports = id => {
 
             return user
         })
-        // .then(({ name, surname, memberNumber, email, bookings }) => ({ name, surname, memberNumber, email, bookings }))
-        .then(user => user)
+        .then(({ name, surname, memberNumber, email, bookings }) => ({ name, surname, memberNumber, email, bookings }))
 }
