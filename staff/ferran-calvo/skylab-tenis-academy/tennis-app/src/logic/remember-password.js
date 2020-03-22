@@ -1,5 +1,6 @@
 import { validate } from 'tennis-utils'
 const { NotAllowedError } = require('tennis-errors')
+require('dotenv').config()
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
@@ -10,7 +11,7 @@ export default function (email) {
     validate.email(email)
 
     return (async () => {
-        const response = await fetch(` http://localhost:8080/users/remember`, {
+        const response = await fetch(`${API_URL}/users/remember`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({email})

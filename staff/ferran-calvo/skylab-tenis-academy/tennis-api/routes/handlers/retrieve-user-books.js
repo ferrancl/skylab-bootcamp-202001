@@ -6,8 +6,8 @@ module.exports = (req, res) => {
 
     try {
         retrieveUserBooks(id)
-            .then(event =>
-                res.status(200).json(event)
+            .then(book =>
+                res.status(200).json(book)
             )
             .catch(({ message }) =>
                 res

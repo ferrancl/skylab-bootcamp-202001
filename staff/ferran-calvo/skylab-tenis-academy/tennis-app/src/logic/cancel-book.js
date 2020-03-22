@@ -1,6 +1,7 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
 import { validate } from 'tennis-utils'
+require('dotenv').config()
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
@@ -11,7 +12,7 @@ export default (function (id) {
 
     return (async () => {
         debugger
-        const response = await fetch(`http://localhost:8080/users/bookings/${id}`, {
+        const response = await fetch(`${API_URL}/users/bookings/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

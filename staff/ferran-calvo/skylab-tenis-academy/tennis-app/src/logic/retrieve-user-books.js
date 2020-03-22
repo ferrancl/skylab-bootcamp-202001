@@ -1,5 +1,6 @@
 import { NotAllowedError } from 'tennis-errors'
 import context from './context'
+require('dotenv').config()
 
 //const { env: { REACT_APP_API_URL: API_URL } } = process
 
@@ -13,7 +14,7 @@ export default (function () {
         const { sub } = JSON.parse(atob(payload))
 
         if (!sub) throw new Error('no user id in token')
-        const response = await fetch(`http://localhost:8080/users/bookings/${sub}`, {
+        const response = await fetch(`${API_URL}/users/bookings/${sub}`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`

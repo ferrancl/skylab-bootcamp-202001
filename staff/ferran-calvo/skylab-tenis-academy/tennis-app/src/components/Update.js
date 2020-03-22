@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Header from './Header'
-import Home from './Home'
 // import Navbar from './Navbar'
 import './Login.sass'
 import './Header.sass'
 import './Form.sass'
 import Feedback from './Feedback'
+import {logout} from '../logic'
+import { Context } from './ContextProvider'
+import { withRouter } from 'react-router-dom'
 
-export default function ({ onSubmit, onGoToMyBooks, onGoToSearch, error, onMount }) {
+export default withRouter(function ({ onSubmit, onGoToMyBooks, onGoToSearch, history, error, onMount }) {
+
+    const [, setState] = useContext(Context)
+
     useEffect(() => {
         onMount()
     }, [])
@@ -30,6 +35,14 @@ export default function ({ onSubmit, onGoToMyBooks, onGoToSearch, error, onMount
         onGoToSearch()
     }
 
+    function handleLogout() {
+        logout()
+
+        setState({ page: 'login' })
+
+        history.push('/login')
+    }
+
 
     function handleGoToMyBooks(event) {
         event.preventDefault()
@@ -40,6 +53,7 @@ export default function ({ onSubmit, onGoToMyBooks, onGoToSearch, error, onMount
 
     return <>
         <Header/>
+        <button onClick={handleLogout}>Logout</button>
         <form className="form" onSubmit={handleSubmit}>
             <label for="email" className="form_label">NEW EMAIL</label>
             <input type="text" className="form_input" id="email" name="email" placeholder="New email"/>
@@ -52,4 +66,4 @@ export default function ({ onSubmit, onGoToMyBooks, onGoToSearch, error, onMount
         <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKINGS</a>
         <a href="" onClick={handleGoToSearch} className="login">SEARCH</a>   
     </>
-}
+})

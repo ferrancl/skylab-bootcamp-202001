@@ -12,22 +12,19 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(number, 'number')
 
     //Checks if the booking is out of the available schedule
-    // const dateWithoutHour = date.split('T')[0]
     date = new Date(date)
+    date.setHours(date.getHours()+1)
     validate.type(date, 'date', Date)
     const dateWithoutHour = date.toLocaleDateString()
-    // const dateWithoutHour = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear()
 
     const now = new Date(Date.now())
-    if ((date.getHours()) < 8 || (date.getHours()) > 22) {
+    if ((date.getHours()) < 8 || (date.getHours()) > 23) {
         throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')
     }
 
-    //Bookings only allowed for the next 48 hours
     let limitTime = new Date(now)
-    limitTime.setDate(limitTime.getDate() + 2)
-    if (date > limitTime) {
-        throw new NotAllowedError('Bookings only allowed for the next 48 hours')
+    if (date < limitTime) {
+        throw new NotAllowedError('Wrong data')
     }
 
     let usersArray = []
@@ -98,7 +95,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
                     from: 'skylab.tennis.academy@gmail.com',
                     to: `${user.email}`,
                     subject: 'Tennis court booked succesfully',
-                    text: `You have booked court number ${number} for ${date}. You can modify your reserve in your profile`
+                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.`
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
