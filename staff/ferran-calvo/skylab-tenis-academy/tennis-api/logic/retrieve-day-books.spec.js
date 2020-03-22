@@ -8,7 +8,7 @@ const retrieveDayBooks = require('./retrieve-day-books')
 const { env: { TEST_MONGODB_URL } } = process
 
 describe('book', () => {
-    let name, surname, email, email2, password, memberNumber, memberNumber2, number, tomorrow, day
+    let name, surname, email, email2, password, memberNumber, memberNumber2, number, tomorrow, tomorrowDay, today, todayDay
     
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -21,7 +21,14 @@ describe('book', () => {
         var dd = tomorrow.getDate()
         var mm = tomorrow.getMonth()+1;
         var yyyy = tomorrow.getFullYear();
-        day = mm+'/'+dd+'/'+yyyy;
+        tomorrowDay = mm+'/'+dd+'/'+yyyy;
+
+        today = new Date()
+        today.setDate(new Date().getDate())
+        var dd = today.getDate()
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        todayDay = mm+'/'+dd+'/'+yyyy;
 
         name = `name-${random()}`
         surname = `surname-${random()}`
@@ -53,22 +60,37 @@ describe('book', () => {
             )
 
             beforeEach(() =>
-            Booking.create({users: [_id1, _id2], date: tomorrow, day: day, status:'PRE', court: __id })
+            Booking.create({users: [_id1, _id2], date: tomorrow, day: tomorrowDay, status:'PRE', court: __id })
             .then(({ id }) => {
-                _idBook = id
+                _idBookTomorrow = id
                 return User.findById(_id1)})
             .then(user => {
-                user.bookings = _idBook
+                user.bookings = _idBookTomorrow
                 user.save()
                 return User.findById(_id2)})
             .then(user2 => {
-                user2.bookings = _idBook
+                user2.bookings = _idBookTomorrow
+                user2.save()
+            })
+            )
+
+            beforeEach(() =>
+            Booking.create({users: [_id1, _id2], date: today, day: todayDay, status:'PRE', court: __id })
+            .then(({ id }) => {
+                _idBookToday = id
+                return User.findById(_id1)})
+            .then(user => {
+                user.bookings = _idBookToday
+                user.save()
+                return User.findById(_id2)})
+            .then(user2 => {
+                user2.bookings = _idBookToday
                 user2.save()
             })
             )
 
         it('should succeed on correct user data', () =>
-            retrieveUserBooks(_id1)
+            retrieveDayBooks(tomorrowDay)
             .then(books => {
                 books.forEach(book =>{
                     expect(book).to.exist
@@ -77,8 +99,9 @@ describe('book', () => {
                     expect(book.users[1].toString()).to.equal(_id2)
                     expect(book.court.number).to.equal(number)
                     expect(book.date).to.be.instanceOf(Date)
+                    expect(book.day).to.equal(tomorrowDay)
                 })
-                return retrieveUserBooks(_id2)
+                return retrieveDayBooks(todayDay)
             })
             .then(books => {
                 books.forEach(book =>{
@@ -88,7 +111,9 @@ describe('book', () => {
                     expect(book.users[1].toString()).to.equal(_id2)
                     expect(book.court.number).to.equal(number)
                     expect(book.date).to.be.instanceOf(Date)
-                })            })
+                    expect(book.day).to.equal(todayDay)
+                })
+            })
         )
     
         after(() => Booking.deleteMany().then(() => mongoose.disconnect()))
