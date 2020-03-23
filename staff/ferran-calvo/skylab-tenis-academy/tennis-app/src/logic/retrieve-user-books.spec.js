@@ -91,7 +91,15 @@ describe('retrieve user books', () => {
                 })
         )
     })
-        
-    afterAll(() => Booking.deleteMany().then(() => mongoose.disconnect()))
+
+    afterAll(() => Booking.deleteMany()
+                .then(() => {
+                    User.deleteMany()
+                })
+                .then(() => {
+                    mongoose.disconnect()
+                }))
+                
+
 
 })

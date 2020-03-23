@@ -1,6 +1,7 @@
 import context from './context'
+import { book } from '.'
 const { random } = Math
-const { retrieveDayBooks } = require('.')
+const { cancelBook } = require('.')
 const { mongoose, models: { User, Booking, Court } } = require('tennis-data')
 const jwt = require('jsonwebtoken')
 
@@ -78,27 +79,21 @@ describe('retrieve day books', () => {
             })
             )
         it('should succeed on correct and valid and right data', () =>
-            retrieveDayBooks(tomorrowDay)
-                .then(books => {
-                    books.forEach(book =>{
-                        expect(book).toBeDefined()
-                        expect(typeof book.id).toBe('string')
-                        expect(book.users).toContain(_id1)
-                        expect(book.users).toContain(_id2)
-                        expect(book.court.number).toBe(number)
-                        expect(book.day).toBe(tomorrowDay)
-                    })
-                    return retrieveDayBooks(todayDay)
+            cancelBook(_idBookTomorrow)
+                .then(result => {
+                    expect(result).toBeUndefined()
+                    return Booking.findById(_idBookTomorrow)
                 })
-                .then(books => {
-                    books.forEach(book =>{
-                        expect(book).toBeDefined()
-                        expect(typeof book.id).toBe('string')
-                        expect(book.users).toContain(_id1)
-                        expect(book.users).toContain(_id2)
-                        expect(book.court.number).toBe(number)
-                        expect(book.day).toBe(todayDay)
-                    })
+                .then(result => {
+                    expect(result).toBe(null)
+                    return Booking.findById(_idBookToday)
+                })
+                .then(book => {
+                    expect(book).toBeDefined()
+                    expect(book.users[0].toString()).toBe(_id1)
+                    expect(book.users[1].toString()).toBe(_id2)
+                    expect(book.day).toBe(todayDay)
+                    expect(book.court.number).toBe(number)    
                 })
         )
     })

@@ -61,18 +61,25 @@ describe('book', () => {
             book(memberNumber2, user3, user4, number, tomorrow.toString())
                 .then(result => {
                     expect(result).toBeUndefined()
-                    return Booking.find({users: [_id1, _id2]})
+                    return Booking.find({users: _id1})
                 })
                 .then(book =>{
+                    console.log(book)
                     expect(book).toBeDefined()
-                    expect(typeof book.id).toBe('string')
-                    expect(book.users[0].toString()).toBe(_id1)
-                    expect(book.users[1].toString()).toBe(_id2)
-                    expect(book.day).toBe(tomorrowDay)
-                    expect(book.court.number).toBe(number)
+                    expect(book[0].users[0].toString()).toBe(_id1)
+                    expect(book[0].users[1].toString()).toBe(_id2)
+                    expect(book[0].day).toBe(tomorrowDay)
+                    expect(book[0].court.number).toBe(number)
+                    expect(book[0].court.number).toBe(number)
                 })
         )
     })
 
-    afterAll(() => User.deleteMany().then(() => mongoose.disconnect()))
+    afterAll(() => Booking.deleteMany()
+    .then(() => {
+        User.deleteMany()
+    })
+    .then(() => {
+        mongoose.disconnect()
+    }))
 })
