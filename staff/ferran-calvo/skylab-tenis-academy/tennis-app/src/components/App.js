@@ -159,8 +159,6 @@ export default withRouter(function ({ history }) {
     <Page name={page}>
       <Route path="/" render={props => <h1>{props.match.params.id}</h1>} />
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Redirect to="/login" />} />
-      {/* <Route path="/" render={() => <h1>Hello, All</h1>} /> */}
-      {/* <Route path="/login" render={() => <h1>Hello, Login</h1>} /> */}
       <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword} onMount={handleMountLogin} />} />

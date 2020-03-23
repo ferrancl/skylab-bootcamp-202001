@@ -19,7 +19,6 @@ export default (function (user2, user3, user4, number, date ) {
     validate.string(date, 'date')
 
     return (async () => {
-        debugger
         const response = await fetch(`${API_URL}/users/bookings/`, {
             method: 'POST',
             headers: {
