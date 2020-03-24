@@ -1,21 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Header from './Header'
 import Results from './Results'
-import './Header.sass'
-import './Login.sass'
 import './Form.sass'
-import {logout} from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 import Book from './Book'
 
 
-export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, error, onMount, results, bookedCourts, history, handleBook }) {
+export default withRouter(function ({onSubmit, error, onMount, results, bookedCourts, history, handleBook }) {
     const [, setState] = useContext(Context)
     const [day, setDay] = useState([])
     const [searchDay, setSearchDay] = useState()
-    // const [day2, setDay2] = useState([])
-    // const [day3, setDay3] = useState([])
     
     useEffect(() => {
         let day1= new Date(Date.now())
@@ -28,8 +22,6 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         day3= day3.getMonth()+1+"/"+day3.getDate()+"/"+day3.getFullYear()
         setSearchDay(day1)
         setDay([day1, day2, day3])
-        // setDay2(day2)
-        // setDay3(day3)
         onSubmit(day1)
         onMount()
     }, [])
@@ -41,31 +33,7 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         onSubmit(event.target.value)
     }
 
-    function handleLogout() {
-        logout()
-
-        setState({ page: 'login' })
-
-        history.push('/login')
-    }
-
-    function handleGoToUpdate(event) {
-        event.preventDefault()
-
-        onGoToUpdate()
-    }
-
-
-    function handleGoToMyBooks(event) {
-        event.preventDefault()
-
-        onGoToMyBooks()
-    }
-
-
     return <>
-        <Header/>
-        <button onClick={handleLogout}>Logout</button>
         <h2>{searchDay}</h2>
         <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
         <label for="day">day</label>
@@ -73,7 +41,5 @@ export default withRouter(function ({onSubmit, onGoToUpdate, onGoToMyBooks, erro
         {day.map(date => <option id="day" value={date}>{date}</option>)}
         </select>
         <Book onSubmit={handleBook} searchDay={searchDay} error={error} />
-        <a href="" onClick={handleGoToUpdate} className="login">UPDATE USER</a>
-        <a href="" onClick={handleGoToMyBooks} className="login">MY BOOKS</a>   
     </>
 })

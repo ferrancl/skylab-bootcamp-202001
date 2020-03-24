@@ -11,7 +11,6 @@ export default (function (id) {
     validate.string(id, 'id')
 
     return (async () => {
-        debugger
         const response = await fetch(`${API_URL}/users/bookings/${id}`, {
             method: 'DELETE',
             headers: {

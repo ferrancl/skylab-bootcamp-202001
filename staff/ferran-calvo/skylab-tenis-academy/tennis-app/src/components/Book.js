@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Header from './Header'
-// import Navbar from './Navbar'
-import './Login.sass'
-import './Header.sass'
+import React, { useState } from 'react'
 import './Form.sass'
 import Feedback from './Feedback'
 

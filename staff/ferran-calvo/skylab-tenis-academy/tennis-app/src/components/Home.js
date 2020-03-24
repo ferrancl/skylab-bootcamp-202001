@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-// import CreateEvent from './CreateEvent'
 import Header from './Header'
 import './Header.sass'
 import './Login.sass'
@@ -57,7 +56,6 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
 
 
     return <>
-        <Header/>
         <h1>Hello, {name}!</h1>
         <button onClick={handleLogout}>Logout</button>
         <a href="" onClick={handleGoToUpdate} className="login">UPDATE USER</a>

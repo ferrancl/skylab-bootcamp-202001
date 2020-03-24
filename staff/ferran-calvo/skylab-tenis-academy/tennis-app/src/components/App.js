@@ -11,6 +11,8 @@ import Search from './Search'
 import { registerUser, login, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
+import Header from './Header'
+import HeaderWL from './HeaderWL'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context)
@@ -35,7 +37,6 @@ export default withRouter(function ({ history }) {
       await registerUser(name, surname, email, password)
 
       history.push('/login')
-      // setState({ page: 'login' })
     } catch ({ message }) {
       setState({ error: message })
     }
@@ -45,7 +46,7 @@ export default withRouter(function ({ history }) {
     try {
       await login(email, password)
 
-      history.push('/home')
+      history.push('/search')
     } catch ({ message }) {
       setState({ ...state, error: message })
     }
@@ -65,7 +66,7 @@ export default withRouter(function ({ history }) {
     try {
       await updateUser(email, oldPassword, password)
 
-      history.push('/home')
+      history.push('/search')
     } catch ({ message }) {
       setState({ error: message })
     }
@@ -75,7 +76,7 @@ export default withRouter(function ({ history }) {
     try {
       await cancelBook(id)
 
-      history.push('/home')
+      history.push('/search')
     } catch ({ message }) {
       setState({ error: message })
     }
@@ -160,12 +161,13 @@ export default withRouter(function ({ history }) {
       <Route path="/" render={props => <h1>{props.match.params.id}</h1>} />
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Redirect to="/login" />} />
       <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
-      <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Register onSubmit={handleRegister} error={error} onGoToLogin={handleGoToLogin} onMount={handleMountRegister} />} />
-      <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Login onSubmit={handleLogin} error={error} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword} onMount={handleMountLogin} />} />
-      <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks}/> : <Redirect to="/login" />} />
-      <Route path="/remember-password" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Remember onSubmit={handleRemember} onGoToLogin={handleGoToLogin} error={error} onMount={handleMountRemember} />} />
-      <Route path="/update-user" render={() => isLoggedIn() ? <Update onSubmit={handleUpdateUser} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks} error={error} onMount={handleMountUpdate} />: <Redirect to="/login" />} />
-      <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
-      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onGoToMyBooks={handleGoToMyBooks} onGoToUpdate={handleGoToUpdate} error={error} onMount={handleMountSearch} results={results} bookedCourts={bookedCourts} handleBook={handleBook}/>: <Redirect to="/login" />} />    </Page>
+      <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword}/>} />
+      <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />
+      <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onMount={handleMountLogin} />} />
+      {/* <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks}/> : <Redirect to="/login" />} /> */}
+      <Route path="/remember-password" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Remember onSubmit={handleRemember} error={error} onMount={handleMountRemember} />} />
+      <Route path="/update-user" render={() => isLoggedIn() ? <Update onSubmit={handleUpdateUser} error={error} onMount={handleMountUpdate} />: <Redirect to="/login" />} />
+      <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
+      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} error={error} onMount={handleMountSearch} results={results} bookedCourts={bookedCourts} handleBook={handleBook}/>: <Redirect to="/login" />} />    </Page>
   </div>
 })
