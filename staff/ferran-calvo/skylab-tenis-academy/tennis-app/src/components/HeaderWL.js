@@ -27,10 +27,12 @@ export default function ({ onGoToLogin, onGoToRegister, onGoToRememberPassword }
     return <>
         <header className="header">
             <nav className="header_nav">
-                <a href=""><img src={logo} className="header_icon" alt=""/></a>
-                <a href="" className="header_options" onClick={handleGoToLogin}>Sign In</a>
+                <li><a href=""><img src={logo} className="header_icon" alt=""/></a></li>
+                <li><a href=""><img src={logo} className="header_icon" alt=""/></a></li>
+                
+                {/* <a href="" className="header_options" onClick={handleGoToLogin}>Sign In</a>
                 <a href="" className="header_options" onClick={handleGoToRegister}>Sign Up</a>
-                <a href="" className="header_options" onClick={handleGoToRememberPassword}>Remember Password</a>
+                <a href="" className="header_options" onClick={handleGoToRememberPassword}>Remember Password</a> */}
             </nav>
         </header>
         </>
