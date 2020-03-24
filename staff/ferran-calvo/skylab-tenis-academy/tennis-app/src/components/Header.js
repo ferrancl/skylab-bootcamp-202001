@@ -29,10 +29,6 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
 
     function handleLogout() {
         logout()
-
-        setState({ page: 'login' })
-
-        history.push('/login')
     }
 
     function handleGoToUpdate(event) {

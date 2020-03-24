@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './Form.sass'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit, onGoToLogin, error, onMount }) {
+export default function ({ onSubmit, error, onMount }) {
     useEffect(() => {
         onMount()
     }, [])
@@ -17,13 +17,6 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
         onSubmit(email)
     }
 
-    function handleGoToLogin(event) {
-        event.preventDefault()
-
-        onGoToLogin()
-    }
-
-
     return <>
         <form className="form" onSubmit={handleSubmit}>
             <label for="email" className="form_label">EMAIL ADDRESS</label>
@@ -31,6 +24,5 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
             <button type="submit" className="form_button">SEND</button>
             {error && <Feedback message={error} level="warn" />}
         </form>
-        <a href="" onClick={handleGoToLogin} className="remember_a">LOGIN</a>
     </>
 }

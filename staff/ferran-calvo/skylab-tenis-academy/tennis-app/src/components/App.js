@@ -21,15 +21,15 @@ export default withRouter(function ({ history }) {
 
 
   useEffect(() => {
-    if (isLoggedIn()) {
+    // if (isLoggedIn()) {
       setState({ page: 'home' })
 
       history.push('/home')
-    } else {
-      setState({ page: 'login' })
+    // } else {
+    //   setState({ page: 'login' })
 
-      history.push('/login')
-    }
+    //   history.push('/login')
+    // }
   }, [])
 
   async function handleRegister(name, surname, email, password) {
@@ -159,12 +159,12 @@ export default withRouter(function ({ history }) {
   return <div className="app">
     <Page name={page}>
       <Route path="/" render={props => <h1>{props.match.params.id}</h1>} />
-      <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/home" /> : <Redirect to="/login" />} />
+      <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />
       <Route path="/home/:id" render={props => <h1>{props.match.params.id}</h1>} />
       <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister} onGoToRememberPassword={handleGoToRememberPassword}/>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} error={error} onMount={handleMountLogin} />} />
-      {/* <Route path="/home" render={() => isLoggedIn() ? <Home onGoToUpdate={handleGoToUpdate} onGoToSearch={handleGoToSearch} onGoToMyBooks={handleGoToMyBooks}/> : <Redirect to="/login" />} /> */}
+<Route path="/home" render={() => <Home/> }/>
       <Route path="/remember-password" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Remember onSubmit={handleRemember} error={error} onMount={handleMountRemember} />} />
       <Route path="/update-user" render={() => isLoggedIn() ? <Update onSubmit={handleUpdateUser} error={error} onMount={handleMountUpdate} />: <Redirect to="/login" />} />
       <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />

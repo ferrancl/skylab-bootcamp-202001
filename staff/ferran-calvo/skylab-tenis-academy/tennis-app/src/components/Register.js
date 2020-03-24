@@ -4,7 +4,7 @@ import './Header.sass'
 import './Form.sass'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit, onGoToLogin, error, onMount }) {
+export default function ({ onSubmit , error, onMount }) {
     useEffect(() => {
         onMount()
     }, [])
@@ -22,12 +22,6 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
         onSubmit(name, surname, email, password)
     }
 
-    function handleGoToLogin(event) {
-        event.preventDefault()
-
-        onGoToLogin()
-    }
-
     return <>
         <section className="register">
             <form className="form" onSubmit={handleSubmit}>
@@ -41,7 +35,6 @@ export default function ({ onSubmit, onGoToLogin, error, onMount }) {
                 <input type="password" className="form_input" id="confirm-password" name="password" placeholder="Password"/>
                 <button type="submit" className="form_button">REGISTER</button>
                 {error && <Feedback message={error} level="warn" />}
-                <a href="" onClick={handleGoToLogin} className="register_a">LOGIN</a>
             </form>
         </section>
         </>
