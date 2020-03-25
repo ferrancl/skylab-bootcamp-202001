@@ -3,13 +3,16 @@ import React, { useState, useEffect, useContext } from 'react'
 import './Header.sass'
 import './Login.sass'
 import './Form.sass'
-import { retrieveUser, isLoggedIn, logout} from '../logic'
+import { retrieveUser, isLoggedIn, logout } from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGoToSearch }) {
     const [, setState] = useContext(Context)
     const [name, setName] = useState()
+    const[menu, setMenu] = useState(false)
 
     useEffect(() => {
         if (isLoggedIn())
@@ -18,7 +21,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
                     const { name } = await retrieveUser()
 
                     setName(name)
-                    
+
                     setState({ page: 'home' })
                 } catch ({ message }) {
                     setState({ error: message, page: 'login' })
@@ -29,38 +32,49 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
 
     function handleLogout() {
         logout()
+        setMenu(false)
     }
 
     function handleGoToUpdate(event) {
         event.preventDefault()
-
+        setMenu(false)
         onGoToUpdate()
     }
 
     function handleGoToMyBooks(event) {
         event.preventDefault()
-
+        setMenu(false)
         onGoToMyBooks()
     }
 
     function handleGoToSearch(event) {
         event.preventDefault()
-
+        setMenu(false)
         onGoToSearch()
     }
 
-
+    function handleMenu(event){
+        event.preventDefault()
+        menu ? setMenu(false): setMenu(true)
+    }
 
     return <>
         <header className="header">
             <nav className="header_nav">
-                <a href=""><img src={logo} className="header_icon" alt=""/></a>
-                <span className="header_name">Hello, {name}!</span>
-                <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
-                <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>
-                <a href="" className="header_options" onClick={handleGoToUpdate}>Edit Profile</a>
-                <a href="" className="header_options" onClick={handleLogout}>Logout</a>
+                <ul className="header_ul">
+                    <li><a href=""><img src={logo} className="header_icon" alt="" /></a></li>
+                    <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" onClick={handleMenu} /></li>
+                </ul>
+                {/* <a href=""><img src={logo} className="header_icon" alt=""/></a>
+                <span className="header_name">Hello, {name}!</span> */}
+                <ul className={menu ?"header_hidden" : "header_hidden idden" }>
+                    <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
+                    <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>
+                    <a href="" className="header_options" onClick={handleGoToUpdate}>Edit Profile</a>
+                    <a href="" className="header_options" onClick={handleLogout}>Logout</a>
+                </ul>
+
             </nav>
         </header>
-        </>
+    </>
 })

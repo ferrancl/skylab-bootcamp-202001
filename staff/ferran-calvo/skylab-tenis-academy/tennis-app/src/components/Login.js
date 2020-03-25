@@ -21,10 +21,10 @@ export default function ({ onSubmit, error, onMount }) {
 
     return <>
         <form className="form loginG" onSubmit={handleSubmit}>
-            <label for="userMember" className="form_label">MEMBER NUMBER OR EMAIL</label>
-            <input type="text" className="form_input" id="userMember" name="userMember" placeholder="Member Number/Email"/>
-            <label for="password" className="form_label">PASSWORD</label>
-            <input type="password" className="form_input" id="password" name="password" placeholder="Password"/>
+            <div className="form_login">
+                <input type="text" className="form_input" id="userMember" name="userMember" placeholder="Member Number/Email" />
+                <input type="password" className="form_input" id="password" name="password" placeholder="Password" />
+            </div>
             <button type="submit" className="form_button">SIGN IN</button>
             {error && <Feedback message={error} level="warn" />}
         </form>

@@ -14,8 +14,8 @@ export default withRouter(function ({ onSubmit, error, onMount }) {
 
         const { target: {
             email: { value: email },
-            oldPassword: {value: oldPassword},
-            password: {value: password}
+            oldPassword: { value: oldPassword },
+            password: { value: password }
         } } = event
 
         onSubmit(email, oldPassword, password)
@@ -24,11 +24,12 @@ export default withRouter(function ({ onSubmit, error, onMount }) {
 
     return <>
         <form className="form" onSubmit={handleSubmit}>
-            <label for="email" className="form_label">NEW EMAIL</label>
-            <input type="text" className="form_input" id="email" name="email" placeholder="New email"/>
-            <label for="password" className="form_label">CHANGE PASSWORD</label>
-            <input type="password" className="form_input" id="oldPassword" name="oldPassword" placeholder="Old Password"/>
-            <input type="password" className="form_input" id="password" name="password" placeholder="New Password"/>
+            <div className="form_register">
+                <input type="text" className="form_input" id="email" name="email" placeholder="New email" />
+
+                <input type="password" className="form_input" id="oldPassword" name="oldPassword" placeholder="Old Password" />
+                <input type="password" className="form_input" id="password" name="password" placeholder="New Password" />
+            </div>
             <button type="submit" className="form_button">UPDATE</button>
             {error && <Feedback message={error} level="warn" />}
         </form>

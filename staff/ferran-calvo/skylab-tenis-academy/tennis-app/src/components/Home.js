@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-
+import './Info.sass'
+import './Footer.sass'
 import clay from './clay.jpg'
 import tennis from './tennis.jpg'
 import activities from './activities.jpg'

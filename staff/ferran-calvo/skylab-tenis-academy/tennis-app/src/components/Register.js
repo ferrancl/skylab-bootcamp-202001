@@ -4,7 +4,7 @@ import './Header.sass'
 import './Form.sass'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit , error, onMount }) {
+export default function ({ onSubmit, error, onMount }) {
     useEffect(() => {
         onMount()
     }, [])
@@ -25,17 +25,19 @@ export default function ({ onSubmit , error, onMount }) {
     return <>
         <section className="register">
             <form className="form" onSubmit={handleSubmit}>
-                <label for="userdata" className="form_label">NAME</label>
-                <input type="text" className="form_input" id="name" name="name" placeholder="Name"/>
-                <label for="userdata" className="form_label">SURNAME</label>
-                <input type="text" className="form_input" id="surname" name="surname" placeholder="Surname"/>
-                <label for="userdata" className="form_label">EMAIL</label>
-                <input type="text" className="form_input" id="email" name="email" placeholder="Email"/>
-                <label for="userdata" className="form_label">PASSWORD</label>
-                <input type="password" className="form_input" id="confirm-password" name="password" placeholder="Password"/>
+                <div className="form_register">
+
+                    <input type="text" className="form_input" id="name" name="name" placeholder="Name" />
+
+                    <input type="text" className="form_input" id="surname" name="surname" placeholder="Surname" />
+
+                    <input type="text" className="form_input" id="email" name="email" placeholder="Email" />
+
+                    <input type="password" className="form_input" id="confirm-password" name="password" placeholder="Password" />
+                </div>
                 <button type="submit" className="form_button">REGISTER</button>
                 {error && <Feedback message={error} level="warn" />}
             </form>
         </section>
-        </>
+    </>
 }

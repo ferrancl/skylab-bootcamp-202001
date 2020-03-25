@@ -30,9 +30,10 @@ export default function ({onSubmit, searchDay, error }) {
     const courts = [1,2,3,4,5,6,7,8,9,10]
 
     return <>
-            <form id="book" onSubmit={handleSubmit}>
-                    <label for="day">hour</label>
-                    <select name="hour" id="hour" form="book">
+            <form className="book" id="book" onSubmit={handleSubmit}>
+                    
+                    <select className="select" name="hour" id="hour" form="book">
+                        <option disabled selected>Hour</option>
                         <option value="08:00">8-9h</option>
                         <option value="09:00">9-10h</option>
                         <option value="10:00">10-11h</option>
@@ -48,22 +49,23 @@ export default function ({onSubmit, searchDay, error }) {
                         <option value="20:00">20-21h</option>
                         <option value="21:00">21-22h</option>
                     </select>
-                    <label for="court">court</label>
-                    <select name="court" id="court" form="book">
+                    
+                    <select  className="select" name="court" id="court" form="book">
+                    <option disabled selected>Court</option>
                     {courts.map(court => <option value={court}>{court}</option>)}
                     </select>
-                    <label for="players">players</label>
-                    <select name="players" id="players" form="book" onChange={handleChange}>
+                    
+                    <select  className="select" name="players" id="players" form="book" onChange={handleChange}>
+                        <option disabled selected>Players</option>
                         <option value="2">2</option>
                         <option value="4">4</option>
                     </select>
-                    <label for="user2" className="form_label">MEMBER NUMBER PLAYER 2</label>
-                    <input type="text" className="form_input" id="user2" name="user2" placeholder="Member Number Player 2"/>
-                    <label for="user3" className={players === "2"? 'hidden':'form_label'}>MEMBER NUMBER PLAYER 3</label>
-                    <input type="text" className={players === "2"? 'hidden':'form_input'} id="user3" name="user3" placeholder="Member Number Player 3"/>
-                    <label for="user4" className={players === "2"? 'hidden':'form_label'}>MEMBER NUMBER PLAYER 4</label>
-                    <input type="text" className={players === "2"? 'hidden':'form_input'} id="user4" name="user4" placeholder="Member Number Player 4"/>
-                    <button type="submit" name="submit" value="submit">BOOK</button>
+                    
+                    <input type="text" className="form_input input-players" id="user2" name="user2" placeholder="Member Number Player 2"/>
+                    <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user3" name="user3" placeholder="Member Number Player 3"/>
+
+                    <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user4" name="user4" placeholder="Member Number Player 4"/>
+                    <button className="form_button" type="submit" name="submit" value="submit">BOOK</button>
             </form>
             {error && <Feedback message={error} level="warn" />}
         </>     

@@ -19,8 +19,8 @@ export default function ({ onSubmit, error, onMount }) {
 
     return <>
         <form className="form" onSubmit={handleSubmit}>
-            <label for="email" className="form_label">EMAIL ADDRESS</label>
-            <input type="text" className="form_input" id="email" name="email" placeholder="Email"/>
+            
+            <input type="text" className="form_input" id="email" name="email" placeholder="Email Address"/>
             <button type="submit" className="form_button">SEND</button>
             {error && <Feedback message={error} level="warn" />}
         </form>
