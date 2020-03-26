@@ -14,12 +14,6 @@ export default function ({ onGoToLogin, onGoToRegister, onGoToRememberPassword }
         onGoToRegister()
     }
 
-    function handleGoToRememberPassword(event) {
-        event.preventDefault()
-        setMenu(false)
-        onGoToRememberPassword()
-    }
-
     function handleGoToLogin(event) {
         event.preventDefault()
         setMenu(false)
@@ -42,7 +36,6 @@ export default function ({ onGoToLogin, onGoToRegister, onGoToRememberPassword }
                 <ul className={menu ?"header_hidden" : "header_hidden idden"}>
                     <li><a href="" className="header_options" onClick={handleGoToLogin}>Sign In</a></li>
                     <li><a href="" className="header_options" onClick={handleGoToRegister}>Sign Up</a></li>
-                    <li><a href="" className="header_options" onClick={handleGoToRememberPassword}>Remember Password</a></li>
                 </ul>
    
             </nav>

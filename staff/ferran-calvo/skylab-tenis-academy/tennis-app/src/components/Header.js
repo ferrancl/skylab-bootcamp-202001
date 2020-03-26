@@ -1,7 +1,6 @@
 import logo from './logo.png'
 import React, { useState, useEffect, useContext } from 'react'
 import './Header.sass'
-import './Login.sass'
 import './Form.sass'
 import { retrieveUser, isLoggedIn, logout } from '../logic'
 import { Context } from './ContextProvider'
@@ -65,15 +64,12 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
                     <li><a href=""><img src={logo} className="header_icon" alt="" /></a></li>
                     <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" onClick={handleMenu} /></li>
                 </ul>
-                {/* <a href=""><img src={logo} className="header_icon" alt=""/></a>
-                <span className="header_name">Hello, {name}!</span> */}
                 <ul className={menu ?"header_hidden" : "header_hidden idden" }>
                     <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
                     <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>
                     <a href="" className="header_options" onClick={handleGoToUpdate}>Edit Profile</a>
                     <a href="" className="header_options" onClick={handleLogout}>Logout</a>
                 </ul>
-
             </nav>
         </header>
     </>

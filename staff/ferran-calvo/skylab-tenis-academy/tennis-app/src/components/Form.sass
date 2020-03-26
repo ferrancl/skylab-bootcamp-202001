@@ -1,10 +1,136 @@
+.bookings
+    display: flex
+    flex-direction: column
+    align-items: center
 .form
     display: flex
     flex-direction: column
     justify-content: center
-    height: 100vh
     align-items: center
-    font-family: 'Roboto', sans-serif
+
+    &_title
+        font-family: 'Baloo Chettan 2', cursive
+        font-size: 2.2rem
+        margin-top: 6rem
+        color: rgba(105, 105, 105, 0.99)
+        display: flex
+
+    &_titleR
+        font-family: 'Baloo Chettan 2', cursive
+        font-size: 2.2rem
+        margin-bottom: 2rem
+        color: rgba(105, 105, 105, 0.99)
+        display: flex
+
+
+    &_anchor
+        margin-top: 2rem
+        font-size: 1rem
+        font-family: 'Baloo Chettan 2', cursive
+  
+    &_nobookings
+        display: flex
+        font-family: 'Baloo Chettan 2', cursive
+        font-size: 1.5rem
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-top: 6rem
+        border-radius: 1rem
+        border: 2px solid
+        width: 60%
+        padding: 0.5rem
+        background-color:  #ffffff
+
+
+    &_mybooks
+        margin-top: 1rem
+
+    &_register
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-top: 7rem
+    
+    &_remember
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-top: 9rem
+
+    &_book
+        display: flex
+        font-family: 'Baloo Chettan 2', cursive
+        font-size: 1.5rem
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-top: 5rem
+        border-radius: 1rem
+        border: 2px solid
+        width: 55%
+
+    &_input
+        align-content: center
+        font-size: 1rem
+        font-family: 'Baloo Chettan 2', cursive
+        border-radius: 0.75rem
+        width: 70%
+        margin-bottom: 2rem
+        padding: 0.5rem
+        outline: none
+        border: 1px solid rgba(105, 105, 105, 0.99)
+
+    &_button
+        margin: 1rem
+        display: inline-block
+        font-family: 'Baloo Chettan 2', cursive
+        padding: 0.8rem 1.2rem
+        font-size: 1.1rem
+        cursor: pointer
+        text-align: center
+        text-decoration: none
+        outline: none
+        color: #fff
+        background-color: #9c4600
+        border: none
+        border-radius: 15px
+        box-shadow: 0 9px #999
+
+    &_button:hover
+        background-color: #9b6940
+
+    &_button:active 
+        background-color: #9b6940
+        box-shadow: 0 5px #666
+        transform: translateY(4px)
+
+    &_cancel
+        margin: 1rem
+        display: inline-block
+        font-family: 'Baloo Chettan 2', cursive
+        padding: 0.8rem 1.2rem
+        font-size: 1rem
+        cursor: pointer
+        text-align: center
+        text-decoration: none
+        outline: none
+        color: #fff
+        background-color: #e01313
+        border: none
+        border-radius: 15px
+        box-shadow: 0 9px #999
+
+    &_cancel:hover
+        background-color: #9b4040
+
+    &_cancel:active 
+        background-color: #9b4040
+        box-shadow: 0 5px #666
+        transform: translateY(4px)
+
 
 .book
     display: flex
@@ -13,46 +139,65 @@
     align-items: center
 
 .select
-    background-color: #fff
+    background-color: #ffffff
+    //font-family: 'Raleway', sans-serif
+    //font-family: 'Ubuntu', sans-serif
+    font-family: 'Baloo Chettan 2', cursive
     padding: 0.2rem
-    border-radius: 2rem
+    border-radius: 0.5rem
     text-align: center
     text-align-last: center
     outline: none
-    width: 90%
+    width: 75%
     margin: 0.25rem 0
 
 .date
     font-size: 1.2rem
-    color: #fff
+    font-family: 'Baloo Chettan 2', cursive
     margin: 0.5rem 0
 
 .legend
     display: flex
-    color: white
+    font-family: 'Baloo Chettan 2', cursive
+    font-size: 0.8rem
     &_court
         display: flex
         align-items: center
     &_clay
-        height: 1rem
-        width: 1rem
+        height: 0.8rem
+        width: 0.8rem
         background-color:  #a84c00
-        margin: 0.5rem
+        border: 1px solid  #471e02
+        box-shadow: 0 4px #999
+        margin: 1rem 0.2rem 1rem 0.8rem
+        border-radius: 50%
     &_hard
-        height: 1rem
-        width: 1rem
-        background-color: #3200a8
-        margin: 0.5rem
+        height: 0.8rem
+        width: 0.8rem
+        background-color: #601cff
+        border: 1px solid  #170247
+        margin: 1rem 0.2rem 1rem 0.8rem
+        border-radius: 50%
+        box-shadow: 0 4px #999
+
     &_available
-        height: 1rem
-        width: 1rem
-        background-color:  #73ff00
-        margin: 0.5rem
+        height: 0.8rem
+        width: 0.8rem
+        background-color:  #15ff00
+        border: 1px solid  #005804
+        box-shadow: 0 4px #999
+        margin: 1rem 0.2rem 1rem 0.8rem
+        border-radius: 50%
+
     &_reserved
-        height: 1rem
-        width: 1rem
+        height: 0.8rem
+        width: 0.8rem
         background-color: #ff0000
-        margin: 0.5rem
+        border: 1px solid #a10000
+        box-shadow: 0 4px #999
+        margin: 1rem 0.2rem 1rem 0.8rem
+        border-radius: 50%
+
 
 .search
     margin-top: 8vh
@@ -62,77 +207,7 @@
         
 
 
-.form_input
-    font-size: 1rem
-    border-radius: 2rem
-    width: 70%
-    padding: 0.5rem
-    outline: none
 
-.form_register
-    height: 50vh
-    width: 100%
-    display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: space-evenly
-    
-.form_login
-    height: 30vh
-    width: 100%
-    display: flex
-    flex-direction: column
-    align-items: center
-    justify-content: space-evenly
-
-.form_button
-    
-    
-    border: 1px solid 
-    background-color: #ffffff
-    border-radius: 2rem
-    padding: 0.75rem 1.5rem
-    color:  #000000
-    font-size: 1rem
-    margin-top: 2rem
-
-    
-    
-    text-align: center
-
-.form_goback
-    
-
-    border: 2px solid 
-    background-color: #000000
-    border-radius: 50%
-    height: 2rem
-    color:  #ffffff
-    font-size: 1rem
-    
-    font-family: Franklin Gothic Medium
-    width: 35%
-    text-align: center
-
-.form_myBookings
-    display: flex
-    flex-direction: row
-    font-size: 15px
-
-.form_cancel
-    margin: auto
-    margin-top: 2%
-    margin-bottom: 10%
-    border: 2px solid 
-    background-color: #ff2020
-    border-radius: 50%
-    height: 50px
-    color:  #ffffff
-    font-size: 25px
-    font-weight: 700
-    font-family: Franklin Gothic Medium
-    width: 35%
-    text-align: center
 
 .hidden
     display: none

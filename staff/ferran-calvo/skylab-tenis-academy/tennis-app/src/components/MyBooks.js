@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './Header.sass'
-import './Login.sass'
 import './Form.sass'
 import { retrieveUserBooks, isLoggedIn} from '../logic'
 import { Context } from './ContextProvider'
@@ -39,6 +38,8 @@ export default withRouter(function ({onSubmit, error, onMount, history }) {
     }
 
     return <>
-        {myBooks.map(book => <form className="form" onSubmit={handleSubmit}><label>Date: {book.date.split('T')[0]}, Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h, Court: {book.court.number}</label><input type="hidden" name = "book" id="book" value={book.id}/><button type="submit">CANCEL</button></form>)}
+        <div className="bookings">
+            {myBooks.length>0? myBooks.map(book => <form className="form_book" onSubmit={handleSubmit}><p className="form_mybooks">Date: {book.day}</p><p>Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h</p><p>Court: {book.court.number}</p><input type="hidden" name = "book" id="book" value={book.id}/><button className="form_cancel" type="submit">CANCEL</button></form>): <p className="form_nobookings">No bookings pending :(</p>}
+        </div>
     </>
 })

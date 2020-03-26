@@ -18,8 +18,8 @@ export default function ({ onSubmit, error, onMount }) {
     }
 
     return <>
-        <form className="form" onSubmit={handleSubmit}>
-            
+        <form className="form_remember" onSubmit={handleSubmit}>
+            <h3 type="text" className="form_titleR">Remember Password</h3>
             <input type="text" className="form_input" id="email" name="email" placeholder="Email Address"/>
             <button type="submit" className="form_button">SEND</button>
             {error && <Feedback message={error} level="warn" />}
