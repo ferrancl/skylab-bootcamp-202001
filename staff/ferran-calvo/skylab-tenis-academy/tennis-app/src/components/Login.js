@@ -28,7 +28,6 @@ export default function ({ onSubmit, onGoToRememberPassword, error, onMount }) {
 
     return <>
         <form className="form" onSubmit={handleSubmit}>
-            <h3 className="form_title">LOGIN</h3>
             <FontAwesomeIcon className="login_icon" icon={faUser} size="5x"  color="rgba(105, 105, 105, 0.99)"/>
             <input type="text" className="form_input" id="userMember" name="userMember" placeholder="Member Number/Email" />
             <input type="password" className="form_input" id="password" name="password" placeholder="Password" />

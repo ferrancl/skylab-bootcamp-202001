@@ -23,13 +23,11 @@ export default withRouter(function ({ onSubmit, error, onMount }) {
 
 
     return <>
-        <form className="form" onSubmit={handleSubmit}>
-            <div className="form_register">
-                <input type="text" className="form_input" id="email" name="email" placeholder="New email" />
-
-                <input type="password" className="form_input" id="oldPassword" name="oldPassword" placeholder="Old Password" />
-                <input type="password" className="form_input" id="password" name="password" placeholder="New Password" />
-            </div>
+        <form className="form_register" onSubmit={handleSubmit}>
+            <h3 className="form_titleR">EDIT PROFILE</h3>
+            <input type="text" className="form_input" id="email" name="email" placeholder="New email" />
+            <input type="password" className="form_input" id="oldPassword" name="oldPassword" placeholder="Old Password" />
+            <input type="password" className="form_input" id="password" name="password" placeholder="New Password" />
             <button type="submit" className="form_button">UPDATE</button>
             {error && <Feedback message={error} level="warn" />}
         </form>
