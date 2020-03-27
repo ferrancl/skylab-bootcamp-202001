@@ -26,6 +26,14 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     if (date < limitTime) {
         throw new NotAllowedError('Wrong data')
     }
+    if (user3 && !user4){
+        throw new NotAllowedError('Please enter the user member number of the 4th player')
+    }
+
+    if (!user3 && user4){
+        throw new NotAllowedError('Please enter the user member number of the 3rd player')
+    }
+    debugger
 
     let usersArray = []
     let booking
@@ -46,12 +54,12 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             return User.findOne({ memberNumber: user3 })
         })
         .then(user3Found =>{
-            if (!user3Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            if (user3 && !user3Found) throw new NotFoundError(`user with member number ${user3} not found`)
             user3_ = user3Found
             return User.findOne({ memberNumber: user4 })
         })
         .then(user4Found => {
-            if (!user4Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            if (user4 && !user4Found) throw new NotFoundError(`user with member number ${user3} not found`)
             user4_ = user4Found
             return Court.findOne({ number })   
         })
