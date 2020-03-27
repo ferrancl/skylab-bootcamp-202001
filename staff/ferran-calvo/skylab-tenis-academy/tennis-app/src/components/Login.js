@@ -32,8 +32,8 @@ export default function ({ onSubmit, onGoToRememberPassword, error, onMount }) {
             <input type="text" className="form_input" id="userMember" name="userMember" placeholder="Member Number/Email" />
             <input type="password" className="form_input" id="password" name="password" placeholder="Password" />
             <button type="submit" className="form_button">SIGN IN</button>
-            <a href="" className="form_anchor" onClick={handleGoToRememberPassword}>FORGOT YOUR PASSWORD?</a>
             {error && <Feedback message={error} level="warn" />}
+            <a href="" className="form_anchor" onClick={handleGoToRememberPassword}>FORGOT YOUR PASSWORD?</a>
         </form>
     </>
 }

@@ -31,7 +31,7 @@ export default function ({ onGoToLogin, onGoToRegister, onGoToRememberPassword }
             <nav className="header_nav">
                 <ul className="header_ul">
                 <li><a href=""><img src={logo} className="header_icon" alt=""/></a></li>
-                <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" onClick={handleMenu} /></li>
+                <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" color="white" onClick={handleMenu} /></li>
                 </ul>
                 <ul className={menu ?"header_hidden" : "header_hidden hidden"}>
                     <li><a href="" className="header_options" onClick={handleGoToLogin}>Sign in</a></li>

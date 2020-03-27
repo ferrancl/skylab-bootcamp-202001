@@ -5,12 +5,15 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export default function (name, surname, email, password) {
+export default function (name, surname, email, password, confirmPassword) {
     validate.string(name, 'name')
     validate.string(surname, 'surname')
     validate.string(email, 'email')
     validate.email(email)
     validate.string(password, 'password')
+    validate.string(confirmPassword, 'confirmPassword')
+
+    if (password !== confirmPassword) throw new NotAllowedError ("The Confirm Password does not match")
 
     return (async () => {
         const response = await fetch(`${API_URL}/users`, {

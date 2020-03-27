@@ -3,11 +3,9 @@ import context from './context'
 import { validate } from 'tennis-utils'
 require('dotenv').config()
 
-//const { env: { REACT_APP_API_URL: API_URL } } = process
-
 const API_URL = process.env.REACT_APP_API_URL
 
-export default (function (email, oldPassword, password) {
+export default (function (email, oldPassword, password, confirmPassword) {
     if (email){
         validate.string(email, 'email')
         validate.email(email)
@@ -15,7 +13,10 @@ export default (function (email, oldPassword, password) {
     if (oldPassword){
         validate.string(oldPassword, 'oldPassword')
         validate.string(password, 'password')
+        validate.string(confirmPassword, 'confirmPassword')
     }
+    if (password!== confirmPassword) throw new NotAllowedError("The Confirm Password confirmation does not match")
+
     return (async () => {
         const response = await fetch(`${API_URL}/users/update`, {
             method: 'POST',

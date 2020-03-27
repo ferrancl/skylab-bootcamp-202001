@@ -36,21 +36,23 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     let user1_
 
     return User.findOne({ memberNumber: user2 })
-        .then(user2 => {
-            if (!user2) throw new NotFoundError(`user with member number ${user2} not found`)
-            user2_ = user2
+        .then(user2Found => {
+            if (!user2Found) throw new NotFoundError(`user with member number ${user2} not found`)
+            user2_ = user2Found
             return User.findById(idUser1)
         })
         .then(user => {
             user1_ = user
             return User.findOne({ memberNumber: user3 })
         })
-        .then(user3 =>{
-            user3_ = user3
+        .then(user3Found =>{
+            if (!user3Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            user3_ = user3Found
             return User.findOne({ memberNumber: user4 })
         })
-        .then(user4 => {
-            user4_ = user4
+        .then(user4Found => {
+            if (!user4Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            user4_ = user4Found
             return Court.findOne({ number })   
         })
         .then(court => {
@@ -58,15 +60,13 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             return Booking.findOne({ court: court_.id, date })
         })
         .then(bookExists => {
-            if (bookExists) throw new NotFoundError(`court ${number} already booked for ${date}`)
+            if (bookExists) throw new NotFoundError(`Court ${number} already booked for ${date}`)
             return Booking.findOne({users: idUser1, day: dateWithoutHour})
-            //return Booking.findOne({users: idUser1, day: dateWithoutHour})
         })
         .then(book => {
             if (book) {
-                throw new NotAllowedError (`This user has already booked a court for ${dateWithoutHour}`)
+                throw new NotAllowedError (`One of the users has already booked a court for ${dateWithoutHour}`)
             }
-            debugger
             if (user3 && user4){
                 booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_, date, day: dateWithoutHour, status: "PRE" })
                 user3_.bookings.push(booking.id)
@@ -96,7 +96,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
                     to: `${user.email}`,
                     subject: 'Tennis court booked succesfully',
                     text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.`
-                }
+              }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
                         console.log(error);

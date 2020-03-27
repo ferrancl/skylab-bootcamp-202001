@@ -4,7 +4,6 @@ const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 const bcrypt = require('bcryptjs')
 
 module.exports = (userId, body) => {
-    debugger
     const {email, oldPassword, password} =  body
 
     let email_
@@ -18,6 +17,7 @@ module.exports = (userId, body) => {
     if (oldPassword && password){
         validate.string(oldPassword, 'oldPassword')
         validate.string(password, 'password')
+        validate.string(confirmPassword, 'confirmPassword')
     }
 
     return User.findOne({email})
@@ -41,7 +41,7 @@ module.exports = (userId, body) => {
         .then((correct) => {
             if (correct && oldPassword){
                 return bcrypt.hash(password, 10)
-                
+
             }if (oldPassword){
                 throw new NotAllowedError('Old password incorrect')
             }else{

@@ -32,9 +32,9 @@ export default withRouter(function ({ history }) {
     // }
   }, [])
 
-  async function handleRegister(name, surname, email, password) {
+  async function handleRegister(name, surname, email, password, confirmPassword) {
     try {
-      await registerUser(name, surname, email, password)
+      await registerUser(name, surname, email, password, confirmPassword)
 
       history.push('/login')
     } catch ({ message }) {
@@ -62,9 +62,9 @@ export default withRouter(function ({ history }) {
     }
   }
 
-  async function handleUpdateUser(email, oldPassword, password) {
+  async function handleUpdateUser(email, oldPassword, password, confirmPassword) {
     try {
-      await updateUser(email, oldPassword, password)
+      await updateUser(email, oldPassword, password, confirmPassword)
 
       history.push('/search')
     } catch ({ message }) {
@@ -157,8 +157,7 @@ export default withRouter(function ({ history }) {
   const { page, error } = state
 
   return <div className="app">
-    <Page name={page}>
-      
+    <Page name={page}> 
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />
       <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />

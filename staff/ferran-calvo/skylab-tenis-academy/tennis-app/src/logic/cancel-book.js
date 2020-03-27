@@ -3,8 +3,6 @@ import context from './context'
 import { validate } from 'tennis-utils'
 require('dotenv').config()
 
-//const { env: { REACT_APP_API_URL: API_URL } } = process
-
 const API_URL = process.env.REACT_APP_API_URL
 
 export default (function (id) {

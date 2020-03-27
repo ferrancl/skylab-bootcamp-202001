@@ -3,16 +3,12 @@ import { NotAllowedError } from 'tennis-errors'
 import context from './context'
 require('dotenv').config()
 
-//const { env: { REACT_APP_API_URL: API_URL } } = process
-
 const API_URL = process.env.REACT_APP_API_URL
 
 export default (function (userMember, password) {
     validate.string(userMember, 'email')
-    // validate.email(email)
     validate.string(password, 'password')
 
-    // ${API_URL}
     return (async () => {
         const response = await fetch(`${API_URL}/users/auth`, {
             method: 'POST',

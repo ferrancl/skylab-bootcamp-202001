@@ -14,10 +14,11 @@ export default function ({ onSubmit, error, onMount }) {
             name: { value: name },
             surname: { value: surname },
             email: { value: email },
-            password: { value: password }
+            password: { value: password },
+            confirmPassword: { value: confirmPassword }
         } } = event
 
-        onSubmit(name, surname, email, password)
+        onSubmit(name, surname, email, password, confirmPassword)
     }
 
     return <>
@@ -26,7 +27,8 @@ export default function ({ onSubmit, error, onMount }) {
                 <input type="text" className="form_input" id="name" name="name" placeholder="Name" />
                 <input type="text" className="form_input" id="surname" name="surname" placeholder="Surname" />
                 <input type="text" className="form_input" id="email" name="email" placeholder="Email" />
-                <input type="password" className="form_input" id="confirm-password" name="password" placeholder="Password" />
+                <input type="password" className="form_input" id="password" name="password" placeholder="Password" />
+                <input type="password" className="form_input" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"/>
                 <button type="submit" className="form_button">SIGN UP</button>
                 {error && <Feedback message={error} level="warn" />}
             </form>

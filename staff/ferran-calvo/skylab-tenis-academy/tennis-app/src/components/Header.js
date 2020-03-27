@@ -62,7 +62,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
             <nav className="header_nav">
                 <ul className="header_ul">
                     <li><a href=""><img src={logo} className="header_icon" alt="" /></a></li>
-                    <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" onClick={handleMenu} /></li>
+                    <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" color="#ff1414" onClick={handleMenu} /></li>
                 </ul>
                 <ul className={menu ?"header_hidden" : "header_hidden hidden" }>
                     <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
