@@ -31,12 +31,12 @@ module.exports = (name, surname, email, password) => {
             transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'skylab.tennis.academy@gmail.com',
-                    pass: 'Skylab1234'
+                    user: 'info.break.point.club@gmail.com',
+                    pass: 'breakpoint123'
                 }
             })
                 mailOptions = {
-                    from: 'skylab.tennis.academy@gmail.com',
+                    from: 'Break Point',
                     to: `${email}`,
                     subject: 'Welcome to Break Point Club',
                     text: `Dear ${name}, \n\nWelcome to our tennis club! You have registered sucesfully. \n\nYour member number is: ${memberNumber_}. You can login in our membership area using your email address or you member number. Let's play!`

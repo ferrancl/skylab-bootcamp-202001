@@ -26,12 +26,12 @@ module.exports = (email) => {
                                     transporter = nodemailer.createTransport({
                                         service: 'gmail',
                                         auth: {
-                                            user: 'skylab.tennis.academy@gmail.com',
-                                            pass: 'Skylab1234'
+                                            user: 'info.break.point.club@gmail.com',
+                                            pass: 'breakpoint123'
                                         }
                                     })
                                     mailOptions = {
-                                        from: 'skylab.tennis.academy@gmail.com',
+                                        from: 'Break Point',
                                         to: `${email}`,
                                         subject: 'Password for online access',
                                         text: `You have asked for a new password. Your new password is: ${password_}. You can change it in settings`

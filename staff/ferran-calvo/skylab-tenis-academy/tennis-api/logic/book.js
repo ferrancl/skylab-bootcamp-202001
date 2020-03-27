@@ -33,7 +33,6 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     if (!user3 && user4){
         throw new NotAllowedError('Please enter the user member number of the 3rd player')
     }
-    debugger
 
     let usersArray = []
     let booking
@@ -51,6 +50,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(user => {
             user1_ = user
+            usersArray.push(user1_, user2_)
             return User.findOne({ memberNumber: user3 })
         })
         .then(user3Found =>{
@@ -61,6 +61,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         .then(user4Found => {
             if (user4 && !user4Found) throw new NotFoundError(`user with member number ${user3} not found`)
             user4_ = user4Found
+            if (user4) usersArray.push(user3_, user4_)
             return Court.findOne({ number })   
         })
         .then(court => {
@@ -69,17 +70,41 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(bookExists => {
             if (bookExists) throw new NotFoundError(`Court ${number} already booked for ${date}`)
-            return Booking.findOne({users: idUser1, day: dateWithoutHour})
+            // return usersArray.forEach(async user => await Booking.findOne({users: user.id, day: dateWithoutHour}))
+            return Booking.find({users: idUser1, day: dateWithoutHour})
         })
-        .then(book => {
-            if (book) {
-                throw new NotAllowedError (`One of the users has already booked a court for ${dateWithoutHour}`)
+        .then(book=> {
+            if (book != undefined){
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length>1) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
+            }
+            return Booking.find({users: user2_.id, day: dateWithoutHour})
+        })
+        .then(book =>{
+            if (book != undefined){
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user2} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length>1) throw new NotAllowedError (`User with member number ${user2} has already booked 2 courts for ${dateWithoutHour}`)      
+            }
+            if (user3) return Booking.find({users: user3_.id, day: dateWithoutHour})
+            return
+        })
+        .then(book =>{
+            if (book != undefined){
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user3} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length>1) throw new NotAllowedError (`User with member number ${user3} has already booked 2 courts for ${dateWithoutHour}`)      
+            }
+            if(user4) return Booking.find({users: user4_.id, day: dateWithoutHour})
+            return
+        })
+        .then(book =>{
+            if (book != undefined){
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user4} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length>1) throw new NotAllowedError (`User with member number ${user4} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (user3 && user4){
                 booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_, date, day: dateWithoutHour, status: "PRE" })
                 user3_.bookings.push(booking.id)
                 user4_.bookings.push(booking.id)
-                usersArray.push(user1_, user2_, user3_, user4_)
                 Promise.all([user3_.save(), user4_.save()])
             }
             else{
@@ -94,16 +119,16 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'skylab.tennis.academy@gmail.com',
-                    pass: 'Skylab1234'
+                    user: 'info.break.point.club@gmail.com',
+                    pass: 'breakpoint123'
                 }
             })
             usersArray.forEach(user =>{
                 mailOptions = {
-                    from: 'skylab.tennis.academy@gmail.com',
+                    from: 'Break Point',
                     to: `${user.email}`,
                     subject: 'Tennis court booked succesfully',
-                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.`
+                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
               }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {

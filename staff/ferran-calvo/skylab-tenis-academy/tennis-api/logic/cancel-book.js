@@ -34,13 +34,13 @@ module.exports = (userId, bookingId) => {
             transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'skylab.tennis.academy@gmail.com',
-                    pass: 'Skylab1234'
+                    user: 'info.break.point.club@gmail.com',
+                    pass: 'breakpoint123'
                 }
             })
             usersArray_.forEach(user =>{
                 mailOptions = {
-                    from: 'skylab.tennis.academy@gmail.com',
+                    from: 'Break Point',
                     to: `${user.email}`,
                     subject: 'Booking cancelled',
                     text: `Your booking for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. `
