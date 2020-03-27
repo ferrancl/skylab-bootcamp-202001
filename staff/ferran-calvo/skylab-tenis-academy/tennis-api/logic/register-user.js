@@ -39,7 +39,7 @@ module.exports = (name, surname, email, password) => {
                     from: 'Break Point',
                     to: `${email}`,
                     subject: 'Welcome to Break Point Club',
-                    text: `Dear ${name}, \n\nWelcome to our tennis club! You have registered sucesfully. \n\nYour member number is: ${memberNumber_}. You can login in our membership area using your email address or you member number. Let's play!`
+                    text: `Dear ${name}, \n\nWelcome to our tennis club! You have registered sucesfully. \n\nYour member number is: ${memberNumber_}. You can login in our membership area using your email address or you member number. Let's play!\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {

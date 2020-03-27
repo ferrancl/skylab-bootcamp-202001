@@ -11,7 +11,6 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
 
     validate.string(number, 'number')
 
-    //Checks if the booking is out of the available schedule
     date = new Date(date)
     date.setHours(date.getHours()+1)
     validate.type(date, 'date', Date)
@@ -70,7 +69,6 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(bookExists => {
             if (bookExists) throw new NotFoundError(`Court ${number} already booked for ${date}`)
-            // return usersArray.forEach(async user => await Booking.findOne({users: user.id, day: dateWithoutHour}))
             return Booking.find({users: idUser1, day: dateWithoutHour})
         })
         .then(book=> {

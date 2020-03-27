@@ -53,6 +53,11 @@ export default withRouter(function ({ onSubmit, error, onMount, results, bookedC
                     <span className="">Reserved</span>
                 </div>
             </div>
+            <div className="form_notes">
+                <p className="notes"><sup>*</sup>Bookings only allowed for the next 2 days and 1h/booking</p>
+                <p className="notes"><sup>**</sup>Only 2 bookings/day allowed per member</p>
+                <p className="notes"><sup>***</sup>Not allowed 2 bookings at the same time per member</p>
+            </div>
             <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
             <h2 className="date">{searchDay}</h2>
             <select  className="select" name="day" id="day" form="day" onChange={handleSubmit}>

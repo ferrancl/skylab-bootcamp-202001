@@ -1,9 +1,4 @@
 .mybooks_background
-    // background-image: linear-gradient(to left, white , gray)
-    // background: url('court.png') no-repeat center center
-    // background: url('calendario.png') no-repeat center center
-    // max-width: 100%
-    // height: auto
     height: 107vh
 
 .bookings
@@ -20,6 +15,9 @@
     justify-content: center
     align-items: center
 
+    &_notes
+        font-family: 'Baloo Chettan 2', cursive
+        font-size: 0.8rem
 
     &_title
         font-family: 'Baloo Chettan 2', cursive
@@ -29,7 +27,6 @@
         border: 2px solid
         padding: 0.3rem
         background-color: rgba(255, 255, 255, 0.99) 
-        //background-color: rgba(105, 105, 105, 0.99) 
         box-shadow: 0 4px #999
 
     &_titleR
@@ -98,7 +95,7 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        margin-top: 6rem
+        margin-top: 4rem
 
     &_book
         display: flex
@@ -142,10 +139,34 @@
         box-shadow: 0 9px #999
 
     &_button:hover
-        background-color: #494949
+        background-color: #ff5d5d
 
     &_button:active 
-        background-color: #494949
+        background-color: #ff5d5d
+        box-shadow: 0 5px #666
+        transform: translateY(4px)
+
+    &_clay
+        margin: 1rem
+        display: inline-block
+        font-family: 'Baloo Chettan 2', cursive
+        padding: 0.8rem 1.2rem
+        font-size: 1.1rem
+        cursor: pointer
+        text-align: center
+        text-decoration: none
+        outline: none
+        color: #fff
+        background-color: #8b4300
+        border: none
+        border-radius: 15px
+        box-shadow: 0 9px #999
+
+    &_clay:hover
+        background-color: #a76b33
+
+    &_clay:active 
+        background-color: #a76b33
         box-shadow: 0 5px #666
         transform: translateY(4px)
     &_hard
@@ -165,10 +186,10 @@
         box-shadow: 0 9px #999
 
     &_hard:hover
-        background-color: #9b6940
+        background-color: #9a6fff
 
     &_hard:active 
-        background-color: #9b6940
+        background-color: #9a6fff
         box-shadow: 0 5px #666
         transform: translateY(4px)
 

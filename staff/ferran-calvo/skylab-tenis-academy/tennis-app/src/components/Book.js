@@ -76,7 +76,7 @@ export default function ({onSubmit, searchDay, error }) {
                     <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user3" name="user3" placeholder="Member Number Player 3"/>
 
                     <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user4" name="user4" placeholder="Member Number Player 4"/>
-                    <button className={surface==="clay"? "form_button": "form_hard"} type="submit" name="submit" value="submit">BOOK</button>
+                    <button className={surface==="clay"? "form_clay": "form_hard"} type="submit" name="submit" value="submit">BOOK</button>
             </form>
             {error && <Feedback message={error} level="warn" />}
         </>     

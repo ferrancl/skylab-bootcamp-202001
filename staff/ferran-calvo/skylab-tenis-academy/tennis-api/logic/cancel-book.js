@@ -43,7 +43,7 @@ module.exports = (userId, bookingId) => {
                     from: 'Break Point',
                     to: `${user.email}`,
                     subject: 'Booking cancelled',
-                    text: `Your booking for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. `
+                    text: `Your booking for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. \n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {

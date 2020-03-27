@@ -34,7 +34,7 @@ module.exports = (email) => {
                                         from: 'Break Point',
                                         to: `${email}`,
                                         subject: 'Password for online access',
-                                        text: `You have asked for a new password. Your new password is: ${password_}. You can change it in settings`
+                                        text: `You have asked for a new password. Your new password is: ${password_}. You can change it in settings. \n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
                                     }
                                     transporter.sendMail(mailOptions, function (error, info) {
                                         if (error) {
