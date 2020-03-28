@@ -10,6 +10,7 @@ import cancelBook from './cancel-book'
 import retrieveDayBooks from './retrieve-day-books'
 import book from './book'
 import retrieveWeather from './retrieve-weather'
+import quickSearch from './quick-search'
 
 export {
     registerUser,
@@ -23,5 +24,6 @@ export {
     cancelBook,
     retrieveDayBooks,
     book,
-    retrieveWeather
+    retrieveWeather,
+    quickSearch
 }

@@ -78,7 +78,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.delete('/users/bookings/:id', jwtVerifierMidWare, cancelBook)
 
-        app.get('/users/bookings-quick', [jwtVerifierMidWare, jsonBodyParser], quickSearch)
+        app.post('/users/bookings-quick', [jwtVerifierMidWare, jsonBodyParser], quickSearch)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

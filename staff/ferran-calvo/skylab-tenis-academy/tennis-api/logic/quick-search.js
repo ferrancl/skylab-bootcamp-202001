@@ -23,17 +23,17 @@ module.exports = (userId, hour) => {
                     for (let court of courts) {
                         let result = await Booking.find({court, date: dateWithoutMinutes})
                         if (result.length === 0){
-                            return [court, dateWithoutMinutes]
+                            return [court.number, dateWithoutMinutes]
                         } 
                     }
                     dateWithoutMinutes.setHours(dateWithoutMinutes.getHours()+1)
                 }
-                return "No  bookings available for today"
+                throw new Error("No bookings availables for today")
             }
             return quickBook()
         })
         .then(book => {
-            console.log(book)
+            book[1] = book[1].getMonth() + 1 +  "/" + (book[1].getDate())+"/" + (book[1].getFullYear())+ " " + (book[1].getHours()-1)+":00"
             return book
         })
 }

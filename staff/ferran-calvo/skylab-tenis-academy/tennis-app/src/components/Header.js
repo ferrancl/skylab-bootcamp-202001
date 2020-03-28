@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGoToSearch }) {
+export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoToMyBooks, onGoToSearch }) {
     const [, setState] = useContext(Context)
     const [name, setName] = useState()
     const[menu, setMenu] = useState(false)
@@ -46,6 +46,12 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
         onGoToMyBooks()
     }
 
+    function handleGoToQuick(event) {
+        event.preventDefault()
+        setMenu(false)
+        onGoToQuick()
+    }
+
     function handleGoToSearch(event) {
         event.preventDefault()
         setMenu(false)
@@ -66,6 +72,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToMyBooks, onGo
                 </ul>
                 <ul className={menu ?"header_hidden" : "header_hidden hidden" }>
                     <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
+                    <a href="" className="header_options" onClick={handleGoToQuick}>Quick Booking</a>
                     <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>
                     <a href="" className="header_options" onClick={handleGoToUpdate}>Edit Profile</a>
                     <a href="" className="header_options_logout" onClick={handleLogout}>Logout</a>

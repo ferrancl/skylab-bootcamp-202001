@@ -6,9 +6,10 @@ import Login from './Login'
 import Home from './Home'
 import Remember from './Remember'
 import Update from './Update'
+import Quick from './Quick'
 import MyBooks from './MyBooks'
 import Search from './Search'
-import { registerUser, login, logout, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather } from '../logic'
+import { registerUser, login, logout, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather, quickSearch } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import Header from './Header'
@@ -19,18 +20,14 @@ export default withRouter(function ({ history }) {
   const [results, setResults] = useState([])
   const [bookedCourts, setBookedCourts] = useState([])
   const [weather, setWeather] = useState()
+  const [quickBook, setQuickBook] = useState(['',''])
+
 
 
   useEffect(() => {
-    // if (isLoggedIn()) {
       setState({ page: 'home' })
 
       history.push('/home')
-    // } else {
-    //   setState({ page: 'login' })
-
-    //   history.push('/login')
-    // }
   }, [])
 
   async function handleRegister(name, surname, email, password, confirmPassword) {
@@ -84,6 +81,17 @@ export default withRouter(function ({ history }) {
     }
   }
 
+  async function handleQuick(hour){
+    try {
+      const quickBook = await quickSearch(hour)
+      setQuickBook(quickBook)
+
+    } catch ({ message }) {
+      setState({ error: message })
+    }
+  }
+
+
   async function handleBook(user2, user3, user4, number, date){
     try {
       await book(user2, user3, user4, number, date)
@@ -133,6 +141,10 @@ export default withRouter(function ({ history }) {
     history.push('./search')
   }
 
+  function handleGoToQuick(){
+    history.push('./quick-search')
+  }
+
   function handleGoToUpdate(){
     history.push('./update-user')
   }
@@ -171,13 +183,15 @@ export default withRouter(function ({ history }) {
   return <div className="app">
     <Page name={page}> 
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />
-      <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
+      <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToQuick={handleGoToQuick} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} onGoToRememberPassword={handleGoToRememberPassword} error={error} onMount={handleMountLogin} />} />
       <Route path="/home" render={() => <Home/> }/>
       <Route path="/remember-password" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Remember onSubmit={handleRemember} error={error} onMount={handleMountRemember} />} />
       <Route path="/update-user" render={() => isLoggedIn() ? <Update onSubmit={handleUpdateUser} error={error} onMount={handleMountUpdate} />: <Redirect to="/login" />} />
       <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
-      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} results={results} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather}/>: <Redirect to="/login" />} />    </Page>
+      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} results={results} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather}/>: <Redirect to="/login" />} />
+      <Route path="/quick-search" render={() => isLoggedIn() ? <Quick onSubmit={handleBook} onChange={handleQuick} quickBook={quickBook} error={error}/>: <Redirect to="/login" />} />
+    </Page>
   </div>
 })

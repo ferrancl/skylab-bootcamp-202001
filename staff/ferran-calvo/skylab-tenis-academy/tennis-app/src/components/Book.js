@@ -67,7 +67,7 @@ export default function ({onSubmit, searchDay, error }) {
                     </select>
                     
                     <select  className="select" name="players" id="players" form="book" onChange={handleChange}>
-                        <option disabled selected>Players</option>
+                        <option disabled selected>Number of players</option>
                         <option value="2">2</option>
                         <option value="4">4</option>
                     </select>
