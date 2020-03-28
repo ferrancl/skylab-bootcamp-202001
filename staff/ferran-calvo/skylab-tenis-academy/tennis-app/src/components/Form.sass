@@ -18,6 +18,7 @@
     &_notes
         font-family: 'Baloo Chettan 2', cursive
         font-size: 0.9rem
+        margin-bottom: 0.3rem
 
     &_title
         font-family: 'Baloo Chettan 2', cursive
@@ -236,14 +237,26 @@
 .select
     background-color: #ffffff
     font-family: 'Baloo Chettan 2', cursive
+    outline: none
+    width: 75%
+    margin: 0.25rem 0
     font-size: 1rem
     padding: 0.2rem
     border-radius: 0.5rem
     text-align: center
     text-align-last: center
-    outline: none
-    width: 75%
-    margin: 0.25rem 0
+
+    &_day
+        width: 70%
+        background-color: #ffffff
+        font-size: 1rem
+        padding: 0.2rem
+        border-radius: 0.5rem
+        text-align: center
+        text-align-last: center
+        margin-right: 1rem
+
+
 
 .date
     font-size: 1.2rem
@@ -301,3 +314,11 @@
         
 .input-players
     margin: 0.75rem 0
+
+.dayWeather
+    display: flex
+    align-items: center
+    height: 10vh
+.weather
+    max-height: 75px
+    max-width: 75px

@@ -11,7 +11,7 @@ export default function ({results, bookedCourts, searchDay, error}) {
             <thead>
                 <tr>
                     <th className=""></th>
-                    <th colspan='14' className="hour">HOUR</th>
+                    <th colspan='14' className="hour_title">HOUR</th>
                 </tr>
             </thead>
             <tbody>

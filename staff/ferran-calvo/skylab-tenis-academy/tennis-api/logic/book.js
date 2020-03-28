@@ -49,6 +49,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(user => {
             user1_ = user
+            if (user1_.memberNumber === user2_.memberNumber) throw new NotAllowedError("Please, check the member number introduced of player 2")
             usersArray.push(user1_, user2_)
             return User.findOne({ memberNumber: user3 })
         })
@@ -65,10 +66,12 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(court => {
             court_ = court
-            return Booking.findOne({ court: court_.id, date })
+            debugger
+            return Booking.findOne({ court: court_, date })
         })
         .then(bookExists => {
-            if (bookExists) throw new NotFoundError(`Court ${number} already booked for ${date}`)
+            debugger
+            if (bookExists) throw new NotFoundError(`Court ${number} already booked at this time`)
             return Booking.find({users: idUser1, day: dateWithoutHour})
         })
         .then(book=> {

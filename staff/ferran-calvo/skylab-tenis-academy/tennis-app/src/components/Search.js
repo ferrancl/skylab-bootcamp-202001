@@ -41,7 +41,7 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
                         hour = " 00:00:00"
                         month = day2.split('/')[0]
                         if (month.length ===1) month="0"+month
-                        date = day2.split('/')[2]+ "-"+ month+ "-" + currentDay.split('/')[1] + hour
+                        date = day2.split('/')[2]+ "-"+ month+ "-" + day2.split('/')[1] + hour
                         hour= " 12:00:00"     
                     }
                 }
@@ -100,7 +100,16 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
 
     return <>
         <div className="search">
-        <div className="legend">
+            <div className="dayWeather">
+            <select  className="select_day" name="day" id="day" form="day" onChange={handleSubmit}>
+                {/* <option disabled selected>Day</option> */}
+                {day.map(date => <option id="day" value={date}>{date}</option>)}
+            </select>
+                {/* <h2 className="date">{searchDay}</h2> */}
+                <img className="weather" src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
+            </div>
+            <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
+            <div className="legend">
                 <div className="legend_court">
                     <div className="legend_clay"></div>
                     <span className="">Clay Court</span>
@@ -123,13 +132,6 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
                 <p className="notes"><sup>**</sup> Only 2 bookings/day allowed per member</p>
                 <p className="notes"><sup>***</sup> Not allowed 2 bookings at the same time per member</p>
             </div>
-            <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
-            <h2 className="date">{searchDay}</h2>
-            <img src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
-            <select  className="select" name="day" id="day" form="day" onChange={handleSubmit}>
-                <option disabled selected>Day</option>
-                {day.map(date => <option id="day" value={date}>{date}</option>)}
-            </select>
             <Book onSubmit={handleBook} searchDay={searchDay} error={error} />
         </div>
     </>
