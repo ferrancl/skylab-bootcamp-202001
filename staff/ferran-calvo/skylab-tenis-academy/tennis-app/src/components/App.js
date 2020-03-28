@@ -8,7 +8,7 @@ import Remember from './Remember'
 import Update from './Update'
 import MyBooks from './MyBooks'
 import Search from './Search'
-import { registerUser, login, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather } from '../logic'
+import { registerUser, login, logout, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import Header from './Header'
@@ -67,7 +67,8 @@ export default withRouter(function ({ history }) {
     try {
       await updateUser(email, oldPassword, password, confirmPassword)
 
-      history.push('/search')
+      logout()
+      history.push('/login')
     } catch ({ message }) {
       setState({ error: message })
     }

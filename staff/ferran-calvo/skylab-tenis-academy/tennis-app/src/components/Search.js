@@ -13,7 +13,6 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
     
     useEffect(() => {
         let hour = " 12:00:00"
-        debugger
         let currentDay = new Date(Date.now())
         let day2 = new Date(currentDay)
         let day3 = new Date(currentDay)
@@ -63,7 +62,6 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let day1 = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear()
         day2.setDate(now.getDate() + 1)
         let hour = " 12:00:00"
-        debugger
         if (event.target.value === day1){
             let month = day1.split('/')[0]
             if (month.length ===1) month="0"+month

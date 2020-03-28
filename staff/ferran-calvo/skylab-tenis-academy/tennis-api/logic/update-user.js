@@ -17,7 +17,6 @@ module.exports = (userId, body) => {
     if (oldPassword && password){
         validate.string(oldPassword, 'oldPassword')
         validate.string(password, 'password')
-        validate.string(confirmPassword, 'confirmPassword')
     }
 
     return User.findOne({email})
