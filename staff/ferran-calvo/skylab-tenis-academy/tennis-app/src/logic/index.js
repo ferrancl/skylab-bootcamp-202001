@@ -9,6 +9,7 @@ import retrieveUserBooks from './retrieve-user-books'
 import cancelBook from './cancel-book'
 import retrieveDayBooks from './retrieve-day-books'
 import book from './book'
+import retrieveWeather from './retrieve-weather'
 
 export {
     registerUser,
@@ -21,5 +22,6 @@ export {
     retrieveUserBooks,
     cancelBook,
     retrieveDayBooks,
-    book
+    book,
+    retrieveWeather
 }
