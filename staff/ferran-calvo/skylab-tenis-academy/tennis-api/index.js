@@ -24,8 +24,8 @@ const {
     modifyBook,
     cancelBook,
     retrieveUserBooks,
-    retrieveDayBooks
-    // subscribeEvent
+    retrieveDayBooks,
+    quickSearch
 } = require('./routes/handlers')
 
 const jsonBodyParser = bodyParser.json()
@@ -78,8 +78,7 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
 
         app.delete('/users/bookings/:id', jwtVerifierMidWare, cancelBook)
 
-
-        // app.post('/users', jwtVerifierMidWare, book)
+        app.get('/users/bookings-quick', [jwtVerifierMidWare, jsonBodyParser], quickSearch)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 

@@ -10,7 +10,6 @@ module.exports = (userId, bookingId) => {
     let date_
     let court_
 
-    debugger
     return User.findOne({ _id: userId, bookings: bookingId })
         .then((correct) => {
             if (correct) {

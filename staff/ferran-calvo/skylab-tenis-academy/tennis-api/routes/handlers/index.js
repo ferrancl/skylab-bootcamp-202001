@@ -8,5 +8,6 @@ module.exports = {
     modifyBook: require('./modify-book'),
     cancelBook: require('./cancel-book'),
     retrieveUserBooks:  require('./retrieve-user-books'),
-    retrieveDayBooks: require('./retrieve-day-books')
+    retrieveDayBooks: require('./retrieve-day-books'),
+    quickSearch: require('./quick-search')
 }
