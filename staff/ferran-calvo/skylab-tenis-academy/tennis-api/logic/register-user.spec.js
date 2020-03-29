@@ -5,11 +5,13 @@ const { random } = Math
 const { mongoose, models: { User } } = require('tennis-data')
 const registerUser = require('./register-user')
 const bcrypt = require('bcryptjs')
+const { NotAllowedError } = require('tennis-errors')
+
 
 const { env: { TEST_MONGODB_URL } } = process
 
 describe('registerUser', () => {
-    let name, surname, email, password, memberNumber
+    let name, surname, email, password, memberNumber, email2
 
     before(() =>
         mongoose.connect(TEST_MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,6 +22,8 @@ describe('registerUser', () => {
         name = `name-${random()}`
         surname = `surname-${random()}`
         email = `email-${random()}@mail.com`
+        email2 = `email2-${random()}@mail.com`
+        memberNumber = `memberNumber-${random()}`
         password = `password-${random()}`
 
     })
@@ -44,6 +48,23 @@ describe('registerUser', () => {
             })
             .then(validPassword => expect(validPassword).to.be.true)
     )
+    it('should fail  when user already exists', () =>{
+        let email2 = `email-${random()}@mail.com`
+        User.create({ name, surname, memberNumber, email: email2, password })
+        .then(() => expect(() => registerUser(name, surname, email2, password)).to.throw(NotAllowedError, `User with email ${email2} already exists`))
+
+
+        // .then(()=> {
+        //     return registerUser(name, surname, email2, password)
+        // })
+        // .then(() => { throw new NotAllowedError})
+        // .catch(({ message }) => {
+        //     expect(message).not.to.be.undefined
+        //     expect(message).to.equal(`User with email ${email2} already exists`)
+        // })
+    })
+
+
 
     // TODO unhappy paths and other happies if exist
 

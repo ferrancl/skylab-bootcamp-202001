@@ -9,9 +9,10 @@ module.exports = (userId, bookingId) => {
     let usersArray_
     let date_
     let court_
+    debugger
 
     return User.findOne({ _id: userId, bookings: bookingId })
-        .then((correct) => {
+        .then(correct => {
             if (correct) {
                 return User.find({ bookings: bookingId })
             }
@@ -46,7 +47,7 @@ module.exports = (userId, bookingId) => {
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
                     if (error) {
-                        console.log(error);
+                        throw new Error ('Mail not sent')
                     } else {
                         console.log('Email sent: ' + info.response);
                     }

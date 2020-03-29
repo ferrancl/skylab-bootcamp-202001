@@ -28,14 +28,14 @@ module.exports = (userId, body) => {
             if (!email){
                 email_ = user.email
             }
-            if (user) {
-                if (oldPassword){
-                    return bcrypt.compare(oldPassword, user.password)
-                }
-                return
-            }else{
-                throw new NotFoundError('This user cannot change the data')
+            // if (user) {
+            if (oldPassword){
+                return bcrypt.compare(oldPassword, user.password)
             }
+            return
+            // }else{
+            //     throw new NotFoundError('This user cannot change the data')
+            // }
         })
         .then((correct) => {
             if (correct && oldPassword){

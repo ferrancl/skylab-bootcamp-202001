@@ -17,9 +17,9 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     const dateWithoutHour = date.toLocaleDateString()
 
     const now = new Date(Date.now())
-    if ((date.getHours()) < 8 || (date.getHours()) > 23) {
-        throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')
-    }
+    // if ((date.getHours()) < 8 || (date.getHours()) > 23) {
+    //     throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')
+    // }
 
     let limitTime = new Date(now)
     if (date < limitTime) {
@@ -66,11 +66,9 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(court => {
             court_ = court
-            debugger
             return Booking.findOne({ court: court_, date })
         })
         .then(bookExists => {
-            debugger
             if (bookExists) throw new NotFoundError(`Court ${number} already booked at this time`)
             return Booking.find({users: idUser1, day: dateWithoutHour})
         })

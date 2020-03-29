@@ -21,7 +21,6 @@ const {
     retrieveUser,
     updateUser,
     book,
-    modifyBook,
     cancelBook,
     retrieveUserBooks,
     retrieveDayBooks,
@@ -69,8 +68,6 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.post('/users/remember', jsonBodyParser, rememberPassword)
 
         app.post('/users/bookings', [jwtVerifierMidWare, jsonBodyParser], book)
-
-        app.patch('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], modifyBook)
 
         app.get('/users/bookings/:id', [jwtVerifierMidWare, jsonBodyParser], retrieveUserBooks)
 

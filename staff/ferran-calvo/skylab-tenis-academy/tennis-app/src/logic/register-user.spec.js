@@ -22,7 +22,7 @@ describe('registerUser', () => {
     })
 
     it('should succeed on correct user data', async () => {
-        const result = await registerUser(name, surname, email, password)
+        const result = await registerUser(name, surname, email, password, password)
 
         expect(result).toBeUndefined()
 

@@ -41,7 +41,7 @@ describe('update user', () => {
         )
 
         it('should succeed on correct and valid and right data', () =>
-            updateUser(newEmail, password, newPassword)
+            updateUser(newEmail, password, newPassword, newPassword)
                 .then(user => {
                     expect(user).toBeDefined()
                     return User.findById(_id)
@@ -59,7 +59,7 @@ describe('update user', () => {
         )
 
         it('should succeed on correct and valid and right data', () =>
-            updateUser(noEmail, password, newPassword)
+            updateUser(noEmail, password, newPassword, newPassword)
                 .then(user => {
                     expect(user).toBeDefined()
                     return User.findById(_id)
