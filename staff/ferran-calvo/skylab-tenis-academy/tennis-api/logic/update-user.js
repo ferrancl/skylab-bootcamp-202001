@@ -21,7 +21,7 @@ module.exports = (userId, body) => {
 
     return User.findOne({email})
         .then(incorrect =>{
-            if (incorrect) throw new NotAllowedError('This email is already in use.')
+            if (incorrect) throw new NotAllowedError('This email is already in use')
             return User.findById(userId)
         })
         .then(user => {

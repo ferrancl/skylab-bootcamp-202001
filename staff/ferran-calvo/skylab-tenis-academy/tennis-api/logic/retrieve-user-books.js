@@ -8,7 +8,7 @@ module.exports = id => {
     return Booking.find({ users: id, date: {$gt: Date.now()}}).sort({ date: 1 })
         .lean()
         .then(books => {
-            if (!books) throw new NotFoundError(`No books of this user`)
+            // if (!books) throw new NotFoundError(`No books of this user`)
 
             books.forEach(book => {
                 book.id = book._id.toString()

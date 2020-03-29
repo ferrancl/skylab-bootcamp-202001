@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL } } = process
+const { NotFoundError } = require('../../tennis-errors')
 const { expect } = require('chai')
 const { random } = Math
 const retrieveUser = require('./retrieve-user')
@@ -42,9 +43,9 @@ describe('retrieveUser', () => {
                     expect(user.password).to.be.undefined
                 })
         )
-    })
 
-    // TODO more happies and unhappies
+    })    
+
 
     after(() => User.deleteMany().then(() => mongoose.disconnect()))
 })

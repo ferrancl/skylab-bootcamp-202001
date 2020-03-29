@@ -9,7 +9,6 @@ module.exports = (userId, bookingId) => {
     let usersArray_
     let date_
     let court_
-    debugger
 
     return User.findOne({ _id: userId, bookings: bookingId })
         .then(correct => {

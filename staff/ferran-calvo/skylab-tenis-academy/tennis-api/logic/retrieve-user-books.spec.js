@@ -88,8 +88,11 @@ describe('book', () => {
                     expect(book.users[1].toString()).to.equal(_id2)
                     expect(book.court.number).to.equal(number)
                     expect(book.date).to.be.instanceOf(Date)
-                })            })
+                })            
+            })
         )
+
+        
     
         after(() => Booking.deleteMany().then(() => mongoose.disconnect()))
     })
