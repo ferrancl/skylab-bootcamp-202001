@@ -130,11 +130,11 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
                     text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
               }
                 transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        console.log(error);
-                    } else {
+                    // if (error) {
+                        // console.log(error);
+                    // } else {
                         console.log('Email sent: ' + info.response);
-                    }
+                    // }
                 })
             })
         })

@@ -76,8 +76,6 @@ describe('updateUser', () => {
                 expect(message).not.to.be.undefined
                 expect(message).to.equal('This email is already in use')
             })
-
-            //expect(() => updateUser(_id, { email: email2})).to.throw(NotAllowedError, 'This email is already in use')
         })
 
         it('should fail when email is already in use', () => {
@@ -87,11 +85,8 @@ describe('updateUser', () => {
             .catch(({ message }) => {
                 expect(message).not.to.be.undefined
                 expect(message).to.equal('Old password incorrect')
-            })
+            })            
             
-        
-    
-            // expect(() => updateUser(_id, { email: email_, oldPassword: wrongPassword, password})).to.throw(NotAllowedError, 'Old password incorrect')
         })
     })
 

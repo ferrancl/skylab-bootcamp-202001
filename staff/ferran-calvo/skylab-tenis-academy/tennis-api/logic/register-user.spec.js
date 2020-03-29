@@ -51,22 +51,14 @@ describe('registerUser', () => {
     it('should fail  when user already exists', () =>{
         let email2 = `email-${random()}@mail.com`
         User.create({ name, surname, memberNumber, email: email2, password })
-        .then(() => expect(() => registerUser(name, surname, email2, password)).to.throw(NotAllowedError, `User with email ${email2} already exists`))
+        .then(() => {
+            return registerUser(name, surname, email2, password)
+        })
+        .catch(({ message }) => {
+            expect(message).not.to.be.undefined
+            expect(message).to.equal(`User with email ${email2} already exists`)
+        })
 
-
-        // .then(()=> {
-        //     return registerUser(name, surname, email2, password)
-        // })
-        // .then(() => { throw new NotAllowedError})
-        // .catch(({ message }) => {
-        //     expect(message).not.to.be.undefined
-        //     expect(message).to.equal(`User with email ${email2} already exists`)
-        // })
     })
-
-
-
-    // TODO unhappy paths and other happies if exist
-
     after(() => User.deleteMany().then(() => mongoose.disconnect()))
 })
