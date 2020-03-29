@@ -19,7 +19,6 @@ module.exports = (userId, hour) => {
             })
             async function quickBook(){
                 while (dateWithoutMinutes<date){
-                    debugger
                     for (let court of courts) {
                         let result = await Booking.find({court, date: dateWithoutMinutes})
                         if (result.length === 0){
@@ -33,6 +32,7 @@ module.exports = (userId, hour) => {
             return quickBook()
         })
         .then(book => {
+            debugger
             book[1] = book[1].getMonth() + 1 +  "/" + (book[1].getDate())+"/" + (book[1].getFullYear())+ " " + (book[1].getHours()-1)+":00"
             return book
         })

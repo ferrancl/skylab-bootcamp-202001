@@ -12,14 +12,13 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(number, 'number')
 
     date = new Date(date)
-    date.setHours(date.getHours()+1)
+    date.setHours(date.getHours()+2)
     validate.type(date, 'date', Date)
     const dateWithoutHour = date.toLocaleDateString()
 
     const now = new Date(Date.now())
-    // if ((date.getHours()) < 8 || (date.getHours()) > 23) {
-    //     throw new NotAllowedError('Bookings only allowed between 8 and 22 hours')
-    // }
+
+    debugger
 
     let limitTime = new Date(now)
     if (date < limitTime) {
@@ -74,14 +73,14 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(book=> {
             if (book != undefined){
-                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same time`)
                 if (book.length>1) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             return Booking.find({users: user2_.id, day: dateWithoutHour})
         })
         .then(book =>{
             if (book != undefined){
-                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user2} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user2} has already booked a court at the same time`)
                 if (book.length>1) throw new NotAllowedError (`User with member number ${user2} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (user3) return Booking.find({users: user3_.id, day: dateWithoutHour})
@@ -89,7 +88,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(book =>{
             if (book != undefined){
-                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user3} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user3} has already booked a court at the same time`)
                 if (book.length>1) throw new NotAllowedError (`User with member number ${user3} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if(user4) return Booking.find({users: user4_.id, day: dateWithoutHour})
@@ -97,7 +96,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         })
         .then(book =>{
             if (book != undefined){
-                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user4} has already booked a court at the same hour for ${dateWithoutHour}`)
+                if (book.length === 1 && book[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user4} has already booked a court at the same time`)
                 if (book.length>1) throw new NotAllowedError (`User with member number ${user4} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (user3 && user4){
@@ -114,29 +113,29 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             user2_.bookings.push(booking.id)
             return Promise.all([user1_.save(), user2_.save(), booking.save()])
         })
-        .then(() => {
-            transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'info.break.point.club@gmail.com',
-                    pass: 'breakpoint123'
-                }
-            })
-            usersArray.forEach(user =>{
-                mailOptions = {
-                    from: 'Break Point',
-                    to: `${user.email}`,
-                    subject: 'Tennis court booked succesfully',
-                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
-              }
-                transporter.sendMail(mailOptions, function (error, info) {
-                    // if (error) {
-                        // console.log(error);
-                    // } else {
-                        console.log('Email sent: ' + info.response);
-                    // }
-                })
-            })
-        })
+        // .then(() => {
+        //     transporter = nodemailer.createTransport({
+        //         service: 'gmail',
+        //         auth: {
+        //             user: 'info.break.point.club@gmail.com',
+        //             pass: 'breakpoint123'
+        //         }
+        //     })
+        //     usersArray.forEach(user =>{
+        //         mailOptions = {
+        //             from: 'Break Point',
+        //             to: `${user.email}`,
+        //             subject: 'Tennis court booked succesfully',
+        //             text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
+        //       }
+        //         transporter.sendMail(mailOptions, function (error, info) {
+        //             if (error) {
+        //                 console.log(error);
+        //             } else {
+        //                 console.log('Email sent: ' + info.response);
+        //             }
+        //         })
+        //     })
+        // })
         .then(() => {})
 }

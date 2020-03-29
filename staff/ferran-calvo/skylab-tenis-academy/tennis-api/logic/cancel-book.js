@@ -29,29 +29,29 @@ module.exports = (userId, bookingId) => {
             court_ = book.court.number
             return Booking.findByIdAndRemove(bookingId)
         })
-        .then(() => {
-            transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'info.break.point.club@gmail.com',
-                    pass: 'breakpoint123'
-                }
-            })
-            usersArray_.forEach(user =>{
-                mailOptions = {
-                    from: 'Break Point',
-                    to: `${user.email}`,
-                    subject: 'Booking cancelled',
-                    text: `Your booking for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. \n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
-                }
-                transporter.sendMail(mailOptions, function (error, info) {
-                    // if (error) {
-                    //     throw new Error ('Mail not sent')
-                    // } else {
-                        console.log('Email sent: ' + info.response);
-                    // }
-                })
-            })
-        })
+        // .then(() => {
+        //     transporter = nodemailer.createTransport({
+        //         service: 'gmail',
+        //         auth: {
+        //             user: 'info.break.point.club@gmail.com',
+        //             pass: 'breakpoint123'
+        //         }
+        //     })
+        //     usersArray_.forEach(user =>{
+        //         mailOptions = {
+        //             from: 'Break Point',
+        //             to: `${user.email}`,
+        //             subject: 'Booking cancelled',
+        //             text: `Your booking for ${date_.toLocaleDateString()} at ${date_.getHours()-1}h of court ${court_} has been cancelled. \n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
+        //         }
+        //         transporter.sendMail(mailOptions, function (error, info) {
+        //             if (error) {
+        //                 throw new Error ('Mail not sent')
+        //             } else {
+        //                 console.log('Email sent: ' + info.response);
+        //             }
+        //         })
+        //     })
+        // })
         .then(() => {})
 }
