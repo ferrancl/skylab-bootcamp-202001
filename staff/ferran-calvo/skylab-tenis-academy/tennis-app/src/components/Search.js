@@ -110,7 +110,7 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
             <select  className="select_day" name="day" id="day" form="day" onChange={handleSubmit}>
                 {day.map(date => <option id="day" value={date}>{date}</option>)}
             </select>
-                <img className="weather" src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
+                <img className={weather === undefined? "hidden": "weather"} src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
             </div>
             <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
             <div className="legend">
