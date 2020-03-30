@@ -21,7 +21,7 @@ module.exports = (req, res) => {
 
         switch (true) {
             case error instanceof NotFoundError:
-                status = 404 // not found
+                status = 404 
                 break
         }
 

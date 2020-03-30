@@ -3,7 +3,6 @@ const { random } = Math
 const { book } = require('.')
 const { mongoose, models: { User, Booking, Court } } = require('tennis-data')
 const jwt = require('jsonwebtoken')
-// const context = require('./context').default
 
 const { env: {
     REACT_APP_TEST_MONGODB_URL: TEST_MONGODB_URL,
@@ -64,7 +63,6 @@ describe('book', () => {
                     return Booking.find({users: _id1})
                 })
                 .then(book =>{
-                    console.log(book)
                     expect(book).toBeDefined()
                     expect(book[0].users[0].toString()).toBe(_id1)
                     expect(book[0].users[1].toString()).toBe(_id2)

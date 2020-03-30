@@ -4,7 +4,7 @@ import './Header.sass'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-export default function ({ onGoToLogin, onGoToRegister, onGoToRememberPassword }) {
+export default function ({ onGoToLogin, onGoToRegister }) {
 
     const[menu, setMenu] = useState(false)
 

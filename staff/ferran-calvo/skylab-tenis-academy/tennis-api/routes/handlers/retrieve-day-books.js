@@ -20,7 +20,7 @@ module.exports = (req, res) => {
 
         switch (true) {
             case error instanceof ContentError:
-                status = 406 // not allowed
+                status = 406
                 break
         }
 

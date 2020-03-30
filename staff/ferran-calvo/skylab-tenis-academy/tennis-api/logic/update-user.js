@@ -1,6 +1,6 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User } } = require('../../tennis-data')
-const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const { NotAllowedError } = require('../../tennis-errors')
 const bcrypt = require('bcryptjs')
 
 /**
@@ -12,6 +12,7 @@ const bcrypt = require('bcryptjs')
  * 
  * @returns {Promise}
  * 
+ * @throws {NotAllowedError} on wrong credentials
  */
 
 
