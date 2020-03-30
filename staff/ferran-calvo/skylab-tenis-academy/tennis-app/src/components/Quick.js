@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './Form.sass'
+import './style/Form.sass'
 import Feedback from './Feedback'
 
 export default function ({ onSubmit, onChange, error, quickBook }) {

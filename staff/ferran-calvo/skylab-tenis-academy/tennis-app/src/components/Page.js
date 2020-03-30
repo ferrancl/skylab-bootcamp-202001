@@ -1,5 +1,5 @@
 import React from 'react'
-import './Page.sass'
+import './style/Page.sass'
 
 export default function ({ name, children }) {
     return <section className={`page page--${name}`}>

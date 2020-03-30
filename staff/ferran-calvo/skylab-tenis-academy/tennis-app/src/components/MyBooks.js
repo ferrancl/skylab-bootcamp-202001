@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './Header.sass'
-import './Form.sass'
+import './style/Header.sass'
+import './style/Form.sass'
 import { retrieveUserBooks, isLoggedIn} from '../logic'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'

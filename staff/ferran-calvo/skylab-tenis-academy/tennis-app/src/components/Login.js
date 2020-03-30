@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import './Form.sass'
-import './Login.sass'
+import './style/Form.sass'
+import './style/Login.sass'
 import Feedback from './Feedback'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'

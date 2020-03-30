@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import './Form.sass'
+import './style/Form.sass'
 import Feedback from './Feedback'
 import { withRouter } from 'react-router-dom'
 

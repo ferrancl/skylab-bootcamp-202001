@@ -35,12 +35,11 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     const dateWithoutHour = date.toLocaleDateString()
 
     const now = new Date(Date.now())
-
-    debugger
+    now.setHours(now.getHours()+1)
 
     let limitTime = new Date(now)
     if (date < limitTime) {
-        throw new NotAllowedError('Wrong data')
+        throw new NotAllowedError('Invalid hour')
     }
     if (user3 && !user4){
         throw new NotAllowedError('Please enter the user member number of the 4th player')
@@ -60,7 +59,7 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
 
     return User.findOne({ memberNumber: user2 })
         .then(user2Found => {
-            if (!user2Found) throw new NotFoundError(`user with member number ${user2} not found`)
+            if (!user2Found) throw new NotFoundError(`User with member number ${user2} not found`)
             user2_ = user2Found
             return User.findById(idUser1)
         })
@@ -71,12 +70,12 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             return User.findOne({ memberNumber: user3 })
         })
         .then(user3Found =>{
-            if (user3 && !user3Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            if (user3 && !user3Found) throw new NotFoundError(`User with member number ${user3} not found`)
             user3_ = user3Found
             return User.findOne({ memberNumber: user4 })
         })
         .then(user4Found => {
-            if (user4 && !user4Found) throw new NotFoundError(`user with member number ${user3} not found`)
+            if (user4 && !user4Found) throw new NotFoundError(`User with member number ${user3} not found`)
             user4_ = user4Found
             if (user4) usersArray.push(user3_, user4_)
             return Court.findOne({ number })   
@@ -131,29 +130,29 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
             user2_.bookings.push(booking.id)
             return Promise.all([user1_.save(), user2_.save(), booking.save()])
         })
-        // .then(() => {
-        //     transporter = nodemailer.createTransport({
-        //         service: 'gmail',
-        //         auth: {
-        //             user: 'info.break.point.club@gmail.com',
-        //             pass: 'breakpoint123'
-        //         }
-        //     })
-        //     usersArray.forEach(user =>{
-        //         mailOptions = {
-        //             from: 'Break Point',
-        //             to: `${user.email}`,
-        //             subject: 'Tennis court booked succesfully',
-        //             text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-1}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
-        //       }
-        //         transporter.sendMail(mailOptions, function (error, info) {
-        //             if (error) {
-        //                 console.log(error);
-        //             } else {
-        //                 console.log('Email sent: ' + info.response);
-        //             }
-        //         })
-        //     })
-        // })
+        .then(() => {
+            transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'info.break.point.club@gmail.com',
+                    pass: 'breakpoint123'
+                }
+            })
+            usersArray.forEach(user =>{
+                mailOptions = {
+                    from: 'Break Point',
+                    to: `${user.email}`,
+                    subject: 'Tennis court booked succesfully',
+                    text: `You have booked court ${number} for ${date.toLocaleDateString()} at ${date.getHours()-2}h. \nYou can view your bookings in your profile.\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`,
+              }
+                transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                    }
+                })
+            })
+        })
         .then(() => {})
 }

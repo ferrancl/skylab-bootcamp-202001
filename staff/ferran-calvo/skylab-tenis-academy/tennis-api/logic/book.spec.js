@@ -100,7 +100,7 @@ describe('book', () => {
         it('should fail on wrong hour', () => {
             let date = new Date(Date.now())
             date.setDate(date.getDate()-2)
-            expect(() => book(_id1, memberNumber2, user3, user4, number, date)).to.throw(NotAllowedError, 'Wrong data')
+            expect(() => book(_id1, memberNumber2, user3, user4, number, date)).to.throw(NotAllowedError, 'Invalid hour')
         })
 
         it('should fail when member user 3 is provided and member number 4 is empty', () => {
@@ -117,7 +117,7 @@ describe('book', () => {
             book(_id1, memberNumber5, user3, user4, number, tomorrow)
             .catch(({ message }) => {
                 expect(message).not.to.be.undefined
-                expect(message).to.equal(`user with member number ${memberNumber5} not found`)
+                expect(message).to.equal(`User with member number ${memberNumber5} not found`)
             })
         })
 
@@ -127,7 +127,7 @@ describe('book', () => {
             book(_id1, memberNumber2, memberNumber5, memberNumber4, number, tomorrow)
             .catch(({ message }) => {
                 expect(message).not.to.be.undefined
-                expect(message).to.equal(`user with member number ${memberNumber5} not found`)
+                expect(message).to.equal(`User with member number ${memberNumber5} not found`)
             })
         })
 
@@ -137,7 +137,7 @@ describe('book', () => {
             book(_id1, memberNumber2, memberNumber3, memberNumber5, number, tomorrow)
             .catch(({ message }) => {
                 expect(message).not.to.be.undefined
-                expect(message).to.equal(`user with member number ${memberNumber5} not found`)
+                expect(message).to.equal(`User with member number ${memberNumber5} not found`)
             })
         })
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Results from './Results'
-import './Form.sass'
+import './style/Form.sass'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 import Book from './Book'
@@ -64,7 +64,6 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let hour = " 12:00:00"
         if (event.target.value === day1){
             let month = day1.split('/')[0]
-            debugger
             let dayy = day1.split('/')[1]
             if (dayy.length ===1) dayy="0"+dayy
             if (month.length ===1) month="0"+month

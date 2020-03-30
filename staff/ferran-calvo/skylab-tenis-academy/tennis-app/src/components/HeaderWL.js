@@ -1,6 +1,6 @@
-import logo from './logo.png'
+import logo from '../utils/logo.png'
 import React, { useState, useEffect, useContext } from 'react'
-import './Header.sass'
+import './style/Header.sass'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import './Header.sass'
-import './Results.sass'
+import './style/Header.sass'
+import './style/Results.sass'
 
 export default function ({results, bookedCourts, searchDay, error}) {
     let now = new Date(Date.now())

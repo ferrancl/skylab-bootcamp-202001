@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './Info.sass'
-import './Footer.sass'
-import clay from './clay.jpg'
-import hard from './hard-court.jpeg'
-import tennis from './tennis.jpg'
-import activities from './activities.jpg'
-import gym from './gym.jpg'
+import './style/Info.sass'
+import './style/Footer.sass'
+import clay from '../utils/clay.jpg'
+import hard from '../utils/hard-court.jpeg'
+import tennis from '../utils/tennis.jpg'
+import activities from '../utils/activities.jpg'
+import gym from '../utils/gym.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationArrow, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
@@ -17,16 +17,13 @@ export default (function ({ }) {
         <img  className="info_image" src={clay} alt=""/>
         <h3 className="info_title">WELCOME TO BREAK POINT CLUB</h3>
         <h6 className="info_subtitle">More than 20.000 m² for practicing sport </h6>
-        <p className="info_description">En Vall Parc tienes todo lo que necesitas para poder competir y practicar deporte en un entorno idílico. Un espacio para disfrutar del deporte y la naturaleza sin salir de Barcelona. Una oferta completa que incluye nuestras escuelas de tenis y pádel para todas las edades, pistas de squash y frontón, zonas de fitness y gimnasio, piscinas y restaurante.
+        <p className="info_description">Located in a fantastic place of Barcelona, Break Point is the perfect tennis club for you and your family and friends to practice this sport.
 
-            Más de 20 pistas de tenis y pádel para edad infantil, juvenil y adulto, rodeadas por el Parc Natural de la Serra de Collserola, una zona privilegiada.</p>
+            The club has more facilities to enjoy and to have a good experience: gym, activities and a pub where to share your time with other members.  </p>
         <img  className="info_image" src={hard} alt=""/>
 
         <h6 className="info_subtitle">10 courts: 5 clay and 5 hardcourt</h6>
-        <p className="info_description">En Vall Parc tienes todo lo que necesitas para poder competir y practicar deporte en un entorno idílico. Un espacio para disfrutar del deporte y la naturaleza sin salir de Barcelona. Una oferta completa que incluye nuestras escuelas de tenis y pádel para todas las edades, pistas de squash y frontón, zonas de fitness y gimnasio, piscinas y restaurante.
-
-            Más de 20 pistas de tenis y pádel para edad infantil, juvenil y adulto, rodeadas por el Parc Natural de la Serra de Collserola, una zona privilegiada.</p>
-
+        <p className="info_description">In our club we have to kind of courts: clay and hard. It provides the perfect area for our members to improve their tennis and to become the perfect player! A good player has to fit and feel comfortable in all conditions.</p>
         <div className="info_activities">
             <img src={tennis} className="info_activities_image" alt=""/>
             <p className="info_text">TENNIS</p>

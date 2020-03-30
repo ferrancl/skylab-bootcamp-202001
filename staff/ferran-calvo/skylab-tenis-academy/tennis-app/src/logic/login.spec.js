@@ -2,7 +2,6 @@ const { random } = Math
 const { mongoose, models: { User } } = require('tennis-data')
 const { login } = require('.')
 const bcrypt = require('bcryptjs')
-// const context = require('./context').default
 import context from './context'
 
 const { env: { REACT_APP_TEST_MONGODB_URL: TEST_MONGODB_URL } } = process
@@ -48,7 +47,6 @@ describe('login', () => {
         )
     })
 
-    // TODO more happies and unhappies
 
     afterAll(() => User.deleteMany().then(() => mongoose.disconnect()))
 })

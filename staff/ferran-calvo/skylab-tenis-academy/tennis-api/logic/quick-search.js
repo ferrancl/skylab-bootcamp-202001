@@ -22,7 +22,7 @@ module.exports = (userId, hour) => {
     let date = new Date(Date.now())
     if (hour < date.getHours()) throw new NotAllowedError("Wrong data")
     let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 2)
-    date.setHours(22) 
+    date.setHours(23) 
 
     return Court.find({})
         .then(courts=> {

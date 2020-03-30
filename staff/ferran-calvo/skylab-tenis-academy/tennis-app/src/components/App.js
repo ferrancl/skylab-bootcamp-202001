@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
-import './App.sass'
+import './style/App.sass'
 import Page from './Page'
 import Register from './Register'
 import Login from './Login'
@@ -30,13 +30,22 @@ export default withRouter(function ({ history }) {
       history.push('/home')
   }, [])
 
+  function __handleError__(error) {
+      
+      setState({...state, error: error.message })
+
+      setTimeout(() => {
+        setState({ error: undefined })
+      }, 3000)
+  }
+
   async function handleRegister(name, surname, email, password, confirmPassword) {
     try {
       await registerUser(name, surname, email, password, confirmPassword)
 
       history.push('/login')
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -45,8 +54,8 @@ export default withRouter(function ({ history }) {
       await login(email, password)
 
       history.push('/search')
-    } catch ({ message }) {
-      setState({ ...state, error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -55,8 +64,8 @@ export default withRouter(function ({ history }) {
       await rememberPassword(email)
 
       history.push('/login')
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -66,8 +75,8 @@ export default withRouter(function ({ history }) {
 
       logout()
       history.push('/login')
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -76,8 +85,8 @@ export default withRouter(function ({ history }) {
       await cancelBook(id)
 
       history.push('/search')
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -86,8 +95,8 @@ export default withRouter(function ({ history }) {
       const quickBook = await quickSearch(hour)
       setQuickBook(quickBook)
 
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -97,8 +106,8 @@ export default withRouter(function ({ history }) {
       await book(user2, user3, user4, number, date)
 
       history.push('/my-books')
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -107,8 +116,8 @@ export default withRouter(function ({ history }) {
       const weather= await retrieveWeather(date)
       setWeather(weather)
 
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
@@ -121,8 +130,8 @@ export default withRouter(function ({ history }) {
       setResults(results)
 
 
-    } catch ({ message }) {
-      setState({ error: message })
+    } catch (error) {
+      return __handleError__(error)
     }
   }
 
