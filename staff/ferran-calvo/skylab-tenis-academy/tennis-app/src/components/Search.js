@@ -64,22 +64,27 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let hour = " 12:00:00"
         if (event.target.value === day1){
             let month = day1.split('/')[0]
+            debugger
+            let dayy = day1.split('/')[1]
+            if (dayy.length ===1) dayy="0"+dayy
             if (month.length ===1) month="0"+month
-            date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour     
+            date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour     
             if (now.getHours() > 12){
                 hour = " 15:00:00"
-                date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
+                date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
                 if (now.getHours() > 15){
                     hour = " 18:00:00"
-                    date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
+                    date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
                     if (now.getHours() > 18){
                         hour = " 21:00:00"
-                        date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
+                        date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
                         if (now.getHours() > 21){
                             hour = " 00:00:00"
+                            dayy = day2.split('/')[1]
+                            if (dayy.length ===1) dayy="0"+dayy
                             month = day2.split('/')[0]
                             if (month.length ===1) month="0"+month
-                            date = day2.split('/')[2]+ "-"+ month+ "-" + day2.split('/')[1] + hour
+                            date = day2.split('/')[2]+ "-"+ month+ "-" + dayy + hour
                         }
                     }
                 }
@@ -87,9 +92,11 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
     
         }
         else{
+            let dayy = event.target.value.split('/')[1]
+            if (dayy.length == 1) dayy = "0"+dayy
             let month = event.target.value.split('/')[0]
             if (month.length == 1) month = "0"+month
-            date = event.target.value.split('/')[2]+ "-"+ month+ "-" + event.target.value.split('/')[1] + hour
+            date = event.target.value.split('/')[2]+ "-"+ month+ "-" + dayy + hour
 
         }
         setSearchDay(event.target.value)

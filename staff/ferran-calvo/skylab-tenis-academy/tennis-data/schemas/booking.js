@@ -7,4 +7,3 @@ module.exports = new Schema({
     status: { type: String, required: true},
     court: { type: { ref: 'Court' }, required: true}
 })
-    // court: { type: [{ type: ObjectId, ref: 'Court' }], required: true}
