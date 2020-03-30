@@ -1,6 +1,6 @@
 # BREAK-POINT
 
-![BREAK-POINT!](https://media.giphy.com/media/3GjKth6HuhzkYbsOdt/giphy.gif) 
+![BREAK-POINT!](https://media.giphy.com/media/n6yCN8anreAeI/giphy.gif) 
 
 Tennis club web where the user can book and organize matches with other members of the club. 
 
