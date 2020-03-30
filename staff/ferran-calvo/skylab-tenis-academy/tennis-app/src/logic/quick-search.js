@@ -4,6 +4,17 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Searchs for the first court available 
+ * 
+ * @param {string} userId user's id that wants to cancel the booking
+ * @param {string} bookingId book id of the booking that the user wants to cancel
+ * 
+ * @returns first book available following user preferences 
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
+
 export default (function (hour) {
     return (async () => {
         const response = await fetch(`${API_URL}/users/bookings-quick`, {

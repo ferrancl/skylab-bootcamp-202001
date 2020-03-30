@@ -1,9 +1,24 @@
 import { validate } from 'tennis-utils'
 const { NotAllowedError } = require('tennis-errors')
 require('dotenv').config()
-//const { env: { REACT_APP_API_URL: API_URL } } = process
 
 const API_URL = process.env.REACT_APP_API_URL
+
+/**
+ * Adds a user to the database 
+ * 
+ * @param {string} name user's name
+ * @param {string} surname user's surname
+ * @param {string} email user's email, unique
+ * @param {string} password user's password for login in his account
+ * @param {string} confirmPassword user's password for login in his account, must be the same as password
+
+
+ * 
+ * @returns 
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
 
 export default function (name, surname, email, password, confirmPassword) {
     validate.string(name, 'name')

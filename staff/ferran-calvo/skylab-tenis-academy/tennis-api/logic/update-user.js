@@ -3,6 +3,18 @@ const { models: { User } } = require('../../tennis-data')
 const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 const bcrypt = require('bcryptjs')
 
+/**
+ * Retrieves bookings of the user provided 
+ * 
+ * @param {string} userId unique id that identifies the user
+ * @param {object} body contains the data that the user wants to update
+
+ * 
+ * @returns {Promise}
+ * 
+ */
+
+
 module.exports = (userId, body) => {
     const {email, oldPassword, password} =  body
 

@@ -5,6 +5,23 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Books a court 
+ * 
+ * @param {string} user2 user 2 unique member number
+ * @param {string} user3 user 3 unique member number (optional)
+ * @param {string} user4 user 4 unique member number (optional)
+ * @param {string} number number that identifies the court
+* @param {string} date date for the booking of the court
+ 
+ * 
+ * @returns 
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ * @throws {NotFoundError} when not found data
+ */
+
+
 export default (function (user2, user3, user4, number, date ) {
     validate.string(user2, 'user2')
     if (user3){

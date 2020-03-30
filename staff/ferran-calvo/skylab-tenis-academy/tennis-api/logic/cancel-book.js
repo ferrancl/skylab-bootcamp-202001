@@ -1,7 +1,19 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User, Booking } } = require('../../tennis-data')
-const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const { NotAllowedError } = require('../../tennis-errors')
 const nodemailer = require('nodemailer')
+
+
+/**
+ * Cancels a book 
+ * 
+ * @param {string} userId user's id that wants to cancel the booking
+ * @param {string} bookingId book id of the booking that the user wants to cancel
+ * 
+ * @returns {Promise}
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
 
 module.exports = (userId, bookingId) => {
     validate.string(userId, 'userId')

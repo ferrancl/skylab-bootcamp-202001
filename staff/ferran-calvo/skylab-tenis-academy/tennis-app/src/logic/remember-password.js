@@ -4,6 +4,16 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Reassign a password to the user's account, that is sended to his email address
+ * 
+ * @param {string} email user's email, unique
+ * 
+ * @returns 
+ * 
+ * @throws {NotFoundError} on not found data
+ */
+
 export default function (email) {
     validate.string(email, 'email')
     validate.email(email)

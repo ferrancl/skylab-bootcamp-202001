@@ -4,6 +4,16 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieve day's books of the povided day
+ * 
+ * @param {string} day day that the user wants to check the bookings
+ * 
+ * @returns  {Array} books of the provided day
+ * 
+ * @throws {NotAllowedError} on wrong data
+ */
+
 export default (function (day) {
     return (async () => {
         const response = await fetch(`${API_URL}/users/booking-day`, {

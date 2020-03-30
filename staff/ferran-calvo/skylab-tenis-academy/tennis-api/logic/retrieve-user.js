@@ -1,7 +1,16 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User } } = require('../../tennis-data')
-const { NotFoundError } = require('../../tennis-errors')
 const { mongoose: { Types: { ObjectId } } } = require('../../tennis-data')
+
+/**
+ * Retrieves data of the user provided 
+ * 
+ * @param {string} id unique id that identifies the user
+ * 
+ * @returns {Promise<string>} data of the provided user
+ * 
+ */
+
 
 module.exports = id => {
     validate.string(id, 'id')

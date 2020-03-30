@@ -5,6 +5,21 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Update user data
+ * 
+ * @param {string} email unique email that identifies the user
+ * @param {string} oldPassword old password that the user wants to change
+ * @param {string} password new password
+ * @param {string} confirmPassword confirmation of the new password
+ * 
+ * @throws {NotAllowedError} on wrong data
+ * 
+ * @returns {Promise}
+ * 
+ */
+
+
 export default (function (email, oldPassword, password, confirmPassword) {
     if (email){
         validate.string(email, 'email')

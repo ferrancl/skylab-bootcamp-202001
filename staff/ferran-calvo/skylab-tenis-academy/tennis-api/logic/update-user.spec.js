@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const { env: { TEST_MONGODB_URL } } = process
-const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const { NotAllowedError } = require('../../tennis-errors')
 const { mongoose, models: { User } } = require('tennis-data')
 const { expect } = require('chai')
 const { random } = Math
@@ -76,8 +76,6 @@ describe('updateUser', () => {
                 expect(message).not.to.be.undefined
                 expect(message).to.equal('This email is already in use')
             })
-
-            //expect(() => updateUser(_id, { email: email2})).to.throw(NotAllowedError, 'This email is already in use')
         })
 
         it('should fail when email is already in use', () => {
@@ -88,13 +86,8 @@ describe('updateUser', () => {
                 expect(message).not.to.be.undefined
                 expect(message).to.equal('Old password incorrect')
             })
-            
-        
-    
-            // expect(() => updateUser(_id, { email: email_, oldPassword: wrongPassword, password})).to.throw(NotAllowedError, 'Old password incorrect')
         })
     })
-
 
     after(() => User.deleteMany().then(() => mongoose.disconnect()))
 })

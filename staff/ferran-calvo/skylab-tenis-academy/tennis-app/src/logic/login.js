@@ -5,6 +5,17 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Checks user credentials against the storage
+ * 
+ * @param {string} userMember user's unique member number or email 
+ * @param {string} password user's password
+ * 
+ * @returns 
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
+
 export default (function (userMember, password) {
     validate.string(userMember, 'email')
     validate.string(password, 'password')

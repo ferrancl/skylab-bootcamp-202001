@@ -5,6 +5,16 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Cancels a book 
+ * 
+ * @param {string} id user's id that wants to cancel the booking
+ * 
+ * @returns 
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
+
 export default (function (id) {
     validate.string(id, 'id')
 

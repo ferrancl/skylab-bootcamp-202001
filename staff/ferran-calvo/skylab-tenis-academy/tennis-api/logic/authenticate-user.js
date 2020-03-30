@@ -8,13 +8,11 @@ const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"
 /**
  * Checks user credentials against the storage
  * 
- * @param {string} memberNumber user's unique member number
+ * @param {string} userMember user's unique member number or email 
  * @param {string} password user's password
  * 
  * @returns {Promise<string>} user id from storage
  * 
- * @throws {ContentError} if user data does not follow the format and content rules
- * @throws {TypeError} if user data does not have the correct type
  * @throws {NotAllowedError} on wrong credentials
  */
 module.exports = (userMember, password) => {

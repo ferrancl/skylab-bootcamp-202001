@@ -1,9 +1,18 @@
 const { validate } = require('../../tennis-utils')
 const { models: { User } } = require('../../tennis-data')
-const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const { NotFoundError } = require('../../tennis-errors')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcryptjs')
 
+/**
+ * Reassign a password to the user's account, that is sended to his email address
+ * 
+ * @param {string} email user's email, unique
+ * 
+ * @returns {Promise}
+ * 
+ * @throws {NotFoundError} on not found data
+ */
 
 module.exports = (email) => {
     validate.string(email, 'email')

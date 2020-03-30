@@ -4,6 +4,16 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieves data of the user provided 
+ * 
+ * @param {string} id unique id that identifies the user
+ * 
+ * @returns {object} data of the provided user
+ * 
+ * @throws {NotAllowedError} on wrong data
+ */
+
 export default (function () {
     return (async () => {
         const response = await fetch(`${API_URL}/users`, {

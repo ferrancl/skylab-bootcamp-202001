@@ -4,6 +4,17 @@ require('dotenv').config()
 
 const API_URL = process.env.REACT_APP_API_URL
 
+/**
+ * Retrieves bookings of the user provided 
+ * 
+ * @param {string} id unique id that identifies the user
+ * 
+ * @returns {Array} books of the provided user
+ * 
+ * @throws {NotAllowedError} on wrong data
+ * 
+ */
+
 export default (function () {
     return (async () => {
         const [header, payload, signature] = this.token.split('.')

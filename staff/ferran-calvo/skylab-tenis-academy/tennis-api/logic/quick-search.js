@@ -1,6 +1,18 @@
 const { validate } = require('../../tennis-utils')
-const { models: { User, Booking, Court } } = require('../../tennis-data')
-const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
+const { models: { Booking, Court } } = require('../../tennis-data')
+const { NotAllowedError } = require('../../tennis-errors')
+
+
+/**
+ * Searchs for the first court available 
+ * 
+ * @param {string} userId user's id that wants to cancel the booking
+ * @param {string} hour hour that the user wants to start the quick search
+ * 
+ * @returns {Promise}
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
 
 module.exports = (userId, hour) => {
     validate.string(userId, 'userId')
@@ -32,7 +44,6 @@ module.exports = (userId, hour) => {
             return quickBook()
         })
         .then(book => {
-            debugger
             book[1] = book[1].getMonth() + 1 +  "/" + (book[1].getDate())+"/" + (book[1].getFullYear())+ " " + (book[1].getHours()-2)+":00"
             return book
         })

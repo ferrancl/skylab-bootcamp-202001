@@ -44,7 +44,3 @@ The user have to register on the app to use all the functionalities. The functio
 ### Trello
 
 [BreakPoint-Trello](https://trello.com/b/eD5tBeUx/break-point)
-
-
-
-

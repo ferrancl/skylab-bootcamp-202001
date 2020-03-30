@@ -4,6 +4,20 @@ const { NotAllowedError } = require('../../tennis-errors')
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcryptjs')
 
+/**
+ * Adds a user to the database 
+ * 
+ * @param {string} name user's name
+ * @param {string} surname user's surname
+ * @param {string} email user's email, unique
+ * @param {string} password user's password for login in his account
+
+ * 
+ * @returns {Promise}
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ */
+
 module.exports = (name, surname, email, password) => {
     validate.string(name, 'name')
     validate.string(surname, 'surname')

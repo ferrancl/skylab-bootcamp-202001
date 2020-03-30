@@ -3,6 +3,24 @@ const { models: { User, Booking, Court } } = require('../../tennis-data')
 const { NotFoundError, NotAllowedError } = require('../../tennis-errors')
 const nodemailer = require('nodemailer')
 
+/**
+ * Books a court 
+ * 
+ * @param {string} idUser1 user's id that is doing the booking
+ * @param {string} user2 user 2 unique member number
+ * @param {string} user3 user 3 unique member number (optional)
+ * @param {string} user4 user 4 unique member number (optional)
+ * @param {string} number number that identifies the court
+* @param {string} date date for the booking of the court
+ 
+ * 
+ * @returns {Promise}
+ * 
+ * @throws {NotAllowedError} on wrong credentials
+ * @throws {NotFoundError} when not found data
+ */
+
+
 module.exports = (idUser1, user2, user3, user4, number, date) => {
     validate.string(idUser1, 'idUser1')
     validate.string(user2, 'user2')

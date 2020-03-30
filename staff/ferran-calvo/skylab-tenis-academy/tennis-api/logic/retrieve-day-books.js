@@ -1,5 +1,15 @@
 const { models: { Booking } } = require('tennis-data')
 
+/**
+ * Retrieves bookings of the day provided 
+ * 
+ * @param {string} day day that the user wants to see the bookings
+ * 
+ * @returns {Promise<string>} books of the day
+ * 
+ * @throws {NotFoundError} on not found data
+ */
+
 module.exports = (day) => {
 
     return Booking.find({day})
