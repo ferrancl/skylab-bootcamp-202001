@@ -39,7 +39,7 @@ The user have to register on the app to use all the functionalities. The functio
 
 ### API code coverage
 
-![code-coverage](./api-code-coverage.png)
+![code-coverage](./code-coverage.png)
 
 ### Trello
 

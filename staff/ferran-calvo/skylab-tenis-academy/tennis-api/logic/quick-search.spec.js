@@ -79,6 +79,26 @@ describe('quick search', () => {
             })
         })
 
+        it('should return the first court available', () =>  {  
+            let now = new Date(Date.now())
+            let date2=  new Date(Date.now())
+            let hour = date2.getHours().toString()
+            date2.setHours(date2.getHours()+1)
+            Booking.insertMany([
+                { users: [_id1, _id2], date: now, day: '3/23/2020', status:'PRE', court: court_ } ,
+                { users: [_id3, _id4], date: now, day: '3/23/2020', status:'PRE', court: court2_ },
+                { users: [_id1, _id2], date: date2, day: '3/23/2020', status:'PRE', court: court_ } ,
+                { users: [_id3, _id4], date: date2, day: '3/23/2020', status:'PRE', court: court2_ }
+            ])
+            .then(() => quickSearch(_id3, hour))
+            .then((book) => {
+                expect(book).to.exist
+                expect(book[0]).to.be(court_.number)
+                expect(book[1]).to.be(now.getMonth() + 1 +  "/" + (now.getDate())+"/" + (now.getFullYear())+ " " + (now.getHours() + 2)+":00")
+            })
+        })
+
+
         it('should return a message that there is no court available', () =>  {  
             let date2=  new Date(Date.now())
             date2.setHours(22)
