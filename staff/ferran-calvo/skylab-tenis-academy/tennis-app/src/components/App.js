@@ -17,7 +17,6 @@ import HeaderWL from './HeaderWL'
 
 export default withRouter(function ({ history }) {
   const [state, setState] = useContext(Context)
-  const [results, setResults] = useState([])
   const [bookedCourts, setBookedCourts] = useState([])
   const [weather, setWeather] = useState()
   const [quickBook, setQuickBook] = useState(['',''])
@@ -125,9 +124,9 @@ export default withRouter(function ({ history }) {
     try {
       let array=[]
       const results = await retrieveDayBooks(day)
-      results.map(result => array.push(`${result.court.number}-${(result.date.split('T')[1].split(':')[0])}`))
+
+      results.map(result => array.push(`${result.court.number}-${(new Date(result.date).getHours())}`))
       setBookedCourts(array)
-      setResults(results)
 
 
     } catch (error) {
@@ -199,7 +198,7 @@ export default withRouter(function ({ history }) {
       <Route path="/remember-password" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Remember onSubmit={handleRemember} error={error} onMount={handleMountRemember} />} />
       <Route path="/update-user" render={() => isLoggedIn() ? <Update onSubmit={handleUpdateUser} error={error} onMount={handleMountUpdate} />: <Redirect to="/login" />} />
       <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
-      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} results={results} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather}/>: <Redirect to="/login" />} />
+      <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather}/>: <Redirect to="/login" />} />
       <Route path="/quick-search" render={() => isLoggedIn() ? <Quick onSubmit={handleBook} onChange={handleQuick} quickBook={quickBook} error={error}/>: <Redirect to="/login" />} />
     </Page>
   </div>

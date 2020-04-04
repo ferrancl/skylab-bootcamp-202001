@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './style/Header.sass'
 import './style/Results.sass'
 
-export default function ({results, bookedCourts, searchDay, error}) {
+export default function ({ bookedCourts, searchDay, error}) {
     let now = new Date(Date.now())
     let currentDay = now.getMonth()+1+"/"+now.getDate()+"/"+now.getFullYear()
     let currentHour = now.getHours()
@@ -34,8 +34,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
                 </tr>
             <tr>
                 <td className="clay">1</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('1-08')? 'red': 'green_odd'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('1-09')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('1-8')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('1-9')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_odd': bookedCourts.includes('1-10')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_odd': bookedCourts.includes('1-11')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_odd': bookedCourts.includes('1-12')? 'red': 'green_odd'}></td>
@@ -51,8 +51,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="clay">2</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('2-08')? 'red': 'green_couple'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('2-09')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('2-8')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('2-9')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_couple': bookedCourts.includes('2-10')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_couple': bookedCourts.includes('2-11')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_couple': bookedCourts.includes('2-12')? 'red': 'green_couple'}></td>
@@ -69,8 +69,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="clay">3</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('3-08')? 'red': 'green_odd'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('3-09')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('3-8')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('3-9')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_odd': bookedCourts.includes('3-10')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_odd': bookedCourts.includes('3-11')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_odd': bookedCourts.includes('3-12')? 'red': 'green_odd'}></td>
@@ -86,8 +86,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="clay">4</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('4-08')? 'red': 'green_couple'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('4-09')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('4-8')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('4-9')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_couple': bookedCourts.includes('4-10')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_couple': bookedCourts.includes('4-11')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_couple': bookedCourts.includes('4-12')? 'red': 'green_couple'}></td>
@@ -103,8 +103,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="clay">5</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('5-08')? 'red': 'green_odd'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('5-09')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('5-8')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('5-9')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_odd': bookedCourts.includes('5-10')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_odd': bookedCourts.includes('5-11')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_odd': bookedCourts.includes('5-12')? 'red': 'green_odd'}></td>
@@ -120,8 +120,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="hard">6</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('6-08')? 'red': 'green_couple'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('6-09')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('6-8')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('6-9')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_couple': bookedCourts.includes('6-10')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_couple': bookedCourts.includes('6-11')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_couple': bookedCourts.includes('6-12')? 'red': 'green_couple'}></td>
@@ -137,8 +137,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="hard">7</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('7-08')? 'red': 'green_odd'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('7-09')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('7-8')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('7-9')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_odd': bookedCourts.includes('7-10')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_odd': bookedCourts.includes('7-11')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_odd': bookedCourts.includes('7-12')? 'red': 'green_odd'}></td>
@@ -154,8 +154,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="hard">8</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('8-08')? 'red': 'green_couple'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('8-09')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('8-8')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('8-9')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_couple': bookedCourts.includes('8-10')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_couple': bookedCourts.includes('8-11')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_couple': bookedCourts.includes('8-12')? 'red': 'green_couple'}></td>
@@ -171,8 +171,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="hard">9</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('9-08')? 'red': 'green_odd'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('9-09')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_odd': bookedCourts.includes('9-8')? 'red': 'green_odd'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_odd': bookedCourts.includes('9-9')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_odd': bookedCourts.includes('9-10')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_odd': bookedCourts.includes('9-11')? 'red': 'green_odd'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_odd': bookedCourts.includes('9-12')? 'red': 'green_odd'}></td>
@@ -188,8 +188,8 @@ export default function ({results, bookedCourts, searchDay, error}) {
             </tr>
             <tr>
                 <td className="hard">10</td>
-                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('10-08')? 'red': 'green_couple'}></td>
-                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('10-09')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 8<currentHour)? 'gray_couple': bookedCourts.includes('10-8')? 'red': 'green_couple'}></td>
+                <td className={(searchDay === currentDay && 9<currentHour)? 'gray_couple': bookedCourts.includes('10-9')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 10<currentHour)? 'gray_couple': bookedCourts.includes('10-10')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 11<currentHour)? 'gray_couple': bookedCourts.includes('10-11')? 'red': 'green_couple'}></td>
                 <td className={(searchDay === currentDay && 12<currentHour)? 'gray_couple': bookedCourts.includes('10-12')? 'red': 'green_couple'}></td>

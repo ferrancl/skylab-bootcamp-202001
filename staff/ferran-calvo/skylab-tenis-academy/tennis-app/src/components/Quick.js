@@ -9,7 +9,7 @@ export default function ({ onSubmit, onChange, error, quickBook }) {
     useEffect(() => {
         let nowHour = new Date(Date.now())
         if (nowHour.getHours()<8) nowHour = "8"
-        else nowHour = (nowHour.getHours()).toString()
+        else nowHour = nowHour.getHours().toString()
         onChange(nowHour)
     }, [])
 

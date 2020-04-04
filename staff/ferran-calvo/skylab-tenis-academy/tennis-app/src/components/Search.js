@@ -4,104 +4,59 @@ import './style/Form.sass'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 import Book from './Book'
+const moment = require('moment')
 
 
-export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount, results, bookedCourts, history, handleBook, weather }) {
+export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount, bookedCourts, history, handleBook, weather }) {
     const [, setState] = useContext(Context)
     const [day, setDay] = useState([])
     const [searchDay, setSearchDay] = useState()
     
     useEffect(() => {
-        let hour = " 12:00:00"
-        let currentDay = new Date(Date.now())
-        let day2 = new Date(currentDay)
-        let day3 = new Date(currentDay)
+        let currentTimeWeather
+        let day1 = moment().format("MM/DD/YYYY")
+        let day2 = moment().add(1, 'days').format("MM/DD/YYYY")
+        let day3 = moment().add(2, 'days').format("MM/DD/YYYY")
 
-        day2.setDate(currentDay.getDate() + 1)
-        day3.setDate(currentDay.getDate() + 2)
+        if (moment().hours() < 12) currentTimeWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        else if (moment().hours() > 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        else if (moment().hours() > 18 && moment().hours() < 21) currentTimeWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        else if (moment().hours() > 21){
+            currentTimeWeather = moment().set({'hour': 0, 'minute': 0, 'second': 0})
+            currentTimeWeather = currentTimeWeather.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
+        }
 
-        let day1 = currentDay.getMonth() + 1 + "/" + currentDay.getDate() + "/" + currentDay.getFullYear()
-        day2 = day2.getMonth() + 1 + "/" + day2.getDate() + "/" + day2.getFullYear()
-        day3 = day3.getMonth() + 1 + "/" + day3.getDate() + "/" + day3.getFullYear()
-
-        let month = day1.split('/')[0]
-        if (month.length ===1) month="0"+month
-        let date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour 
-
-        if (currentDay.getHours() > 12){
-            hour = " 15:00:00"
-            date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
-            if (currentDay.getHours() > 15){
-                hour = " 18:00:00"
-                date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
-                if (currentDay.getHours() > 18){
-                    hour = " 21:00:00"
-                    date = day1.split('/')[2]+ "-"+ month+ "-" + day1.split('/')[1] + hour
-                    if (currentDay.getHours() > 21){
-                        hour = " 00:00:00"
-                        month = day2.split('/')[0]
-                        if (month.length ===1) month="0"+month
-                        date = day2.split('/')[2]+ "-"+ month+ "-" + day2.split('/')[1] + hour
-                        hour= " 12:00:00"     
-                    }
-                }
-            }
-        }              
         setSearchDay(day1)
         setDay([day1, day2, day3])
         onSubmit(day1)
-        onSubmitWeather(date)
+        onSubmitWeather(currentTimeWeather)
         onMount()
     }, [])
 
     function handleSubmit(event) {
-        let date
         event.preventDefault()
-        let now = new Date(Date.now())
-        let day2 = new Date(now)
-        let day1 = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear()
-        day2.setDate(now.getDate() + 1)
-        let hour = " 12:00:00"
-        if (event.target.value === day1){
-            let month = day1.split('/')[0]
-            let dayy = day1.split('/')[1]
-            if (dayy.length ===1) dayy="0"+dayy
-            if (month.length ===1) month="0"+month
-            date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour     
-            if (now.getHours() > 12){
-                hour = " 15:00:00"
-                date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
-                if (now.getHours() > 15){
-                    hour = " 18:00:00"
-                    date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
-                    if (now.getHours() > 18){
-                        hour = " 21:00:00"
-                        date = day1.split('/')[2]+ "-"+ month+ "-" + dayy + hour
-                        if (now.getHours() > 21){
-                            hour = " 00:00:00"
-                            dayy = day2.split('/')[1]
-                            if (dayy.length ===1) dayy="0"+dayy
-                            month = day2.split('/')[0]
-                            if (month.length ===1) month="0"+month
-                            date = day2.split('/')[2]+ "-"+ month+ "-" + dayy + hour
-                        }
-                    }
-                }
-            }              
-    
+        let dateWeather
+        if (event.target.value === day[0]){
+            if (moment().hours() < 12) dateWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+            else if (moment().hours() > 12 && moment().hours() < 18) dateWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+            else if (moment().hours() > 18 && moment().hours() < 21) dateWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+            else if (moment().hours() > 21){
+                dateWeather = moment().set({'hour': 0, 'minute': 0, 'second': 0})
+                dateWeather = dateWeather.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
+            }
         }
         else{
-            let dayy = event.target.value.split('/')[1]
-            if (dayy.length == 1) dayy = "0"+dayy
-            let month = event.target.value.split('/')[0]
-            if (month.length == 1) month = "0"+month
-            date = event.target.value.split('/')[2]+ "-"+ month+ "-" + dayy + hour
-
+            if (event.target.value === day[1]){
+                dateWeather = moment().add(1, 'days')
+            }
+            if (event.target.value === day[2]){
+                dateWeather = moment().add(2, 'days')
+            }
+            dateWeather = dateWeather.set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
         }
         setSearchDay(event.target.value)
         onSubmit(event.target.value)
-        onSubmitWeather(date)
-       
+        onSubmitWeather(dateWeather)
     }
 
     return <>
@@ -112,7 +67,7 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
             </select>
                 <img className={weather === undefined? "hidden": "weather"} src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
             </div>
-            <Results results={results} bookedCourts={bookedCourts} searchDay={searchDay} />
+            <Results bookedCourts={bookedCourts} searchDay={searchDay} />
             <div className="legend">
                 <div className="legend_court">
                     <div className="legend_clay"></div>

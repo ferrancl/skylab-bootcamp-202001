@@ -13,7 +13,10 @@ const { models: { Booking } } = require('tennis-data')
 module.exports = id => {
     validate.string(id, 'id')
 
-    return Booking.find({ users: id, date: {$gt: Date.now()}}).sort({ date: 1 })
+    now = new Date()
+    now.setMinutes(0)
+
+    return Booking.find({ users: id, date: {$gt: now}}).sort({ date: 1 })
         .lean()
         .then(books => {
             books.forEach(book => {

@@ -43,7 +43,7 @@ export default withRouter(function ({onSubmit, error, onMount, history }) {
                 <h3 className="form_titleM">MY BOOKINGS</h3>
             </div>
             <div className="bookings">
-                {myBooks.length>0? myBooks.map(book => <form className="form_book" onSubmit={handleSubmit}><p className="form_mybooks">Date: {book.day}</p><p>Hour: {((book.date.split('T')[1]).split('.')[0]).split(':')[0]}h</p><p>Court: {book.court.number}</p><input type="hidden" name = "book" id="book" value={book.id}/><button className="form_cancel" type="submit">CANCEL</button></form>): <p className="form_nobookings">No bookings pending :(</p>}
+                {myBooks.length>0? myBooks.map(book => <form className="form_book" onSubmit={handleSubmit}><p className="form_mybooks">Date: {book.day}</p><p>Hour: {new Date(book.date).getHours()}h</p><p>Court: {book.court.number}</p><input type="hidden" name = "book" id="book" value={book.id}/><button className="form_cancel" type="submit">CANCEL</button></form>): <p className="form_nobookings">No bookings pending :(</p>}
             </div>
         </div>
     </>

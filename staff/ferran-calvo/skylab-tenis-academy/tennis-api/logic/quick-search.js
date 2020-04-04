@@ -21,8 +21,10 @@ module.exports = (userId, hour) => {
     let courtsArray_ = []
     let date = new Date(Date.now())
     if (hour < date.getHours()) throw new NotAllowedError("Wrong data")
-    let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 2)
-    date.setHours(23) 
+    //let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 2)
+    let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour )
+
+    date.setHours(22) 
 
     return Court.find({})
         .then(courts=> {
@@ -44,7 +46,7 @@ module.exports = (userId, hour) => {
             return quickBook()
         })
         .then(book => {
-            book[1] = book[1].getMonth() + 1 +  "/" + (book[1].getDate())+"/" + (book[1].getFullYear())+ " " + (book[1].getHours()-2)+":00"
+            book[1] = book[1].getMonth() + 1 +  "/" + (book[1].getDate())+"/" + (book[1].getFullYear())+ " " + (book[1].getHours())+":00"
             return book
         })
 }
