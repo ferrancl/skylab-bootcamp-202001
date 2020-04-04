@@ -14,9 +14,9 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
     
     useEffect(() => {
         let currentTimeWeather
-        let day1 = moment().format("MM/DD/YYYY")
-        let day2 = moment().add(1, 'days').format("MM/DD/YYYY")
-        let day3 = moment().add(2, 'days').format("MM/DD/YYYY")
+        let day1 = moment().format("M/D/YYYY")
+        let day2 = moment().add(1, 'days').format("M/D/YYYY")
+        let day3 = moment().add(2, 'days').format("M/D/YYYY")
 
         if (moment().hours() < 12) currentTimeWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
         else if (moment().hours() > 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
