@@ -56,11 +56,7 @@ module.exports = (name, surname, email, password) => {
                     text: `Dear ${name}, \n\nWelcome to our tennis club! You have registered successfully. \n\nYour member number is: ${memberNumber_}. You can login in our membership area using your email address or you member number. Let's play!\n\nContact us for any problem\nTN: 111 222 3333\nEmail: info.break.point.club@gmail.com\nOffice: Street 11, nº22, Barcelona (8-18h)`
                 }
                 transporter.sendMail(mailOptions, function (error, info) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        console.log('Email sent: ' + info.response);
-                    }
+                    if (error) throw new Error("Email not sent")
                 })
         })
         .then(() => { })

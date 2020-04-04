@@ -19,9 +19,9 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let day3 = moment().add(2, 'days').format("M/D/YYYY")
 
         if (moment().hours() < 12) currentTimeWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-        else if (moment().hours() > 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-        else if (moment().hours() > 18 && moment().hours() < 21) currentTimeWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-        else if (moment().hours() > 21){
+        if (moment().hours() > 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        if (moment().hours() >= 18 && moment().hours() < 21) currentTimeWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        if (moment().hours() >= 21){
             currentTimeWeather = moment().set({'hour': 0, 'minute': 0, 'second': 0})
             currentTimeWeather = currentTimeWeather.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
         }
@@ -38,9 +38,9 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let dateWeather
         if (event.target.value === day[0]){
             if (moment().hours() < 12) dateWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-            else if (moment().hours() > 12 && moment().hours() < 18) dateWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-            else if (moment().hours() > 18 && moment().hours() < 21) dateWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-            else if (moment().hours() > 21){
+            if (moment().hours() > 12 && moment().hours() < 18) dateWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+            if (moment().hours() >= 18 && moment().hours() < 21) dateWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+            if (moment().hours() >= 21){
                 dateWeather = moment().set({'hour': 0, 'minute': 0, 'second': 0})
                 dateWeather = dateWeather.add(1, 'days').format("YYYY-MM-DD HH:mm:ss")
             }

@@ -11,7 +11,6 @@ const { mongoose: { Types: { ObjectId } } } = require('../../tennis-data')
  * 
  */
 
-
 module.exports = id => {
     validate.string(id, 'id')
 
