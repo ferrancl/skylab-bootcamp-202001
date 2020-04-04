@@ -14,7 +14,7 @@ module.exports = id => {
     validate.string(id, 'id')
 
     now = new Date()
-    now.setMinutes(0)
+    now.setHours(now.getHours()-1)
 
     return Booking.find({ users: id, date: {$gt: now}}).sort({ date: 1 })
         .lean()
