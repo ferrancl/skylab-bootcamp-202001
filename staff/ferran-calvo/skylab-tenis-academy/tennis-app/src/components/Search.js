@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Results from './Results'
 import './style/Form.sass'
+import './style/Legend.sass'
+import './style/Notes.sass'
 import { Context } from './ContextProvider'
 import { withRouter } from 'react-router-dom'
 import Book from './Book'
@@ -19,7 +21,7 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
         let day3 = moment().add(2, 'days').format("M/D/YYYY")
 
         if (moment().hours() < 12) currentTimeWeather = moment().set({'hour': 12, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
-        if (moment().hours() > 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
+        if (moment().hours() >= 12 && moment().hours() < 18) currentTimeWeather = moment().set({'hour': 18, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
         if (moment().hours() >= 18 && moment().hours() < 21) currentTimeWeather = moment().set({'hour': 21, 'minute': 0, 'second': 0}).format("YYYY-MM-DD HH:mm:ss")
         if (moment().hours() >= 21){
             currentTimeWeather = moment().set({'hour': 0, 'minute': 0, 'second': 0})
@@ -62,7 +64,7 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
     return <>
         <div className="search">
             <div className="dayWeather">
-            <select  className="select_day" name="day" id="day" form="day" onChange={handleSubmit}>
+            <select  className="dayWeather_day" name="day" id="day" form="day" onChange={handleSubmit}>
                 {day.map(date => <option id="day" value={date}>{date}</option>)}
             </select>
                 <img className={weather === undefined? "hidden": "weather"} src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
@@ -86,10 +88,10 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
                     <span className="">Reserved</span>
                 </div>
             </div>
-            <div className="form_notes">
-                <p className="notes"><sup>*</sup> Bookings only allowed for the next 2 days and 1h/booking</p>
-                <p className="notes"><sup>**</sup> Only 2 bookings/day allowed per member</p>
-                <p className="notes"><sup>***</sup> Not allowed 2 bookings at the same time per member</p>
+            <div className="notes">
+                <p className="notes_text"><sup>*</sup> Bookings only allowed for the next 2 days and 1h/booking</p>
+                <p className="notes_text"><sup>**</sup> Only 2 bookings/day allowed per member</p>
+                <p className="notes_text"><sup>***</sup> Not allowed 2 bookings at the same time per member</p>
             </div>
             <Book onSubmit={handleBook} searchDay={searchDay} error={error} />
         </div>

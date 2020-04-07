@@ -43,9 +43,9 @@ export default function ({ onSubmit, onChange, error, quickBook }) {
     }
 
     return <>
-            <form className="form_quick" id="book" onSubmit={handleSubmit}>
-                <h3 className="form_titleM">QUICK BOOKING</h3>             
-                <select className="select" name="hour" id="hour" form="book" onChange={handleSubmitHour}>
+            <form className="form" id="book" onSubmit={handleSubmit}>
+                <h3 className="form_title">QUICK BOOKING</h3>             
+                <select className="form_select" name="hour" id="hour" form="book" onChange={handleSubmitHour}>
                     <option disabled selected>Hour</option>
                     <option value="8">8-9h</option>
                     <option value="9">9-10h</option>
@@ -63,7 +63,7 @@ export default function ({ onSubmit, onChange, error, quickBook }) {
                     <option value="21">21-22h</option>
                 </select>
 
-                <select  className="select" name="players" id="players" form="book" onChange={handleChange}>
+                <select  className="form_select" name="players" id="players" form="book" onChange={handleChange}>
                     <option disabled selected>Number of players</option>
                     <option value="2">2</option>
                     <option value="4">4</option>

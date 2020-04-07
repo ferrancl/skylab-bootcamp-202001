@@ -18,19 +18,15 @@ module.exports = (userId, hour) => {
     validate.string(userId, 'userId')
     validate.string(hour, 'hour')
     hour = parseInt(hour)
-    let courtsArray_ = []
     let date = new Date(Date.now())
-    if (hour < date.getHours()) throw new NotAllowedError("Wrong data")
-    //let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour + 2)
+    if (hour < date.getHours()) throw new NotAllowedError("Invalid hour")
     let dateWithoutMinutes = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour )
 
     date.setHours(22) 
 
     return Court.find({})
         .then(courts=> {
-            courts.forEach(court => {
-                courtsArray_.push({id: court.id, number: court.number})
-            })
+            courts.sort(() => Math.random() - 0.5)
             async function quickBook(){
                 while (dateWithoutMinutes<date){
                     for (let court of courts) {

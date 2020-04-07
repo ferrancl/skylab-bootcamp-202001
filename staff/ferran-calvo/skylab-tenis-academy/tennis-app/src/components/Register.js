@@ -22,8 +22,8 @@ export default function ({ onSubmit, error, onMount }) {
     }
 
     return <>
-            <form className="form_register" onSubmit={handleSubmit}>
-                <h3 className="form_titleR">REGISTER</h3>
+            <form className="form" onSubmit={handleSubmit}>
+                <h3 className="form_title">REGISTER</h3>
                 <input type="text" className="form_input" id="name" name="name" placeholder="Name" />
                 <input type="text" className="form_input" id="surname" name="surname" placeholder="Surname" />
                 <input type="text" className="form_input" id="email" name="email" placeholder="Email" />

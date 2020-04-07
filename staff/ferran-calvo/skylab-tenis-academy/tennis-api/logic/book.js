@@ -37,8 +37,9 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
     const dateWithoutHour = date.toLocaleDateString()
 
     let limitTime = new Date()
+    limitTime.setHours(limitTime.getHours()-1)
 
-    if (date.getHours() < limitTime.getHours()) {
+    if (date < limitTime) {
         throw new NotAllowedError('Invalid hour')
     }
     if (user3 && !user4){

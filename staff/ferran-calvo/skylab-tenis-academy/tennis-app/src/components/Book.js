@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './style/Form.sass'
+import './style/Book.sass'
 import Feedback from './Feedback'
 
 export default function ({onSubmit, searchDay, error }) {
@@ -41,9 +42,8 @@ export default function ({onSubmit, searchDay, error }) {
     const courts = [1,2,3,4,5,6,7,8,9,10]
 
     return <>
-            <form className="book" id="book" onSubmit={handleSubmit}>
-                    
-                    <select className="select" name="hour" id="hour" form="book">
+            <form className="form" id="book" onSubmit={handleSubmit}>               
+                    <select className="form_select" name="hour" id="hour" form="book">
                         <option disabled selected>Hour</option>
                         <option value="08:00">8-9h</option>
                         <option value="09:00">9-10h</option>
@@ -61,12 +61,12 @@ export default function ({onSubmit, searchDay, error }) {
                         <option value="21:00">21-22h</option>
                     </select>
                     
-                    <select  className="select" name="court" id="court" form="book" onChange={handleChangeButton}>
+                    <select  className="form_select" name="court" id="court" form="book" onChange={handleChangeButton}>
                     <option disabled selected>Court</option>
                     {courts.map(court => <option value={court}>{court}</option>)}
                     </select>
                     
-                    <select  className="select" name="players" id="players" form="book" onChange={handleChange}>
+                    <select  className="form_select" name="players" id="players" form="book" onChange={handleChange}>
                         <option disabled selected>Number of players</option>
                         <option value="2">2</option>
                         <option value="4">4</option>
