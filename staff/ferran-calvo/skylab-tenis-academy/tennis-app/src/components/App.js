@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
 import './style/App.sass'
-import Page from './Page'
 import Register from './Register'
 import Login from './Login'
 import Home from './Home'
@@ -189,7 +188,6 @@ export default withRouter(function ({ history }) {
   const { page, error } = state
 
   return <div className="app">
-    <Page name={page}> 
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />
       <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToQuick={handleGoToQuick} onGoToUpdate={handleGoToUpdate}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />
@@ -200,6 +198,5 @@ export default withRouter(function ({ history }) {
       <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
       <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather}/>: <Redirect to="/login" />} />
       <Route path="/quick-search" render={() => isLoggedIn() ? <Quick onSubmit={handleBook} onChange={handleQuick} quickBook={quickBook} error={error}/>: <Redirect to="/login" />} />
-    </Page>
   </div>
 })
