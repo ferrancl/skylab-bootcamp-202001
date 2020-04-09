@@ -1,3 +1,8 @@
+@mixin info-style
+    margin: 5%
+    text-align: center
+    font-family: 'Lato', sans-serif
+    letter-spacing: 2px
 .info
     width: 100%
     height: auto
@@ -9,29 +14,20 @@
         height: 16rem
 
     .info_title
+        @include info-style
         font-size: 2rem
-        text-align: center
-        font-family: 'Lato', sans-serif
         color: #000000ea
-        letter-spacing: 2px
-        margin: 5%
         padding-bottom: 1rem
         border-bottom: 2px solid #ffffff
 
     .info_subtitle
-        font-family: 'Lato', sans-serif
-        letter-spacing: 2px
+        @include info-style
         color: #ffffff
-        margin: 5%
         font-size: 1.5rem
-        text-align: center
     
     .info_description
-        font-family: 'Lato', sans-serif
+        @include info-style
         font-weight: 300
-        letter-spacing: 2px
-        margin: 5%
-        text-align: center
         
 
     .info_activities 

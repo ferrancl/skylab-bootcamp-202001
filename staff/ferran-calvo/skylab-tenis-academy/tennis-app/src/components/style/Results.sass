@@ -1,58 +1,61 @@
+@mixin table-style 
+    border-radius: 0.3rem
+    box-shadow: 0 4px #999
+
 .green
     &_odd
-        border-radius: 0.3rem
-        background-color: #29F4EB
+        background-color: #08e0d6
         border: 1px solid  #005804
-        box-shadow: 0 4px #999
+        @include table-style
+        
     &_couple
-        border-radius: 0.3rem
         background-color: #A5FFFB
         border: 1px solid  #005804
-        box-shadow: 0 4px #999
+        @include table-style
+        
 .red
     background-color: #ff0000
     border: 1px solid #a10000
-    box-shadow: 0 4px #999
-    border-radius: 0.3rem
-
+    @include table-style
+    
 .gray
-    border-radius: 0.3rem
     &_odd
-        border-radius: 0.3rem
         background-color: #636363
         border: 1px solid  #383838
-        box-shadow: 0 4px #999
+        @include table-style
     
     &_couple
-        border-radius: 0.3rem
         background-color: #888888
         border: 1px solid  #383838
-        box-shadow: 0 4px #999
+        @include table-style
+        
 .clay
     color: white
     font-family: 'Lato', sans-serif
-    border-radius: 0.3rem
     background-color: #B36C17
     border: 1px solid  #471e02
-    box-shadow: 0 4px #999
+    @include table-style
+    
 .hard
     background-color: #4c00fd
     border: 1px solid  #170247
     color: white
     font-family: 'Lato', sans-serif
-    border-radius: 0.3rem
-    box-shadow: 0 4px #999
-
+    @include table-style
+    
 .tg  
     text-align: center
     table-layout: fixed
     width: 95%
+    border-collapse: separate
+    border-spacing: 0.14rem
+    
 .hour
     background-color: #3a4102
-    box-shadow: 0 4px #999
     color: white
-    border-radius: 0.3rem
     font-family: 'Lato', sans-serif
+    @include table-style
+    
     &_title
         font-family: 'Lato', sans-serif
         background-color: #5a5a5a

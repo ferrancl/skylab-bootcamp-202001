@@ -26,7 +26,7 @@ export default function ({ onSubmit, onGoToRememberPassword, error, onMount }) {
         onSubmit(userMember, password)
     }
 
-    return <>
+    return <div className="login">
         <form className="form" onSubmit={handleSubmit}>
             <FontAwesomeIcon className="login_icon" icon={faUser} size="5x"  color="rgba(105, 105, 105, 0.99)"/>
             <input type="text" className="form_input" id="userMember" name="userMember" placeholder="Member Number/Email" />
@@ -35,5 +35,5 @@ export default function ({ onSubmit, onGoToRememberPassword, error, onMount }) {
             {error && <Feedback message={error} level="warn" />}
             <a href="" className="form_anchor" onClick={handleGoToRememberPassword}>FORGOT YOUR PASSWORD?</a>
         </form>
-    </>
+    </div>
 }

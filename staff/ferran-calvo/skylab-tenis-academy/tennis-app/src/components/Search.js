@@ -9,7 +9,7 @@ import Book from './Book'
 const moment = require('moment')
 
 
-export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount, bookedCourts, history, handleBook, weather }) {
+export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount, bookedCourts, history, handleBook, weather, message }) {
     const [, setState] = useContext(Context)
     const [day, setDay] = useState([])
     const [searchDay, setSearchDay] = useState()
@@ -63,37 +63,41 @@ export default withRouter(function ({ onSubmit, onSubmitWeather, error, onMount,
 
     return <>
         <div className="search">
-            <div className="dayWeather">
-            <select  className="dayWeather_day" name="day" id="day" form="day" onChange={handleSubmit}>
-                {day.map(date => <option id="day" value={date}>{date}</option>)}
-            </select>
-                <img className={weather === undefined? "hidden": "weather"} src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
+            <div className="table">
+                <div className="dayWeather">
+                <select  className="dayWeather_day" name="day" id="day" form="day" onChange={handleSubmit}>
+                    {day.map(date => <option id="day" value={date}>{date}</option>)}
+                </select>
+                    <img className={weather === undefined? "hidden": "weather"} src={`http://openweathermap.org/img/wn/${weather}@2x.png`}/>
+                </div>
+                <Results bookedCourts={bookedCourts} searchDay={searchDay} />
             </div>
-            <Results bookedCourts={bookedCourts} searchDay={searchDay} />
-            <div className="legend">
-                <div className="legend_court">
-                    <div className="legend_clay"></div>
-                    <span className="">Clay Court</span>
+            <div className="doBook">
+                <div className="legend">
+                    <div className="legend_court">
+                        <div className="legend_clay"></div>
+                        <span className="">Clay Court</span>
+                    </div>
+                    <div className="legend_court">
+                        <div className="legend_hard"></div>
+                        <span className="">Hard Court</span>
+                    </div>
+                    <div className="legend_court">
+                        <div className="legend_available"></div>
+                        <span className="">Available</span>
+                    </div>
+                    <div className="legend_court">
+                        <div className="legend_reserved"></div>
+                        <span className="">Reserved</span>
+                    </div>
                 </div>
-                <div className="legend_court">
-                    <div className="legend_hard"></div>
-                    <span className="">Hard Court</span>
+                <div className="notes">
+                    <p className="notes_text"><sup>*</sup> Bookings only allowed for the next 2 days and 1h/booking</p>
+                    <p className="notes_text"><sup>**</sup> Only 2 bookings/day allowed per member</p>
+                    <p className="notes_text"><sup>***</sup> Not allowed 2 bookings at the same time per member</p>
                 </div>
-                <div className="legend_court">
-                    <div className="legend_available"></div>
-                    <span className="">Available</span>
-                </div>
-                <div className="legend_court">
-                    <div className="legend_reserved"></div>
-                    <span className="">Reserved</span>
-                </div>
+                <Book onSubmit={handleBook} searchDay={searchDay} error={error} message={message}/>
             </div>
-            <div className="notes">
-                <p className="notes_text"><sup>*</sup> Bookings only allowed for the next 2 days and 1h/booking</p>
-                <p className="notes_text"><sup>**</sup> Only 2 bookings/day allowed per member</p>
-                <p className="notes_text"><sup>***</sup> Not allowed 2 bookings at the same time per member</p>
-            </div>
-            <Book onSubmit={handleBook} searchDay={searchDay} error={error} />
         </div>
     </>
 })

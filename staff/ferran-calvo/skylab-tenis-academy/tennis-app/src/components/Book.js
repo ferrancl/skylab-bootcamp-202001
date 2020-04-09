@@ -3,7 +3,7 @@ import './style/Form.sass'
 import './style/Book.sass'
 import Feedback from './Feedback'
 
-export default function ({onSubmit, searchDay, error }) {
+export default function ({onSubmit, searchDay, error, message}) {
     const [players, setPlayers] = useState("2")
     const [surface, setSurface] = useState("clay")
 
@@ -78,6 +78,7 @@ export default function ({onSubmit, searchDay, error }) {
                     <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user4" name="user4" placeholder="Member Number Player 4"/>
                     <button className={surface==="clay"? "form_clay": "form_hard"} type="submit" name="submit" value="submit">BOOK</button>
             </form>
+            {message && <Feedback message={message} level="info" />}
             {error && <Feedback message={error} level="warn" />}
         </>     
 

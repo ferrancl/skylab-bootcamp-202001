@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import './style/Form.sass'
 import Feedback from './Feedback'
 
-export default function ({ onSubmit, onChange, error, quickBook }) {
+export default function ({ onSubmit, onChange, error, quickBook, message }) {
 
     const [players, setPlayers] = useState("2")
     
@@ -76,6 +76,7 @@ export default function ({ onSubmit, onChange, error, quickBook }) {
                 <p className="form_quick_p">Court: <span className="form_quick_span">{quickBook[0]}</span> Date: <span className="form_quick_span">{quickBook[1]}</span></p>
                 <button className="form_button" type="submit" name="submit" value="submit">BOOK</button>
             </form>
+            {message && <Feedback message={message} level="info" />}
             {error && <Feedback message={error} level="warn" />}
         </>     
 }

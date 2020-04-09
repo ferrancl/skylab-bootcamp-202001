@@ -1,3 +1,17 @@
+@mixin button-style 
+    margin: 1rem
+    display: inline-block
+    font-family: 'Lato', sans-serif
+    padding: 0.8rem 1.2rem
+    font-size: 1.1rem
+    cursor: pointer
+    text-align: center
+    text-decoration: none
+    outline: none
+    border: none
+    border-radius: 15px
+    box-shadow: 0 5px #5D5A57   
+    
 .form
     display: flex
     flex-direction: column
@@ -16,6 +30,7 @@
         box-shadow: 0 4px #999
 
     &_anchor
+        color: #f8ff98
         margin-top: 2rem
         font-size: 1rem
         font-family: 'Lato', sans-serif
@@ -82,20 +97,9 @@
         border: 1px solid rgba(105, 105, 105, 0.99)
 
     &_button
-        margin: 1rem
-        display: inline-block
-        font-family: 'Lato', sans-serif
-        padding: 0.8rem 1.2rem
-        font-size: 1.1rem
-        cursor: pointer
-        text-align: center
-        text-decoration: none
-        outline: none
+        @include button-style
         color: #fff
         background-color: #ff1414
-        border: none
-        border-radius: 15px
-        box-shadow: 0 5px #5D5A57
 
     &_button:hover
         background-color: #ff5d5d
@@ -106,21 +110,9 @@
         transform: translateY(4px)
 
     &_clay
-        margin: 1rem
-        display: inline-block
-        font-family: 'Lato', sans-serif
-        padding: 0.8rem 1.2rem
-        font-size: 1.1rem
-        cursor: pointer
-        text-align: center
-        text-decoration: none
-        outline: none
+        @include button-style
         color: #fff
         background-color: #B36C17
-        border: none
-        border-radius: 15px
-        box-shadow: 0 5px #5D5A57
-
     &_clay:hover
         background-color: #a76b33
 
@@ -129,50 +121,15 @@
         box-shadow: 0 5px #666
         transform: translateY(4px)
     &_hard
-        margin: 1rem
-        display: inline-block
-        font-family: 'Lato', sans-serif
-        padding: 0.8rem 1.2rem
-        font-size: 1.1rem
-        cursor: pointer
-        text-align: center
-        text-decoration: none
-        outline: none
+        @include button-style
         color: #fff
         background-color: #601cff
-        border: none
-        border-radius: 15px
-        box-shadow: 0 5px #5D5A57
 
     &_hard:hover
         background-color: #9a6fff
 
     &_hard:active 
         background-color: #9a6fff
-        box-shadow: 0 5px #666
-        transform: translateY(4px)
-
-    &_cancel
-        margin: 1rem
-        display: inline-block
-        font-family: 'Lato', sans-serif
-        padding: 0.7rem 1.1rem
-        font-size: 1rem
-        cursor: pointer
-        text-align: center
-        text-decoration: none
-        outline: none
-        color: #fff
-        background-color: #e01313
-        border: none
-        border-radius: 15px
-        box-shadow: 0 9px #999
-
-    &_cancel:hover
-        background-color: #9b4040
-
-    &_cancel:active 
-        background-color: #9b4040
         box-shadow: 0 5px #666
         transform: translateY(4px)
 
@@ -186,23 +143,28 @@
     display: flex
     flex-direction: column
     align-items: center
+
         
 .hidden
     display: none
         
 
+.table
+    display: flex
+    align-items: center
+    flex-direction: column
 .dayWeather
     display: flex
     align-items: center
+    justify-content: center
     height: 10vh
 
     &_day
-        width: 90%
+        width: 70%
         background-color: #ffffff
         font-size: 1rem
         padding: 0.2rem
         border-radius: 0.5rem
-        text-align: center
         text-align-last: center
         margin-right: 1rem
 
