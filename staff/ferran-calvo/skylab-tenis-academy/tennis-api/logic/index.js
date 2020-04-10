@@ -11,4 +11,5 @@ module.exports = {
     quickSearch: require('./quick-search'),
     friendRequest: require('./friend-request'),
     answerRequest: require('./answer-request'),
+    retrieveUserFriends: require('./retrieve-user-friends')
 }

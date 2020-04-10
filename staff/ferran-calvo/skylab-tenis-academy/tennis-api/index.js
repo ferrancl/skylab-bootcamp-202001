@@ -26,7 +26,8 @@ const {
     retrieveDayBooks,
     quickSearch,
     friendRequest,
-    answerRequest
+    answerRequest,
+    retrieveUserFriends
 } = require('./routes/handlers')
 
 const jsonBodyParser = bodyParser.json()
@@ -82,6 +83,8 @@ mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true 
         app.post('/users/friend-request', [jwtVerifierMidWare, jsonBodyParser], friendRequest)
 
         app.post('/users/answer-request', [jwtVerifierMidWare, jsonBodyParser], answerRequest)
+
+        app.get('/users/friends', [jwtVerifierMidWare], retrieveUserFriends)
 
         app.listen(port, () => logger.info(`server ${name} ${version} up and running on port ${port}`))
 
