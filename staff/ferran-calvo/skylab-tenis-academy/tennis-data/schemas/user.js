@@ -1,5 +1,4 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
-//const creditCard = require('./credit-card')
 
 module.exports = new Schema({
     name: { type: String, required: true },
@@ -10,4 +9,7 @@ module.exports = new Schema({
     created: { type: Date, required: true, default: Date.now },
     authenticated: { type: Date },
     bookings: {type: [{ type: ObjectId, ref: 'Booking' }]},
+    friends: {type: [{ type: ObjectId, ref: 'User'}]},
+    requests:  {type: [{ type: ObjectId, ref: 'User'}]},
+    invitations:  {type: [{ type: ObjectId, ref: 'User'}]}
 })

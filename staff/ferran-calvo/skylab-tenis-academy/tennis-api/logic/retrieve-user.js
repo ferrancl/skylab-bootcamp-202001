@@ -24,5 +24,5 @@ module.exports = id => {
 
             return user
         })
-        .then(({ name, surname, memberNumber, email, bookings }) => ({ name, surname, memberNumber, email, bookings }))
+        .then(({ name, surname, memberNumber, email, bookings, friends, requests, invitations }) => ({ name, surname, memberNumber, email, bookings, friends, requests, invitations }))
 }
