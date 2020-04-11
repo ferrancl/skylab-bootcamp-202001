@@ -1,55 +1,44 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style/Form.sass'
 import Feedback from './Feedback'
-import { retrieveUser } from '../logic'
+import { retrieveUserFriends } from '../logic'
 
-export default function ({ onSubmit, onAnswer, error }) {
+export default function ({ onSubmit, error }) {
     const [friends, setFriends] = useState([])
-    const [requests, setRequests] = useState([])
-    const [invitations, setInvitations] = useState([])
 
     useEffect(() => {
-        const { friends, requests, invitations } = await retrieveUser()
-        setFriends(friends)
-        setRequests(requests)
-        setInvitations(invitations)
+        (async () => {
+            const [friends , , ]  = await retrieveUserFriends()
+            setFriends(friends)
+        })()
     }, [])
 
-
-    function handleSubmit(event) {
+    function handleSubmit (event){
         event.preventDefault()
-        let date
-        let court
 
         const { target: {
             user2: { value: user2 },
-            user3: { value: user3 },
-            user4: { value: user4 }
+            name2: { value: name2 },
+            surname2: { value: surname2 }
         } } = event
 
-        court = quickBook[0]
-        date = quickBook[1]
-        onSubmit(user2, user3, user4, court, date)
+        onSubmit(user2, name2,  surname2)
     }
 
     return <>
-
-            <form className="form" id="book" onSubmit={handleSubmit}>
-                <h3 className="form_title">INVITATIONS RECEIVED</h3>
-                {invitations.length>0? invitations.map(book => <form className="bookings_book" onSubmit={handleSubmit}><p className="mybooks">Date: {book.day}</p><p>Hour: {new Date(book.date).getHours()}h</p><p>Court: {book.court.number}</p><input type="hidden" name = "book" id="book" value={book.id}/><button className="form_button" type="submit">CANCEL</button></form>): <p className="form_nobookings">No invitations pending :(</p>}
-
-            </form>
-            {message && <Feedback message={message} level="info" />}
-            {error && <Feedback message={error} level="warn" />}
+            <div className="form" id="book" >
+                <h3 className="form_title">FRIENDS LIST</h3>
+                {friends.length>0? friends.map(friend => <div><p className="mybooks">Name: {friend.name}</p><p className="mybooks">Surname: {friend.surname}</p><p className="mybooks">Member Number: {friend.memberNumber}</p></div>): <p className="form_nobookings">No friends in your list</p>}
+            </div>
 
             <form className="form" id="book" onSubmit={handleSubmit}>
                 <h3 className="form_title">MAKE A FRIEND REQUEST</h3>
-                <input type="text" className='form_input' id="user4" name="user4" placeholder="Member Number"/>             
+                <input type="text" className='form_input' id="user2" name="user2" placeholder="Friend's Member Number"/>
+                <input type="text" className='form_input' id="name2" name="name2" placeholder="Friend's Name"/>             
+                <input type="text" className='form_input' id="surname2" name="surname2" placeholder="Friend's Surname"/>                         
                 <button className="form_button" type="submit" name="submit" value="submit">SEND</button>
             </form>
-            {message && <Feedback message={message} level="info" />}
             {error && <Feedback message={error} level="warn" />}
-
 
         </>     
 }

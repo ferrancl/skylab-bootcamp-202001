@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoToMyBooks, onGoToSearch, onGoToFriends }) {
+export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoToMyBooks, onGoToSearch, onGoToRequests, onGoToFriends }) {
     const [, setState] = useContext(Context)
     const [name, setName] = useState()
     const[menu, setMenu] = useState(false)
@@ -64,6 +64,12 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoTo
         onGoToFriends()
     }
 
+    function handleGoToRequests(event) {
+        event.preventDefault()
+        setMenu(false)
+        onGoToRequests()
+    }
+
     function handleMenu(event){
         event.preventDefault()
         menu ? setMenu(false): setMenu(true)
@@ -81,7 +87,8 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoTo
                     <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
                     <a href="" className="header_options" onClick={handleGoToQuick}>Quick Booking</a>
                     <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>
-                    <a href="" className="header_options" onClick={handleGoToFriends}>Friends Area</a>
+                    <a href="" className="header_options" onClick={handleGoToFriends}>Friends List</a>
+                    <a href="" className="header_options" onClick={handleGoToRequests}>Friendship Requests</a>
                     <a href="" className="header_options" onClick={handleGoToUpdate}>Edit Profile</a>
                     <a href="" className="header_options_logout" onClick={handleLogout}>Logout</a>
                 </ul>

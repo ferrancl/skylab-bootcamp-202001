@@ -6,6 +6,10 @@ import Header from './Header'
 import Remember from './Remember'
 import Update from './Update'
 import MyBooks from './MyBooks'
+import Requests from './Requests'
+import Friends from './Friends'
+import Quick from './Quick'
+
 
 export {
     App,
@@ -15,5 +19,8 @@ export {
     Header,
     Remember,
     Update,
-    MyBooks
+    MyBooks,
+    Requests,
+    Quick,
+    Friends
 }

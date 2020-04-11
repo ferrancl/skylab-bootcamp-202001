@@ -31,7 +31,7 @@ module.exports = (userId, user2, answer) => {
             return Promise.all([User.findByIdAndUpdate(userId, { $pull: { invitations: user2_.id } }), User.findByIdAndUpdate(user2_.id, { $pull: { requests: userId } })])
         })
         .then(() => {
-            if (answer){
+            if (answer === "yes"){
                 user1_.friends.push(user2__.id)
                 user2__.friends.push(user1_.id)
                 return Promise.all([user1_.save(), user2__.save()])

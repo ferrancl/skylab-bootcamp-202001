@@ -8,7 +8,9 @@ import Update from './Update'
 import Quick from './Quick'
 import MyBooks from './MyBooks'
 import Search from './Search'
-import { registerUser, login, logout, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather, quickSearch, retrieveUser } from '../logic'
+import Requests from './Requests'
+import Friends from './Friends'
+import { registerUser, login, logout, isLoggedIn, rememberPassword, updateUser, cancelBook, retrieveDayBooks, book, retrieveWeather, quickSearch, retrieveUser, answerRequest, retrieveUserFriends, friendRequest } from '../logic'
 import { Context } from './ContextProvider'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import Header from './Header'
@@ -21,6 +23,7 @@ export default withRouter(function ({ history }) {
   const [bookedCourts, setBookedCourts] = useState([])
   const [weather, setWeather] = useState()
   const [quickBook, setQuickBook] = useState(['',''])
+
 
   useEffect(() => {
       setState({ page: 'home' })
@@ -140,9 +143,12 @@ export default withRouter(function ({ history }) {
     }
   }
 
-  async function handleFriendRequest(user2) {
+  async function handleFriendRequest(user2,  name2, surname2) {
     try {
-      await friendRequest(user2)
+      await friendRequest(user2, name2, surname2)
+
+      history.push('/friends-requests')
+
 
     } catch (error) {
       return __handleError__(error)
@@ -153,10 +159,13 @@ export default withRouter(function ({ history }) {
     try {
       await answerRequest(user2, answer)
 
+      history.push('/friends-list')
+
     } catch (error) {
       return __handleError__(error)
     }
   }
+
 
   function handleGoToLogin() {
     history.push('/login')
@@ -185,8 +194,12 @@ export default withRouter(function ({ history }) {
     history.push('/my-books')
   }
 
+  function handleGoToRequests(){
+    history.push('/friends-requests')
+  }
+
   function handleGoToFriends(){
-    history.push('/friends-area')
+    history.push('/friends-list')
   }
 
   function handleMountLogin() {
@@ -217,7 +230,7 @@ export default withRouter(function ({ history }) {
 
   return <div className="app">
       <Route exact path="/" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Redirect to="/login" />} />
-      <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToQuick={handleGoToQuick} onGoToUpdate={handleGoToUpdate} onGoToFriends={handleGoToFriends}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
+      <Route path="/" render={() => isLoggedIn() ?<Header onGoToMyBooks={handleGoToMyBooks} onGoToSearch={handleGoToSearch} onGoToQuick={handleGoToQuick} onGoToUpdate={handleGoToUpdate} onGoToRequests={handleGoToRequests} onGoToFriends={handleGoToFriends}/>: <HeaderWL onGoToLogin={handleGoToLogin} onGoToRegister={handleGoToRegister}/>} />
       <Route path="/register" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Register onSubmit={handleRegister} error={error} onMount={handleMountRegister} />} />
       <Route path="/login" render={() => isLoggedIn() ? <Redirect to="/search" /> : <Login onSubmit={handleLogin} onGoToRememberPassword={handleGoToRememberPassword} error={error} onMount={handleMountLogin} />} />
       <Route path="/home" render={() => <Home/> }/>
@@ -226,6 +239,7 @@ export default withRouter(function ({ history }) {
       <Route path="/my-books" render={() => isLoggedIn() ? <MyBooks onSubmit={handleCancelBook} error={error} onMount={handleMountMyBooks} />: <Redirect to="/login" />} />
       <Route path="/search" render={() => isLoggedIn() ? <Search onSubmit={handleDayBooks} onSubmitWeather={handleWeather} error={error} onMount={handleMountSearch} bookedCourts={bookedCourts} handleBook={handleBook} weather={weather} message={message}/>: <Redirect to="/login" />} />
       <Route path="/quick-search" render={() => isLoggedIn() ? <Quick onSubmit={handleBook} onChange={handleQuick} quickBook={quickBook} error={error} message={message}/>: <Redirect to="/login" />} />
-      <Route path="/friends-area" render={() => isLoggedIn() ? <Friends onSubmit={handleFriendRequest} onAnswer={handleAnswerRequest} error={error}/>: <Redirect to="/login" />} />
+      <Route path="/friends-requests" render={() => isLoggedIn() ? <Requests onAnswer={handleAnswerRequest} error={error}/>: <Redirect to="/login" />} />
+      <Route path="/friends-list" render={() => isLoggedIn() ? <Friends onSubmit={handleFriendRequest} error={error}/>: <Redirect to="/login" />} />
   </div>
 })

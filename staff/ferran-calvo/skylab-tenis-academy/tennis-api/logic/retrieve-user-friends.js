@@ -20,11 +20,11 @@ module.exports = userId => {
     return Promise.all([User.find({friends: userId}), User.find({invitations: userId}), User.find({requests: userId})])
         .then(result => {
             const [ friends, requests, invitations ] = result
-            
+
             friends.forEach(friend => { friendsArray.push({name: friend.name, surname: friend.surname, memberNumber: friend.memberNumber})})
-            requests.forEach(requestFriend => {requestsArray.push({ memberNumber: requestFriend.memberNumber})})
+            requests.forEach(requestFriend => {requestsArray.push({name: requestFriend.name, surname: requestFriend.surname, memberNumber: requestFriend.memberNumber})})
             invitations.forEach(invitationFriend => {invitationsArray.push({name: invitationFriend.name, surname: invitationFriend.surname, memberNumber: invitationFriend.memberNumber})})
 
-            return ({friendsArray, requestsArray, invitationsArray})
+            return [friendsArray, requestsArray, invitationsArray]
         })  
 }

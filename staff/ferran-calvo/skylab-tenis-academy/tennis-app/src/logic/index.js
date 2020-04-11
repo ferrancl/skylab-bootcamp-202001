@@ -11,6 +11,9 @@ import retrieveDayBooks from './retrieve-day-books'
 import book from './book'
 import retrieveWeather from './retrieve-weather'
 import quickSearch from './quick-search'
+import retrieveUserFriends from './retrieve-user-friends'
+import friendRequest from './friend-request'
+import answerRequest from './answer-request'
 
 export {
     registerUser,
@@ -25,5 +28,8 @@ export {
     retrieveDayBooks,
     book,
     retrieveWeather,
-    quickSearch
+    quickSearch,
+    retrieveUserFriends,
+    friendRequest,
+    answerRequest
 }

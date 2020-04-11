@@ -2,10 +2,10 @@ const { friendRequest } = require('../../logic')
 const {  NotFoundError } = require('tennis-errors')
 
 module.exports = (req, res) => {
-    const { payload: { sub: id }, body: {user2} } = req
+    const { payload: { sub: id }, body: {user2, name2, surname2} } = req
 
     try {
-        friendRequest(id, user2)
+        friendRequest(id, user2, name2, surname2)
             .then(() => res.status(201).end())
             .catch(({ message }) =>
                 res
