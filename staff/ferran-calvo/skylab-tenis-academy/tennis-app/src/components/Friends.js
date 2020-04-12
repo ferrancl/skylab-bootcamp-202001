@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './style/Form.sass'
+import './style/Friends.sass'
 import Feedback from './Feedback'
 import { retrieveUserFriends } from '../logic'
 
@@ -26,20 +27,20 @@ export default function ({ onSubmit, error }) {
     }
 
     return <>
-            <div className="form" id="book" >
-                <h3 className="form_title">FRIENDS LIST</h3>
-                {friends.length>0? friends.map(friend => <div><p className="mybooks">Name: {friend.name}</p><p className="mybooks">Surname: {friend.surname}</p><p className="mybooks">Member Number: {friend.memberNumber}</p></div>): <p className="form_nobookings">No friends in your list</p>}
-            </div>
-
+        <div className="friends">
             <form className="form" id="book" onSubmit={handleSubmit}>
                 <h3 className="form_title">MAKE A FRIEND REQUEST</h3>
                 <input type="text" className='form_input' id="user2" name="user2" placeholder="Friend's Member Number"/>
                 <input type="text" className='form_input' id="name2" name="name2" placeholder="Friend's Name"/>             
                 <input type="text" className='form_input' id="surname2" name="surname2" placeholder="Friend's Surname"/>                         
                 <button className="form_button" type="submit" name="submit" value="submit">SEND</button>
+                {error && <Feedback message={error} level="warn" />}
             </form>
-            {error && <Feedback message={error} level="warn" />}
-
+            <div className="friends_list" id="book" >
+                <h3 className="friends_title">FRIENDS LIST</h3>
+                {friends.length>0? friends.map(friend => <div className="friends_friend"><p className="friends_text">{friend.name.toUpperCase()} {friend.surname.toUpperCase()}</p><p className="friends_text">Member Number: {friend.memberNumber}</p></div>): <p className="friends_noItem">No friends in your list</p>}
+            </div>
+        </div>
         </>     
 }
 

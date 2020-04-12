@@ -30,6 +30,8 @@ export default (function (user2, user3, user4, number, date ) {
     if(user4){
         validate.string(user4, 'user4')
     }
+    if (user3 === "Member 3") user3 = undefined
+    if (user4 === "Member 4") user4 = undefined
     validate.string(number,  'number')
     validate.string(date, 'date')
 

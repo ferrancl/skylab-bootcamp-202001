@@ -23,6 +23,7 @@ module.exports = (idUser1, user2, name2, surname2) => {
     return Promise.all([User.findById(idUser1), User.findOne({ memberNumber: user2 })])
         .then(result => { 
             const [user1, user2_] = result
+            if (user1.memberNumber === user2_.memberNumber) throw new NotAllowedError(`You cannot send a friend request to yourself`)
             if (!user2_) throw new NotAllowedError(`User with ${user2} member number does not exist`)
             if (user2_.name.toLowerCase() !== name2.toLowerCase() || user2_.surname.toLowerCase() !== surname2.toLowerCase()) throw new NotAllowedError(`Name or surname does not fit with the member number introduced`)
             if (user2_.friends){

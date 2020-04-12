@@ -83,7 +83,7 @@ export default withRouter(function ({ history, onGoToUpdate, onGoToQuick, onGoTo
                     <li><FontAwesomeIcon className="header_icon" icon={faBars} size="2x" color="#ff1414" onClick={handleMenu} /></li>
                 </ul>
                 <ul className={menu ?"header_hidden" : "header_hidden hidden" }>
-                    <p className="header_options_name">Hello, {name}!</p>
+                    <p className="header_name">Hello, {name}!</p>
                     <a href="" className="header_options" onClick={handleGoToSearch}>Search Bookings</a>
                     <a href="" className="header_options" onClick={handleGoToQuick}>Quick Booking</a>
                     <a href="" className="header_options" onClick={handleGoToMyBooks}>My Bookings</a>

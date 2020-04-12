@@ -1,26 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style/Form.sass'
 import './style/Book.sass'
 import Feedback from './Feedback'
+import { retrieveUserFriends } from '../logic'
 
 export default function ({onSubmit, searchDay, error, message}) {
     const [players, setPlayers] = useState("2")
-    const [surface, setSurface] = useState("clay")
+    const [friends, setFriends] = useState([])
+
+    useEffect(() => {
+        (async () => {
+            const [friends , , ]  = await retrieveUserFriends()
+            setFriends(friends)
+        })()
+    }, [])
 
     function handleChange(event){
         event.preventDefault()
 
         setPlayers(event.target.value)
-    }
-
-    function handleChangeButton(event){
-        event.preventDefault()
-        if (event.target.value<6){
-            setSurface("clay")
-        }
-        else{
-            setSurface("hard")
-        }
     }
 
     function handleSubmit(event) {
@@ -60,26 +58,36 @@ export default function ({onSubmit, searchDay, error, message}) {
                         <option value="20:00">20-21h</option>
                         <option value="21:00">21-22h</option>
                     </select>
-                    
-                    <select  className="form_select" name="court" id="court" form="book" onChange={handleChangeButton}>
+
+                    <select className="form_select" name="court" id="court" form="book">
                     <option disabled selected>Court</option>
                     {courts.map(court => <option value={court}>{court}</option>)}
                     </select>
-                    
+
                     <select  className="form_select" name="players" id="players" form="book" onChange={handleChange}>
                         <option disabled selected>Number of players</option>
                         <option value="2">2</option>
                         <option value="4">4</option>
                     </select>
                     
-                    <input type="text" className="form_input input-players" id="user2" name="user2" placeholder="Member Number Player 2"/>
-                    <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user3" name="user3" placeholder="Member Number Player 3"/>
+                    <select className="form_select" name="user2" id="user2" form="book">
+                    <option disabled selected>Member 2</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                    </select>
 
-                    <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user4" name="user4" placeholder="Member Number Player 4"/>
-                    <button className={surface==="clay"? "form_clay": "form_hard"} type="submit" name="submit" value="submit">BOOK</button>
+                    <select className={players === "2"? 'hidden':'form_select'} name="user3" id="user3" form="book">
+                    <option disabled selected>Member 3</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                    </select>
+                    
+                    <select className={players === "2"? 'hidden':'form_select'} name="user4" id="user4" form="book">
+                    <option disabled selected>Member 4</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                    </select>
+                    <button className="form_button" type="submit" name="submit" value="submit">BOOK</button>
+                    {message && <Feedback message={message} level="info" />}
+                    {error && <Feedback message={error} level="warn" />}
             </form>
-            {message && <Feedback message={message} level="info" />}
-            {error && <Feedback message={error} level="warn" />}
         </>     
 
 }

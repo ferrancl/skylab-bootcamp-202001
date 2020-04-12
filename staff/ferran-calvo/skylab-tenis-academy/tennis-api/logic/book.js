@@ -88,20 +88,20 @@ module.exports = (idUser1, user2, user3, user4, number, date) => {
         .then(books=> {
             const [book1, book2, book3, book4] = books
             if (book1 != undefined){
-                if (book1.length === 1 && book1[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same time`)
-                if (book1.length>1) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
+                if (book1.length === 1 && book1[0].date.getTime() === date.getTime()) throw new NotAllowedError (`You have already booked a court at the same time`)
+                if (book1.length>1) throw new NotAllowedError (`You have already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (book2 != undefined){
-                if (book2.length === 1 && book2[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same time`)
-                if (book2.length>1) throw new NotAllowedError (`User with member number ${user2_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
+                if (book2.length === 1 && book2[0].date.getTime() === date.getTime()) throw new NotAllowedError (`${user2_.name} ${user2_.surname} has already booked a court at the same time`)
+                if (book2.length>1) throw new NotAllowedError (`${user2_.name} ${user2_.surname} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (book3 != undefined){
-                if (book3.length === 1 && book3[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same time`)
-                if (book3.length>1) throw new NotAllowedError (`User with member number ${user3_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
+                if (book3.length === 1 && book3[0].date.getTime() === date.getTime()) throw new NotAllowedError (`${user3_.name} ${user3_.surname} has already booked a court at the same time`)
+                if (book3.length>1) throw new NotAllowedError (`${user3_.name} ${user3_.surname} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (book4 != undefined){
-                if (book4.length === 1 && book4[0].date.getTime() === date.getTime()) throw new NotAllowedError (`User with member number ${user1_.memberNumber} has already booked a court at the same time`)
-                if (book4.length>1) throw new NotAllowedError (`User with member number ${user4_.memberNumber} has already booked 2 courts for ${dateWithoutHour}`)      
+                if (book4.length === 1 && book4[0].date.getTime() === date.getTime()) throw new NotAllowedError (`${user4_.name} ${user4_.surname} has already booked a court at the same time`)
+                if (book4.length>1) throw new NotAllowedError (`${user4_.name} ${user4_.surname} has already booked 2 courts for ${dateWithoutHour}`)      
             }
             if (user3 && user4){
                 booking = new Booking({ users:[idUser1, user2_.id, user3_.id, user4_.id], court: court_, date, day: dateWithoutHour, status: "PRE" })

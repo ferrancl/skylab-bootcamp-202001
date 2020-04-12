@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './style/Form.sass'
 import Feedback from './Feedback'
+import { retrieveUserFriends } from '../logic'
 
 export default function ({ onSubmit, onChange, error, quickBook, message }) {
-
     const [players, setPlayers] = useState("2")
+    const [friends, setFriends] = useState([])
     
     useEffect(() => {
+        (async () => {
+            const [friends , , ]  = await retrieveUserFriends()
+            setFriends(friends)
+        })()
         let nowHour = new Date(Date.now())
         if (nowHour.getHours()<8) nowHour = "8"
         else nowHour = nowHour.getHours().toString()
@@ -68,11 +73,22 @@ export default function ({ onSubmit, onChange, error, quickBook, message }) {
                     <option value="2">2</option>
                     <option value="4">4</option>
                 </select>
-                    
-                <input type="text" className="form_input input-players" id="user2" name="user2" placeholder="Member Number Player 2"/>
-                <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user3" name="user3" placeholder="Member Number Player 3"/>
 
-                <input type="text" className={players === "2"? 'hidden':'form_input input-players'} id="user4" name="user4" placeholder="Member Number Player 4"/>
+                <select className="form_select" name="user2" id="user2" form="book">
+                    <option disabled selected>Member 2</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                </select>
+
+                <select className={players === "2"? 'hidden':'form_select'} name="user3" id="user3" form="book">
+                    <option disabled selected>Member 3</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                </select>
+                    
+                <select className={players === "2"? 'hidden':'form_select'} name="user4" id="user4" form="book">
+                    <option disabled selected>Member 4</option>
+                    {friends.map(friend => <option value={friend.memberNumber}>{friend.memberNumber} ({friend.name} {friend.surname})</option>)}
+                </select>
+    
                 <p className="form_quick_p">Court: <span className="form_quick_span">{quickBook[0]}</span> Date: <span className="form_quick_span">{quickBook[1]}</span></p>
                 <button className="form_button" type="submit" name="submit" value="submit">BOOK</button>
             </form>

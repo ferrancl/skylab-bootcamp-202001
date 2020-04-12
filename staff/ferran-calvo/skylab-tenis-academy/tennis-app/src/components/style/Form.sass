@@ -2,7 +2,7 @@
     margin: 1rem
     display: inline-block
     font-family: 'Lato', sans-serif
-    padding: 0.8rem 1.2rem
+    padding: 0.7rem 0.9rem
     font-size: 1.1rem
     cursor: pointer
     text-align: center
@@ -39,7 +39,7 @@
         background-color: #ffffff
         font-family: 'Lato', sans-serif
         outline: none
-        width: 75%
+        width: 70%
         margin: 0.50rem 0
         font-size: 1rem
         padding: 0.2rem
@@ -61,7 +61,7 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        margin-top: 4rem
+        margin-top: 2rem
         border-radius: 0.4rem
         width: 55%
         padding: 0.5rem
@@ -109,30 +109,6 @@
         box-shadow: 0 5px #666
         transform: translateY(4px)
 
-    &_clay
-        @include button-style
-        color: #fff
-        background-color: #B36C17
-    &_clay:hover
-        background-color: #a76b33
-
-    &_clay:active 
-        background-color: #a76b33
-        box-shadow: 0 5px #666
-        transform: translateY(4px)
-    &_hard
-        @include button-style
-        color: #fff
-        background-color: #601cff
-
-    &_hard:hover
-        background-color: #9a6fff
-
-    &_hard:active 
-        background-color: #9a6fff
-        box-shadow: 0 5px #666
-        transform: translateY(4px)
-
 .date
     font-size: 1.2rem
     font-family: 'Lato', sans-serif
@@ -144,7 +120,12 @@
     flex-direction: column
     align-items: center
 
-        
+.doBook
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 100%
+
 .hidden
     display: none
         
